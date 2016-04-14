@@ -1,0 +1,232 @@
+{
+	"featureTypes" : {
+		"buurt" : {
+			"name" : "Buurt",
+			"style" : {
+				"fillColor" : "#999922",
+				"strokeColor" : "#000000",
+				"strokeWidth" : 1,
+				"iconWidth" : 30,
+				"iconHeight" : 30,
+				"iconUri" : "images/5001 gemeente.png",
+                "nameLabel" : "bu_naam",
+				"maxTitleResolution" : -1
+			}, "propertyTypeKeys":"bu_naam;bu_code;gm_naam;aant_inw;woningen;p_1gezw;p_mgezw;p_koopwon,p_huurwon;p_huko_onb;a_1gezw;a_mgezw;a_koopwon,a_huurwon;a_huko_onb;woz;a_apb_w;a_napb_w;p_apb_w;p_napb_w;"
+		}
+	},
+	"propertyTypeData" : {
+        "bu_naam": {
+        	"label": "bu_naam",
+        	"title": "Buurtnaam",
+        	"type": "text",
+        	"visibleInCallOut" : true
+       	},
+        "bu_code": {
+        	"label": "bu_code",
+        	"title": "Buurtcode",
+        	"type": "text",
+        	"visibleInCallOut" : true
+		},
+		"gm_naam" : {
+			"label" : "gm_naam",
+			"type" : "text",
+			"title" : "Gemeentenaam",
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+		},
+        "aant_inw" : {
+			"label" : "aant_inw",
+			"type" : "number",
+			"title" : "Aantal inwoners",
+            "stringFormat" : "{0:#,#}",
+			"visibleInCallOut" : false,
+			"isSearchable" : false
+		},
+        "woningen" : {
+			"label" : "woningen",
+			"type" : "number",
+			"title" : "Aantal woningen",
+            "section" : "Woningen",
+            "stringFormat" : "{0:#,#}",
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+		},        
+		"p_1gezw" : {
+			"label" : "p_1gezw",
+			"type" : "number",
+			"title" : "Perc. eengezinswoningen",
+            "section" : "Woningen",
+            "description" : "Percentage eengezinswoningen",
+            "stringFormat" : "{0:#,#}%",
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+		},        
+		"p_mgezw" : {
+			"label" : "p_mgezw",
+			"type" : "number",
+			"title" : "Perc. meergezinswoningen",
+            "description" : "Percentage meergezinswoningen",
+            "section" : "Woningen",
+            "minValue":0,
+            "maxValue":100,
+            "stringFormat" : "{0:#,#}%",
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+		},
+        "p_koopwon" : {
+			"label" : "p_koopwon",
+			"type" : "number",
+			"title" : "Perc. koopwoningen",
+            "description" : "Percentage koopwoningen",
+            "section" : "Woningen",
+            "minValue":0,
+            "maxValue":100,
+            "stringFormat" : "{0:#,#}%",
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+		},
+        "p_huurwon" : {
+			"label" : "p_huurwon",
+			"type" : "number",
+			"title" : "Perc. huurwoningen",
+            "description" : "Percentage huurwoningen",
+            "section" : "Woningen",
+            "minValue":0,
+            "maxValue":100,
+            "stringFormat" : "{0:#,#}%",
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+		},
+        "p_huko_onb" : {
+			"label" : "p_huko_onb",
+			"type" : "number",
+			"title" : "Perc. eigendom onbekend",
+            "description" : "Percentage eigendom onbekend",
+            "section" : "Woningen",
+            "stringFormat" : "{0:#,#}%",
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+		},
+        "a_1gezw" : {
+			"label" : "a_1gezw",
+			"type" : "number",
+			"title" : "Aant. eengezinswoningen",
+            "description" : "Aantal eengezinswoningen",
+            "section" : "Woningen",
+            "stringFormat" : "{0:#,#}",
+            "expression" : "properties.woningen * properties.p_1gezw / 100",
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+		},        
+		"a_mgezw" : {
+			"label" : "a_mgezw",
+			"type" : "number",
+			"title" : "Aant. meergezinswoningen",
+            "description" : "Aantal meergezinswoningen",
+            "section" : "Woningen",
+            "stringFormat" : "{0:#,#}",
+            "expression" : "properties.woningen * properties.p_mgezw / 100",
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+		},
+        "a_koopwon" : {
+			"label" : "a_koopwon",
+			"type" : "number",
+			"title" : "Aant. koopwoningen",
+            "description" : "Aantal koopwoningen",
+            "section" : "Woningen",
+            "expression" : "properties.woningen * properties.p_koopwon / 100",
+            "stringFormat" : "{0:#,#}",
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+		},
+        "a_huurwon" : {
+			"label" : "a_huurwon",
+			"type" : "number",
+			"title" : "Aant. huurwoningen",
+            "description" : "Aantal huurwoningen",
+            "section" : "Woningen",
+            "expression" : "properties.woningen * properties.p_huurwon / 100",
+            "stringFormat" : "{0:#,#}",
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+		},
+        "a_huko_onb" : {
+			"label" : "a_huko_onb",
+			"type" : "number",
+			"title" : "Aant. eigendom onbekend",
+            "description" : "Aantal eigendom onbekend",
+            "section" : "Woningen",
+            "expression" : "properties.woningen * properties.p_huko_onb / 100",
+            "stringFormat" : "{0:#,#}",
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+		},
+        "a_apb_w" : {
+			"label" : "a_apb_w",
+			"type" : "number",
+			"title" : "Aant. aanpasbare woningen",
+            "description" : "Aantal aanpasbare woningen",
+            "section" : "Aanpasbaarheid",
+            "minValue":0,
+            "maxValue":5000,
+            "expression" : "properties.a_1gezw",
+            "stringFormat" : "{0:#,#}",
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+		},
+        "a_napb_w" : {
+			"label" : "a_napb_w",
+			"type" : "number",
+			"title" : "Aant. niet-aanpasbare woningen",
+            "description" : "Aantal niet-aanpasbare woningen",
+            "section" : "Aanpasbaarheid",
+            "expression" : "properties.a_mgezw",
+            "stringFormat" : "{0:#,#}",
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+		},
+        "p_apb_w" : {
+			"label" : "p_apb_w",
+			"type" : "number",
+			"title" : "Perc. aanpasbare woningen",
+            "description" : "Percentage aanpasbare woningen",
+            "section" : "Aanpasbaarheid",
+            "minValue":0,
+            "maxValue":100,
+            "expression" : "properties.p_1gezw",
+            "stringFormat" : "{0:#,#}%",
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+		},
+        "p_napb_w" : {
+			"label" : "p_napb_w",
+			"type" : "number",
+			"title" : "Perc. niet-aanpasbare woningen",
+            "description" : "Percentage niet-aanpasbare woningen",
+            "section" : "Aanpasbaarheid",
+            "minValue":0,
+            "maxValue":100,
+            "expression" : "properties.p_mgezw",
+            "stringFormat" : "{0:#,#}%",
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+		},
+        "woz" : {
+			"label" : "woz",
+			"type" : "number",
+			"title" : "Gem. WOZ-waarde",
+            "section" : "Woningen",
+            "stringFormat" : "€{0:#,#}k",
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+		},
+		"contour" : {
+			"label" : "contour",
+			"type" : "text",
+			"title" : "contour",
+			"visibleInCallOut" : false,
+			"isSearchable" : false
+		}
+	}
+}

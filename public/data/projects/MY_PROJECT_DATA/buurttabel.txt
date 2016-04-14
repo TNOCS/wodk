@@ -1,0 +1,17 @@
+| {{0}}                       | &nbsp;&nbsp;&nbsp;Aantal | &nbsp;&nbsp;&nbsp;Percentage |
+|-----------------------------|-------------------------:|-----------------------------:|
+| Aantal woningen             | {{1}}                    | 100                       |
+| | |
+| Niet-aanpasbare woningen    | {{13}}                    | {{15}}                  |
+| Aanpasbare woningen         | {{12}}                    | {{14}}                    |
+| Aangepaste woningen         | -                    | -                       |
+| Aanpasbaarheid onbekend     | -                    | -                       |
+| | |
+| Koopwoningen                | {{9}}                    | {{4}}                       |
+| Huurwoningen                | {{10}}                    | {{5}}                       |
+| Koop/huur onbekend          | {{11}}                    | {{6}}                       |
+| | |
+| Eengezinswoningen (egw)     | {{7}}                   | {{2}}                       |
+| Meergezinswoningen (mgw)    | {{8}}                   | {{3}}                       |
+| | |
+| Gemiddelde WOZ-waarde       | {{16}}                    | -                       |
