@@ -1,5 +1,5 @@
 {
-  "name": "csWeb-example",
+  "name": "wodk",
   "version": "0.1.0",
   "authors": [
     "Erik Vullings",
@@ -14,7 +14,7 @@
   ],
   "license": "MIT",
   "description": "csWeb example project",
-  "homepage": "http://github.com/TNOCS/csWeb",
+  "homepage": "http://github.com/TNOCS/wodk",
   "private": true,
   "ignore": [
     "**/.*",
@@ -24,10 +24,7 @@
     "tests"
   ],
   "dependencies": {
-    "csweb": "~0.2.8",
     "font-awesome": "~4.4.0",
-    "angularUtils-pagination": "angular-utils-pagination#~0.9.2",
-    "angular-summernote": "https://github.com/erikvullings/angular-summernote.git#^0.8.0",
-    "summernote": "0.8.1"
+    "angularUtils-pagination": "angular-utils-pagination#~0.9.2"
   }
 }

@@ -293,7 +293,7 @@
                         "label": "Ster 5 - specifieke woning",
                         "interval": {
                             "min": 4,
-                            "max": 7
+                            "max": 5
                         },
                         "color": "#007722"
                     }

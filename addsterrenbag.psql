@@ -1,0 +1,106 @@
+ALTER TABLE bagactueel.pand ADD COLUMN ster_0 int;
+ALTER TABLE bagactueel.pand ADD COLUMN ster_1 int;
+ALTER TABLE bagactueel.pand ADD COLUMN ster_2 int;
+ALTER TABLE bagactueel.pand ADD COLUMN ster_3 int;
+ALTER TABLE bagactueel.pand ADD COLUMN ster_4 int;
+ALTER TABLE bagactueel.pand ADD COLUMN ster_5 int;
+ALTER TABLE bagactueel.pand ADD COLUMN ster_onb int;
+alter table bagactueel.pand add hoogte_max numeric(5,2);
+alter table bagactueel.pand add hoogte_min numeric(5,2);
+alter table bagactueel.pand add hoogte_gem numeric(5,2);
+alter table bagactueel.pand add hoogte_med numeric(5,2);
+
+UPDATE bagactueel.pand
+SET ster_onb = woningen_in_pand
+WHERE pandhoogte IS NULL;
+
+UPDATE bagactueel.pand
+SET ster_2 = 1
+WHERE
+woningen_in_pand = 1 AND 
+niet_woningen_in_pand = 0 AND
+pandhoogte >= 5;
+  
+UPDATE bagactueel.pand
+SET ster_3 = 1
+WHERE
+woningen_in_pand = 1 AND 
+niet_woningen_in_pand = 0 AND
+pandhoogte < 5;
+
+UPDATE bagactueel.pand
+SET ster_3 = woningen_in_pand
+WHERE
+(woningen_in_pand > 1 OR 
+  (woningen_in_pand = 1 AND niet_woningen_in_pand > 0)
+)
+AND pandhoogte >= 17
+AND bouwjaar >= 1930;
+
+UPDATE bagactueel.pand
+SET ster_3 = woningen_in_pand
+WHERE
+woningen_in_pand >= 9
+AND pandhoogte < 17
+AND bouwjaar >= 1992
+AND pandoppervlakte >= 3500;
+
+UPDATE bagactueel.pand
+SET ster_3 = 1, ster_0 = 1
+WHERE
+woningen_in_pand = 2
+AND pandhoogte < 17
+AND bouwjaar >= 1930;
+
+UPDATE bagactueel.pand
+SET ster_3 = 1, ster_0 = 2
+WHERE
+woningen_in_pand = 3
+AND pandhoogte < 17
+AND bouwjaar >= 1930;
+
+UPDATE bagactueel.pand
+SET ster_3 = 2, ster_0 = 2
+WHERE
+woningen_in_pand = 4
+AND pandhoogte < 17
+AND bouwjaar >= 1930;
+
+UPDATE bagactueel.pand
+SET ster_3 = 2, ster_0 = 3
+WHERE
+woningen_in_pand = 5
+AND pandhoogte < 17
+AND bouwjaar >= 1930;
+
+UPDATE bagactueel.pand
+SET ster_3 = 2, ster_0 = 4
+WHERE
+woningen_in_pand = 6
+AND pandhoogte < 17
+AND bouwjaar >= 1930;
+
+UPDATE bagactueel.pand
+SET ster_3 = 2, ster_0 = 5
+WHERE
+woningen_in_pand = 7
+AND pandhoogte < 17
+AND bouwjaar >= 1930;
+
+UPDATE bagactueel.pand
+SET ster_3 = 2, ster_0 = 6
+WHERE
+woningen_in_pand = 8
+AND pandhoogte < 17
+AND bouwjaar >= 1930;
+
+update bagactueel.pand
+set 
+hoogte_max = pandhoogte.maximum_hoogte,
+hoogte_med = pandhoogte.mediaan_hoogte,
+hoogte_gem = pandhoogte.gemiddelde_hoogte,
+hoogte_min = pandhoogte.minimum_hoogte
+from bagactueel.pandhoogte
+where
+pand.pandhoogte_gml_id = pandhoogte.gml_id
+AND pand.pandhoogte_gml_id IS NOT NULL;
