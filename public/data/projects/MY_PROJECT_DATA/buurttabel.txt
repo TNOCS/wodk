@@ -1,17 +1,17 @@
 | {{0}}                       | &nbsp;&nbsp;&nbsp;Aantal | &nbsp;&nbsp;&nbsp;Percentage |
 |-----------------------------|-------------------------:|-----------------------------:|
-| Aantal woningen             | {{1}}                    | 100                       |
+| Aantal woningen                      | {{1}}                    | 100                    |
 | | |
-| Niet-aanpasbare woningen    | {{13}}                    | {{15}}                  |
-| Aanpasbare woningen         | {{12}}                    | {{14}}                    |
-| Aangepaste woningen         | -                    | -                       |
-| Aanpasbaarheid onbekend     | -                    | -                       |
+| Specifieke woningen (ster 4 & 5)     | {{4}}                    | {{8}}                  |
+| Aanpasbare woningen (ster 2 & 3)     | {{3}}                    | {{7}}                  |
+| Niet-aanpasbare woningen (ster 0 & 1)| {{2}}                    | {{6}}                  |
+| Aanpasbaarheid onbekend              | {{5}}                    | {{9}}                  |
 | | |
-| Koopwoningen                | {{9}}                    | {{4}}                       |
-| Huurwoningen                | {{10}}                    | {{5}}                       |
-| Koop/huur onbekend          | {{11}}                    | {{6}}                       |
+| Koopwoningen                | {{10}}                   | {{16}}                       |
+| Huurwoningen                | {{11}}                   | {{17}}                       |
+| Koop/huur onbekend          | {{12}}                   | {{18}}                       |
 | | |
-| Eengezinswoningen (egw)     | {{7}}                   | {{2}}                       |
-| Meergezinswoningen (mgw)    | {{8}}                   | {{3}}                       |
+| Eengezinswoningen (egw)     | {{13}}                   | {{19}}                       |
+| Appartementen               | {{14}}                   | {{20}}                       |
 | | |
-| Gemiddelde WOZ-waarde       | {{16}}                    | -                       |
+| Gemiddelde WOZ-waarde       | {{15}}                   | -                       |

@@ -1,0 +1,32 @@
+<configuration>
+	<system.webServer>
+		<handlers>
+			<add name="iisnode" path="server.js" verb="*" modules="iisnode" />
+		</handlers>  
+			<rewrite>
+				<rules>
+                <clear />
+                <rule name="Imported Rule 1">
+                    <match url="cache/" ignoreCase="false" />
+                    <conditions logicalGrouping="MatchAll" trackAllCaptures="false" />
+                    <action type="CustomResponse" statusCode="403" statusReason="Forbidden" statusDescription="Forbidden" />
+                </rule>
+                <rule name="DynamicContent">
+                    <conditions logicalGrouping="MatchAll" trackAllCaptures="false">
+                        <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" />
+                    </conditions>
+                    <action type="Rewrite" url="server.js" />
+                </rule>
+                <rule name="Imported Rule 2" stopProcessing="true">
+                    <match url="^" ignoreCase="false" />
+                    <conditions logicalGrouping="MatchAll" trackAllCaptures="false">
+                        <add input="{REQUEST_FILENAME}" matchType="IsFile" ignoreCase="false" negate="true" />
+                        <add input="{REQUEST_FILENAME}" matchType="IsDirectory" ignoreCase="false" negate="true" />
+                        <add input="{URL}" pattern="^/favicon.ico$" ignoreCase="false" negate="true" />
+                    </conditions>
+                    <action type="Rewrite" url="./index.php" />
+                </rule>e
+				</rules>
+			</rewrite>
+  </system.webServer>
+</configuration>

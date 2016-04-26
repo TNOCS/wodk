@@ -43,8 +43,28 @@ cs.start(() => {
             console.log('/bagsearchaddress');
             mapLayerFactory.processBagSearchQuery(req, res);
         });
+        
+        cs.server.post('/bagwoningen/public/bagsearchaddress', (req, res) => {
+            console.log('/bagsearchaddress');
+            mapLayerFactory.processBagSearchQuery(req, res);
+        });
 
         cs.server.post(deployPath + '/public/bagbuurten', (req, res) => {
+            console.log('/public/bagbuurten');
+            mapLayerFactory.processBagBuurten(req, res);
+        });
+        
+        cs.server.post(deployPath + '/bagcontours', (req, res) => {
+            console.log();
+            mapLayerFactory.processBagContours(req, res);
+        });
+
+        cs.server.post(deployPath + '/bagsearchaddress', (req, res) => {
+            console.log('/bagsearchaddress');
+            mapLayerFactory.processBagSearchQuery(req, res);
+        });
+
+        cs.server.post(deployPath + '/bagbuurten', (req, res) => {
             console.log('/public/bagbuurten');
             mapLayerFactory.processBagBuurten(req, res);
         });

@@ -4,15 +4,19 @@
             "name": "BagPanden",
             "contourProperty": "contour",
             "style": {
-                "fillColor": "#99ff99",
+                "fillColor": "#9999ff",
+                "fillOpacity" : 0.85,
+                "opacity" : 0.85,
                 "strokeColor": "#000000",
                 "strokeWidth": 1,
                 "iconWidth": 30,
                 "iconHeight": 30,
-                "iconUri": "images/homeicon{ster_gem}.png",
-                "maxTitleResolution": -1
+                "cornerRadius": 6,
+                "iconUri": "images/bag_{icon}.png",
+                "maxTitleResolution": -1,
+                "drawingMode": "Point"
             },
-            "propertyTypeKeys": "Adres;postcode;Name;woonplaatsnaam;gemeentenaam;wijknaam;wijkcode;buurtnaam;buurtcode;pandoppervlakte;pandhoogte;bouwjaar;woningen_in_pand;lift;ster_onb;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_gem;woningtype;oppervlakteverblijfsobject;gebruiksdoelverblijfsobject;pandid;"
+            "propertyTypeKeys": "Adres;postcode;Name;woonplaatsnaam;gemeentenaam;woningtype;woningen_in_pand;niet_woningen_in_pand;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;lift;pandoppervlakte;bouwjaar;pandhoogte;wijknaam;wijkcode;buurtnaam;buurtcode;ster_gem;oppervlakteverblijfsobject;gebruiksdoelverblijfsobject;pandid;icon;"
         }
     },
     "propertyTypeData": {
@@ -26,7 +30,7 @@
             "label": "postcode",
             "type": "text",
             "title": "Postcode",
-            "visibleInCallOut": false,
+            "visibleInCallOut": true,
             "canEdit": false,
             "isSearchable": false
         },
@@ -81,17 +85,25 @@
             "visibleInCallOut": true,
             "isSearchable": false
         },
+        "niet_woningen_in_pand": {
+            "label": "niet_woningen_in_pand",
+            "type": "number",
+            "title": "# Niet-woningen in pand",
+            "visibleInCallOut": true,
+            "isSearchable": false
+        },
         "woningtype": {
             "label": "woningtype",
             "titel": "Woningtype",
             "type": "text",
-            "expression": "properties.woningen_in_pand === 1 ? 'EGW' : 'MGW'"
+            "expression": "(properties.woningen_in_pand === 1 && !properties.niet_woningen_in_pand) ? 'EGW' : 'Appartement'"
         },
         "lift": {
             "label": "lift",
             "titel": "Lift aanwezig",
             "type": "text",
-            "expression": "(properties.pandhoogte >= 17 || (properties.woningen_in_pand > 9 && properties.pandoppervlakte >= 3500)) ? 'ja' : 'nee'"
+            "expression": "(properties.pandhoogte >= 17 || (properties.woningen_in_pand > 9 && properties.pandoppervlakte >= 3500)) ? 'ja' : 'nee'",
+            "expression": "(!properties.icon || properties.icon == 10) ? 'in onderzoek' : (properties.pandhoogte >= 17 || (properties.woningen_in_pand > 9 && properties.pandoppervlakte >= 3500)) ? 'ja' : 'nee'"
         },
         "oppervlakteverblijfsobject": {
             "label": "oppervlakteverblijfsobject",
@@ -239,16 +251,32 @@
         "ster_gem": {
             "label": "ster_gem",
             "type": "number",
-            "title": "Gemiddelde ster",
-            "expression": "(properties.ster_onb > 0) ? 6 : ((properties.ster_1 * 1 ||0 + properties.ster_2 * 2 ||0 + properties.ster_3 * 3 ||0 + properties.ster_4 * 4 ||0 + properties.ster_5 * 5 ||0)/properties.woningen_in_pand)",
-            "visibleInCallOut": true,
+            "title": "Aanpasbaarheid",
+            "expression": "((properties.icon == 10) ? -2 : ((properties.icon > 10) ? -1 : properties.icon))",
+            "visibleInCallOut": false,
             "isSearchable": false,
             "legend": {
                 "id": "ster_gem",
                 "visualAspect": "fillColor",
-                "description": "Gemiddelde ster",
+                "description": "Aanpasbaarheidsster",
                 "legendKind": "discrete",
                 "legendEntries": [
+                    {
+                        "label": "Aanpasbaarheid onbekend",
+                        "interval": {
+                            "min": -3,
+                            "max": -2
+                        },
+                        "color": "#111111"
+                    },
+                    {
+                        "label": "Aanpasbaarheid gemengd",
+                        "interval": {
+                            "min": -2,
+                            "max": -1
+                        },
+                        "color": "#ffff00"
+                    },
                     {
                         "label": "Ster 0 - niet-aanpasbare woning",
                         "interval": {
@@ -263,7 +291,7 @@
                             "min": 0,
                             "max": 1
                         },
-                        "color": "#ff9900"
+                        "color": "#ff5500"
                     },
                     {
                         "label": "Ster 2 - aanpasbare woning",
@@ -271,7 +299,7 @@
                             "min": 1,
                             "max": 2
                         },
-                        "color": "#33ff33"
+                        "color": "#00ff00"
                     },
                     {
                         "label": "Ster 3 - aanpasbare woning",
@@ -279,7 +307,7 @@
                             "min": 2,
                             "max": 3
                         },
-                        "color": "#00dd00"
+                        "color": "#00cc00"
                     },
                     {
                         "label": "Ster 4 - specifieke woning",
@@ -287,7 +315,7 @@
                             "min": 3,
                             "max": 4
                         },
-                        "color": "#009922"
+                        "color": "#006600"
                     },
                     {
                         "label": "Ster 5 - specifieke woning",
@@ -295,7 +323,7 @@
                             "min": 4,
                             "max": 5
                         },
-                        "color": "#007722"
+                        "color": "#005500"
                     }
                 ]
             }
@@ -305,6 +333,14 @@
             "type": "number",
             "title": "Pandhoogte",
             "visibleInCallOut": true,
+            "isSearchable": false
+        },
+        "icon": {
+            "label": "icon",
+            "type": "number",
+            "title": "icon",
+            "visibleInCallOut": false,
+            "canEdit": false,
             "isSearchable": false
         }
     }

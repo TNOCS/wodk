@@ -193,7 +193,7 @@ module MobileApp {
         // Translations.English.locale['MAP_LABEL'] = 'MY AWESOME MAP';
         $translateProvider.translations('en', Translations.English.locale);
         $translateProvider.translations('nl', Translations.Dutch.locale);
-        $translateProvider.preferredLanguage('en');
+        $translateProvider.preferredLanguage('nl');
     })
         .config($languagesProvider => {
         // Defines the GUI languages that you wish to use in your project.

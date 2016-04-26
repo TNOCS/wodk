@@ -3,6 +3,7 @@
 		"buurt" : {
 			"name" : "Buurt",
 			"style" : {
+				"drawingMode": "Polygon",
 				"fillColor" : "#999922",
 				"strokeColor" : "#000000",
 				"strokeWidth" : 1,
@@ -11,7 +12,9 @@
 				"iconUri" : "images/5001 gemeente.png",
                 "nameLabel" : "bu_naam",
 				"maxTitleResolution" : -1
-			}, "propertyTypeKeys":"bu_naam;bu_code;gm_naam;aant_inw;woningen;p_1gezw;p_mgezw;p_koopwon,p_huurwon;p_huko_onb;a_1gezw;a_mgezw;a_koopwon,a_huurwon;a_huko_onb;woz;a_apb_w;a_napb_w;p_apb_w;p_napb_w;"
+			}, 
+			"selectActions": ["select feature", "center on map"],
+			"propertyTypeKeys":"bu_naam;bu_code;gm_naam;aant_inw;ster_totaal;a_apb_w;a_napb_w;a_apb_onb;a_aangep_w;p_apb_w;p_napb_w;p_apb_onb;p_aangep_w;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;woningen;p_1gezw;p_mgezw;p_koopwon,p_huurwon;p_huko_onb;a_1gezw;a_mgezw;a_koopwon,a_huurwon;a_huko_onb;woz;"
 		}
 	},
 	"propertyTypeData" : {
@@ -42,22 +45,86 @@
 			"visibleInCallOut" : false,
 			"isSearchable" : false
 		},
+		"ster_totaal" : {
+			"label" : "ster_totaal",
+			"type" : "number",
+			"title" : "Aantal woningen",
+            "stringFormat" : "{0:#,#}",
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+		},
+        "ster_0" : {
+			"label" : "ster_0",
+			"type" : "number",
+			"title" : "Aantal woningen ster 0",
+            "stringFormat" : "{0:#,#}",
+			"visibleInCallOut" : false,
+			"isSearchable" : false
+		}, 
+        "ster_1" : {
+			"label" : "ster_1",
+			"type" : "number",
+			"title" : "Aantal woningen ster 1",
+            "stringFormat" : "{0:#,#}",
+			"visibleInCallOut" : false,
+			"isSearchable" : false
+		}, 
+        "ster_2" : {
+			"label" : "ster_2",
+			"type" : "number",
+			"title" : "Aantal woningen ster 2",
+            "stringFormat" : "{0:#,#}",
+			"visibleInCallOut" : false,
+			"isSearchable" : false
+		}, 
+        "ster_3" : {
+			"label" : "ster_3",
+			"type" : "number",
+			"title" : "Aantal woningen ster 3",
+            "stringFormat" : "{0:#,#}",
+			"visibleInCallOut" : false,
+			"isSearchable" : false
+		}, 
+        "ster_4" : {
+			"label" : "ster_4",
+			"type" : "number",
+			"title" : "Aantal woningen ster 4",
+            "stringFormat" : "{0:#,#}",
+			"visibleInCallOut" : false,
+			"isSearchable" : false
+		}, 
+        "ster_5" : {
+			"label" : "ster_5",
+			"type" : "number",
+			"title" : "Aantal woningen ster 5",
+            "stringFormat" : "{0:#,#}",
+			"visibleInCallOut" : false,
+			"isSearchable" : false
+		}, 
+        "ster_onb" : {
+			"label" : "ster_onb",
+			"type" : "number",
+			"title" : "Aant. woningen ster onbekend",
+            "stringFormat" : "{0:#,#}",
+			"visibleInCallOut" : false,
+			"isSearchable" : false
+		}, 
         "woningen" : {
 			"label" : "woningen",
 			"type" : "number",
 			"title" : "Aantal woningen",
-            "section" : "Woningen",
             "stringFormat" : "{0:#,#}",
-			"visibleInCallOut" : true,
+			"visibleInCallOut" : false,
 			"isSearchable" : false
 		},        
 		"p_1gezw" : {
 			"label" : "p_1gezw",
 			"type" : "number",
 			"title" : "Perc. eengezinswoningen",
-            "section" : "Woningen",
             "description" : "Percentage eengezinswoningen",
             "stringFormat" : "{0:#,#}%",
+			"min": 0,
+			"max": 100,
 			"visibleInCallOut" : true,
 			"isSearchable" : false
 		},        
@@ -66,10 +133,9 @@
 			"type" : "number",
 			"title" : "Perc. meergezinswoningen",
             "description" : "Percentage meergezinswoningen",
-            "section" : "Woningen",
-            "minValue":0,
-            "maxValue":100,
             "stringFormat" : "{0:#,#}%",
+			"min": 0,
+			"max": 100,
 			"visibleInCallOut" : true,
 			"isSearchable" : false
 		},
@@ -78,10 +144,9 @@
 			"type" : "number",
 			"title" : "Perc. koopwoningen",
             "description" : "Percentage koopwoningen",
-            "section" : "Woningen",
-            "minValue":0,
-            "maxValue":100,
             "stringFormat" : "{0:#,#}%",
+			"min": 0,
+			"max": 100,
 			"visibleInCallOut" : true,
 			"isSearchable" : false
 		},
@@ -90,10 +155,9 @@
 			"type" : "number",
 			"title" : "Perc. huurwoningen",
             "description" : "Percentage huurwoningen",
-            "section" : "Woningen",
-            "minValue":0,
-            "maxValue":100,
             "stringFormat" : "{0:#,#}%",
+			"min": 0,
+			"max": 100,
 			"visibleInCallOut" : true,
 			"isSearchable" : false
 		},
@@ -102,8 +166,9 @@
 			"type" : "number",
 			"title" : "Perc. eigendom onbekend",
             "description" : "Percentage eigendom onbekend",
-            "section" : "Woningen",
             "stringFormat" : "{0:#,#}%",
+			"min": 0,
+			"max": 100,
 			"visibleInCallOut" : true,
 			"isSearchable" : false
 		},
@@ -112,9 +177,8 @@
 			"type" : "number",
 			"title" : "Aant. eengezinswoningen",
             "description" : "Aantal eengezinswoningen",
-            "section" : "Woningen",
             "stringFormat" : "{0:#,#}",
-            "expression" : "properties.woningen * properties.p_1gezw / 100",
+            "expression" : "properties.ster_totaal * properties.p_1gezw / 100",
 			"visibleInCallOut" : true,
 			"isSearchable" : false
 		},        
@@ -123,9 +187,8 @@
 			"type" : "number",
 			"title" : "Aant. meergezinswoningen",
             "description" : "Aantal meergezinswoningen",
-            "section" : "Woningen",
             "stringFormat" : "{0:#,#}",
-            "expression" : "properties.woningen * properties.p_mgezw / 100",
+            "expression" : "properties.ster_totaal * properties.p_mgezw / 100",
 			"visibleInCallOut" : true,
 			"isSearchable" : false
 		},
@@ -134,8 +197,7 @@
 			"type" : "number",
 			"title" : "Aant. koopwoningen",
             "description" : "Aantal koopwoningen",
-            "section" : "Woningen",
-            "expression" : "properties.woningen * properties.p_koopwon / 100",
+            "expression" : "properties.ster_totaal * properties.p_koopwon / 100",
             "stringFormat" : "{0:#,#}",
 			"visibleInCallOut" : true,
 			"isSearchable" : false
@@ -145,8 +207,7 @@
 			"type" : "number",
 			"title" : "Aant. huurwoningen",
             "description" : "Aantal huurwoningen",
-            "section" : "Woningen",
-            "expression" : "properties.woningen * properties.p_huurwon / 100",
+            "expression" : "properties.ster_totaal * properties.p_huurwon / 100",
             "stringFormat" : "{0:#,#}",
 			"visibleInCallOut" : true,
 			"isSearchable" : false
@@ -156,8 +217,17 @@
 			"type" : "number",
 			"title" : "Aant. eigendom onbekend",
             "description" : "Aantal eigendom onbekend",
-            "section" : "Woningen",
-            "expression" : "properties.woningen * properties.p_huko_onb / 100",
+            "expression" : "properties.ster_totaal * properties.p_huko_onb / 100",
+            "stringFormat" : "{0:#,#}",
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+		},
+		"a_apb_onb" : {
+			"label" : "a_apb_onb",
+			"type" : "number",
+			"title" : "Aant. aanpasbaarheid onbekend",
+            "description" : "Aantal aanpasbaarheid onbekend",
+            "expression" : "properties.ster_onb",
             "stringFormat" : "{0:#,#}",
 			"visibleInCallOut" : true,
 			"isSearchable" : false
@@ -167,10 +237,7 @@
 			"type" : "number",
 			"title" : "Aant. aanpasbare woningen",
             "description" : "Aantal aanpasbare woningen",
-            "section" : "Aanpasbaarheid",
-            "minValue":0,
-            "maxValue":5000,
-            "expression" : "properties.a_1gezw",
+            "expression" : "properties.ster_2 + properties.ster_3",
             "stringFormat" : "{0:#,#}",
 			"visibleInCallOut" : true,
 			"isSearchable" : false
@@ -180,8 +247,17 @@
 			"type" : "number",
 			"title" : "Aant. niet-aanpasbare woningen",
             "description" : "Aantal niet-aanpasbare woningen",
-            "section" : "Aanpasbaarheid",
-            "expression" : "properties.a_mgezw",
+            "expression" : "properties.ster_0 + properties.ster_1",
+            "stringFormat" : "{0:#,#}",
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+		},
+        "a_aangep_w" : {
+			"label" : "a_aangep_w",
+			"type" : "number",
+			"title" : "Aant. aangepaste woningen",
+            "description" : "Aantal aangepaste woningen",
+            "expression" : "properties.ster_4 || 0 + properties.ster_5 || 0",
             "stringFormat" : "{0:#,#}",
 			"visibleInCallOut" : true,
 			"isSearchable" : false
@@ -190,33 +266,214 @@
 			"label" : "p_apb_w",
 			"type" : "number",
 			"title" : "Perc. aanpasbare woningen",
+            "expression" : "properties.a_apb_w / properties.ster_totaal * 100",
             "description" : "Percentage aanpasbare woningen",
-            "section" : "Aanpasbaarheid",
-            "minValue":0,
-            "maxValue":100,
-            "expression" : "properties.p_1gezw",
             "stringFormat" : "{0:#,#}%",
+			"min": 0,
+			"max": 100,
 			"visibleInCallOut" : true,
-			"isSearchable" : false
+			"isSearchable" : false,
+			"legend": {
+                "id": "p_apb_w",
+                "visualAspect": "fillColor",
+                "description": "Percentage aanpasbare woningen",
+                "legendKind": "discrete",
+                "legendEntries": [
+                    {
+                        "label": "0-20%",
+                        "interval": {
+                            "min": 0,
+                            "max": 20
+                        },
+                        "color": "#ff0000"
+                    },
+                    {
+                        "label": "20-40%",
+                        "interval": {
+                            "min": 20,
+                            "max": 40
+                        },
+                        "color": "#ff7700"
+                    },
+					{
+                        "label": "40-60%",
+                        "interval": {
+                            "min": 40,
+                            "max": 60
+                        },
+                        "color": "#ccff00"
+                    },
+					{
+                        "label": "60-100%",
+                        "interval": {
+                            "min": 60,
+                            "max": 100
+                        },
+                        "color": "#00ff00"
+                    }
+                ]
+            }
 		},
         "p_napb_w" : {
 			"label" : "p_napb_w",
 			"type" : "number",
 			"title" : "Perc. niet-aanpasbare woningen",
             "description" : "Percentage niet-aanpasbare woningen",
-            "section" : "Aanpasbaarheid",
-            "minValue":0,
-            "maxValue":100,
-            "expression" : "properties.p_mgezw",
+            "expression" : "properties.a_napb_w / properties.ster_totaal * 100",
             "stringFormat" : "{0:#,#}%",
+			"min": 0,
+			"max": 100,
 			"visibleInCallOut" : true,
-			"isSearchable" : false
+			"isSearchable" : false,
+			"legend": {
+                "id": "p_napb_w",
+                "visualAspect": "fillColor",
+                "description": "Percentage niet-aanpasbare woningen",
+                "legendKind": "discrete",
+                "legendEntries": [
+                    {
+                        "label": "0-20%",
+                        "interval": {
+                            "min": 0,
+                            "max": 20
+                        },
+                        "color": "#ff0000"
+                    },
+                    {
+                        "label": "20-40%",
+                        "interval": {
+                            "min": 20,
+                            "max": 40
+                        },
+                        "color": "#ff7700"
+                    },
+					{
+                        "label": "40-60%",
+                        "interval": {
+                            "min": 40,
+                            "max": 60
+                        },
+                        "color": "#ccff00"
+                    },
+					{
+                        "label": "60-100%",
+                        "interval": {
+                            "min": 60,
+                            "max": 100
+                        },
+                        "color": "#00ff00"
+                    }
+                ]
+            }
+		},
+		"p_apb_onb" : {
+			"label" : "p_apb_onb",
+			"type" : "number",
+			"title" : "Perc. aanpasbaarheid onbekend",
+            "description" : "Percentage aanpasbaarheid onbekend",
+            "expression" : "properties.a_apb_onb / properties.ster_totaal * 100",
+            "stringFormat" : "{0:#,#}%",
+			"min": 0,
+			"max": 100,
+			"visibleInCallOut" : true,
+			"isSearchable" : false,
+			"legend": {
+                "id": "p_apb_onb",
+                "visualAspect": "fillColor",
+                "description": "Percentage aanpasbaarheid onbekend",
+                "legendKind": "discrete",
+                "legendEntries": [
+                    {
+                        "label": "0-20%",
+                        "interval": {
+                            "min": 0,
+                            "max": 20
+                        },
+                        "color": "#ff0000"
+                    },
+                    {
+                        "label": "20-40%",
+                        "interval": {
+                            "min": 20,
+                            "max": 40
+                        },
+                        "color": "#ff7700"
+                    },
+					{
+                        "label": "40-60%",
+                        "interval": {
+                            "min": 40,
+                            "max": 60
+                        },
+                        "color": "#ccff00"
+                    },
+					{
+                        "label": "60-100%",
+                        "interval": {
+                            "min": 60,
+                            "max": 100
+                        },
+                        "color": "#00ff00"
+                    }
+                ]
+            }
+		},
+		"p_aangep_w" : {
+			"label" : "p_aangep_w",
+			"type" : "number",
+			"title" : "Perc. aangepaste woningen",
+            "description" : "Percentage aangepaste woningen",
+            "expression" : "properties.a_aangep_w / properties.ster_totaal * 100",
+            "stringFormat" : "{0:#,#}%",
+			"min": 0,
+			"max": 100,
+			"visibleInCallOut" : true,
+			"isSearchable" : false,
+			"legend": {
+                "id": "p_aangep_w",
+                "visualAspect": "fillColor",
+                "description": "Percentage aangepaste woningen",
+                "legendKind": "discrete",
+                "legendEntries": [
+                    {
+                        "label": "0-20%",
+                        "interval": {
+                            "min": 0,
+                            "max": 20
+                        },
+                        "color": "#ff0000"
+                    },
+                    {
+                        "label": "20-40%",
+                        "interval": {
+                            "min": 20,
+                            "max": 40
+                        },
+                        "color": "#ff7700"
+                    },
+					{
+                        "label": "40-60%",
+                        "interval": {
+                            "min": 40,
+                            "max": 60
+                        },
+                        "color": "#ccff00"
+                    },
+					{
+                        "label": "60-100%",
+                        "interval": {
+                            "min": 60,
+                            "max": 100
+                        },
+                        "color": "#00ff00"
+                    }
+                ]
+            }
 		},
         "woz" : {
 			"label" : "woz",
 			"type" : "number",
 			"title" : "Gem. WOZ-waarde",
-            "section" : "Woningen",
             "stringFormat" : "€{0:#,#}k",
 			"visibleInCallOut" : true,
 			"isSearchable" : false

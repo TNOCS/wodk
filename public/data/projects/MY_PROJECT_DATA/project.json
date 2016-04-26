@@ -4,10 +4,7 @@
     "title": "Woningen op de kaart",
     "connected": false,
     "dynamic": false,
-    "logo": "images/CommonSenseRound.png",
-    "useOfflineSearch": false,
-    "useOnlineSearch": true,
-    "onlineSearchUrl": "bagsearchaddress",
+    "logo": "images/vws.png",
     "userPrivileges": {
         "mca": {
             "expertMode": true
@@ -43,7 +40,7 @@
                     "url": "bagcontours",
                     "renderType": "geojson",
                     "dataSourceParameters": {
-                        "minZoom": 18,
+                        "minZoom": 17,
                         "getPointFeatures": true
                     }
                 },
@@ -68,7 +65,7 @@
                     "url": "bagcontours",
                     "renderType": "geojson",
                     "dataSourceParameters": {
-                        "minZoom": 18,
+                        "minZoom": 17,
                         "getPointFeatures": false
                     }
                 },
@@ -94,7 +91,7 @@
                     "url": "bagbuurten",
                     "renderType": "geojson",
                     "dataSourceParameters": {
-                        "minZoom": 14
+                        "minZoom": 13
                     }
                 }
             ]
@@ -103,7 +100,7 @@
     "dashboards": [
         {
             "id": "map",
-            "name": "Home",
+            "name": "Kaart",
             "showMap": true,
             "showTimeline": false,
             "showLeftmenu": false,
@@ -117,31 +114,35 @@
                     "elementId": "widget-5e75accc-21a4-47c0-de1d-8093ae45e305",
                     "enabled": true,
                     "style": "default",
-                    "left": "470px",
+                    "left": "25px",
                     "right": "",
-                    "bottom": "20px",
+                    "top": "75px",
                     "width": "400px",
-                    "height": "320px",
+                    "height": "520px",
                     "data": {
                         "featureTypeName": "data/resourceTypes/Buurt.json#buurt",
                         "dynamicProperties": [
                             "bu_naam",
-                            "woning",
+                            "ster_totaal",
+                            "a_apb_w",
+                            "a_napb_w",
+                            "a_aangep_w",
+                            "a_apb_onb",
+                            "p_apb_w",
+                            "p_napb_w",
+                            "p_aangep_w",
+                            "p_apb_onb",
+                            "a_koopwon",
+                            "a_huurwon",
+                            "a_huko_onb",
+                            "a_1gezw",
+                            "a_mgezw",
+                            "woz",
                             "p_1gezw",
                             "p_mgezw",
                             "p_koopwon",
                             "p_huurwon",
-                            "p_huko_onb",
-                            "a_1gezw",
-                            "a_mgezw",
-                            "a_koopwon",
-                            "a_huurwon",
-                            "a_huko_onb",
-                            "a_apb_w",
-                            "a_napb_w",
-                            "p_apb_w",
-                            "p_napb_w",
-                            "woz"
+                            "p_huko_onb"
                         ],
                         "url": "data/projects/MY_PROJECT_DATA/buurttabel.txt"
                     }
@@ -152,25 +153,42 @@
                     "enabled": true,
                     "style": "transparent",
                     "left": "25px",
-                    "top": "700px",
-                    "width": "450px",
+                    "bottom": "3%",
+                    "width": "470px",
                     "data": {
                         "buttons": [
                             {
-                                "title": "Aanpasbaarheidsster",
-                                "description": "Geeft een indicatie voor het aanpasbaarheidsniveau van een pand.",
-                                "action": "Activate Style",
+                                "title": "Aanpasbaarheid woningen (iconen)",
+                                "description": "Geeft een indicatie voor het aanpasbaarheidsniveau van een pand d.m.v. iconen.",
+                                "action": "zoom map;activate layer;activate style;show style tab",
+                                "layer": "bagadressen",
                                 "group": "BAG",
                                 "property": "data/resourceTypes/BagPanden.json#ster_gem",
-                                "showLegend": true
+                                "showLegend": true,
+                                "defaultEnabled": false,
+                                "zoomLevel": 18
                             },
                             {
-                                "title": "Woningen per pand",
-                                "description": "Woningen per pand",
-                                "action": "Activate Style",
+                                "title": "Aanpasbaarheid woningen (contouren)",
+                                "description": "Geeft een indicatie voor het aanpasbaarheidsniveau van een pand d.m.v. contouren.",
+                                "action": "activate layer;activate style;show style tab;zoom map",
+                                "layer": "bagcontouren",
                                 "group": "BAG",
-                                "property": "data/resourceTypes/BagPanden.json#woningen_in_pand",
-                                "showLegend": true
+                                "property": "data/resourceTypes/BagPanden.json#ster_gem",
+                                "showLegend": true,
+                                "defaultEnabled": false,
+                                "zoomLevel": 18
+                            },
+                            {
+                                "title": "Buurtoverzicht aanpasbaarheid",
+                                "description": "Toont overzichten voor het aanpasbaarheidsniveau van buurten.",
+                                "action": "zoom map;activate style",
+                                "layer": "bagbuurten",
+                                "group": "BAG",
+                                "property": "data/resourceTypes/Buurt.json#p_apb_w",
+                                "defaultEnabled": true,
+                                "showLegend": true,
+                                "zoomLevel": 14
                             }
                         ]
                     }
@@ -180,7 +198,7 @@
         },
         {
             "id": "datatable",
-            "name": "Table",
+            "name": "Tabel",
             "showMap": false,
             "showTimeline": false,
             "showLeftmenu": false,
@@ -227,6 +245,13 @@
                 }
             ],
             "mobile": true
+        }
+    ],
+    "searchProviders": [
+        {
+            "name": "bag",
+            "url": "/bagwoningen/public/bagsearchaddress",
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/public/bagsearchaddress"
         }
     ],
     "url": "/data/projects/MY_PROJECT_DATA/project.json"
