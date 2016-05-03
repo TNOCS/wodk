@@ -4,13 +4,16 @@ Het model ‘woningaanpassingen’ classificeert alle woningen van de Nederlands
 In het BAG-bestand (zie 2.) staan alle 7,5 miljoen woningen met adressen (=locatie) die in gebruik zijn. Per woning is tevens een aantal woning- en gebouwkenmerken opgenomen. Het bestand 3D Gebouwhoogte NL (zie 2.) bevat van alle woongebouwen de hoogte. Door de koppeling van bepaalde woning- en gebouwkenmerken uit het BAG-bestand en 3D Gebouwhoogte NL (zie 3.) kan 92% van de woongebouwen geclassificeerd worden. Voor het deel waarvan de kenmerken uit het BAG-bestand niet afdoende zijn om de woningen met een zekere mate van betrouwbaarheid te classificeren wordt momenteel een aanvullend liftonderzoek uitgevoerd.
 TNO kan geen verantwoordelijkheid nemen voor de juistheid van de gegevens in de genoemde bronbestanden van de BAG en het Kadaster. De gekozen koppeling van woning- en gebouwkenmerken is gebaseerd op expert-opinion en getoetst aan een gedetailleerd woningbestand van de gemeente Rotterdam. TNO heeft de uitgangspunten voor de classificering van de woningen zorgvuldig afgewogen op de mate van betrouwbaarheid (zie 3.), maar kan geen garantie bieden voor een volledige correctheid. 
 
+<br>
 ####1.	Classificering woningvoorraad: niet-aanpasbaar | aanpasbaar | specifiek
 De toegankelijkheid van de woningen wordt in zes niveaus onderscheiden. Per twee niveaus worden de woningen geclusterd tot drie hoofdgroepen: niet-aanpasbare, aanpasbare en specifieke woningen. In figuur 1 is deze classificatie schematisch weergegeven.
 
  
 ![Classificatie](data/images/class_woningen.png)
+
 Figuur 1: Classificatie woningvoorraad op toegankelijkheid en aanpasbaarheid
 
+<br>
 ####2.	Bronbestanden: BAG en 3D Gebouwhoogte NL
 Over BAG ([http://www.data.overheid.nl](http://www.data.overheid.nl "www.data.overheid.nl")):
 De BAG (Basisregistraties adressen en gebouwen) is onderdeel van het overheidsstelsel van basisregistraties. Gemeenten zijn bronhouders van de BAG. Zij zijn verantwoordelijk voor het opnemen van de gegevens in de BAG en voor de kwaliteit ervan. Alle gemeenten stellen gegevens over adressen en gebouwen centraal beschikbaar via de Landelijke Voorziening (BAGLV). Het Kadaster beheert de BAGLV en stelt de gegevens beschikbaar aan de diverse afnemers.
@@ -22,6 +25,7 @@ De BAG bevat deze gegevens van alle panden in Nederland.
 Over 3D Gebouwhoogte NL ([http://www.kadaster.nl/3dgebouwhoogte](http://www.kadaster.nl/3dgebouwhoogte "www.kadaster.nl/3dgebouwhoogte")):
 3D Gebouwhoogte NL bevat voor 99,7% van alle TOP10NL gebouwen de 2D geometrieën met gegeneraliseerde gebouwhoogten, toegevoegd als attributen. Dat zijn 2.992.613 TOP10NL gebouwen (versie R2 2014). De hoogten komen uit het Actuele Hoogte Bestand Nederland (AHN), zie [http://www.ahn.nl](http://www.ahn.nl "www.ahn.nl"). Zij zijn in een automatisch proces aan de 2D geometrieën gekoppeld via een point-in-polygoon procedure. Vanwege het tijdsverschil in opname tussen AHN2 en TOP10NL van soms enkele jaren, kunnen er inconsistenties optreden in het bestand.
 
+<br>
 ####3.	Uitgangspunten voor de classificering
 De gekozen uitgangspunten van de woning- en gebouwkenmerken voor de classificering van de woningvoorraad voor meergezinswoningen is als volgt:
 1.	Woongebouwen met een bouwjaar van voor 1930 hebben geen lift, dus de bovenwoningen van het woongebouw zijn ongeschikt en niet aan te passen voor de doelgroep;

@@ -115,7 +115,7 @@
 
 
             <!-- Select renderer -->
-            <ul class="nav navbar-nav" style="float:right">
+            <ul ng-if="false" class="nav navbar-nav" style="float:right">
                 <li data-ng-if="vm.$layerService.activeMapRenderer.title!='leaflet'"><a data-ng-click="vm.$layerService.selectRenderer('leaflet')">2D</a></li>
                 <li data-ng-if="vm.$layerService.activeMapRenderer.title!='cesium'"><a data-ng-click="vm.$layerService.selectRenderer('cesium')">3D</a></li>
             </ul>
@@ -219,7 +219,7 @@
                             </svg>
                         </li>
                         
-                        <li class="lp-tab" ng-click="vm.$layerService.visual.leftPanelVisible = !vm.$layerService.visual.leftPanelVisible;vm.$messageBusService.publish('search','reset')">
+                        <li class="lp-tab close-tab" ng-click="vm.$layerService.visual.leftPanelVisible = !vm.$layerService.visual.leftPanelVisible;vm.$messageBusService.publish('search','reset')">
                             <div>
                                 <i class="fa fa-times"></i>
                             </div>
@@ -271,7 +271,7 @@
 
 
     <div id="header-box" class="header-box">
-        <a class="menutoggle" style="color:black" ng-click="vm.$layerService.visual.leftPanelVisible = !vm.$layerService.visual.leftPanelVisible;vm.$messageBusService.publish('search','reset')" uib-tooltip="Ope/sluit het menu">
+        <a class="menutoggle" style="color:black" ng-click="vm.$layerService.visual.leftPanelVisible = !vm.$layerService.visual.leftPanelVisible;vm.$messageBusService.publish('search','reset')" uib-tooltip="Open/sluit het menu" tooltip-placement="bottom" tooltip-popup-delay="500">
             <i class="fa fa-bars"></i>
         </a>
 

@@ -113,12 +113,12 @@
                     "directive": "markdownwidget",
                     "elementId": "widget-5e75accc-21a4-47c0-de1d-8093ae45e305",
                     "enabled": true,
-                    "style": "default",
-                    "left": "25px",
-                    "right": "",
-                    "top": "75px",
-                    "width": "400px",
-                    "height": "520px",
+                    "style": "vws",
+                    "left": "",
+                    "right": "2%",
+                    "bottom": "3%",
+                    "width": "450px",
+                    "height": "480px",
                     "data": {
                         "featureTypeName": "data/resourceTypes/Buurt.json#buurt",
                         "dynamicProperties": [
@@ -153,44 +153,63 @@
                     "enabled": true,
                     "style": "transparent",
                     "left": "25px",
-                    "bottom": "3%",
-                    "width": "470px",
+                    "top": "85px",
+                    "width": "400px",
                     "data": {
                         "buttons": [
-                            {
-                                "title": "Aanpasbaarheid woningen (iconen)",
-                                "description": "Geeft een indicatie voor het aanpasbaarheidsniveau van een pand d.m.v. iconen.",
-                                "action": "zoom map;activate layer;activate style;show style tab",
-                                "layer": "bagadressen",
-                                "group": "BAG",
-                                "property": "data/resourceTypes/BagPanden.json#ster_gem",
-                                "showLegend": true,
-                                "defaultEnabled": false,
-                                "zoomLevel": 18
-                            },
-                            {
-                                "title": "Aanpasbaarheid woningen (contouren)",
-                                "description": "Geeft een indicatie voor het aanpasbaarheidsniveau van een pand d.m.v. contouren.",
-                                "action": "activate layer;activate style;show style tab;zoom map",
-                                "layer": "bagcontouren",
-                                "group": "BAG",
-                                "property": "data/resourceTypes/BagPanden.json#ster_gem",
-                                "showLegend": true,
-                                "defaultEnabled": false,
-                                "zoomLevel": 18
-                            },
                             {
                                 "title": "Buurtoverzicht aanpasbaarheid",
                                 "description": "Toont overzichten voor het aanpasbaarheidsniveau van buurten.",
                                 "action": "zoom map;activate style",
                                 "layer": "bagbuurten",
+                                "image": "images/buurt_button.png",
                                 "group": "BAG",
                                 "property": "data/resourceTypes/Buurt.json#p_apb_w",
                                 "defaultEnabled": true,
                                 "showLegend": true,
                                 "zoomLevel": 14
+                            },
+                            {
+                                "title": "Woningcontouren",
+                                "description": "Geeft een indicatie voor het aanpasbaarheidsniveau van een pand d.m.v. contouren.",
+                                "action": "zoom map;activate style",
+                                "layer": "bagcontouren",
+                                "image": "images/contour_button.png",
+                                "group": "BAG",
+                                "property": "data/resourceTypes/BagPanden.json#ster_gem",
+                                "showLegend": true,
+                                "defaultEnabled": false,
+                                "zoomLevel": 18
+                            },
+                            {
+                                "title": "Woningdetails",
+                                "description": "Geeft een indicatie voor het aanpasbaarheidsniveau van een pand d.m.v. iconen.",
+                                "action": "zoom map;activate style",
+                                "layer": "bagadressen",
+                                "image": "images/pand_button.png",
+                                "group": "BAG",
+                                "property": "data/resourceTypes/BagPanden.json#ster_gem",
+                                "showLegend": true,
+                                "defaultEnabled": false,
+                                "zoomLevel": 18
                             }
                         ]
+                    }
+                },
+                {
+                    "id": "11111ccc-21a4-47c0-de1d-8093ae45e305",
+                    "directive": "legend-directive",
+                    "title": "Legenda",
+                    "elementId": "widget-11111ccc-21a4-47c0-de1d-8093ae45e305",
+                    "enabled": true,
+                    "style": "vws",
+                    "left": "25px",
+                    "right": "",
+                    "top": "340px",
+                    "width": "",
+                    "height": "",
+                    "data": {
+                        "mode": "lastSelectedStyle"
                     }
                 }
             ],
@@ -219,7 +238,7 @@
         },
         {
             "id": "disclaimer",
-            "name": "Disclaimer",
+            "name": "Toelichting",
             "showMap": true,
             "showTimeline": false,
             "showLeftmenu": false,
@@ -236,7 +255,7 @@
                     "left": "20%",
                     "right": "",
                     "top": "10%",
-                    "width": "60%",
+                    "width": "65%",
                     "height": "80%",
                     "data": {
                         "title": "",

@@ -1,3 +1,41 @@
 .leftpanel-container {
-    bottom: 350px !important;
+    top: 300px !important;
+    bottom: 70px !important;
+}
+
+.active-text {
+    font-size: 14px;
+}
+
+.button-legend-color-entry {
+    width: 12px;
+    height:12px;
+}
+
+.button-legend-entries {
+    float:left;
+    margin-right:3px;
+    margin-top:1px
+}
+
+.button-container {
+    background: rgba(229, 240, 249, 0.77);
+    box-shadow: 0 1px 7px rgba(0, 0, 0, 0.4);
+    cursor : pointer;
+    font-size: 20px;
+    margin-top:5px;
+    margin-right: 8px;
+    color:black;
+        min-height: 46px;
+
+    }
+
+.button-container:active {
+    background: #007bc7;
+    color: white;
+}
+
+.button-container-down {
+    background: #01689b;
+    color: white;
 }

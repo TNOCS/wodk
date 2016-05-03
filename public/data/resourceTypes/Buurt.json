@@ -13,7 +13,7 @@
                 "nameLabel" : "bu_naam",
 				"maxTitleResolution" : -1
 			}, 
-			"selectActions": ["select feature", "center on map"],
+			"selectActions": ["center on map"],
 			"propertyTypeKeys":"bu_naam;bu_code;gm_naam;aant_inw;ster_totaal;a_apb_w;a_napb_w;a_apb_onb;a_aangep_w;p_apb_w;p_napb_w;p_apb_onb;p_aangep_w;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;woningen;p_1gezw;p_mgezw;p_koopwon,p_huurwon;p_huko_onb;a_1gezw;a_mgezw;a_koopwon,a_huurwon;a_huko_onb;woz;"
 		}
 	},
@@ -265,7 +265,7 @@
         "p_apb_w" : {
 			"label" : "p_apb_w",
 			"type" : "number",
-			"title" : "Perc. aanpasbare woningen",
+			"title" : "Percentage aanpasbare woningen",
             "expression" : "properties.a_apb_w / properties.ster_totaal * 100",
             "description" : "Percentage aanpasbare woningen",
             "stringFormat" : "{0:#,#}%",

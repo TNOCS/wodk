@@ -17,6 +17,13 @@
             "borderWidth": 1,
             "background": "white"
         },
+        "vws": {
+            "borderWidth": 1,
+            "borderColor": "#01689b",
+            "background": "#e5f0f9",
+            "opacity": 0.92,
+            "borderRadius": "4px"
+        },
         "transparent": {
             "borderWidth": 0,
             "background": "transparent"
