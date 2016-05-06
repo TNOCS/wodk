@@ -261,8 +261,9 @@
     </div>
 
     <!--Loading spinner-->
-    <div data-ng-show="layersLoading>0" id="loadingspinner" style="margin:0px auto; width:200px; height:100px;">
-        <div class="spinner" style="position: initial; margin-top:60px;">
+    <div data-ng-show="layersLoading>0" id="loadingspinner" style="margin:0px auto; width:700px; height:100px;">
+        <div class="spinner" style="position: initial; margin-top:80px;">
+            <h2>Woningen worden geladen</h2>
             <div class="bounce1" style="width:16px; height:16px;"></div>
             <div class="bounce2" style="width:16px; height:16px;"></div>
             <div class="bounce3" style="width:16px; height:16px;"></div>
@@ -294,7 +295,7 @@
         </div>
         <!-- Language switch -->
         <div ng-if="vm.$layerService.touchMode" ng-click="vm.$layerService.touchMode=false" class="navbar-form navbar-right toggle-icon">
-            <img src="images/touch.png" style="width:30px;height:30px;margin-top:7px;margin-left:-13px" />
+            <img src="bower_components/csweb/dist-bower/images/widgets/touchbutton.png" style="width:30px;height:30px;margin-top:7px;margin-left:-13px" />
         </div>
 
         <div ng-if="!vm.$layerService.touchMode" ng-click="vm.$layerService.touchMode=true" class="navbar-form navbar-right toggle-icon">

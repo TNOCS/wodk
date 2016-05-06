@@ -39,3 +39,46 @@
     background: #01689b;
     color: white;
 }
+
+.spinner > div {
+    background-color: rgba(229, 240, 249, 1.0);
+    width: 24px;
+    height: 24px;
+    border: solid 1px black;
+}
+
+.spinner > h2 {
+    color: rgba(229, 240, 249, 1.0);
+    font-weight: bold;
+    border-radius: 0%;
+    -webkit-animation: bouncedelaytext 1.4s infinite ease-in-out;
+    animation: bouncedelaytext 1.4s infinite ease-in-out;
+    /* Prevent first frame from flickering when animation starts */
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    text-shadow: #000 0px 0px 2px;
+    -webkit-font-smoothing: antialiased;
+}
+
+@-webkit-keyframes bouncedelaytext {
+    0%,
+    80%,
+    100% {
+        -webkit-transform: scale(1.0);
+    }
+    40% {
+        -webkit-transform: scale(1.0);
+    }
+}
+@keyframes bouncedelaytext {
+    0%,
+    80%,
+    100% {
+        transform: scale(1.0);
+        -webkit-transform: scale(1.0);
+    }
+    40% {
+        transform: scale(1.0);
+        -webkit-transform: scale(1.0);
+    }
+}
