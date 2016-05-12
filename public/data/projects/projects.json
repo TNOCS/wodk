@@ -47,6 +47,7 @@
         "preview": "http://b.tile.openstreetmap.fr/hot/11/1048/675.png"
     }, {
         "title": "OpenStreetMap",
+        "id": "OpenStreetMap",
         "subtitle": "Road",
         "url": "http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png",
         "isDefault": false,
@@ -92,6 +93,7 @@
         "preview": "http://a.tile.stamen.com/watercolor/11/1051/673.png"
     }, {
         "title": "World Imagery",
+        "id": "Earth",
         "isDefault": true,
         "subtitle": "from ESRI",
         "minZoom": 0,
@@ -124,6 +126,7 @@
         "preview": "http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/11/673/1051.png"
     }, {
         "title": "Positron",
+        "id": "Positron",
         "subtitle": "From CartoDB",
         "subdomains": ["a", "b", "c", "d"],
         "minZoom": 0,

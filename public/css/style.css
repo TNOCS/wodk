@@ -82,6 +82,12 @@
     }
 }
 
+.callout-icon {
+    margin-left:5px;
+    width: 48px;
+    height: 48px;
+}
+
 .marker-cluster-small {
 	background-color: rgba(226, 226, 226, 0.6);
 }

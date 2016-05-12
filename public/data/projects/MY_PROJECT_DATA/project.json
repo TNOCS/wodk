@@ -40,7 +40,7 @@
                     "url": "bagcontours",
                     "renderType": "geojson",
                     "dataSourceParameters": {
-                        "minZoom": 16,
+                        "minZoom": 13,
                         "getPointFeatures": true
                     }
                 },
@@ -192,6 +192,43 @@
                                 "showLegend": true,
                                 "defaultEnabled": false,
                                 "zoomLevel": 18
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "23bcc93c-6956-4acb-10c0-139f1e89d4bd",
+                    "directive": "buttonwidget",
+                    "enabled": true,
+                    "style": "transparent",
+                    "left": "25px",
+                    "bottom": "10px",
+                    "width": "",
+                    "data": {
+                        "buttons": [
+                            {
+                                "title": "OpenStreetMap",
+                                "action": "activate baselayer",
+                                "layer": "OpenStreetMap",
+                                "image": "http://c.tile.openstreetmap.org/11/1051/673.png",
+                                "defaultEnabled": false,
+                                "showLegend": false
+                            },
+                            {
+                                "title": "ESRI Earth",
+                                "action": "activate baselayer",
+                                "layer": "World Imagery",
+                                "image": "http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/11/673/1051.png",
+                                "defaultEnabled": false,
+                                "showLegend": false
+                            },
+                            {
+                                "title": "Positron",
+                                "action": "activate baselayer",
+                                "layer": "Positron",
+                                "image": "http://a.basemaps.cartocdn.com/light_nolabels/11/673/1051.png",
+                                "defaultEnabled": false,
+                                "showLegend": false
                             }
                         ]
                     }
