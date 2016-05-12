@@ -40,7 +40,7 @@
                     "url": "bagcontours",
                     "renderType": "geojson",
                     "dataSourceParameters": {
-                        "minZoom": 17,
+                        "minZoom": 16,
                         "getPointFeatures": true
                     }
                 },
@@ -65,7 +65,7 @@
                     "url": "bagcontours",
                     "renderType": "geojson",
                     "dataSourceParameters": {
-                        "minZoom": 17,
+                        "minZoom": 16,
                         "getPointFeatures": false
                     }
                 },
@@ -91,7 +91,7 @@
                     "url": "bagbuurten",
                     "renderType": "geojson",
                     "dataSourceParameters": {
-                        "minZoom": 13
+                        "minZoom": 12
                     }
                 }
             ]

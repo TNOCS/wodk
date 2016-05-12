@@ -104,7 +104,7 @@
             "titel": "Lift aanwezig",
             "type": "text",
             "expression": "(!properties.icon || properties.icon == 10) ? 'in onderzoek' : (properties.pandhoogte >= 17 || (properties.woningen_in_pand > 9 && properties.pandoppervlakte >= 3500)) ? 'ja' : 'nee'",
-            "expression": "(properties.pandhoogte >= 17 && properties.bouwjaar >= 1930) || (properties.woningen_in_pand > 9 && properties.pandoppervlakte >= 3500 && properties.bouwjaar >= 1992) ? 'ja' : ((properties.woningen_in_pand == 1 && !properties.niet_woningen_in_pand) || (properties.bouwjaar > 1800 && properties.bouwjaar < 1930) || (properties.bouwjaar >=1930 && properties.pandhoogte < 17 && properties.woningen_in_pand < 9)) ? 'nee' : 'in onderzoek'"
+            "expression": "(properties.pandhoogte >= 17 && properties.bouwjaar >= 1930) || (properties.woningen_in_pand > 9 && properties.pandoppervlakte >= 3500 && properties.bouwjaar >= 1992) ? 'ja' : ((properties.woningen_in_pand == 1 && !properties.niet_woningen_in_pand) || (properties.bouwjaar >= 1800 && properties.bouwjaar < 1930) || (properties.bouwjaar >=1930 && properties.pandhoogte < 17 && properties.woningen_in_pand < 9)) ? 'nee' : 'in onderzoek'"
         },
         "oppervlakteverblijfsobject": {
             "label": "oppervlakteverblijfsobject",

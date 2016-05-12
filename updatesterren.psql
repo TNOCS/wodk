@@ -63,7 +63,8 @@ SET ster_3 = 1, ster_0 = 1, icon = 12
 WHERE
 woningen_in_pand = 2
 AND pandhoogte < 17
-AND (bouwjaar < 1950 OR bouwjaar >= 1970);
+AND (bouwjaar < 1950 OR bouwjaar >= 1970)
+AND niet_woningen_in_pand = 0;
 
 -- Ster 3 en ster 0 voor bj < 1950 of >= 1970 en hoogte < 17m
 UPDATE bagactueel.pand
@@ -71,7 +72,8 @@ SET ster_3 = 1, ster_0 = 2, icon = 13
 WHERE
 woningen_in_pand = 3
 AND pandhoogte < 17
-AND (bouwjaar < 1950 OR bouwjaar >= 1970);
+AND (bouwjaar < 1950 OR bouwjaar >= 1970)
+AND niet_woningen_in_pand = 0;
 
 -- Ster 3 en ster 0 voor bj < 1950 of >= 1970 en hoogte < 17m
 UPDATE bagactueel.pand
@@ -79,7 +81,8 @@ SET ster_3 = 2, ster_0 = 2, icon = 14
 WHERE
 woningen_in_pand = 4
 AND pandhoogte < 17
-AND (bouwjaar < 1950 OR bouwjaar >= 1970);
+AND (bouwjaar < 1950 OR bouwjaar >= 1970)
+AND niet_woningen_in_pand = 0;
 
 -- Ster 3 en ster 0 voor bj < 1950 of >= 1970 en hoogte < 17m
 UPDATE bagactueel.pand
@@ -87,7 +90,8 @@ SET ster_3 = 2, ster_0 = 3, icon = 15
 WHERE
 woningen_in_pand = 5
 AND pandhoogte < 17
-AND (bouwjaar < 1950 OR bouwjaar >= 1970);
+AND (bouwjaar < 1950 OR bouwjaar >= 1970)
+AND niet_woningen_in_pand = 0;
 
 -- Ster 3 en ster 0 voor bj < 1950 of >= 1970 en hoogte < 17m
 UPDATE bagactueel.pand
@@ -95,7 +99,8 @@ SET ster_3 = 2, ster_0 = 4, icon = 16
 WHERE
 woningen_in_pand = 6
 AND pandhoogte < 17
-AND (bouwjaar < 1950 OR bouwjaar >= 1970);
+AND (bouwjaar < 1950 OR bouwjaar >= 1970)
+AND niet_woningen_in_pand = 0;
 
 -- Ster 3 en ster 0 voor bj < 1950 of >= 1970 en hoogte < 17m
 UPDATE bagactueel.pand
@@ -103,7 +108,8 @@ SET ster_3 = 2, ster_0 = 5, icon = 17
 WHERE
 woningen_in_pand = 7
 AND pandhoogte < 17
-AND (bouwjaar < 1950 OR bouwjaar >= 1970);
+AND (bouwjaar < 1950 OR bouwjaar >= 1970)
+AND niet_woningen_in_pand = 0;
 
 -- Ster 3 en ster 0 voor bj < 1950 of >= 1970 en hoogte < 17m
 UPDATE bagactueel.pand
@@ -111,11 +117,12 @@ SET ster_3 = 2, ster_0 = 6, icon = 18
 WHERE
 woningen_in_pand = 8
 AND pandhoogte < 17
-AND (bouwjaar < 1950 OR bouwjaar >= 1970);
+AND (bouwjaar < 1950 OR bouwjaar >= 1970)
+AND niet_woningen_in_pand = 0;
 
 -- Ster 0 voor bj >= 1950 en < 1970 en hoogte < 17m
 UPDATE bagactueel.pand
-SET ster_0 = woningen_in_pand, icon = 0
+SET ster_0 = woningen_in_pand, ster_3 = NULL, icon = 0
 WHERE
 woningen_in_pand > 1 
 AND woningen_in_pand <= 9
@@ -133,6 +140,9 @@ ster_4 = NULL,
 ster_5 = NULL
 WHERE
 bouwjaar >= 2019 OR bouwjaar < 1800;
+
+-- Clean db
+VACUUM ANALYZE bagactueel.pand;
 
 -- ALTER TABLE bagactueel.buurt_2014 ADD COLUMN ster_0 int;
 -- ALTER TABLE bagactueel.buurt_2014 ADD COLUMN ster_1 int;
@@ -168,7 +178,6 @@ UPDATE bagactueel.buurt_2014
 SET ster_totaal = COALESCE(ster_0, 0) + COALESCE(ster_1, 0) +COALESCE(ster_2, 0) + COALESCE(ster_3, 0) + COALESCE(ster_4, 0) + COALESCE(ster_5, 0) + COALESCE(ster_onb, 0);
 
 -- Clean db
-VACUUM ANALYZE bagactueel.pand;
 VACUUM ANALYZE bagactueel.buurt_2014;
 
 /*
