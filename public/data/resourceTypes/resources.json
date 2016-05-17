@@ -3,10 +3,11 @@
     "gemeente": {
       "name": "Gemeente",
       "style": {
-        "fillColor": "#ffff99",
-        "strokeColor": "#000000",
-        "drawingMode": "MultiPolygon",
-        "strokeWidth": 1,
+        "fillColor": "#ffffff",
+        "fillOpacity": 0.2,
+        "strokeColor": "#0000ff",
+        "strokeWidth": 4,
+        "drawingMode": "MultiLineString",
         "iconWidth": 32,
         "iconHeight": 32,
         "iconUri": "images/gemeente.png",

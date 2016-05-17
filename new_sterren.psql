@@ -1,0 +1,231 @@
+-- ALTER TABLE bagactueel.pand ADD COLUMN icon int;
+-- Type 0 = EGW; Type 1 = MGW
+-- ALTER TABLE bagactueel.pand ADD COLUMN pandtype int; 
+-- Lift 0 = nee, 1 = ja, 2 = aanname geen lift, -1 = in onderzoek
+-- ALTER TABLE bagactueel.lift ADD COLUMN lift int;
+-- Plint 0 = nee, 1 = ja, -1 = in onderzoek
+-- ALTER TABLE bagactueel.plint ADD COLUMN plint int; 
+
+-- Reset alle sterren, iconen, types, liften, plinten
+UPDATE bagactueel.pand
+SET ster_onb = NULL,
+ster_0 = NULL,
+ster_1 = NULL,
+ster_2 = NULL,
+ster_3 = NULL,
+ster_4 = NULL,
+ster_5 = NULL,
+icon = NULL,
+lift = NULL,
+plint = NULL,
+pandtype = NULL;
+
+-- Set pandtype EGW (1)
+UPDATE bagactueel.pand
+SET pandtype = 0, lift = 0, plint = 0, ster_3 = 1, icon = 3
+WHERE woningen_in_pand = 1 AND
+niet_woningen_in_pand = 0 AND
+pandhoogte >= 4 AND pandhoogte <= 5;
+
+-- Set pandtype EGW (2)
+UPDATE bagactueel.pand
+SET pandtype = 0, lift = 0, plint = 0, ster_2 = 1, icon = 2
+WHERE woningen_in_pand = 1 AND 
+niet_woningen_in_pand = 0 AND
+pandhoogte > 5;
+
+-- Set pandtype EGW (3)
+UPDATE bagactueel.pand
+SET pandtype = 0, lift = 0, plint = 0, ster_2 = 1, icon = 2
+WHERE woningen_in_pand = 1 AND 
+niet_woningen_in_pand = 0 AND
+(pandhoogte < 4 OR pandhoogte IS NULL);
+
+-- Set pandtype MGW boven winkel, aanname geen lift (4)
+UPDATE bagactueel.pand
+SET pandtype = 1, lift = 2, plint = 0, ster_0 = 1, icon = 0
+WHERE
+(woningen_in_pand = 1 AND niet_woningen_in_pand > 0);
+
+-- Set pandtype MGW in onderzoek bj <1800 >2029 (5)
+UPDATE bagactueel.pand
+SET pandtype = 1, lift = -1, plint = -1, ster_onb = woningen_in_pand, icon = 10
+WHERE
+woningen_in_pand > 1 AND (bouwjaar <= 1800 OR bouwjaar > 2019);
+
+-- Ster onbekend voor MGW met bj 1800-1930 en hoogte < 5 of onb (7)
+UPDATE bagactueel.pand
+SET ster_onb = woningen_in_pand, lift = 2, plint = 2, icon = 10, pandtype = 1
+WHERE
+woningen_in_pand > 1
+AND (pandhoogte < 5 OR pandhoogte IS NULL)
+AND bouwjaar >= 1800 AND bouwjaar < 1930;
+
+-- Ster onbekend voor MGW met bj >= 1930 en 2020 en hoogte < 5 of onb (8)
+UPDATE bagactueel.pand
+SET ster_onb = woningen_in_pand, lift = -1, plint = -1, icon = 10, pandtype = 1
+WHERE
+woningen_in_pand > 1
+AND (pandhoogte < 5 OR pandhoogte IS NULL)
+AND bouwjaar >= 1930 AND bouwjaar < 2020;
+
+-- Ster 3 voor MGW met bj >= 1930 en hoogte >= 17m (9)
+UPDATE bagactueel.pand
+SET ster_3 = woningen_in_pand, lift = 1, plint = 0, icon = 3, pandtype = 1
+WHERE
+woningen_in_pand > 1
+AND pandhoogte >= 17
+AND bouwjaar >= 1930 AND bouwjaar < 2020;
+
+-- Ster onb voor MGW met bj 1930-1950 of 1970-1992 en hoogte 5-17m en >=9 woningen (A9)
+UPDATE bagactueel.pand
+SET ster_onb = woningen_in_pand, lift = -1, plint = 0, icon = 10, pandtype = 1
+WHERE
+woningen_in_pand >= 9
+AND pandhoogte >= 5 AND pandhoogte < 17
+AND ((bouwjaar >= 1930 AND bouwjaar < 1950) OR (bouwjaar >= 1970 AND bouwjaar < 1992));
+
+-- Ster onb voor MGW met bj 1950-1970 en hoogte 5-17m en >=9 woningen (B12)
+UPDATE bagactueel.pand
+SET ster_onb = woningen_in_pand, lift = -1, plint = -1, icon = 10, pandtype = 1
+WHERE
+woningen_in_pand >= 9
+AND pandhoogte >= 5 AND pandhoogte < 17
+AND bouwjaar >= 1950 AND bouwjaar < 1970;
+
+-- Ster 3 voor bj >= 1992 en hoogte < 17m en >35 woningen of opp > 3500m2 (C17)
+UPDATE bagactueel.pand
+SET ster_3 = woningen_in_pand, lift = 1, plint = 0, icon = 3, pandtype = 1
+WHERE
+pandhoogte >= 5 AND pandhoogte < 17
+AND bouwjaar >= 1992 AND bouwjaar < 2020
+AND (pandoppervlakte >= 3500 OR woningen_in_pand >= 35);
+
+-- Ster onb voor bj >= 1992 en hoogte < 17m en >=9 woningen en opp < 3500m2 (C18)
+UPDATE bagactueel.pand
+SET ster_onb = woningen_in_pand, lift = -1, plint = 0, icon = 10, pandtype = 1
+WHERE
+woningen_in_pand >= 9
+AND pandhoogte >= 5 AND pandhoogte < 17
+AND bouwjaar >= 1992 AND bouwjaar < 2020
+AND (pandoppervlakte < 3500 OR woningen_in_pand < 35);
+
+
+-- Alles <= 8 woningen ZONDER plint
+-- Ster 3 en ster 0 voor bj < 1950 of >= 1970 en hoogte < 17m
+UPDATE bagactueel.pand
+SET ster_3 = 1, ster_0 = 1, icon = 12, pandtype = 1, lift = 2, plint = 0
+WHERE
+woningen_in_pand = 2
+AND pandhoogte < 17 AND pandhoogte >= 5
+AND ((bouwjaar >= 1800 AND bouwjaar < 1930) OR (bouwjaar >= 1930 AND bouwjaar < 1950) OR (bouwjaar >= 1970 AND bouwjaar < 2020));
+
+-- Ster 3 en ster 0 voor bj < 1950 of >= 1970 en hoogte < 17m
+UPDATE bagactueel.pand
+SET ster_3 = 1, ster_0 = 2, icon = 13, pandtype = 1, lift = 2, plint = 0
+WHERE
+woningen_in_pand = 3
+AND pandhoogte < 17 AND pandhoogte >= 5
+AND ((bouwjaar >= 1800 AND bouwjaar < 1930) OR (bouwjaar >= 1930 AND bouwjaar < 1950) OR (bouwjaar >= 1970 AND bouwjaar < 2020));
+
+-- Ster 3 en ster 0 voor bj < 1950 of >= 1970 en hoogte < 17m
+UPDATE bagactueel.pand
+SET ster_3 = 2, ster_0 = 2, icon = 14, pandtype = 1, lift = 2, plint = 0
+WHERE
+woningen_in_pand = 4
+AND pandhoogte < 17 AND pandhoogte >= 5
+AND ((bouwjaar >= 1800 AND bouwjaar < 1930) OR (bouwjaar >= 1930 AND bouwjaar < 1950) OR (bouwjaar >= 1970 AND bouwjaar < 2020));
+
+-- Ster 3 en ster 0 voor bj < 1950 of >= 1970 en hoogte < 17m
+UPDATE bagactueel.pand
+SET ster_3 = 2, ster_0 = 3, icon = 15, pandtype = 1, lift = 2, plint = 0
+WHERE
+woningen_in_pand = 5
+AND pandhoogte < 17 AND pandhoogte >= 5
+AND ((bouwjaar >= 1800 AND bouwjaar < 1930) OR (bouwjaar >= 1930 AND bouwjaar < 1950) OR (bouwjaar >= 1970 AND bouwjaar < 2020));
+
+-- Ster 3 en ster 0 voor bj < 1950 of >= 1970 en hoogte < 17m
+UPDATE bagactueel.pand
+SET ster_3 = 2, ster_0 = 4, icon = 16, pandtype = 1, lift = 2, plint = 0
+WHERE
+woningen_in_pand = 6
+AND pandhoogte < 17 AND pandhoogte >= 5
+AND ((bouwjaar >= 1800 AND bouwjaar < 1930) OR (bouwjaar >= 1930 AND bouwjaar < 1950) OR (bouwjaar >= 1970 AND bouwjaar < 2020));
+
+-- Ster 3 en ster 0 voor bj < 1950 of >= 1970 en hoogte < 17m
+UPDATE bagactueel.pand
+SET ster_3 = 2, ster_0 = 5, icon = 17, pandtype = 1, lift = 2, plint = 0
+WHERE
+woningen_in_pand = 7
+AND pandhoogte < 17 AND pandhoogte >= 5
+AND ((bouwjaar >= 1800 AND bouwjaar < 1930) OR (bouwjaar >= 1930 AND bouwjaar < 1950) OR (bouwjaar >= 1970 AND bouwjaar < 2020));
+
+-- Ster 3 en ster 0 voor bj < 1950 of >= 1970 en hoogte < 17m
+UPDATE bagactueel.pand
+SET ster_3 = 2, ster_0 = 6, icon = 18, pandtype = 1, lift = 2, plint = 0
+WHERE
+woningen_in_pand = 8
+AND pandhoogte < 17 AND pandhoogte >= 5
+AND ((bouwjaar >= 1800 AND bouwjaar < 1930) OR (bouwjaar >= 1930 AND bouwjaar < 1950) OR (bouwjaar >= 1970 AND bouwjaar < 2020));
+
+-- Alles <= 8 woningen MET plint
+-- Ster onb voor bj 1950-1970 en hoogte 5 - 17m (B15, B16)
+UPDATE bagactueel.pand
+SET ster_onb = woningen_in_pand, icon = 10, pandtype = 1, lift = 2, plint = -1
+WHERE
+woningen_in_pand > 1 AND woningen_in_pand <= 8
+AND pandhoogte < 17 AND pandhoogte >= 5
+AND bouwjaar >= 1950 AND bouwjaar < 1970
+AND niet_woningen_in_pand = 0;
+
+-- Clean db
+VACUUM ANALYZE bagactueel.pand;
+
+-- ALTER TABLE bagactueel.buurt_2014 ADD COLUMN ster_0 int;
+-- ALTER TABLE bagactueel.buurt_2014 ADD COLUMN ster_1 int;
+-- ALTER TABLE bagactueel.buurt_2014 ADD COLUMN ster_2 int;
+-- ALTER TABLE bagactueel.buurt_2014 ADD COLUMN ster_3 int;
+-- ALTER TABLE bagactueel.buurt_2014 ADD COLUMN ster_4 int;
+-- ALTER TABLE bagactueel.buurt_2014 ADD COLUMN ster_5 int;
+-- ALTER TABLE bagactueel.buurt_2014 ADD COLUMN ster_onb int;
+-- ALTER TABLE bagactueel.buurt_2014 ADD COLUMN ster_totaal int;
+
+-- Reset alle buurten
+UPDATE bagactueel.buurt_2014
+SET ster_onb = NULL,
+ster_0 = NULL,
+ster_1 = NULL,
+ster_2 = NULL,
+ster_3 = NULL,
+ster_4 = NULL,
+ster_5 = NULL,
+ster_totaal = NULL;
+
+UPDATE bagactueel.buurt_2014
+SET ster_0 = sq.ster_0, ster_1 = sq.ster_1, ster_2 = sq.ster_2, ster_3 = sq.ster_3, ster_4 = sq.ster_4, ster_5 = sq.ster_5, ster_onb = sq.ster_onb
+FROM (
+	SELECT SUM(pand.ster_0) as ster_0, SUM(pand.ster_1) as ster_1, SUM(pand.ster_2) as ster_2, SUM(pand.ster_3) as ster_3, SUM(pand.ster_4) as ster_4, SUM(pand.ster_5) as ster_5, SUM(pand.ster_onb) as ster_onb, b2.gid
+	FROM bagactueel.pand, bagactueel.buurt_2014 b2
+	WHERE ST_Intersects(pand.geovlak, b2.geom)
+	GROUP BY b2.gid
+) AS sq
+WHERE buurt_2014.gid = sq.gid;
+
+UPDATE bagactueel.buurt_2014
+SET ster_totaal = COALESCE(ster_0, 0) + COALESCE(ster_1, 0) +COALESCE(ster_2, 0) + COALESCE(ster_3, 0) + COALESCE(ster_4, 0) + COALESCE(ster_5, 0) + COALESCE(ster_onb, 0);
+
+-- Clean db
+VACUUM ANALYZE bagactueel.buurt_2014;
+
+/*
+*update bagactueel.pand
+*set 
+*hoogte_max = pandhoogte.maximum_hoogte,
+*hoogte_med = pandhoogte.mediaan_hoogte,
+*hoogte_gem = pandhoogte.gemiddelde_hoogte,
+*hoogte_min = pandhoogte.minimum_hoogte
+*from bagactueel.pandhoogte
+*where
+*pand.pandhoogte_gml_id = pandhoogte.gml_id
+*AND pand.pandhoogte_gml_id IS NOT NULL;
+*/

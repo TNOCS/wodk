@@ -31,7 +31,8 @@ module App {
             'layerService',
             'messageBusService',
             'dashboardService',
-            'geoService'
+            'geoService',
+            '$timeout'
         ];
 
         public areaFilter: AreaFilter.AreaFilterModel;
@@ -47,7 +48,8 @@ module App {
             private $layerService: csComp.Services.LayerService,
             private $messageBusService: csComp.Services.MessageBusService,
             private $dashboardService: csComp.Services.DashboardService,
-            private geoService: csComp.Services.GeoService
+            private geoService: csComp.Services.GeoService,
+            private $timeout: ng.ITimeoutService
         ) {
             sffjs.setCulture('nl-NL');
 
@@ -62,6 +64,16 @@ module App {
                     this.$layerService.addActionService(this.areaFilter);
                     this.contourAction = new ContourAction.ContourActionModel();
                     this.$layerService.addActionService(this.contourAction);
+                    this.$layerService.actionService.addAction('load buurten', (options: csComp.Services.IButtonActionOptions) => {
+                        console.log('load buurten');
+                        var l = this.$layerService.findLayer('bagbuurten');
+                        var f = this.$layerService.lastSelectedFeature;
+                        if (!l || !f || !f.properties || !f.properties['GM_CODE']) return;
+                        if (!l.dataSourceParameters) l.dataSourceParameters = {};
+                        l.dataSourceParameters['searchProperty'] = f.properties['GM_CODE'];
+                        l.quickRefresh = true;
+                        this.$layerService.addLayer(l);
+                    });
 
                     // NOTE EV: You may run into problems here when calling this inside an angular apply cycle.
                     // Alternatively, check for it or use (dependency injected) $timeout.

@@ -5,8 +5,8 @@
             "contourProperty": "contour",
             "style": {
                 "fillColor": "#9999ff",
-                "fillOpacity" : 0.85,
-                "opacity" : 0.85,
+                "fillOpacity": 0.85,
+                "opacity": 0.85,
                 "strokeColor": "#000000",
                 "strokeWidth": 1,
                 "strokeOpacity": 1,
@@ -17,7 +17,7 @@
                 "maxTitleResolution": -1,
                 "drawingMode": "Point"
             },
-            "propertyTypeKeys": "Adres;postcode;Name;woonplaatsnaam;gemeentenaam;woningtype;woningen_in_pand;niet_woningen_in_pand;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;lift;pandoppervlakte;bouwjaar;pandhoogte;wijknaam;wijkcode;buurtnaam;buurtcode;ster_gem;oppervlakteverblijfsobject;gebruiksdoelverblijfsobject;pandid;icon;"
+            "propertyTypeKeys": "Adres;postcode;Name;woonplaatsnaam;gemeentenaam;pandtype;woningen_in_pand;niet_woningen_in_pand;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;lift;plint;pandoppervlakte;bouwjaar;pandhoogte;kadaster;streetview;wijknaam;wijkcode;buurtnaam;buurtcode;ster_gem;oppervlakteverblijfsobject;gebruiksdoelverblijfsobject;pandid;icon;"
         }
     },
     "propertyTypeData": {
@@ -96,15 +96,43 @@
         "woningtype": {
             "label": "woningtype",
             "titel": "Woningtype",
+            "visibleInCallOut": false,
             "type": "text",
             "expression": "(properties.woningen_in_pand === 1 && !properties.niet_woningen_in_pand) ? 'EGW' : 'Appartement'"
         },
+        "pandtype": {
+            "label": "pandtype",
+            "title": "Woningtype",
+            "type": "options",
+            "options": {
+                "0": "Eengezinswoning",
+                "1": "Appartement"
+            },
+            "visibleInCallOut": true
+        },
         "lift": {
             "label": "lift",
-            "titel": "Lift aanwezig",
-            "type": "text",
-            "expression": "(!properties.icon || properties.icon == 10) ? 'in onderzoek' : (properties.pandhoogte >= 17 || (properties.woningen_in_pand > 9 && properties.pandoppervlakte >= 3500)) ? 'ja' : 'nee'",
-            "expression": "(properties.pandhoogte >= 17 && properties.bouwjaar >= 1930) || (properties.woningen_in_pand > 9 && properties.pandoppervlakte >= 3500 && properties.bouwjaar >= 1992) ? 'ja' : ((properties.woningen_in_pand == 1 && !properties.niet_woningen_in_pand) || (properties.bouwjaar >= 1800 && properties.bouwjaar < 1930) || (properties.bouwjaar >=1930 && properties.pandhoogte < 17 && properties.woningen_in_pand < 9)) ? 'nee' : 'in onderzoek'"
+            "title": "Lift",
+            "type": "options",
+            "options": {
+                "-1": "In onderzoek",
+                "0": "Geen lift",
+                "1": "Lift aanwezig",
+                "2": "Aanname geen lift"
+            },
+            "visibleInCallOut": true
+        },
+        "plint": {
+            "label": "plint",
+            "title": "Plint",
+            "type": "options",
+            "options": {
+                "-1": "In onderzoek",
+                "0": "Geen plint",
+                "1": "Plint aanwezig",
+                "2": "Aanname geen plint"
+            },
+            "visibleInCallOut": true
         },
         "oppervlakteverblijfsobject": {
             "label": "oppervlakteverblijfsobject",
@@ -341,6 +369,24 @@
             "type": "number",
             "title": "icon",
             "visibleInCallOut": false,
+            "canEdit": false,
+            "isSearchable": false
+        },
+        "streetview": {
+            "label": "streetview",
+            "type": "bbcode",
+            "expression": "'[url=http://maps.google.com/maps?q=' + properties.openbareruimtenaam + ' ' + properties.huisnummer + ' ' + properties.woonplaatsnaam + ']Streetview link[/url]'",
+            "title": "Streetview",
+            "visibleInCallOut": true,
+            "canEdit": false,
+            "isSearchable": false
+        },
+        "kadaster": {
+            "label": "kadaster",
+            "type": "bbcode",
+            "expression": "'[url=https://bagviewer.kadaster.nl/lvbag/bag-viewer/index.html#?searchQuery=' + properties.openbareruimtenaam + ' ' + properties.huisnummer + ' ' + properties.woonplaatsnaam + '&zoomlevel=13]BAG link[/url]'",
+            "title": "Kadaster",
+            "visibleInCallOut": true,
             "canEdit": false,
             "isSearchable": false
         }

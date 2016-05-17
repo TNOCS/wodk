@@ -17,7 +17,7 @@
     "csweb": "^0.3.0",
     "geojson-vt": "^2.1.8",
     "moment": "^2.13.0",
-    "pg": "^4.5.3",
+    "pg": "^4.5.5",
     "winston": "^2.1.0"
   },
   "devDependencies": {

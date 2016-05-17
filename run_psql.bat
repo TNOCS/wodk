@@ -1,0 +1,1 @@
+psql -U rinzeb -h localhost -p 5433 -d bag -a -f %1
