@@ -6,15 +6,17 @@
 				"drawingMode": "Polygon",
 				"fillColor" : "#999922",
 				"strokeColor" : "#000000",
-				"strokeWidth" : 1,
+				"selectedStrokeColor" : "#000000",
+				"strokeWidth" : 2,
+			 	"selectedStrokeWidth": 4,
 				"iconWidth" : 30,
 				"iconHeight" : 30,
 				"iconUri" : "images/5001 gemeente.png",
                 "nameLabel" : "bu_naam",
 				"maxTitleResolution" : -1
 			}, 
-			"selectActions": ["center on map"],
-			"propertyTypeKeys":"bu_naam;bu_code;gm_naam;aant_inw;ster_totaal;a_apb_w;a_napb_w;a_apb_onb;a_aangep_w;p_apb_w;p_napb_w;p_apb_onb;p_aangep_w;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;woningen;p_1gezw;p_mgezw;p_koopwon,p_huurwon;p_huko_onb;a_1gezw;a_mgezw;a_koopwon,a_huurwon;a_huko_onb;woz;"
+			"selectActions": ["center on map", "load woningen"],
+			"propertyTypeKeys":"bu_naam;bu_code;gm_naam;gm_code;aant_inw;ster_totaal;a_apb_w;a_napb_w;a_apb_onb;a_aangep_w;p_apb_w;p_napb_w;p_apb_onb;p_aangep_w;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;woningen;p_1gezw;p_mgezw;p_koopwon,p_huurwon;p_huko_onb;a_1gezw;a_mgezw;a_koopwon,a_huurwon;a_huko_onb;woz;"
 		}
 	},
 	"propertyTypeData" : {
@@ -36,6 +38,12 @@
 			"title" : "Gemeentenaam",
 			"visibleInCallOut" : true,
 			"isSearchable" : false
+		},
+		"gm_code": {
+        	"label": "gm_code",
+        	"title": "Gemeentecode",
+        	"type": "text",
+        	"visibleInCallOut" : true
 		},
         "aant_inw" : {
 			"label" : "aant_inw",
@@ -227,7 +235,7 @@
 			"type" : "number",
 			"title" : "Aant. aanpasbaarheid onbekend",
             "description" : "Aantal aanpasbaarheid onbekend",
-            "expression" : "properties.ster_onb",
+            "expression" : "properties.ster_onb || 0",
             "stringFormat" : "{0:#,#}",
 			"visibleInCallOut" : true,
 			"isSearchable" : false
@@ -371,7 +379,7 @@
 			"type" : "number",
 			"title" : "Perc. aanpasbaarheid onbekend",
             "description" : "Percentage aanpasbaarheid onbekend",
-            "expression" : "properties.a_apb_onb / properties.ster_totaal * 100",
+            "expression" : "properties.a_apb_onb / properties.ster_totaal * 100 || 0",
             "stringFormat" : "{0:#,#}%",
 			"min": 0,
 			"max": 100,

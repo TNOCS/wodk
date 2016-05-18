@@ -5,8 +5,8 @@
         "northEast": [55.0, 11.0]
     },
     "viewBounds": {
-        "southWest": [52.072523513, 4.3002946777],
-        "northEast": [52.097919924, 4.3309537048]
+        "southWest": [50.6808, 3.1531],
+        "northEast": [53.774, 7.4158]
     },
     "widgetStyles": {
         "default": {

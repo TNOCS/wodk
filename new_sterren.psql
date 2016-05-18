@@ -97,7 +97,8 @@ AND bouwjaar >= 1950 AND bouwjaar < 1970;
 UPDATE bagactueel.pand
 SET ster_3 = woningen_in_pand, lift = 1, plint = 0, icon = 3, pandtype = 1
 WHERE
-pandhoogte >= 5 AND pandhoogte < 17
+woningen_in_pand > 1
+AND pandhoogte >= 5 AND pandhoogte < 17
 AND bouwjaar >= 1992 AND bouwjaar < 2020
 AND (pandoppervlakte >= 3500 OR woningen_in_pand >= 35);
 
@@ -175,8 +176,7 @@ SET ster_onb = woningen_in_pand, icon = 10, pandtype = 1, lift = 2, plint = -1
 WHERE
 woningen_in_pand > 1 AND woningen_in_pand <= 8
 AND pandhoogte < 17 AND pandhoogte >= 5
-AND bouwjaar >= 1950 AND bouwjaar < 1970
-AND niet_woningen_in_pand = 0;
+AND bouwjaar >= 1950 AND bouwjaar < 1970;
 
 -- Clean db
 VACUUM ANALYZE bagactueel.pand;

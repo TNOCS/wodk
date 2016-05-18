@@ -31,7 +31,7 @@
                             "description": "Municipalities (2014)"
                         }
                     },
-                    "refreshBBOX": true,
+                    "refreshBBOX": false,
                     "defaultFeatureType": "gemeente",
                     "typeUrl": "data/resourceTypes/cbs.json",
                     "type": "geojson",
@@ -40,64 +40,15 @@
                     "renderType": "geojson"
                 }
             ]
-        }, {
-            "id": "BAG",
+        },
+        {
+            "id": "buurten",
             "description": "Kaartlagen gebaseerd op de Basis Administratie Gebouwen (Bron: Kadaster)",
-            "title": "BAG",
+            "title": "Buurten",
             "clusterLevel": 18,
-            "clustering": true,
+            "clustering": false,
             "oneLayerActive": true,
             "layers": [
-                {
-                    "id": "bagadressen",
-                    "reference": "bagadressen",
-                    "languages": {
-                        "nl": {
-                            "title": "BAG Woningen",
-                            "description": "Zoom in op wijkniveau om woningen in het betreffende gebied te laden."
-                        },
-                        "en": {
-                            "title": "BAG Woningen",
-                            "description": "Zoom in on city level to show buildings in the shown extent."
-                        }
-                    },
-                    "refreshBBOX": false,
-                    "defaultFeatureType": "BagPanden",
-                    "typeUrl": "data/resourceTypes/BagPanden.json",
-                    "type": "database",
-                    "enabled": false,
-                    "url": "bagcontours",
-                    "renderType": "geojson",
-                    "dataSourceParameters": {
-                        "minZoom": 16,
-                        "getPointFeatures": true
-                    }
-                },
-                {
-                    "id": "bagcontouren",
-                    "reference": "bagcontouren",
-                    "languages": {
-                        "nl": {
-                            "title": "BAG Contouren",
-                            "description": "Zoom in op wijkniveau om woningen in het betreffende gebied te laden."
-                        },
-                        "en": {
-                            "title": "BAG Contouren",
-                            "description": "Zoom in on city level to show buildings in the visible extent."
-                        }
-                    },
-                    "refreshBBOX": false,
-                    "defaultFeatureType": "BagPanden",
-                    "typeUrl": "data/resourceTypes/BagPanden.json",
-                    "type": "database",
-                    "enabled": false,
-                    "url": "bagcontours",
-                    "renderType": "geojson",
-                    "dataSourceParameters": {
-                        "minZoom": 16,
-                        "getPointFeatures": false
-                    }
-                },
                 {
                     "id": "bagbuurten",
                     "reference": "bagbuurten",
@@ -114,14 +65,51 @@
                     "refreshBBOX": false,
                     "opacity": 75,
                     "defaultFeatureType": "buurt",
+                    "defaultLegendProperty": "data/resourceTypes/Buurt.json#p_apb_w",
                     "typeUrl": "data/resourceTypes/Buurt.json",
                     "type": "database",
-                    "enabled": true,
+                    "enabled": false,
                     "url": "bagbuurten",
                     "renderType": "geojson",
                     "dataSourceParameters": {
                         "minZoom": 12,
                         "searchProperty": ""
+                    }
+                }
+            ]
+        },
+        {
+            "id": "BAG",
+            "description": "Kaartlagen gebaseerd op de Basis Administratie Gebouwen (Bron: Kadaster)",
+            "title": "BAG",
+            "clusterLevel": 18,
+            "clustering": true,
+            "oneLayerActive": true,
+            "layers": [
+                {
+                    "id": "bagcontouren",
+                    "reference": "bagcontouren",
+                    "languages": {
+                        "nl": {
+                            "title": "BAG Contouren",
+                            "description": "Zoom in op wijkniveau om woningen in het betreffende gebied te laden."
+                        },
+                        "en": {
+                            "title": "BAG Contouren",
+                            "description": "Zoom in on city level to show buildings in the visible extent."
+                        }
+                    },
+                    "refreshBBOX": false,
+                    "defaultFeatureType": "BagPanden",
+                    "defaultLegendProperty": "data/resourceTypes/BagPanden.json#ster_gem",
+                    "typeUrl": "data/resourceTypes/BagPanden.json",
+                    "type": "database",
+                    "enabled": false,
+                    "url": "bagcontours",
+                    "renderType": "geojson",
+                    "dataSourceParameters": {
+                        "minZoom": 16,
+                        "getPointFeatures": false
                     }
                 }
             ]
@@ -183,46 +171,26 @@
                     "directive": "buttonwidget",
                     "enabled": true,
                     "style": "transparent",
+                    "height": "72px",
                     "left": "25px",
                     "top": "85px",
-                    "width": "400px",
+                    "width": "170px",
                     "data": {
+                        "minimalLayout": true,
                         "buttons": [
                             {
-                                "title": "Buurtoverzicht aanpasbaarheid",
-                                "description": "Toont overzichten voor het aanpasbaarheidsniveau van buurten.",
-                                "action": "zoom map;activate style",
-                                "layer": "bagbuurten",
-                                "image": "images/buurt_button.png",
-                                "group": "BAG",
-                                "property": "data/resourceTypes/Buurt.json#p_apb_w",
-                                "defaultEnabled": true,
-                                "showLegend": true,
-                                "zoomLevel": 14
+                                "title": "Stap terug",
+                                "action": "step back",
+                                "image": "images/previous.png",
+                                "defaultEnabled": false,
+                                "showLegend": false
                             },
                             {
-                                "title": "Woningcontouren",
-                                "description": "Geeft een indicatie voor het aanpasbaarheidsniveau van een pand d.m.v. contouren.",
-                                "action": "zoom map;activate style",
-                                "layer": "bagcontouren",
-                                "image": "images/contour_button.png",
-                                "group": "BAG",
-                                "property": "data/resourceTypes/BagPanden.json#ster_gem",
-                                "showLegend": true,
+                                "title": "Begin opnieuw",
+                                "action": "reload project",
+                                "image": "images/reload.png",
                                 "defaultEnabled": false,
-                                "zoomLevel": 18
-                            },
-                            {
-                                "title": "Woningdetails",
-                                "description": "Geeft een indicatie voor het aanpasbaarheidsniveau van een pand d.m.v. iconen.",
-                                "action": "zoom map;activate style",
-                                "layer": "bagadressen",
-                                "image": "images/pand_button.png",
-                                "group": "BAG",
-                                "property": "data/resourceTypes/BagPanden.json#ster_gem",
-                                "showLegend": true,
-                                "defaultEnabled": false,
-                                "zoomLevel": 18
+                                "showLegend": false
                             }
                         ]
                     }
@@ -275,7 +243,7 @@
                     "style": "vws",
                     "left": "25px",
                     "right": "",
-                    "top": "340px",
+                    "top": "370px",
                     "width": "",
                     "height": "",
                     "data": {
@@ -340,11 +308,13 @@
         {
             "name": "bag",
             "url": "/bagwoningen/public/bagsearchaddress",
-            "url": "http://www.zorgopdekaart.nl/bagwoningen/public/bagsearchaddress"
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/public/bagsearchaddress",
+            "url": null
         },
         {
             "name": "OpenCageData",
             "url": "https://api.opencagedata.com/geocode/v1/json",
+            "key": "d7f5ecb72de96fb76392a9f3af3a7220",
             "data": {
                 "culture": "nl",
                 "language": "nl-NL",

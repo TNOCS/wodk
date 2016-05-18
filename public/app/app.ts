@@ -37,6 +37,9 @@ module App {
 
         public areaFilter: AreaFilter.AreaFilterModel;
         public contourAction: ContourAction.ContourActionModel;
+
+        private selectionHistory: IFeature[];
+
         activeLayer: csComp.Services.ProjectLayer;
 
         // dependencies are injected via AngularJS $injector
@@ -57,6 +60,7 @@ module App {
             $scope.showMenuRight = false;
             $scope.featureSelected = false;
             $scope.layersLoading = 0;
+            this.selectionHistory = [];
 
             $messageBusService.subscribe('project', (action: string) => {
                 if (action === 'loaded') {
@@ -64,15 +68,124 @@ module App {
                     this.$layerService.addActionService(this.areaFilter);
                     this.contourAction = new ContourAction.ContourActionModel();
                     this.$layerService.addActionService(this.contourAction);
+
+                    // Load buurten by gemeente
                     this.$layerService.actionService.addAction('load buurten', (options: csComp.Services.IButtonActionOptions) => {
                         console.log('load buurten');
                         var l = this.$layerService.findLayer('bagbuurten');
                         var f = this.$layerService.lastSelectedFeature;
                         if (!l || !f || !f.properties || !f.properties['GM_CODE']) return;
+                        if (f.geometry.type === 'LineString' || f.geometry.type === 'MultiLineString') return;
+                        this.selectionHistory.push(JSON.parse(JSON.stringify(csComp.Services.Feature.serialize(f))));
+                        var fClone: IFeature = csComp.Services.Feature.serialize(f);
+                        // Replace polygon gemeente by polyline
+                        var gl = this.$layerService.findLayer('gemeente');
+                        this.$layerService.removeFeature(f);
+                        if (gl && gl.data && gl.data.features) {
+                            fClone.geometry.type = (fClone.geometry.type === 'Polygon' ? 'LineString' : 'MultiLineString');
+                            if (fClone.geometry.type === 'LineString') {
+                                fClone.geometry.coordinates = fClone.geometry.coordinates[0];
+                            } else {
+                                fClone.geometry.coordinates = _.map(fClone.geometry.coordinates, (poly) => { return poly[0]; })
+                            }
+                            gl.data.features.push(fClone);
+                            this.$layerService.initFeature(fClone, gl);
+                            this.$layerService.activeMapRenderer.addFeature(fClone);
+                            if (this.$layerService.$rootScope.$root.$$phase !== '$apply' && this.$layerService.$rootScope.$root.$$phase !== '$digest') { this.$layerService.$rootScope.$apply(); }
+                        }
+
                         if (!l.dataSourceParameters) l.dataSourceParameters = {};
                         l.dataSourceParameters['searchProperty'] = f.properties['GM_CODE'];
-                        l.quickRefresh = true;
-                        this.$layerService.addLayer(l);
+                        if (this.$layerService.findLoadedLayer(l.id)) {
+                            this.$layerService.layerSources[l.type.toLowerCase()].refreshLayer(l);
+                        } else {
+                            this.$layerService.addLayer(l, () => {
+                                var group = this.$layerService.findGroupById('buurten');
+                                if (typeof group === 'undefined') return;
+                                var propType = this.$layerService.findPropertyTypeById('data/resourceTypes/Buurt.json#p_apb_w');
+                                if (typeof propType === 'undefined') return;
+                                this.$layerService.setGroupStyle(group, propType);
+                                this.$layerService.layerSources[l.type.toLowerCase()].fitMap(l);
+                            });
+                        }
+                    });
+
+                    // Load woningen by buurt
+                    this.$layerService.actionService.addAction('load woningen', (options: csComp.Services.IButtonActionOptions) => {
+                        console.log('load woningen');
+                        var l = this.$layerService.findLayer('bagcontouren');
+                        var f = this.$layerService.lastSelectedFeature;
+                        if (!l || !f || !f.geometry || !f.geometry.coordinates) return;
+                        if (f.geometry.type === 'LineString' || f.geometry.type === 'MultiLineString') return;
+                        this.selectionHistory.push(JSON.parse(JSON.stringify(csComp.Services.Feature.serialize(f))));
+                        var fClone: IFeature = csComp.Services.Feature.serialize(f);
+                        // Replace polygon buurt by polyline
+                        var bl = this.$layerService.findLayer('bagbuurten');
+                        this.$layerService.removeFeature(f);
+                        if (bl && bl.data && bl.data.features) {
+                            fClone.geometry.type = (fClone.geometry.type === 'Polygon' ? 'LineString' : 'MultiLineString');
+                            if (fClone.geometry.type === 'LineString') {
+                                fClone.geometry.coordinates = fClone.geometry.coordinates[0];
+                            } else {
+                                fClone.geometry.coordinates = _.map(fClone.geometry.coordinates, (poly) => { return poly[0]; })
+                            }
+                            bl.data.features.push(fClone);
+                            this.$layerService.initFeature(fClone, bl);
+                            this.$layerService.activeMapRenderer.addFeature(fClone);
+                            if (this.$layerService.$rootScope.$root.$$phase !== '$apply' && this.$layerService.$rootScope.$root.$$phase !== '$digest') { this.$layerService.$rootScope.$apply(); }
+                        }
+
+                        if (!l.dataSourceParameters) l.dataSourceParameters = {};
+                        l.dataSourceParameters['searchProperty'] = f.properties['bu_code'];
+                        if (this.$layerService.findLoadedLayer(l.id)) {
+                            this.$layerService.layerSources[l.type.toLowerCase()].refreshLayer(l);
+                        } else {
+                            this.$layerService.addLayer(l, () => {
+                                var group = this.$layerService.findGroupById('BAG');
+                                if (typeof group === 'undefined') return;
+                                var propType = this.$layerService.findPropertyTypeById('data/resourceTypes/BagPanden.json#ster_gem');
+                                if (typeof propType === 'undefined') return;
+                                this.$layerService.setGroupStyle(group, propType);
+                                // this.$layerService.layerSources[l.type.toLowerCase()].fitMap(l);
+                                this.$layerService.$mapService.map.setZoom(15);
+                            });
+                        }
+                    });
+
+                    // Step back in history
+                    this.$layerService.actionService.addAction('step back', (options: csComp.Services.IButtonActionOptions) => {
+                        console.log('step back');
+                        if (this.selectionHistory.length === 0) {
+                            this.$layerService.checkViewBounds();
+                            return;
+                        }
+                        var lastItem: IFeature = this.selectionHistory.pop();
+                        if (!lastItem.id || !lastItem.layerId) return;
+                        var l = this.$layerService.findLoadedLayer(lastItem.layerId);
+                        var replacementFeature = this.$layerService.findFeature(l, lastItem.id);
+                        this.$layerService.removeFeature(replacementFeature);
+                        l.data.features.push(lastItem);
+                        this.$layerService.initFeature(lastItem, l);
+                        this.$layerService.activeMapRenderer.addFeature(lastItem);
+                        switch (lastItem.layerId) {
+                            case 'gemeente':
+                                var buurtLayer = this.$layerService.findLoadedLayer('bagbuurten');
+                                if (!buurtLayer) break;
+                                var featsToRemove = _.filter(buurtLayer.data.features, (f: IFeature) => { return (f.properties['gm_code'] && f.properties['gm_code'] === lastItem.properties['GM_CODE']) });
+                                featsToRemove.forEach((f) => {
+                                    this.$layerService.removeFeature(f);
+                                });
+                                break;
+                            case 'bagbuurten':
+                                var bagLayer = this.$layerService.findLoadedLayer('bagcontouren');
+                                if (!bagLayer) break;
+                                var featsToRemove = _.filter(bagLayer.data.features, (f: IFeature) => { return (f.properties['buurtcode'] && f.properties['buurtcode'] === lastItem.properties['bu_code']) });
+                                featsToRemove.forEach((f) => {
+                                    this.$layerService.removeFeature(f);
+                                });
+                                break;
+                        }
+                        if (this.$layerService.$rootScope.$root.$$phase !== '$apply' && this.$layerService.$rootScope.$root.$$phase !== '$digest') { this.$layerService.$rootScope.$apply(); }
                     });
 
                     // NOTE EV: You may run into problems here when calling this inside an angular apply cycle.
@@ -110,7 +223,10 @@ module App {
                     break;
                 case 'activated':
                     if (this.$scope.layersLoading >= 1) this.$scope.layersLoading -= 1;
-
+                    if (layer.id === 'bagcontouren') {
+                        // var gemeente = this.$layerService.findLoadedLayer('gemeente');
+                        // if (gemeente) this.$layerService.removeLayer(gemeente);
+                    }
                     break;
                 case 'error':
                     this.$scope.layersLoading = 0;

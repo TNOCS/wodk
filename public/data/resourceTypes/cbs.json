@@ -3,17 +3,19 @@
         "gemeente": {
             "name": "gemeente",
             "style": {
-                "fillColor": "#ffffff",
-                "fillOpacity": 0.2,
+                "fillColor": "#9999ff",
+                "fillOpacity": 0.5,
                 "strokeColor": "#0000ff",
+                "selectedStrokeColor": "#0000ff",
                 "drawingMode": "MultiPolygon",
-                "strokeWidth": 5,
+                "strokeWidth": 2,
+                "selectedStrokeWidth": 4,
                 "iconWidth": 32,
                 "iconHeight": 32,
                 "iconUri": "images/gemeente.png",
                 "nameLabel": "GM_NAAM"
             },
-            "selectActions": ["load buurten"],
+            "selectActions": ["load buurten", "center on map"],
             "propertyTypeKeys": "AANT_INW;AANT_MAN;AANT_VROUW;P_00_14_JR;NR_KIDS;P_15_24_JR;P_25_44_JR;P_45_64_JR;P_65_EO_JR;NR_OUDJES;P_ONGEHUWD;P_GEHUWD;P_GESCHEID;P_VERWEDUW;P_WEST_AL;P_N_W_AL;P_MAROKKO;P_ANT_ARU;P_SURINAM;P_TURKIJE;P_OVER_NW;AUTO_TOT;AUTO_HH;AUTO_LAND;BEDR_AUTO;MOTOR_2W;OPP_TOT;OPP_LAND;OPP_WATER;GM_NAAM;GM_CODE;WATER;BEV_DICHTH;AANTAL_HH;P_EENP_HH;P_HH_Z_K;P_HH_M_K;GEM_HH_GR;A_BST_B;A_BST_NB;A_LFTJ6J;A_LFTO6J;AF_ZIEK_I;AV5_ZIEK_I;AV10ZIEK_I;AV20ZIEK_I;AF_ZIEK_E;AV5_ZIEK_E;AV10ZIEK_E;AV20ZIEK_E;AF_KDV;AV1_KDV;AV3_KDV;AV5_KDV;AF_BSO;AV1_BSO;AV3_BSO;AV5_BSO;AF_OPRITH;AF_TREINST;AF_OVERST;AF_BIBLIO;AF_IJSBAAN",
             "legendExpr": [
                 {
