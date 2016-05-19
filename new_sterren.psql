@@ -109,7 +109,7 @@ WHERE
 woningen_in_pand >= 9
 AND pandhoogte >= 5 AND pandhoogte < 17
 AND bouwjaar >= 1992 AND bouwjaar < 2020
-AND (pandoppervlakte < 3500 OR woningen_in_pand < 35);
+AND (pandoppervlakte < 3500 AND woningen_in_pand < 35);
 
 
 -- Alles <= 8 woningen ZONDER plint
@@ -203,13 +203,17 @@ ster_totaal = NULL;
 
 UPDATE bagactueel.buurt_2014
 SET ster_0 = sq.ster_0, ster_1 = sq.ster_1, ster_2 = sq.ster_2, ster_3 = sq.ster_3, ster_4 = sq.ster_4, ster_5 = sq.ster_5, ster_onb = sq.ster_onb
-FROM (
-	SELECT SUM(pand.ster_0) as ster_0, SUM(pand.ster_1) as ster_1, SUM(pand.ster_2) as ster_2, SUM(pand.ster_3) as ster_3, SUM(pand.ster_4) as ster_4, SUM(pand.ster_5) as ster_5, SUM(pand.ster_onb) as ster_onb, b2.gid
-	FROM bagactueel.pand, bagactueel.buurt_2014 b2
-	WHERE ST_Intersects(pand.geovlak, b2.geom)
-	GROUP BY b2.gid
-) AS sq
-WHERE buurt_2014.gid = sq.gid;
+	FROM (
+		SELECT SUM(panden.ster_0) as ster_0, SUM(panden.ster_1) as ster_1, SUM(panden.ster_2) as ster_2, SUM(panden.ster_3) as ster_3, SUM(panden.ster_4) as ster_4, SUM(panden.ster_5) as ster_5, SUM(panden.ster_onb) as ster_onb, panden.gid as bu_gid
+		FROM (
+			SELECT pand.identificatie, MAX(pand.ster_0) as ster_0, MAX(pand.ster_1) as ster_1, MAX(pand.ster_2) as ster_2, MAX(pand.ster_3) as ster_3, MAX(pand.ster_4) as ster_4, MAX(pand.ster_5) as ster_5, MAX(pand.ster_onb) as ster_onb, b2.gid
+			FROM bagactueel.pand, bagactueel.buurt_2014 b2
+			WHERE ST_Intersects(pand.geovlak, b2.geom)
+			GROUP BY b2.gid, pand.identificatie
+		) AS panden
+		GROUP BY bu_gid
+	) AS sq
+WHERE buurt_2014.gid = sq.bu_gid;
 
 UPDATE bagactueel.buurt_2014
 SET ster_totaal = COALESCE(ster_0, 0) + COALESCE(ster_1, 0) +COALESCE(ster_2, 0) + COALESCE(ster_3, 0) + COALESCE(ster_4, 0) + COALESCE(ster_5, 0) + COALESCE(ster_onb, 0);

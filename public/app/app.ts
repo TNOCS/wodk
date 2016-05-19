@@ -139,6 +139,7 @@ module App {
                         l.dataSourceParameters['searchProperty'] = f.properties['bu_code'];
                         if (this.$layerService.findLoadedLayer(l.id)) {
                             this.$layerService.layerSources[l.type.toLowerCase()].refreshLayer(l);
+                            this.$layerService.layerSources[l.type.toLowerCase()].fitMap(l);                            
                         } else {
                             this.$layerService.addLayer(l, () => {
                                 var group = this.$layerService.findGroupById('BAG');
@@ -146,8 +147,10 @@ module App {
                                 var propType = this.$layerService.findPropertyTypeById('data/resourceTypes/BagPanden.json#ster_gem');
                                 if (typeof propType === 'undefined') return;
                                 this.$layerService.setGroupStyle(group, propType);
-                                // this.$layerService.layerSources[l.type.toLowerCase()].fitMap(l);
-                                this.$layerService.$mapService.map.setZoom(15);
+                                var b = csComp.Helpers.GeoExtensions.getFeatureBounds(fClone);
+                                this.$layerService.map.map.fitBounds(<any>b);
+                                // this.$.layerSources[l.type.toLowerCase()].fitMap(l);
+                                // this.$layerService.$mapService.map.setZoom(15);
                             });
                         }
                     });
@@ -185,6 +188,7 @@ module App {
                                 });
                                 break;
                         }
+                        this.$messageBusService.publish('updatelegend', 'update');
                         if (this.$layerService.$rootScope.$root.$$phase !== '$apply' && this.$layerService.$rootScope.$root.$$phase !== '$digest') { this.$layerService.$rootScope.$apply(); }
                     });
 

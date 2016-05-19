@@ -245,7 +245,7 @@
 			"type" : "number",
 			"title" : "Aant. aanpasbare woningen",
             "description" : "Aantal aanpasbare woningen",
-            "expression" : "properties.ster_2 + properties.ster_3",
+            "expression" : "properties.ster_2 || 0 + properties.ster_3|| 0 ",
             "stringFormat" : "{0:#,#}",
 			"visibleInCallOut" : true,
 			"isSearchable" : false
@@ -255,7 +255,7 @@
 			"type" : "number",
 			"title" : "Aant. niet-aanpasbare woningen",
             "description" : "Aantal niet-aanpasbare woningen",
-            "expression" : "properties.ster_0 + properties.ster_1",
+            "expression" : "properties.ster_0 || 0 + properties.ster_1 || 0",
             "stringFormat" : "{0:#,#}",
 			"visibleInCallOut" : true,
 			"isSearchable" : false

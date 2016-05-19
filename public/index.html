@@ -219,7 +219,7 @@
                             </svg>
                         </li>
                         
-                        <li class="lp-tab close-tab" ng-click="vm.$layerService.visual.leftPanelVisible = !vm.$layerService.visual.leftPanelVisible;vm.$messageBusService.publish('search','reset')">
+                        <li class="lp-tab close-tab" ng-click="vm.$layerService.visual.leftPanelVisible = !vm.$layerService.visual.leftPanelVisible;vm.$messageBusService.publish('search','reset')" uib-popover="Sluit het menu" popover-trigger="mouseenter"  popover-append-to-body="true">
                             <div>
                                 <i class="fa fa-times"></i>
                             </div>
