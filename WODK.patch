@@ -1,0 +1,182 @@
+diff --git a/csComp/directives/LayersList/LayersDirective.tpl.html b/csComp/directives/LayersList/LayersDirective.tpl.html
+index 7aed895..65ddee6 100644
+--- a/csComp/directives/LayersList/LayersDirective.tpl.html
++++ b/csComp/directives/LayersList/LayersDirective.tpl.html
+@@ -46,7 +46,7 @@
+     <!-- ng-show="vm.layer._gui.featureTypes && vm.layer._gui.editing" -->
+ 
+     <div>
+-        <div class="layer-actions">
++        <div class="layer-actions" ng-if="false">
+             <div class="inner-addon left-addon" style="margin:5px;float:left" ng-focus="">
+                 <i class="fa fa-search"></i>
+                 <input type="text" ng-model="vm.layerfilter" expand-to="200px" class="form-control" style="width:100px;height:30px" />
+diff --git a/csComp/directives/Navigate/NavigateCtrl.ts b/csComp/directives/Navigate/NavigateCtrl.ts
+index ab8f910..50b7934 100644
+--- a/csComp/directives/Navigate/NavigateCtrl.ts
++++ b/csComp/directives/Navigate/NavigateCtrl.ts
+@@ -169,28 +169,29 @@ module Navigate {
+                 mark = csComp.Helpers.nextChar(mark);
+             });
+             csComp.Services.GeojsonRenderer.render(this.$layerService, this.searchResultLayer, this.$layerService.activeMapRenderer);
+-            //this.fitMap(this.searchResultLayer);
++            // this.fitMap(this.searchResultLayer);
+         }
+ 
+         /** Fit the search results, if any, to the map. */
+         private fitMap(layer: csComp.Services.ProjectLayer) {
+             if (this.searchResults.length === 0) return;
+-            var bounds = {
+-                xMin: NaN,
+-                xMax: NaN,
+-                yMin: NaN,
+-                yMax: NaN,
+-            };
+-            var bbox = <csComp.Services.IBoundingBox>{};
+-            layer.data.features.forEach(f => {
+-                let b = f.geometry.coordinates;
+-                bounds.xMin = bounds.xMin < b[0] ? bounds.xMin : b[0];
+-                bounds.xMax = bounds.xMax > b[0] ? bounds.xMax : b[0];
+-                bounds.yMin = bounds.yMin < b[1] ? bounds.yMin : b[1];
+-                bounds.yMax = bounds.yMax > b[1] ? bounds.yMax : b[1];
+-            });
+-            bbox.southWest = [bounds.yMin, bounds.xMin];
+-            bbox.northEast = [bounds.yMax, bounds.xMax];
++            var bbox = csComp.Helpers.GeoExtensions.getBoundingBox(layer.data.features);
++            // var bounds = {
++            //     xMin: NaN,
++            //     xMax: NaN,
++            //     yMin: NaN,
++            //     yMax: NaN,
++            // };
++            // var bbox = <csComp.Services.IBoundingBox>{};
++            // layer.data.features.forEach(f => {
++            //     let b = f.geometry.coordinates;
++            //     bounds.xMin = bounds.xMin < b[0] ? bounds.xMin : b[0];
++            //     bounds.xMax = bounds.xMax > b[0] ? bounds.xMax : b[0];
++            //     bounds.yMin = bounds.yMin < b[1] ? bounds.yMin : b[1];
++            //     bounds.yMax = bounds.yMax > b[1] ? bounds.yMax : b[1];
++            // });
++            // bbox.southWest = [bounds.yMin, bounds.xMin];
++            // bbox.northEast = [bounds.yMax, bounds.xMax];
+ 
+             // var b = csComp.Helpers.GeoExtensions.getBoundingBox(layer.data);
+             if (this.searchResults.length === 1 && this.searchResults[0].location.type.toLowerCase() === 'point') {
+diff --git a/csComp/directives/Widgets/Filters/RowFilter.tpl.html b/csComp/directives/Widgets/Filters/RowFilter.tpl.html
+index 2ad63fb..f03ac30 100644
+--- a/csComp/directives/Widgets/Filters/RowFilter.tpl.html
++++ b/csComp/directives/Widgets/Filters/RowFilter.tpl.html
+@@ -10,6 +10,7 @@
+             <h4 style="display:inline-block;">{{filter.title}}</h4>
+             <div class="left-menu dropdown-toggle pull-left" style="float: right!important; position:relative;" ng-click="vm.openLayerMenu($event)"></div>
+             <a class='btn fa fa-remove' style="float: right;" ng-click="vm.remove()"></a>
++            <a class='btn fa fa-save' style="float: right;padding-right:0;" ng-click="vm.export()" uib-tooltip="Opslaan als afbeelding" tooltip-trigger="mouseenter" tooltip-append-to-body="true"></a>
+         </div>
+         <div id="filter_{{filter.id}}" style="margin-left:-30px"></div>    
+     </div>
+diff --git a/csComp/directives/Widgets/Filters/RowFilterCtrl.ts b/csComp/directives/Widgets/Filters/RowFilterCtrl.ts
+index 7247191..3830ed8 100644
+--- a/csComp/directives/Widgets/Filters/RowFilterCtrl.ts
++++ b/csComp/directives/Widgets/Filters/RowFilterCtrl.ts
+@@ -63,6 +63,8 @@ module Filters {
+                             res.push([$scope.createScatterString + ' ' + gf.title, () => this.createScatter(gf)]);
+                         }
+                     });
++                    
++                    res.push(['Opslaan als afbeelding', () => this.export()]);
+ 
+                     return res;
+                 });
+@@ -161,9 +163,11 @@ module Filters {
+                         group.filterResult = dcDim.top(Infinity);
+                         this.$layerService.updateMapFilter(group);
+                     }, 100);
+-                }).on('filtered', (e) => {
++                })
++                .on('filtered', (e) => {
+                     console.log('Filtered rowchart');
+-                });
++                })
++                .xAxis().ticks(8);
+             this.dcChart.selectAll();
+             this.updateRange();
+             dc.renderAll();
+@@ -227,5 +231,15 @@ module Filters {
+                 this.$layerService.removeFilter(this.$scope.filter);
+             }
+         }
++        
++        public export() {
++            var svg = new XMLSerializer().serializeToString(this.dcChart.root().node().firstChild);
++            var canvas = <any>document.getElementById('png-export-placeholder');
++            canvg(canvas, svg, {renderCallback: () => {
++                var img = canvas.toDataURL("image/png");
++                var fileName = this.$scope.filter.title || 'rowfilter-export';
++                csComp.Helpers.saveImage(img, fileName + '.png', 'png');
++            }});
++        }
+     }
+ }
+diff --git a/csComp/directives/Widgets/MarkdownWidget/MarkdownWidget.tpl.html b/csComp/directives/Widgets/MarkdownWidget/MarkdownWidget.tpl.html
+index dad3b31..dc6b982 100644
+--- a/csComp/directives/Widgets/MarkdownWidget/MarkdownWidget.tpl.html
++++ b/csComp/directives/Widgets/MarkdownWidget/MarkdownWidget.tpl.html
+@@ -2,9 +2,10 @@
+     <div class="row" style="display: inline-block; margin-left: 2px;">
+         <div style="display: inline-block; font-size:16px; font-weight:bold; margin-bottom:2px;">{{data.title}}</div>
+         <div style="display: inline-block; margin-right:5px; position: absolute; top: 2px; right: 0px;">
+-            <a class="widget-min-max-close" ng-click="vm.close()"    ng-if="vm.canClose()"><i class="fa fa-times"></i></a>
+-            <a class="widget-min-max-close" ng-click="vm.minimize()" ng-show="minimized">  <i class="fa fa-plus"></i></a>
+-            <a class="widget-min-max-close" ng-click="vm.minimize()" ng-hide="minimized">  <i class="fa fa-minus"></i></a>
++            <a class="widget-min-max-close" ng-click="vm.close()" ng-if="vm.canClose()"><i class="fa fa-times"></i></a>
++            <a class="widget-min-max-close" ng-click="vm.minimize()" ng-show="minimized"> <i class="fa fa-plus"></i></a>
++            <a class="widget-min-max-close" ng-click="vm.minimize()" ng-hide="minimized"> <i class="fa fa-minus"></i></a>
++            <a class="widget-min-max-close" ng-click="vm.exportToPDF()"><i class="fa fa-save" uib-tooltip="Opslaan als PDF" tooltip-trigger="mouseenter" tooltip-append-to-body="true"></i></a>
+         </div>
+         <!--<div class="display:inline-block; margin-right:10px; btn-group btn-group-sm" role="group">
+             <a ng-click="vm.minimize()">
+diff --git a/csComp/directives/Widgets/MarkdownWidget/MarkdownWidgetCtrl.ts b/csComp/directives/Widgets/MarkdownWidget/MarkdownWidgetCtrl.ts
+index 21b20bc..a7fcda0 100644
+--- a/csComp/directives/Widgets/MarkdownWidget/MarkdownWidgetCtrl.ts
++++ b/csComp/directives/Widgets/MarkdownWidget/MarkdownWidgetCtrl.ts
+@@ -35,6 +35,7 @@ module MarkdownWidget {
+         vm: MarkdownWidgetCtrl;
+         data: MarkdownWidgetData;
+         minimized: boolean;
++        lastSelectedFeature: IFeature;
+     }
+ 
+     export class MarkdownWidgetCtrl {
+@@ -75,6 +76,7 @@ module MarkdownWidget {
+                 this.parentWidget.hide();
+                 this.msgBusHandle = this.$messageBus.subscribe('feature', (action: string, feature: csComp.Services.IFeature) => {
+                     switch (action) {
++                        case 'onUpdateWidgets':
+                         case 'onFeatureDeselect':
+                         case 'onFeatureSelect':
+                             this.selectFeature(feature);
+@@ -151,6 +153,7 @@ module MarkdownWidget {
+                 return;
+             }
+             this.$timeout(() => {
++                this.$scope.lastSelectedFeature = feature;
+                 var md = this.$scope.data.content;
+                 var i = 0;
+                 this.$scope.data.dynamicProperties.forEach(p => {
+@@ -181,6 +184,16 @@ module MarkdownWidget {
+                 this.$scope.data.mdText = md;
+             }, 0);
+         }
++        
++        private exportToPDF() {
++            var doc = new jsPDF('p', 'pt', 'a3');
++            doc.setFontSize(12);
++            doc.fromHTML($('#' + this.widget.elementId).get(0), 15, 15, {
++                'width': +this.widget.width
++            });
++            var fileName = this.$scope.lastSelectedFeature.properties['Name'] || 'buurtoverzicht';
++            doc.save(fileName + '.pdf');
++        }
+     }
+ 
+ }
