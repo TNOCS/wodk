@@ -1,6 +1,6 @@
 .leftpanel-container {
     top: 170px !important;
-    bottom: 70px !important;
+    bottom: 90px !important;
 }
 
 .active-text {
@@ -37,6 +37,10 @@
 .button-container-down {
     background: #01689b;
     color: white;
+}
+
+.header-container {
+    background: #007bc7;
 }
 
 .spinner > div {

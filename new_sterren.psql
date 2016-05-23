@@ -169,6 +169,14 @@ woningen_in_pand = 8
 AND pandhoogte < 17 AND pandhoogte >= 5
 AND ((bouwjaar >= 1800 AND bouwjaar < 1930) OR (bouwjaar >= 1930 AND bouwjaar < 1950) OR (bouwjaar >= 1970 AND bouwjaar < 2020));
 
+-- Ster 3 en ster 0 voor bj < 1930 en hoogte < 17m and woningen >9
+UPDATE bagactueel.pand
+SET ster_3 = 2, ster_0 = (woningen_in_pand - 2), icon = 19, pandtype = 1, lift = 2, plint = 0
+WHERE
+woningen_in_pand >= 9
+AND pandhoogte < 17 AND pandhoogte >= 5
+AND bouwjaar >= 1800 AND bouwjaar < 1930
+
 -- Alles <= 8 woningen MET plint
 -- Ster onb voor bj 1950-1970 en hoogte 5 - 17m (B15, B16)
 UPDATE bagactueel.pand

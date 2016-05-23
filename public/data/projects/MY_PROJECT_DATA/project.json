@@ -127,6 +127,22 @@
             "showBackgroundImage": false,
             "widgets": [
                 {
+                    "id": "5e75afef-21a4-47c0-de1d-8093ae45e305",
+                    "directive": "headerwidget",
+                    "elementId": "widget-5e75afef-21a4-47c0-de1d-8093ae45e305",
+                    "enabled": true,
+                    "style": "vws",
+                    "left": "0",
+                    "bottom": "0",
+                    "width": "0",
+                    "height": "0",
+                    "data": {
+                        "autoShow" : true,
+                        "title" : "Korte uitleg",
+                        "content": "Klik op een gemeente om de onderliggende buurten te tonen. De buurten zijn gekleurd op basis van het percentage aanpasbare woningen in de betreffende buurt. Vervolgens kunt u de woningen in een buurt laden door de buurt aan te klikken. Afhankelijk van het aantal woningen in de buurt kan het laden even duren. Ook de woningen zijn gekleurd op basis van hun aanpasbaarheid. Om weer terug te gaan naar het buurtoverzicht, kunt u de terug-knop (<img src=\"./images/previous.png\" height=\"16px\"/>) van deze webpagina gebruiken. Om uw selecties terug te zetten in de oorspronlijke staat klikt u de 'opnieuw beginnen' knop (<img src=\"images/reload.png\" height=\"16px\"/>) \n\n Voor een uitgebreide uitleg over het model achter de aanpasbaarheid verwijzen we u naar het 'Toelichting'-dashboard."
+                    }
+                },
+                {
                     "id": "5e75accc-21a4-47c0-de1d-8093ae45e305",
                     "directive": "markdownwidget",
                     "elementId": "widget-5e75accc-21a4-47c0-de1d-8093ae45e305",
@@ -203,9 +219,10 @@
                     "left": "25px",
                     "bottom": "10px",
                     "height": "72px",
-                    "width": "240px",
+                    "width": "75px",
                     "data": {
                         "minimalLayout": true,
+                        "toggleMode": true,
                         "buttons": [
                             {
                                 "title": "OpenStreetMap",

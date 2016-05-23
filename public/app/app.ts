@@ -75,22 +75,27 @@ module App {
                         var l = this.$layerService.findLayer('bagbuurten');
                         var f = this.$layerService.lastSelectedFeature;
                         if (!l || !f || !f.properties || !f.properties['GM_CODE']) return;
-                        if (f.geometry.type === 'LineString' || f.geometry.type === 'MultiLineString') return;
+                        if (f.geometry.type.toLowerCase() === 'point') return;
                         this.selectionHistory.push(JSON.parse(JSON.stringify(csComp.Services.Feature.serialize(f))));
                         var fClone: IFeature = csComp.Services.Feature.serialize(f);
                         // Replace polygon gemeente by polyline
                         var gl = this.$layerService.findLayer('gemeente');
                         this.$layerService.removeFeature(f);
                         if (gl && gl.data && gl.data.features) {
-                            fClone.geometry.type = (fClone.geometry.type === 'Polygon' ? 'LineString' : 'MultiLineString');
-                            if (fClone.geometry.type === 'LineString') {
-                                fClone.geometry.coordinates = fClone.geometry.coordinates[0];
-                            } else {
-                                fClone.geometry.coordinates = _.map(fClone.geometry.coordinates, (poly) => { return poly[0]; })
+                            // fClone.geometry.type = (fClone.geometry.type === 'Polygon' ? 'LineString' : 'MultiLineString');
+                            // if (fClone.geometry.type === 'LineString') {
+                            //     fClone.geometry.coordinates = fClone.geometry.coordinates[0];
+                            // } else {
+                            //     fClone.geometry.coordinates = _.map(fClone.geometry.coordinates, (poly) => { return poly[0]; })
+                            // }
+                            if (fClone.geometry.type.toLowerCase() !== 'point') {
+                                fClone.properties['_contour'] = JSON.stringify(fClone.geometry);
+                                fClone.geometry = csComp.Helpers.GeoExtensions.getCentroid(fClone.geometry.coordinates);
                             }
                             gl.data.features.push(fClone);
                             this.$layerService.initFeature(fClone, gl);
                             this.$layerService.activeMapRenderer.addFeature(fClone);
+                            this.$messageBusService.publish('feature', 'onUpdateWidgets', fClone );
                             if (this.$layerService.$rootScope.$root.$$phase !== '$apply' && this.$layerService.$rootScope.$root.$$phase !== '$digest') { this.$layerService.$rootScope.$apply(); }
                         }
 
@@ -98,6 +103,7 @@ module App {
                         l.dataSourceParameters['searchProperty'] = f.properties['GM_CODE'];
                         if (this.$layerService.findLoadedLayer(l.id)) {
                             this.$layerService.layerSources[l.type.toLowerCase()].refreshLayer(l);
+                            this.$messageBusService.publish('updatelegend', 'update', _.find(l.group.styles, (s) => { return s.enabled; }) );
                         } else {
                             this.$layerService.addLayer(l, () => {
                                 var group = this.$layerService.findGroupById('buurten');
@@ -116,22 +122,30 @@ module App {
                         var l = this.$layerService.findLayer('bagcontouren');
                         var f = this.$layerService.lastSelectedFeature;
                         if (!l || !f || !f.geometry || !f.geometry.coordinates) return;
-                        if (f.geometry.type === 'LineString' || f.geometry.type === 'MultiLineString') return;
+                        if (f.geometry.type.toLowerCase() === 'point') {
+                            this.$layerService.visual.rightPanelVisible = false;
+                            return;
+                        }
                         this.selectionHistory.push(JSON.parse(JSON.stringify(csComp.Services.Feature.serialize(f))));
                         var fClone: IFeature = csComp.Services.Feature.serialize(f);
                         // Replace polygon buurt by polyline
                         var bl = this.$layerService.findLayer('bagbuurten');
                         this.$layerService.removeFeature(f);
                         if (bl && bl.data && bl.data.features) {
-                            fClone.geometry.type = (fClone.geometry.type === 'Polygon' ? 'LineString' : 'MultiLineString');
-                            if (fClone.geometry.type === 'LineString') {
-                                fClone.geometry.coordinates = fClone.geometry.coordinates[0];
-                            } else {
-                                fClone.geometry.coordinates = _.map(fClone.geometry.coordinates, (poly) => { return poly[0]; })
+                            // fClone.geometry.type = (fClone.geometry.type === 'Polygon' ? 'LineString' : 'MultiLineString');
+                            // if (fClone.geometry.type === 'LineString') {
+                            //     fClone.geometry.coordinates = fClone.geometry.coordinates[0];
+                            // } else {
+                            //     fClone.geometry.coordinates = _.map(fClone.geometry.coordinates, (poly) => { return poly[0]; })
+                            // }
+                            if (fClone.geometry.type.toLowerCase() !== 'point') {
+                                fClone.properties['_contour'] = JSON.stringify(fClone.geometry);
+                                fClone.geometry = csComp.Helpers.GeoExtensions.getCentroid(fClone.geometry.coordinates);
                             }
                             bl.data.features.push(fClone);
                             this.$layerService.initFeature(fClone, bl);
                             this.$layerService.activeMapRenderer.addFeature(fClone);
+                            this.$messageBusService.publish('feature', 'onUpdateWidgets', fClone );
                             if (this.$layerService.$rootScope.$root.$$phase !== '$apply' && this.$layerService.$rootScope.$root.$$phase !== '$digest') { this.$layerService.$rootScope.$apply(); }
                         }
 
@@ -139,7 +153,8 @@ module App {
                         l.dataSourceParameters['searchProperty'] = f.properties['bu_code'];
                         if (this.$layerService.findLoadedLayer(l.id)) {
                             this.$layerService.layerSources[l.type.toLowerCase()].refreshLayer(l);
-                            this.$layerService.layerSources[l.type.toLowerCase()].fitMap(l);                            
+                            this.$layerService.layerSources[l.type.toLowerCase()].fitMap(l);     
+                            this.$messageBusService.publish('updatelegend', 'update', _.find(l.group.styles, (s) => { return s.enabled; }) );                       
                         } else {
                             this.$layerService.addLayer(l, () => {
                                 var group = this.$layerService.findGroupById('BAG');
@@ -147,10 +162,10 @@ module App {
                                 var propType = this.$layerService.findPropertyTypeById('data/resourceTypes/BagPanden.json#ster_gem');
                                 if (typeof propType === 'undefined') return;
                                 this.$layerService.setGroupStyle(group, propType);
-                                var b = csComp.Helpers.GeoExtensions.getFeatureBounds(fClone);
-                                this.$layerService.map.map.fitBounds(<any>b);
+                                // var b = csComp.Helpers.GeoExtensions.getFeatureBounds(fClone);
+                                // this.$layerService.map.map.fitBounds(<any>b);
                                 // this.$.layerSources[l.type.toLowerCase()].fitMap(l);
-                                // this.$layerService.$mapService.map.setZoom(15);
+                                this.$layerService.$mapService.map.setZoom(15);
                             });
                         }
                     });
@@ -178,6 +193,7 @@ module App {
                                 featsToRemove.forEach((f) => {
                                     this.$layerService.removeFeature(f);
                                 });
+                                if (this.$layerService.$mapService.map.getZoom() > 13) this.$layerService.$mapService.map.setZoom(13);
                                 break;
                             case 'bagbuurten':
                                 var bagLayer = this.$layerService.findLoadedLayer('bagcontouren');
@@ -186,10 +202,24 @@ module App {
                                 featsToRemove.forEach((f) => {
                                     this.$layerService.removeFeature(f);
                                 });
+                                if (this.$layerService.$mapService.map.getZoom() > 14) this.$layerService.$mapService.map.setZoom(14);
                                 break;
                         }
-                        this.$messageBusService.publish('updatelegend', 'update');
-                        if (this.$layerService.$rootScope.$root.$$phase !== '$apply' && this.$layerService.$rootScope.$root.$$phase !== '$digest') { this.$layerService.$rootScope.$apply(); }
+                        // Update legend
+                        if (this.selectionHistory.length > 0) {
+                            var legendFeature;
+                            if (lastItem.layerId === 'gemeente') { 
+                                var buurtLayer = this.$layerService.findLoadedLayer('bagbuurten');
+                                this.$messageBusService.publish('updatelegend', 'update', _.find(buurtLayer.group.styles, (s) => { return s.enabled; }) );                                
+                            } else {
+                                this.$messageBusService.publish('updatelegend', 'update', _.find(l.group.styles, (s) => { return s.enabled; }) );
+                            }
+                            this.$messageBusService.publish('feature', 'onUpdateWidgets', lastItem );
+                        } else {
+                            this.$messageBusService.publish('updatelegend', 'hidelegend');
+                        }
+                        
+                        if ($scope.$root.$$phase !== '$apply' && $scope.$root.$$phase !== '$digest') { $scope.$apply(); };
                     });
 
                     // NOTE EV: You may run into problems here when calling this inside an angular apply cycle.
