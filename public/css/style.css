@@ -43,6 +43,10 @@
     background: #007bc7;
 }
 
+.rightpanel { 
+    bottom: 16px !important;
+}
+
 .spinner > div {
     background-color: rgba(229, 240, 249, 1.0);
     width: 24px;
