@@ -1,4 +1,5 @@
 {
+    "$schema": "./schemas/project_schema.json",
     "id": "a337abc7-ffd6-443f-21dd-152d9c5666f5",
     "storage": "file",
     "title": "Woningen op de kaart",
@@ -127,22 +128,6 @@
             "showBackgroundImage": false,
             "widgets": [
                 {
-                    "id": "5e75afef-21a4-47c0-de1d-8093ae45e305",
-                    "directive": "headerwidget",
-                    "elementId": "widget-5e75afef-21a4-47c0-de1d-8093ae45e305",
-                    "enabled": true,
-                    "style": "vws",
-                    "left": "0",
-                    "bottom": "0",
-                    "width": "0",
-                    "height": "0",
-                    "data": {
-                        "autoShow" : true,
-                        "title" : "Korte uitleg",
-                        "content": "Klik op een gemeente om de onderliggende buurten te tonen. De buurten zijn gekleurd op basis van het percentage aanpasbare woningen in de betreffende buurt. Vervolgens kunt u de woningen in een buurt laden door de buurt aan te klikken. Afhankelijk van het aantal woningen in de buurt kan het laden even duren. Ook de woningen zijn gekleurd op basis van hun aanpasbaarheid. Om weer terug te gaan naar het buurtoverzicht, kunt u de terug-knop (<img src=\"./images/previous.png\" height=\"16px\"/>) van deze webpagina gebruiken. Om uw selecties terug te zetten in de oorspronlijke staat klikt u de 'opnieuw beginnen' knop (<img src=\"images/reload.png\" height=\"16px\"/>) \n\n Voor een uitgebreide uitleg over het model achter de aanpasbaarheid verwijzen we u naar het 'Toelichting'-dashboard."
-                    }
-                },
-                {
                     "id": "5e75accc-21a4-47c0-de1d-8093ae45e305",
                     "directive": "markdownwidget",
                     "elementId": "widget-5e75accc-21a4-47c0-de1d-8093ae45e305",
@@ -187,9 +172,9 @@
                     "directive": "buttonwidget",
                     "enabled": true,
                     "style": "transparent",
+                    "left": "120px",
+                    "bottom": "10px",
                     "height": "72px",
-                    "left": "25px",
-                    "top": "85px",
                     "width": "170px",
                     "data": {
                         "minimalLayout": true,
@@ -252,19 +237,19 @@
                     }
                 },
                 {
-                    "id": "11111ccc-21a4-47c0-de1d-8093ae45e305",
-                    "directive": "legend-directive",
-                    "title": "Legenda",
-                    "elementId": "widget-11111ccc-21a4-47c0-de1d-8093ae45e305",
+                    "id": "12111ccc-21a4-47c0-de1d-8093ae45e305",
+                    "directive": "filterstylewidget",
+                    "title": "Filter & Style",
+                    "elementId": "widget-12111ccc-21a4-47c0-de1d-8093ae45e305",
                     "enabled": true,
                     "style": "vws",
                     "left": "25px",
                     "right": "",
-                    "top": "170px",
+                    "top": "100px",
                     "width": "",
-                    "height": "",
+                    "height": "350px",
                     "data": {
-                        "mode": "lastSelectedStyle"
+                        "canClose": true
                     }
                 }
             ],

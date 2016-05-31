@@ -1,5 +1,5 @@
 .leftpanel-container {
-    top: 170px !important;
+    top: 100px !important;
     bottom: 90px !important;
 }
 
@@ -115,4 +115,22 @@
 }
 .marker-cluster-large div {
 	background-color: rgba(15, 225, 255, 0.6);
+}
+
+.dc-chart g.row circle {
+    cursor: pointer;
+}
+
+.dc-chart circle.deselected {
+    stroke: none;
+    fill: #ccc;
+}
+
+.dc-chart g.row polygon {
+    cursor: pointer;
+}
+
+.dc-chart polygon.deselected {
+    stroke: none;
+    fill: #ccc;
 }

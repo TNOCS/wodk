@@ -90,7 +90,7 @@ module App {
                             // }
                             if (fClone.geometry.type.toLowerCase() !== 'point') {
                                 fClone.properties['_contour'] = JSON.stringify(fClone.geometry);
-                                fClone.geometry = csComp.Helpers.GeoExtensions.getCentroid(fClone.geometry.coordinates);
+                                fClone.geometry = csComp.Helpers.GeoExtensions.getEastmostCoordinate(fClone.geometry.coordinates);
                             }
                             gl.data.features.push(fClone);
                             this.$layerService.initFeature(fClone, gl);
@@ -126,6 +126,10 @@ module App {
                             this.$layerService.visual.rightPanelVisible = false;
                             return;
                         }
+                        var b: L.LatLngBounds = csComp.Helpers.GeoExtensions.getFeatureBounds(f);
+                        this.$layerService.map.getMap().fitBounds(b);                     
+                        // this.$layerService.centerFeatureOnMap(this.$layerService.selectedFeatures);
+                        // this.$layerService.map.getMap().setZoom(15);
                         this.selectionHistory.push(JSON.parse(JSON.stringify(csComp.Services.Feature.serialize(f))));
                         var fClone: IFeature = csComp.Services.Feature.serialize(f);
                         // Replace polygon buurt by polyline
@@ -140,7 +144,7 @@ module App {
                             // }
                             if (fClone.geometry.type.toLowerCase() !== 'point') {
                                 fClone.properties['_contour'] = JSON.stringify(fClone.geometry);
-                                fClone.geometry = csComp.Helpers.GeoExtensions.getCentroid(fClone.geometry.coordinates);
+                                fClone.geometry = csComp.Helpers.GeoExtensions.getNorthmostCoordinate(fClone.geometry.coordinates);
                             }
                             bl.data.features.push(fClone);
                             this.$layerService.initFeature(fClone, bl);
@@ -165,7 +169,6 @@ module App {
                                 // var b = csComp.Helpers.GeoExtensions.getFeatureBounds(fClone);
                                 // this.$layerService.map.map.fitBounds(<any>b);
                                 // this.$.layerSources[l.type.toLowerCase()].fitMap(l);
-                                this.$layerService.$mapService.map.setZoom(15);
                             });
                         }
                     });
