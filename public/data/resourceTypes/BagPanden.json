@@ -146,14 +146,15 @@
         "oppervlakteverblijfsobject": {
             "label": "oppervlakteverblijfsobject",
             "type": "number",
-            "title": "Oppervlakte",
-            "visibleInCallOut": false,
+            "title": "Oppervlakte verblijfsobject",
+            "section": "Overig",
+            "visibleInCallOut": true,
             "isSearchable": false
         },
         "pandoppervlakte": {
             "label": "pandoppervlakte",
             "type": "number",
-            "title": "Oppervlakte pand",
+            "title": "Footprint pand",
             "stringFormat": "{0:#,#} m2",
             "visibleInCallOut": true,
             "isSearchable": false

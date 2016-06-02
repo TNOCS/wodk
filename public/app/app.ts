@@ -39,6 +39,8 @@ module App {
         public contourAction: ContourAction.ContourActionModel;
 
         private selectionHistory: IFeature[];
+        private htmlStyle = '<div style="display:inline-block;vertical-align:middle;text-align:center;background:rgba(0,0,255,1);width:28px;height:28px;border-radius:50%;border-style:solid;border-color:rgba(0,0,150,1);border-width:2px;opacity:1;box-shadow:2px 3px 6px 0px rgba(0,0,0,0.75);"><img src="images/empty.png" style="width:24px;height:24px;display:block;"></div>';
+        private htmlStyleInvisible = '<div style="display:inline-block;width:2px;height:2px;"></div>';
 
         activeLayer: csComp.Services.ProjectLayer;
 
@@ -61,6 +63,8 @@ module App {
             $scope.featureSelected = false;
             $scope.layersLoading = 0;
             this.selectionHistory = [];
+            
+            
 
             $messageBusService.subscribe('project', (action: string) => {
                 if (action === 'loaded') {
@@ -68,6 +72,29 @@ module App {
                     this.$layerService.addActionService(this.areaFilter);
                     this.contourAction = new ContourAction.ContourActionModel();
                     this.$layerService.addActionService(this.contourAction);
+                    
+                    //Hide icons on large zoomlevels
+                    this.$mapService.map.on('zoomend', (map) => {
+                        if (this.$mapService.map.getZoom() < 10) {
+                            this.$layerService.project.features.forEach((f) => {
+                                if (f.geometry && f.geometry.type.toLowerCase() === 'point') {
+                                    if (f.htmlStyle === this.htmlStyle) {
+                                        f.htmlStyle = this.htmlStyleInvisible;
+                                        this.$layerService.activeMapRenderer.updateFeature(f);
+                                    }
+                                }
+                            })
+                        } else {
+                            this.$layerService.project.features.forEach((f) => {
+                                if (f.geometry && f.geometry.type.toLowerCase() === 'point') {
+                                    if (f.htmlStyle === this.htmlStyleInvisible) {
+                                        f.htmlStyle = this.htmlStyle;
+                                        this.$layerService.activeMapRenderer.updateFeature(f);
+                                    }
+                                }
+                            })
+                        }
+                    });
 
                     // Load buurten by gemeente
                     this.$layerService.actionService.addAction('load buurten', (options: csComp.Services.IButtonActionOptions) => {
@@ -98,8 +125,7 @@ module App {
                             }
                             gl.data.features.push(fClone);
                             this.$layerService.initFeature(fClone, gl);
-                            fClone.effectiveStyle.opacity = 1;
-                            fClone.effectiveStyle.fillOpacity = 1;
+                            fClone.htmlStyle = this.htmlStyle;
                             this.$layerService.activeMapRenderer.addFeature(fClone);
                             this.$messageBusService.publish('feature', 'onUpdateWidgets', fClone );
                             if (this.$layerService.$rootScope.$root.$$phase !== '$apply' && this.$layerService.$rootScope.$root.$$phase !== '$digest') { this.$layerService.$rootScope.$apply(); }
@@ -158,8 +184,7 @@ module App {
                             }
                             bl.data.features.push(fClone);
                             this.$layerService.initFeature(fClone, bl);
-                            fClone.effectiveStyle.fillOpacity = 1;
-                            fClone.effectiveStyle.opacity = 1;
+                            fClone.htmlStyle = this.htmlStyle;
                             this.$layerService.activeMapRenderer.addFeature(fClone);
                             this.$messageBusService.publish('feature', 'onUpdateWidgets', fClone );
                             if (this.$layerService.$rootScope.$root.$$phase !== '$apply' && this.$layerService.$rootScope.$root.$$phase !== '$digest') { this.$layerService.$rootScope.$apply(); }
