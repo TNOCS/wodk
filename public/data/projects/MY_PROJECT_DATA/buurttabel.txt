@@ -1,6 +1,6 @@
 <b>Gemeente {{21}}</b>
 
-| {{0}}                       | &nbsp;&nbsp;&nbsp;Aantal | &nbsp;&nbsp;&nbsp;Percentage |
+| {{0}}                       | &nbsp;&nbsp;&nbsp;Aantal | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%          |
 |-----------------------------|-------------------------:|-----------------------------:|
 | Aantal woningen                      | {{1}}                    | 100                    |
 | | |

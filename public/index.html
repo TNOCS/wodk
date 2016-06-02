@@ -225,7 +225,7 @@
                             </svg>
                         </li>
                         
-                        <li class="lp-tab close-tab" ng-click="vm.$layerService.visual.leftPanelVisible = !vm.$layerService.visual.leftPanelVisible;vm.$messageBusService.publish('search','reset')" uib-popover="Sluit het menu" popover-trigger="mouseenter"  popover-append-to-body="true">
+                        <li class="lp-tab close-tab" ng-click="vm.$layerService.visual.leftPanelVisible = !vm.$layerService.visual.leftPanelVisible" uib-popover="Sluit het menu" popover-trigger="mouseenter"  popover-append-to-body="true">
                             <div>
                                 <i class="fa fa-times"></i>
                             </div>
@@ -236,7 +236,7 @@
                 <div class="leftpanel-content">
                     <!-- Tab panes -->
                     <div class="tab-content ">
-                        <navigate ng-show="vm.showNavigation" class="tab-pane" id="navigate"></navigate>
+                        <!--<navigate ng-show="vm.showNavigation" class="tab-pane" id="navigate"></navigate>-->
                         <base-map-list class="tab-pane" id="basestyles"></base-map-list>
                         <layers-directive class="tab-pane active" id="layers"></layers-directive>
                         <filter-list ng-hide="vm.$layerService.noFilters" class="tab-pane" id="filters"></filter-list>
@@ -287,7 +287,9 @@
         <input type="text" style="margin-top:10px;float:left" ng-show="sv" />-->
         <project-header-selection></project-header-selection>
         <dashboard-header-selection></dashboard-header-selection>
-
+        <div ng-show="vm.showNavigation" class="search-result-dropdown">
+            <navigate class="tab-pane" id="navigate" style="height:100%"></navigate>
+        </div>
     </div>
 
     <div class="righttab-box" style="padding-right:30px;display:none">

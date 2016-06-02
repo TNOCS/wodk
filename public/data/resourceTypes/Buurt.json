@@ -9,9 +9,10 @@
 				"selectedStrokeColor" : "#000000",
 				"strokeWidth" : 2,
 			 	"selectedStrokeWidth": 4,
-				"iconWidth" : 30,
-				"iconHeight" : 30,
-				"iconUri" : "images/buurt.png",
+				"cornerRadius": 50,
+				"iconWidth" : 24,
+				"iconHeight" : 24,
+				"iconUri" : "images/empty.png",
                 "nameLabel" : "bu_naam",
 				"maxTitleResolution" : -1
 			},

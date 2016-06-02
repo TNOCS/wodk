@@ -17,21 +17,28 @@
                 "maxTitleResolution": -1,
                 "drawingMode": "Point"
             },
-            "propertyTypeKeys": "Adres;postcode;Name;woonplaatsnaam;gemeentenaam;pandtype;woningen_in_pand;niet_woningen_in_pand;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;lift;plint;pandoppervlakte;bouwjaar;pandhoogte;kadaster;streetview;wijknaam;wijkcode;buurtnaam;buurtcode;ster_gem;oppervlakteverblijfsobject;gebruiksdoelverblijfsobject;pandid;icon;"
+            "propertyTypeKeys": "Name;aanpasbaarheid;kostenindicatie;Adres;gemeentenaam;streetview;pandtype;bouwjaar;lift;pandoppervlakte;plint;pandhoogte;woningen_in_pand;niet_woningen_in_pand;gebruiksdoelverblijfsobject;pandid;kadaster;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;wijknaam;wijkcode;buurtnaam;buurtcode;ster_gem;oppervlakteverblijfsobject;icon;postcode;woonplaatsnaam;"
         }
     },
     "propertyTypeData": {
         "Adres": {
             "label": "Adres",
-            "titel": "Adres",
+            "title": "Adres",
             "type": "textarea",
-            "expression": "properties.openbareruimtenaam + ' ' + properties.huisnummer + properties.huisletter||'' + properties.huisnummertoevoeging||'' + '\n' + properties.postcode + ' ' + properties.woonplaatsnaam"
+            "expression": "properties.openbareruimtenaam + ' ' + properties.huisnummer + (properties.huisletter||'') + (properties.huisnummertoevoeging||'') + '\n' + properties.postcode + ' ' + properties.woonplaatsnaam"
+        },
+        "kostenindicatie": {
+            "label": "kostenindicatie",
+            "title": "Kostenindicatie aanpassingen",
+            "visibleInCallOut": true,
+            "type": "textarea",
+            "expression": "(properties.woningen_in_pand === 1 && !properties.niet_woningen_in_pand) ? 'traplift (nieuw): €3500 - €7500 \ntraplift (hergebruik): ca. 50% van nieuw' : null"
         },
         "postcode": {
             "label": "postcode",
             "type": "text",
             "title": "Postcode",
-            "visibleInCallOut": true,
+            "visibleInCallOut": false,
             "canEdit": false,
             "isSearchable": false
         },
@@ -82,14 +89,15 @@
         "woningen_in_pand": {
             "label": "woningen_in_pand",
             "type": "number",
-            "title": "# Woningen in pand",
+            "title": "Aantal woningen in pand",
             "visibleInCallOut": true,
             "isSearchable": false
         },
         "niet_woningen_in_pand": {
             "label": "niet_woningen_in_pand",
             "type": "number",
-            "title": "# Niet-woningen in pand",
+            "title": "Aantal niet-woningen in pand",
+            "expression": "(properties.niet_woningen_in_pand > 0) ? properties.niet_woningen_in_pand : null",
             "visibleInCallOut": true,
             "isSearchable": false
         },
@@ -124,13 +132,14 @@
         },
         "plint": {
             "label": "plint",
-            "title": "Plint",
+            "title": "Hoogteverschil begane grondvloer appartement - maaiveld > 1/2 meter",
+            "description": "Hoogteverschil begane grondvloer appartement - maaiveld > 1/2 meter",
             "type": "options",
             "options": {
                 "-1": "In onderzoek",
-                "0": "Geen plint",
-                "1": "Plint aanwezig",
-                "2": "Aanname geen plint"
+                "0": "Nee",
+                "1": "Ja",
+                "2": "Aanname geen hoogteverschil"
             },
             "visibleInCallOut": true
         },
@@ -145,6 +154,7 @@
             "label": "pandoppervlakte",
             "type": "number",
             "title": "Oppervlakte pand",
+            "stringFormat": "{0:#,#} m2",
             "visibleInCallOut": true,
             "isSearchable": false
         },
@@ -152,7 +162,6 @@
             "label": "gebruiksdoelverblijfsobject",
             "type": "text",
             "title": "Gebruiksdoel",
-            "section": "Kenmerken",
             "visibleInCallOut": true,
             "isSearchable": false
         },
@@ -173,6 +182,7 @@
         "wijknaam": {
             "label": "wijknaam",
             "type": "text",
+            "section": "Overig",
             "title": "Wijk",
             "visibleInCallOut": true,
             "isSearchable": false
@@ -180,6 +190,7 @@
         "buurtnaam": {
             "label": "buurtnaam",
             "type": "text",
+            "section": "Overig",
             "title": "Buurt",
             "visibleInCallOut": true,
             "isSearchable": false
@@ -187,6 +198,7 @@
         "buurtcode": {
             "label": "buurtcode",
             "type": "text",
+            "section": "Overig",
             "title": "Buurtcode",
             "visibleInCallOut": true,
             "isSearchable": false
@@ -195,6 +207,7 @@
             "label": "wijkcode",
             "type": "text",
             "title": "Wijkcode",
+            "section": "Overig",
             "visibleInCallOut": true,
             "isSearchable": false
         },
@@ -216,7 +229,6 @@
         },
         "pandid": {
             "label": "pandid",
-            "section": "Kenmerken",
             "type": "text",
             "title": "Pand identificatie",
             "visibleInCallOut": true,
@@ -225,6 +237,7 @@
         "ster_onb": {
             "label": "ster_onb",
             "type": "number",
+            "section": "Overig",
             "title": "Ster onbekend",
             "visibleInCallOut": true,
             "isSearchable": false
@@ -232,6 +245,7 @@
         "ster_0": {
             "label": "ster_0",
             "type": "number",
+            "section": "Overig",
             "title": "Ster 0",
             "description": "Niet-aanpasbare woning",
             "visibleInCallOut": true,
@@ -241,6 +255,7 @@
             "label": "ster_1",
             "description": "Niet-aanpasbare woning",
             "type": "number",
+            "section": "Overig",
             "title": "Ster 1",
             "visibleInCallOut": true,
             "isSearchable": false
@@ -249,6 +264,7 @@
             "label": "ster_2",
             "description": "Aanpasbare woning",
             "type": "number",
+            "section": "Overig",
             "title": "Ster 2",
             "visibleInCallOut": true,
             "isSearchable": false
@@ -257,6 +273,7 @@
             "label": "ster_3",
             "description": "Aanpasbare woning",
             "type": "number",
+            "section": "Overig",
             "title": "Ster 3",
             "visibleInCallOut": true,
             "isSearchable": false
@@ -265,6 +282,7 @@
             "label": "ster_4",
             "description": "Specifieke woning",
             "type": "number",
+            "section": "Overig",
             "title": "Ster 4",
             "visibleInCallOut": true,
             "isSearchable": false
@@ -273,7 +291,17 @@
             "label": "ster_5",
             "description": "Specifieke woning",
             "type": "number",
+            "section": "Overig",
             "title": "Ster 5",
+            "visibleInCallOut": true,
+            "isSearchable": false
+        },
+        "aanpasbaarheid": {
+            "label": "aanpasbaarheid",
+            "type": "media",
+            "title": "Aanpasbaarheid",
+            "inlineImage": true,
+            "expression": "['images/star_' + ((properties.icon == 10) ? -2 : ((properties.icon > 10) ? -1 : properties.icon)) + '.png']",
             "visibleInCallOut": true,
             "isSearchable": false
         },
@@ -296,7 +324,7 @@
                             "min": -3,
                             "max": -2
                         },
-                        "color": "#111111"
+                        "color": "#222222"
                     },
                     {
                         "label": "Aanpasbaarheid gemengd",
@@ -361,6 +389,7 @@
             "label": "pandhoogte",
             "type": "number",
             "title": "Pandhoogte",
+            "stringFormat": "{0:#,#} m",
             "visibleInCallOut": true,
             "isSearchable": false
         },

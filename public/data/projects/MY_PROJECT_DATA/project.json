@@ -251,6 +251,24 @@
                     "data": {
                         "canClose": true
                     }
+                },
+                {
+                    "id": "72111ccc",
+                    "directive": "rangewidget",
+                    "elementId": "widget-72111ccc",
+                    "enabled": true,
+                    "style": "vws",
+                    "left": "25px",
+                    "right": "",
+                    "top": "490px",
+                    "width": "",
+                    "height": "",
+                    "data": {
+                        "canClose": true,
+                        "title": "Filter kleine buurten",
+                        "groupId": "buurten",
+                        "propId": "data/resourceTypes/Buurt.json#ster_totaal"
+                    }
                 }
             ],
             "mobile": true
@@ -308,21 +326,8 @@
     ],
     "searchProviders": [
         {
-            "name": "bag",
-            "url": "/bagwoningen/public/bagsearchaddress",
-            "url": "http://www.zorgopdekaart.nl/bagwoningen/public/bagsearchaddress",
-            "url": null
-        },
-        {
-            "name": "OpenCageData",
-            "url": "https://api.opencagedata.com/geocode/v1/json",
-            "key": "d7f5ecb72de96fb76392a9f3af3a7220",
-            "data": {
-                "culture": "nl",
-                "language": "nl-NL",
-                "userLocation": "52.1,5.1",
-                "bounds": "3.1531,50.6808,7.4158,53.7747"
-            }
+            "name": "EsriBagSearch",
+            "url": "https://services.arcgisonline.nl/arcgis/rest/services/Geocoder_BAG/GeocodeServer/findAddressCandidates"
         }
     ],
     "url": "/data/projects/MY_PROJECT_DATA/project.json"

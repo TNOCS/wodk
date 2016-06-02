@@ -50,7 +50,7 @@
         "id": "OpenStreetMap",
         "subtitle": "Road",
         "url": "http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png",
-        "isDefault": false,
+        "isDefault": true,
         "cesium_url": "http://otile3.mqcdn.com/tiles/1.0.0/osm/",
         "cesium_maptype": "openstreetmap",
         "minZoom": 0,
@@ -94,7 +94,7 @@
     }, {
         "title": "World Imagery",
         "id": "Earth",
-        "isDefault": true,
+        "isDefault": false,
         "subtitle": "from ESRI",
         "minZoom": 0,
         "maxZoom": 22,

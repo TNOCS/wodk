@@ -72,6 +72,10 @@ module App {
                     // Load buurten by gemeente
                     this.$layerService.actionService.addAction('load buurten', (options: csComp.Services.IButtonActionOptions) => {
                         console.log('load buurten');
+                        if ($scope.layersLoading != 0) {
+                            this.$layerService.$messageBusService.notify('Bezig met laden...', 'Wacht tot het laden voltooid is.', 3000);
+                            return;
+                        }
                         var l = this.$layerService.findLayer('bagbuurten');
                         var f = this.$layerService.lastSelectedFeature;
                         if (!l || !f || !f.properties || !f.properties['GM_CODE']) return;
@@ -94,6 +98,8 @@ module App {
                             }
                             gl.data.features.push(fClone);
                             this.$layerService.initFeature(fClone, gl);
+                            fClone.effectiveStyle.opacity = 1;
+                            fClone.effectiveStyle.fillOpacity = 1;
                             this.$layerService.activeMapRenderer.addFeature(fClone);
                             this.$messageBusService.publish('feature', 'onUpdateWidgets', fClone );
                             if (this.$layerService.$rootScope.$root.$$phase !== '$apply' && this.$layerService.$rootScope.$root.$$phase !== '$digest') { this.$layerService.$rootScope.$apply(); }
@@ -119,6 +125,10 @@ module App {
                     // Load woningen by buurt
                     this.$layerService.actionService.addAction('load woningen', (options: csComp.Services.IButtonActionOptions) => {
                         console.log('load woningen');
+                        if ($scope.layersLoading != 0) {
+                            this.$layerService.$messageBusService.notify('Bezig met laden...', 'Wacht tot het laden voltooid is.', 3000);
+                            return;
+                        }
                         var l = this.$layerService.findLayer('bagcontouren');
                         var f = this.$layerService.lastSelectedFeature;
                         if (!l || !f || !f.geometry || !f.geometry.coordinates) return;
@@ -148,6 +158,8 @@ module App {
                             }
                             bl.data.features.push(fClone);
                             this.$layerService.initFeature(fClone, bl);
+                            fClone.effectiveStyle.fillOpacity = 1;
+                            fClone.effectiveStyle.opacity = 1;
                             this.$layerService.activeMapRenderer.addFeature(fClone);
                             this.$messageBusService.publish('feature', 'onUpdateWidgets', fClone );
                             if (this.$layerService.$rootScope.$root.$$phase !== '$apply' && this.$layerService.$rootScope.$root.$$phase !== '$digest') { this.$layerService.$rootScope.$apply(); }

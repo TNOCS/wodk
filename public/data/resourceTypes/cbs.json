@@ -10,9 +10,10 @@
                 "drawingMode": "MultiPolygon",
                 "strokeWidth": 2,
                 "selectedStrokeWidth": 4,
-                "iconWidth": 32,
-                "iconHeight": 32,
-                "iconUri": "images/gemeente.png",
+                "cornerRadius": 50,
+                "iconWidth": 24,
+                "iconHeight": 24,
+                "iconUri": "images/empty.png",
                 "nameLabel": "GM_NAAM"
             },
             "selectActions": ["load buurten", "center on map"],
