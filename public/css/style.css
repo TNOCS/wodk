@@ -48,14 +48,14 @@
 }
 
 .spinner > div {
-    background-color: rgba(229, 240, 249, 1.0);
+    background-color: black;
     width: 24px;
     height: 24px;
     border: solid 1px black;
 }
 
 .spinner > h2 {
-    color: rgba(229, 240, 249, 1.0);
+    color: black;
     font-weight: bold;
     border-radius: 0%;
     -webkit-animation: bouncedelaytext 1.4s infinite ease-in-out;
@@ -63,7 +63,7 @@
     /* Prevent first frame from flickering when animation starts */
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
-    text-shadow: #000 0px 0px 2px;
+    text-shadow: white 0px 0px 2px;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -149,4 +149,37 @@
 .dc-chart polygon.deselected {
     stroke: none;
     fill: #ccc;
+}
+
+.dc-chart rect {
+    cursor: pointer;
+}
+
+.dc-chart path {
+    cursor: pointer;
+}
+
+#checkboxcheck.deselected {
+    opacity: 0;
+}
+
+#checkboxcheck.selected {
+    opacity: 1;
+}
+
+#checkboxbox.selected {
+    stroke: black;
+}
+
+#checkboxbox.deselected {
+    stroke: black;
+}
+
+#searchInput:-ms-input-placeholder{
+    color: grey;
+}
+
+#searchInput {
+    border-style: inset;
+    padding: 1px;
 }

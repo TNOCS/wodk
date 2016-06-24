@@ -17,7 +17,7 @@
                 "maxTitleResolution": -1,
                 "drawingMode": "Point"
             },
-            "propertyTypeKeys": "Name;aanpasbaarheid;kostenindicatie;Adres;gemeentenaam;streetview;pandtype;bouwjaar;lift;pandoppervlakte;plint;pandhoogte;woningen_in_pand;niet_woningen_in_pand;gebruiksdoelverblijfsobject;pandid;kadaster;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;wijknaam;wijkcode;buurtnaam;buurtcode;ster_gem;oppervlakteverblijfsobject;icon;postcode;woonplaatsnaam;"
+            "propertyTypeKeys": "Name;aanpasbaarheid;kostenindicatie;Adres;gemeentenaam;streetview;kadaster;pandtype;bouwjaar;lift;pandoppervlakte;gebruiksdoelverblijfsobject;plint;pandhoogte;woningen_in_pand;niet_woningen_in_pand;pandid;kadaster;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;wijknaam;wijkcode;buurtnaam;buurtcode;ster_gem;oppervlakteverblijfsobject;icon;postcode;woonplaatsnaam;"
         }
     },
     "propertyTypeData": {
@@ -309,7 +309,7 @@
         "ster_gem": {
             "label": "ster_gem",
             "type": "number",
-            "title": "Aanpasbaarheid",
+            "title": "Aanpasbaarheid woning",
             "expression": "((properties.icon == 10) ? -2 : ((properties.icon > 10) ? -1 : properties.icon))",
             "visibleInCallOut": false,
             "isSearchable": false,
@@ -328,7 +328,7 @@
                         "color": "#222222"
                     },
                     {
-                        "label": "Aanpasbaarheid gemengd",
+                        "label": "Aanpasbaarheid pand gemengd",
                         "interval": {
                             "min": -2,
                             "max": -1
@@ -336,7 +336,7 @@
                         "color": "#ffff00"
                     },
                     {
-                        "label": "Ster 0 - niet-aanpasbare woning",
+                        "label": "Niet-aanpasbare woning (ster 0)",
                         "interval": {
                             "min": -1,
                             "max": 0
@@ -344,7 +344,7 @@
                         "color": "#ff0000"
                     },
                     {
-                        "label": "Ster 1 - niet-aanpasbare woning",
+                        "label": "Niet-aanpasbare woning (ster 1)",
                         "interval": {
                             "min": 0,
                             "max": 1
@@ -352,7 +352,7 @@
                         "color": "#ff5500"
                     },
                     {
-                        "label": "Ster 2 - aanpasbare woning",
+                        "label": "Aanpasbare woning (ster 2)",
                         "interval": {
                             "min": 1,
                             "max": 2
@@ -360,7 +360,7 @@
                         "color": "#00ff00"
                     },
                     {
-                        "label": "Ster 3 - aanpasbare woning",
+                        "label": "Aanpasbare woning (ster 3)",
                         "interval": {
                             "min": 2,
                             "max": 3
@@ -368,7 +368,7 @@
                         "color": "#00cc00"
                     },
                     {
-                        "label": "Ster 4 - specifieke woning",
+                        "label": "Specifieke woning (ster 4)",
                         "interval": {
                             "min": 3,
                             "max": 4
@@ -376,7 +376,7 @@
                         "color": "#006600"
                     },
                     {
-                        "label": "Ster 5 - specifieke woning",
+                        "label": "Specifieke woning (ster 5)",
                         "interval": {
                             "min": 4,
                             "max": 5

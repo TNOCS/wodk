@@ -484,7 +484,7 @@
 			"label" : "woz",
 			"type" : "number",
 			"title" : "Gem. WOZ-waarde",
-            "stringFormat" : "€{0:#,#}k",
+            "stringFormat" : "€ {0:#,#}k",
 			"visibleInCallOut" : true,
 			"isSearchable" : false
 		},
