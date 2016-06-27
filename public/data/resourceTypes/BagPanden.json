@@ -4,7 +4,7 @@
             "name": "BagPanden",
             "contourProperty": "contour",
             "style": {
-                "fillColor": "#9999ff",
+                "fillColor": "#444444",
                 "fillOpacity": 0.85,
                 "opacity": 0.85,
                 "strokeColor": "#000000",
@@ -17,7 +17,7 @@
                 "maxTitleResolution": -1,
                 "drawingMode": "Point"
             },
-            "propertyTypeKeys": "Name;aanpasbaarheid;kostenindicatie;Adres;gemeentenaam;streetview;kadaster;pandtype;bouwjaar;lift;pandoppervlakte;gebruiksdoelverblijfsobject;plint;pandhoogte;woningen_in_pand;niet_woningen_in_pand;pandid;kadaster;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;wijknaam;wijkcode;buurtnaam;buurtcode;ster_gem;oppervlakteverblijfsobject;icon;postcode;woonplaatsnaam;"
+            "propertyTypeKeys": "Name;aanpasbaarheid;kostenindicatie;Adres;gemeentenaam;streetview;kadaster;pandtype;bouwjaar;lift;pandoppervlakte;gebruiksdoelverblijfsobject;plint;pandhoogte;woningen_in_pand;niet_woningen_in_pand;pandid;kadaster;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;wijknaam;wijkcode;buurtnaam;buurtcode;ster_gem;oppervlakteverblijfsobject;icon;postcode;woonplaatsnaam;leeftijd_bewoner;eigendom;verhuurder;corporatie;"
         }
     },
     "propertyTypeData": {
@@ -320,6 +320,7 @@
                 "legendKind": "discrete",
                 "legendEntries": [
                     {
+                        "sortKey": "h",
                         "label": "Aanpasbaarheid onbekend",
                         "interval": {
                             "min": -3,
@@ -328,6 +329,7 @@
                         "color": "#222222"
                     },
                     {
+                        "sortKey": "g",
                         "label": "Aanpasbaarheid pand gemengd",
                         "interval": {
                             "min": -2,
@@ -336,6 +338,7 @@
                         "color": "#ffff00"
                     },
                     {
+                        "sortKey": "f",
                         "label": "Niet-aanpasbare woning (ster 0)",
                         "interval": {
                             "min": -1,
@@ -344,6 +347,7 @@
                         "color": "#ff0000"
                     },
                     {
+                        "sortKey": "e",
                         "label": "Niet-aanpasbare woning (ster 1)",
                         "interval": {
                             "min": 0,
@@ -352,6 +356,7 @@
                         "color": "#ff5500"
                     },
                     {
+                        "sortKey": "d",
                         "label": "Aanpasbare woning (ster 2)",
                         "interval": {
                             "min": 1,
@@ -360,6 +365,7 @@
                         "color": "#00ff00"
                     },
                     {
+                        "sortKey": "c",
                         "label": "Aanpasbare woning (ster 3)",
                         "interval": {
                             "min": 2,
@@ -368,6 +374,7 @@
                         "color": "#00cc00"
                     },
                     {
+                        "sortKey": "b",
                         "label": "Specifieke woning (ster 4)",
                         "interval": {
                             "min": 3,
@@ -376,6 +383,7 @@
                         "color": "#006600"
                     },
                     {
+                        "sortKey": "a",
                         "label": "Specifieke woning (ster 5)",
                         "interval": {
                             "min": 4,
@@ -418,6 +426,369 @@
             "title": "Kadaster",
             "visibleInCallOut": true,
             "canEdit": false,
+            "isSearchable": false
+        },
+        "leeftijd_bewoner": {
+            "label": "leeftijd_bewoner",
+            "type": "number",
+            "title": "Leeftijd oudste bewoner",
+            "stringFormat": "{0:#,#} jaar",
+            "section": "Huurdata",
+            "visibleInCallOut": true,
+            "isSearchable": false,
+            "legend": {
+                "id": "leeftijd_bewoner",
+                "visualAspect": "fillColor",
+                "description": "Leeftijd oudste bewoner",
+                "legendKind": "discrete",
+                "legendEntries": [
+                    {
+                        "sortKey": "a",
+                        "label": "<65",
+                        "interval": {
+                            "min": 1,
+                            "max": 65
+                        },
+                        "color": "#00ff00"
+                    },
+                    {
+                        "sortKey": "b",
+                        "label": "65-75",
+                        "interval": {
+                            "min": 65,
+                            "max": 75
+                        },
+                        "color": "#ffff00"
+                    },
+                    {
+                        "sortKey": "c",
+                        "label": "75-85",
+                        "interval": {
+                            "min": 75,
+                            "max": 85
+                        },
+                        "color": "#ff5500"
+                    },
+                    {
+                        "sortKey": "d",
+                        "label": ">85",
+                        "interval": {
+                            "min": 85,
+                            "max": 999
+                        },
+                        "color": "#ff0000"
+                    }
+                ]
+            }
+        },
+        "eigendom": {
+            "label": "eigendom",
+            "type": "options",
+            "title": "Eigendom",
+            "section": "Huurdata",
+            "options": {
+                "Huur": "Huur",
+                "Koop": "Koop"
+            },
+            "visibleInCallOut": true,
+            "isSearchable": false,
+            "legend": {
+                "id": "eigendom",
+                "visualAspect": "fillColor",
+                "description": "Eigendom",
+                "legendKind": "discretestrings",
+                "legendEntries": [
+                    {
+                        "sortKey": "a",
+                        "label": "Huur",
+                        "stringValue": "Huur",
+                        "color": "#00ff00"
+                    },
+                    {
+                        "sortKey": "b",
+                        "label": "Koop",
+                        "stringValue": "Koop",
+                        "color": "#ffff00"
+                    },
+                    {
+                        "sortKey": "c",
+                        "label": "Onbekend",
+                        "stringValue": "Onbekend",
+                        "color": "#444444"
+                    }
+                ]
+            }
+        },
+        "verhuurder": {
+            "label": "verhuurder",
+            "type": "options",
+            "title": "Verhuurder",
+            "section": "Huurdata",
+            "legend": {
+                "legendEntries": [
+                    {
+                        "sortKey": 0,
+                        "label": "BOUWVERENIGING \"ONZE WONING\"",
+                        "stringValue": "BOUWVERENIGING \"ONZE WONING\"",
+                        "color": "#DDDDDD"
+                    },
+                    {
+                        "sortKey": 1,
+                        "label": "BOUWVERENIGING \"ONZE WONING\"",
+                        "stringValue": "BOUWVERENIGING \"ONZE WONING\"",
+                        "color": "#C0C0C0"
+                    },
+                    {
+                        "sortKey": 2,
+                        "label": "EENDRACHT WONINGBOUWVER",
+                        "stringValue": "EENDRACHT WONINGBOUWVER",
+                        "color": "#808080"
+                    },
+                    {
+                        "sortKey": 3,
+                        "label": "PATRIMONIUMS WONINGSTICHTING TE DELFSHAVEN",
+                        "stringValue": "PATRIMONIUMS WONINGSTICHTING TE DELFSHAVEN",
+                        "color": "#FF9900"
+                    },
+                    {
+                        "sortKey": 4,
+                        "label": "STICHTING COM-WONEN",
+                        "stringValue": "STICHTING COM-WONEN",
+                        "color": "#FF0000"
+                    },
+                    {
+                        "sortKey": 5,
+                        "label": "STICHTING HUMANITAS HUISVESTING",
+                        "stringValue": "STICHTING HUMANITAS HUISVESTING",
+                        "color": "#800000"
+                    },
+                    {
+                        "sortKey": 6,
+                        "label": "STICHTING LAURENS WONEN",
+                        "stringValue": "STICHTING LAURENS WONEN",
+                        "color": "#FFFF00"
+                    },
+                    {
+                        "sortKey": 7,
+                        "label": "STICHTING OUDERENHUISVESTING ROTTERDAM",
+                        "stringValue": "STICHTING OUDERENHUISVESTING ROTTERDAM",
+                        "color": "#808000"
+                    },
+                    {
+                        "sortKey": 8,
+                        "label": "STICHTING PATRIMONIUM'S BEJAARDENHUISVESTING",
+                        "stringValue": "STICHTING PATRIMONIUM'S BEJAARDENHUISVESTING",
+                        "color": "#00FF00"
+                    },
+                    {
+                        "sortKey": 9,
+                        "label": "STICHTING STADSWONEN",
+                        "stringValue": "STICHTING STADSWONEN",
+                        "color": "#008000"
+                    },
+                    {
+                        "sortKey": 10,
+                        "label": "STICHTING VESTIA GROEP",
+                        "stringValue": "STICHTING VESTIA GROEP",
+                        "color": "#00FFFF"
+                    },
+                    {
+                        "sortKey": 11,
+                        "label": "STICHTING WOONBRON",
+                        "stringValue": "STICHTING WOONBRON",
+                        "color": "#008080"
+                    },
+                    {
+                        "sortKey": 12,
+                        "label": "STICHTING WOONSTAD ROTTERDAM",
+                        "stringValue": "STICHTING WOONSTAD ROTTERDAM",
+                        "color": "#0000FF"
+                    },
+                    {
+                        "sortKey": 13,
+                        "label": "WONINGBOUWVERENIGING HOEK VAN HOLLAND",
+                        "stringValue": "WONINGBOUWVERENIGING HOEK VAN HOLLAND",
+                        "color": "#000080"
+                    },
+                    {
+                        "sortKey": 14,
+                        "label": "Part. tot 100 won.",
+                        "stringValue": "Part. tot 100 won.",
+                        "color": "#FF00FF"
+                    },
+                    {
+                        "sortKey": 15,
+                        "label": "Nat. pers. 2-10 won",
+                        "stringValue": "Nat. pers. 2-10 won",
+                        "color": "#800080"
+                    },
+                    {
+                        "sortKey": 16,
+                        "label": "Part. 100 + won.",
+                        "stringValue": "Part. 100 + won.",
+                        "color": "#222222"
+                    }
+                ],
+                "legendKind": "discretestrings",
+                "visualAspect": "fillColor",
+                "id": "verhuurder",
+                "description": "Verhuurder"
+            },
+            "options": {
+                "BOUWVERENIGING \"ONZE WONING\"": "BOUWVERENIGING \"ONZE WONING\"",
+                "EENDRACHT WONINGBOUWVER": "EENDRACHT WONINGBOUWVER",
+                "PATRIMONIUMS WONINGSTICHTING TE DELFSHAVEN": "PATRIMONIUMS WONINGSTICHTING TE DELFSHAVEN",
+                "STICHTING COM-WONEN": "STICHTING COM-WONEN",
+                "STICHTING HUMANITAS HUISVESTING": "STICHTING HUMANITAS HUISVESTING",
+                "STICHTING LAURENS WONEN": "STICHTING LAURENS WONEN",
+                "STICHTING OUDERENHUISVESTING ROTTERDAM": "STICHTING OUDERENHUISVESTING ROTTERDAM",
+                "STICHTING PATRIMONIUM'S BEJAARDENHUISVESTING": "STICHTING PATRIMONIUM'S BEJAARDENHUISVESTING",
+                "STICHTING STADSWONEN": "STICHTING STADSWONEN",
+                "STICHTING VESTIA GROEP": "STICHTING VESTIA GROEP",
+                "STICHTING WOONBRON": "STICHTING WOONBRON",
+                "STICHTING WOONSTAD ROTTERDAM": "STICHTING WOONSTAD ROTTERDAM",
+                "WONINGBOUWVERENIGING HOEK VAN HOLLAND": "WONINGBOUWVERENIGING HOEK VAN HOLLAND",
+                "Part. tot 100 won.": "Part. tot 100 won.",
+                "Nat. pers. 2-10 won": "Nat. pers. 2-10 won",
+                "Part. 100 + won.": "Part. 100 + won."
+            },
+            "visibleInCallOut": true,
+            "isSearchable": false
+        },
+        "corporatie": {
+            "label": "corporatie",
+            "type": "options",
+            "title": "Corporatie",
+            "section": "Huurdata",
+            "legend": {
+                "legendEntries": [
+                    {
+                        "sortKey": 0,
+                        "label": "BOUWVERENIGING \"ONZE WONING\"",
+                        "stringValue": "BOUWVERENIGING \"ONZE WONING\"",
+                        "color": "#DDDDDD"
+                    },
+                    {
+                        "sortKey": 1,
+                        "label": "BOUWVERENIGING \"ONZE WONING\"",
+                        "stringValue": "BOUWVERENIGING \"ONZE WONING\"",
+                        "color": "#C0C0C0"
+                    },
+                    {
+                        "sortKey": 2,
+                        "label": "EENDRACHT WONINGBOUWVER",
+                        "stringValue": "EENDRACHT WONINGBOUWVER",
+                        "color": "#808080"
+                    },
+                    {
+                        "sortKey": 3,
+                        "label": "PATRIMONIUMS WONINGSTICHTING TE DELFSHAVEN",
+                        "stringValue": "PATRIMONIUMS WONINGSTICHTING TE DELFSHAVEN",
+                        "color": "#FF9900"
+                    },
+                    {
+                        "sortKey": 4,
+                        "label": "STICHTING COM-WONEN",
+                        "stringValue": "STICHTING COM-WONEN",
+                        "color": "#FF0000"
+                    },
+                    {
+                        "sortKey": 5,
+                        "label": "STICHTING HUMANITAS HUISVESTING",
+                        "stringValue": "STICHTING HUMANITAS HUISVESTING",
+                        "color": "#800000"
+                    },
+                    {
+                        "sortKey": 6,
+                        "label": "STICHTING LAURENS WONEN",
+                        "stringValue": "STICHTING LAURENS WONEN",
+                        "color": "#FFFF00"
+                    },
+                    {
+                        "sortKey": 7,
+                        "label": "STICHTING OUDERENHUISVESTING ROTTERDAM",
+                        "stringValue": "STICHTING OUDERENHUISVESTING ROTTERDAM",
+                        "color": "#808000"
+                    },
+                    {
+                        "sortKey": 8,
+                        "label": "STICHTING PATRIMONIUM'S BEJAARDENHUISVESTING",
+                        "stringValue": "STICHTING PATRIMONIUM'S BEJAARDENHUISVESTING",
+                        "color": "#00FF00"
+                    },
+                    {
+                        "sortKey": 9,
+                        "label": "STICHTING STADSWONEN",
+                        "stringValue": "STICHTING STADSWONEN",
+                        "color": "#008000"
+                    },
+                    {
+                        "sortKey": 10,
+                        "label": "STICHTING VESTIA GROEP",
+                        "stringValue": "STICHTING VESTIA GROEP",
+                        "color": "#00FFFF"
+                    },
+                    {
+                        "sortKey": 11,
+                        "label": "STICHTING WOONBRON",
+                        "stringValue": "STICHTING WOONBRON",
+                        "color": "#008080"
+                    },
+                    {
+                        "sortKey": 12,
+                        "label": "STICHTING WOONSTAD ROTTERDAM",
+                        "stringValue": "STICHTING WOONSTAD ROTTERDAM",
+                        "color": "#0000FF"
+                    },
+                    {
+                        "sortKey": 13,
+                        "label": "WONINGBOUWVERENIGING HOEK VAN HOLLAND",
+                        "stringValue": "WONINGBOUWVERENIGING HOEK VAN HOLLAND",
+                        "color": "#000080"
+                    },
+                    {
+                        "sortKey": 14,
+                        "label": "Part. tot 100 won.",
+                        "stringValue": "Part. tot 100 won.",
+                        "color": "#FF00FF"
+                    },
+                    {
+                        "sortKey": 15,
+                        "label": "Nat. pers. 2-10 won",
+                        "stringValue": "Nat. pers. 2-10 won",
+                        "color": "#800080"
+                    },
+                    {
+                        "sortKey": 16,
+                        "label": "Part. 100 + won.",
+                        "stringValue": "Part. 100 + won.",
+                        "color": "#222222"
+                    }
+                ],
+                "legendKind": "discretestrings",
+                "visualAspect": "fillColor",
+                "id": "eigendom",
+                "description": "Eigendom"
+            },
+            "options": {
+                "BOUWVERENIGING \"ONZE WONING\"": "BOUWVERENIGING \"ONZE WONING\"",
+                "EENDRACHT WONINGBOUWVER": "EENDRACHT WONINGBOUWVER",
+                "PATRIMONIUMS WONINGSTICHTING TE DELFSHAVEN": "PATRIMONIUMS WONINGSTICHTING TE DELFSHAVEN",
+                "STICHTING COM-WONEN": "STICHTING COM-WONEN",
+                "STICHTING HUMANITAS HUISVESTING": "STICHTING HUMANITAS HUISVESTING",
+                "STICHTING LAURENS WONEN": "STICHTING LAURENS WONEN",
+                "STICHTING OUDERENHUISVESTING ROTTERDAM": "STICHTING OUDERENHUISVESTING ROTTERDAM",
+                "STICHTING PATRIMONIUM'S BEJAARDENHUISVESTING": "STICHTING PATRIMONIUM'S BEJAARDENHUISVESTING",
+                "STICHTING STADSWONEN": "STICHTING STADSWONEN",
+                "STICHTING VESTIA GROEP": "STICHTING VESTIA GROEP",
+                "STICHTING WOONBRON": "STICHTING WOONBRON",
+                "STICHTING WOONSTAD ROTTERDAM": "STICHTING WOONSTAD ROTTERDAM",
+                "WONINGBOUWVERENIGING HOEK VAN HOLLAND": "WONINGBOUWVERENIGING HOEK VAN HOLLAND",
+                "Part. tot 100 won.": "Part. tot 100 won.",
+                "Nat. pers. 2-10 won": "Nat. pers. 2-10 won",
+                "Part. 100 + won.": "Part. 100 + won."
+            },
+            "visibleInCallOut": true,
             "isSearchable": false
         }
     }

@@ -1,4 +1,4 @@
-<b>Buurt {{0}}</b>
+<b>Buurt {{0}}</b><br>
 <b>Gemeente {{21}}</b>
 
 | {{0}}                       | &nbsp;&nbsp;&nbsp;Aantal | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%          |
