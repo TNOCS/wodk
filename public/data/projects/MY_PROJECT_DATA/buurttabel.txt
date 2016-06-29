@@ -5,10 +5,10 @@
 |-----------------------------|-------------------------:|-----------------------------:|
 | Aantal woningen                      | {{1}}                    | 100                    |
 | | |
-| Specifieke woningen (ster 4 & 5)     | {{4}}                    | {{8}}                  |
-| Aanpasbare woningen (ster 2 & 3)     | {{2}}                    | {{6}}                  |
-| Niet-aanpasbare woningen (ster 0 & 1)| {{3}}                    | {{7}}                  |
-| Aanpasbaarheid onbekend              | {{5}}                    | {{9}}                  |
+| Specifiek 4/5 sterren    | {{4}}                    | {{8}}                  |
+| Aanpasbaar 2/3 sterren   | {{2}}                    | {{6}}                  |
+| Niet-aanpasbaar 0/1 ster | {{3}}                    | {{7}}                  |
+| Aanpasbaarheid ??        | {{5}}                    | {{9}}                  |
 | | |
 | Koopwoningen                | {{10}}                   | {{16}}                       |
 | Huurwoningen                | {{11}}                   | {{17}}                       |
@@ -16,5 +16,3 @@
 | | |
 | Eengezinswoningen (egw)     | {{13}}                   | {{19}}                       |
 | Appartementen               | {{14}}                   | {{20}}                       |
-| | |
-| Gemiddelde WOZ-waarde       | {{15}}                   | -                       |

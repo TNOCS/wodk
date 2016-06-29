@@ -203,13 +203,30 @@
 .wodk-title-row {
     background: #01689b;
     color: white;
+    padding: 4px;
 }
 
 .wodk-subtitle-row {
     background: #007bc7;
     font-weight: bold;
+    font-size:15px;
+    padding: 4px;
 }
 
 .fa-white {
     color: white;
+}
+
+.active-text {
+    font-size: 12px;
+}
+
+.active-text table tbody tr td {
+    border-bottom: 1px #007bc7 solid;
+    border-top: 1px #007bc7 solid;
+}
+
+.dc-chart g.row text {
+    font-size: 12px;
+    font-family: Lucida Console, Consolas, Courier New, Monaco, monospace;
 }

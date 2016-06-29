@@ -320,8 +320,8 @@
                 "legendKind": "discrete",
                 "legendEntries": [
                     {
-                        "sortKey": "h",
-                        "label": "Aanpasbaarheid onbekend",
+                        "sortKey": "a",
+                        "label": "in onderzoek",
                         "interval": {
                             "min": -3,
                             "max": -2
@@ -329,8 +329,8 @@
                         "color": "#222222"
                     },
                     {
-                        "sortKey": "g",
-                        "label": "Aanpasbaarheid pand gemengd",
+                        "sortKey": "f",
+                        "label": "0/3 ster  mix",
                         "interval": {
                             "min": -2,
                             "max": -1
@@ -338,8 +338,8 @@
                         "color": "#ffff00"
                     },
                     {
-                        "sortKey": "f",
-                        "label": "Niet-aanpasbare woning (ster 0)",
+                        "sortKey": "h",
+                        "label": "geen    niet-aanpasbaar",
                         "interval": {
                             "min": -1,
                             "max": 0
@@ -347,8 +347,8 @@
                         "color": "#ff0000"
                     },
                     {
-                        "sortKey": "e",
-                        "label": "Niet-aanpasbare woning (ster 1)",
+                        "sortKey": "g",
+                        "label": "1 ster  niet-aanpasbaar",
                         "interval": {
                             "min": 0,
                             "max": 1
@@ -356,8 +356,8 @@
                         "color": "#ff5500"
                     },
                     {
-                        "sortKey": "d",
-                        "label": "Aanpasbare woning (ster 2)",
+                        "sortKey": "e",
+                        "label": "2 sterren aanpasbaar",
                         "interval": {
                             "min": 1,
                             "max": 2
@@ -365,8 +365,8 @@
                         "color": "#00ff00"
                     },
                     {
-                        "sortKey": "c",
-                        "label": "Aanpasbare woning (ster 3)",
+                        "sortKey": "d",
+                        "label": "3 sterren aanpasbaar",
                         "interval": {
                             "min": 2,
                             "max": 3
@@ -374,8 +374,8 @@
                         "color": "#00cc00"
                     },
                     {
-                        "sortKey": "b",
-                        "label": "Specifieke woning (ster 4)",
+                        "sortKey": "c",
+                        "label": "4 sterren speciaal",
                         "interval": {
                             "min": 3,
                             "max": 4
@@ -383,8 +383,8 @@
                         "color": "#006600"
                     },
                     {
-                        "sortKey": "a",
-                        "label": "Specifieke woning (ster 5)",
+                        "sortKey": "b",
+                        "label": "5 sterren speciaal",
                         "interval": {
                             "min": 4,
                             "max": 5

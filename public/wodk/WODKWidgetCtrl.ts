@@ -1,6 +1,10 @@
 module wodk {
     export class WODKWidgetData {
         title: string;
+        dynamicProperties: string[];
+        content: string;
+        mdText: string;
+        url: string;
     }
 
     export interface IWODKWidgetScope extends ng.IScope {
@@ -57,16 +61,24 @@ module wodk {
                 this.exporterAvailable = false;
             }
 
-            // this.mBusHandles.push(this.$messageBus.subscribe('feature', (action: string, feature: csComp.Services.IFeature) => {
-            //     switch (action) {
-            //         case 'onFeatureDeselect':
-            //         case 'onFeatureSelect':
-            //             this.selectFeature(feature);
-            //             break;
-            //         default:
-            //             break;
-            //     }
-            // }));
+            if (!(typeof $scope.data.url === 'undefined')) {
+                $.get($scope.data.url, (md) => {
+                    $timeout(() => {
+                        $scope.data.content = $scope.data.mdText = md;
+                    }, 0);
+                });
+            }
+
+            this.mBusHandles.push(this.$messageBus.subscribe('feature', (action: string, feature: csComp.Services.IFeature) => {
+                switch (action) {
+                    case 'onFeatureDeselect':
+                    case 'onFeatureSelect':
+                        this.selectFeature(feature);
+                        break;
+                    default:
+                        break;
+                }
+            }));
 
             this.parentWidget.hide();
 
@@ -130,9 +142,30 @@ module wodk {
         private selectFeature(feature: csComp.Services.IFeature) {
             if (!feature || !feature.isSelected) {
                 return;
-            } else {
-                this.parentWidget.show();
             }
+            this.$timeout(() => {
+                var md = this.$scope.data.content;
+                var i = 0;
+                this.$scope.data.dynamicProperties.forEach(p => {
+                    var searchPattern = '{{' + i++ + '}}';
+                    var displayText = '';
+                    if (feature.properties.hasOwnProperty(p)) {
+                        var pt = this.$layerService.getPropertyType(feature, p);
+                        displayText = csComp.Helpers.convertPropertyInfo(pt, feature.properties[p]);
+                    }
+                    md = this.replaceAll(md, searchPattern, displayText);
+                });
+                this.parentWidget.show();
+                this.$scope.data.mdText = md;
+            }, 0);
+        }
+
+        private escapeRegExp(str: string) {
+            return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, '\\$1');
+        }
+
+        private replaceAll(str: string, find: string, replace: string) {
+            return str.replace(new RegExp(this.escapeRegExp(find), 'g'), replace);
         }
 
         private createChart() {
