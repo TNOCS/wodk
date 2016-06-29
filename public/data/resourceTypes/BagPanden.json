@@ -444,41 +444,47 @@
                 "legendEntries": [
                     {
                         "sortKey": "a",
-                        "label": "<65",
+                        "label": "60-70",
                         "interval": {
-                            "min": 1,
-                            "max": 65
+                            "min": 60,
+                            "max": 70
                         },
                         "color": "#00ff00"
                     },
                     {
                         "sortKey": "b",
-                        "label": "65-75",
+                        "label": "70-80",
                         "interval": {
-                            "min": 65,
-                            "max": 75
+                            "min": 70,
+                            "max": 80
                         },
                         "color": "#ffff00"
                     },
                     {
                         "sortKey": "c",
-                        "label": "75-85",
+                        "label": "80-90",
                         "interval": {
-                            "min": 75,
-                            "max": 85
+                            "min": 80,
+                            "max": 90
                         },
                         "color": "#ff5500"
                     },
                     {
                         "sortKey": "d",
-                        "label": ">85",
+                        "label": ">90",
                         "interval": {
-                            "min": 85,
+                            "min": 90,
                             "max": 999
                         },
                         "color": "#ff0000"
+                    },
+                    {
+                        "sortKey": "A",
+                        "label": "<60",
+                        "color": "#444444"
                     }
-                ]
+                ],
+                "defaultLabel": "<60"
             }
         },
         "eigendom": {
@@ -516,7 +522,8 @@
                         "stringValue": "Onbekend",
                         "color": "#444444"
                     }
-                ]
+                ],
+                "defaultLabel": "Onbekend"
             }
         },
         "verhuurder": {
@@ -626,13 +633,19 @@
                         "sortKey": 16,
                         "label": "Part. 100 + won.",
                         "stringValue": "Part. 100 + won.",
-                        "color": "#222222"
+                        "color": "#99FF99"
+                    },
+                    {
+                        "sortKey": 999,
+                        "label": "Onbekend",
+                        "color": "#444444"
                     }
                 ],
                 "legendKind": "discretestrings",
                 "visualAspect": "fillColor",
                 "id": "verhuurder",
-                "description": "Verhuurder"
+                "description": "Verhuurder",
+                "defaultLabel": "Onbekend"
             },
             "options": {
                 "BOUWVERENIGING \"ONZE WONING\"": "BOUWVERENIGING \"ONZE WONING\"",
@@ -762,13 +775,19 @@
                         "sortKey": 16,
                         "label": "Part. 100 + won.",
                         "stringValue": "Part. 100 + won.",
-                        "color": "#222222"
+                        "color": "#99FF99"
+                    },
+                    {
+                        "sortKey": 999,
+                        "label": "Onbekend",
+                        "color": "#444444"
                     }
                 ],
                 "legendKind": "discretestrings",
                 "visualAspect": "fillColor",
                 "id": "eigendom",
-                "description": "Eigendom"
+                "description": "Eigendom",
+                "defaultLabel": "Onbekend"
             },
             "options": {
                 "BOUWVERENIGING \"ONZE WONING\"": "BOUWVERENIGING \"ONZE WONING\"",

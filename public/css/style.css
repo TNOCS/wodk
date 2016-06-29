@@ -183,3 +183,25 @@
     border-style: inset;
     padding: 1px;
 }
+
+.row {
+    margin: 0 0 0 0;
+}
+
+.border-right {
+    border-right: 2px #007bc7 solid;
+}
+
+.wodk-title-row {
+    background: #01689b;
+    color: white;
+}
+
+.wodk-subtitle-row {
+    background: #007bc7;
+    font-weight: bold;
+}
+
+.fa-white {
+    color: white;
+}

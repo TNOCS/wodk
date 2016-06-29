@@ -31,6 +31,7 @@ module App {
             'layerService',
             'messageBusService',
             'dashboardService',
+            'wodkWidgetSvc',
             'geoService',
             '$timeout'
         ];
@@ -53,6 +54,7 @@ module App {
             private $layerService: csComp.Services.LayerService,
             private $messageBusService: csComp.Services.MessageBusService,
             private $dashboardService: csComp.Services.DashboardService,
+            private wodkWidgetSvc: wodk.WODKWidgetSvc,
             private geoService: csComp.Services.GeoService,
             private $timeout: ng.ITimeoutService
         ) {

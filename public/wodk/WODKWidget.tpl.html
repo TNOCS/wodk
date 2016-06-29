@@ -1,0 +1,41 @@
+<div uib-popover="WODK Widget" popover-trigger="mouseenter" popover-append-to-body="false" popover-placement="right">
+    <div class="table">
+        <div class="row wodk-title-row" style="display: block">
+            <div class="col-md-12">
+                <div style="display: inline-block; font-size:16px; font-weight:bold; margin-bottom:2px;">{{vm.widget.title}}</div>
+                <div style="display: inline-block; margin-right:5px; position: absolute; top: 2px; right: 0px;">
+                    <a class="widget-min-max-close" ng-click="vm.close()" ng-show="vm.canClose()"><i class="fa fa-times fa-white"></i></a>
+                    <a class="widget-min-max-close" ng-click="vm.minimize()" ng-show="vm.canMinimize() && minimized"> <i class="fa fa-plus fa-white"></i></a>
+                    <a class="widget-min-max-close" ng-click="vm.minimize()" ng-show="vm.canMinimize() && !minimized"> <i class="fa fa-minus fa-white"></i></a>
+                    <a class="widget-min-max-close" ng-click="vm.exportToImage()"><i class="fa fa-save fa-white" uib-tooltip="{{'SAVE_AS_IMAGE' | translate}}" tooltip-trigger="mouseenter" tooltip-append-to-body="true" ng-show="vm.exporterAvailable&&!minimized"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="row wodk-subtitle-row">
+            <div class="col-md-6 border-right">
+                <div>Cumulatief</div>
+            </div>
+            <div class="col-md-6">
+                <div>Laatst geselecteerd</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 border-right">
+                <div ng-repeat="item in vm.items track by $index">
+                    {{$index + 1}}. {{item}}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div>Laatst geselecteerd</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 border-right">
+                <row-filter ng-if="filter && filter.filterType=='row'" style="margin-left:25px"></row-filter>
+            </div>
+            <div class="col-md-6">
+                <div>Single rowfilter</div>
+            </div>
+        </div>
+    </div>
+</div>

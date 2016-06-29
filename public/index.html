@@ -52,6 +52,9 @@
 
     <script src="bower_components/angularUtils-pagination/dirPagination.js"></script>
     <script src="bower_components/csweb/dist-bower/csComp.js"></script>
+    <script src="wodk/WODKWidgetCtrl.js"></script>
+    <script src="wodk/WODKWidget.js"></script>
+    <script src="wodk/WODKWidgetSvc.js"></script>
     <script src="app/app.js"></script>
     <script src="bower_components/csweb/dist-bower/csTemplates.js"></script>
     <script src="bower_components/jspdf/dist/jspdf.min.js"></script>
@@ -60,67 +63,17 @@
     <script src="js/canvg.js"></script>
     <!--<script src="js/row-filter-checkbox.js"></script>-->
     <script src="js/legend-style-checkbox.js"></script>
-    
-    <!-- endbuild -->
-<link rel="shortcut icon" href="favicon.ico">
 
-    <style>
-        .toggle-icon {
-            background: red;
-            width: 40px;
-            height: 40px;
-            border-radius: 20px;
-            margin-left: 10px;
-        }
-        
-        .highRisk{
-            background: red;
-        }
-        
-        .normalRisk
-        {
-            background: lightblue;
-        }
-        
-        .lowRisk{
-            background: green;
-        }
-        
-        /*.vis-timeline .podium {
-            background: lightblue;
-        }*/
-    </style>
-
-</head>
-
-<body data-ng-controller="appCtrl" data-ng-cloak data-ng-init="showMap=true">
-    <!--<script>L_PREFER_CANVAS = true;</script>-->
-    <!--<script src="/socket.io/socket.io.js"></script>-->
-    <!-- build:js csWeb.js -->
-    <script src="bower_components/csweb/dist-bower/csWeb-dep.js"></script>
-
-    <script src="bower_components/angularUtils-pagination/dirPagination.js"></script>
-    <script src="bower_components/csweb/dist-bower/csComp.js"></script>
-    <script src="app/app.js"></script>
-    
-    <script src="bower_components/csweb/dist-bower/csTemplates.js"></script>
-
+    <link rel="shortcut icon" href="favicon.ico"/>
     <link href="http://leaflet.github.io/Leaflet.draw/leaflet.draw.css" rel="stylesheet" />
-
-    <!-- endbuild -->
-
+    
     <div class="body" style="top:0">
         <map mapid="main" class="map-main" ng-show="vm.$layerService.visual.mapVisible" ng-style="{width: vm.$layerService.visual.mapWidth ? vm.$layerService.visual.mapWidth : '100%', left: vm.$layerService.visual.alignMapRight ? vm.$layerService.visual.mapWidth : 0}"></map>
-
 
         <!-- Link to views -->
         <div class="navbar-collapse collapse">
 
-
-
             <!-- Dashboard selection -->
-
-
             <!-- Select renderer -->
             <ul ng-if="false" class="nav navbar-nav" style="float:right">
                 <li data-ng-if="vm.$layerService.activeMapRenderer.title!='leaflet'"><a data-ng-click="vm.$layerService.selectRenderer('leaflet')">2D</a></li>

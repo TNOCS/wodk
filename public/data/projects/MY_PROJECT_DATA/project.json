@@ -197,6 +197,26 @@
                     }
                 },
                 {
+                    "id": "5e75a888-21a4-47c0-de1d-8093ae45e305",
+                    "directive": "markdownwidget",
+                    "elementId": "widget-5e75a888-21a4-47c0-de1d-8093ae45e305",
+                    "enabled": false,
+                    "style": "default",
+                    "left": "20%",
+                    "right": "2px",
+                    "top": "10%",
+                    "bottom": "16px",
+                    "width": "65%",
+                    "height": "80%",
+                    "data": {
+                        "featureTypeName": "Dummy",
+                        "dynamicProperties": ["DummyProp"],
+                        "title": "",
+                        "url": "data/projects/MY_PROJECT_DATA/disclaimer.txt",
+                        "canMinimize": false
+                    }
+                },
+                {
                     "id": "23bcc93c-6956-4acb-10c0-139f1e89d4bd",
                     "directive": "buttonwidget",
                     "enabled": true,
@@ -237,38 +257,19 @@
                     }
                 },
                 {
-                    "id": "12111ccc-21a4-47c0-de1d-8093ae45e305",
-                    "directive": "filterstylewidget",
-                    "title": "Filter & Style",
-                    "elementId": "widget-12111ccc-21a4-47c0-de1d-8093ae45e305",
-                    "enabled": true,
+                    "id": "12181ccc-21a4-47c0-de1d-8093ae45e305",
+                    "directive": "wodkwidget",
+                    "title": "Woninginformatie",
+                    "elementId": "widget-12181ccc-21a4-47c0-de1d-8093ae45e305",
+                    "enabled": false,
                     "style": "vws",
-                    "left": "25px",
-                    "right": "",
-                    "top": "100px",
+                    "left": "",
+                    "right": "0px",
+                    "top": "130px",
                     "width": "",
                     "height": "",
                     "data": {
-                        "canClose": false,
-                        "canMinimize": false
-                    }
-                },
-                {
-                    "id": "5e75a888-21a4-47c0-de1d-8093ae45e305",
-                    "directive": "markdownwidget",
-                    "elementId": "widget-5e75a888-21a4-47c0-de1d-8093ae45e305",
-                    "enabled": false,
-                    "style": "default",
-                    "left": "20%",
-                    "right": "",
-                    "top": "10%",
-                    "width": "65%",
-                    "height": "80%",
-                    "data": {
-                        "featureTypeName": "Dummy",
-                        "dynamicProperties": ["DummyProp"],
-                        "title": "",
-                        "url": "data/projects/MY_PROJECT_DATA/disclaimer.txt",
+                        "canClose": true,
                         "canMinimize": false
                     }
                 }
