@@ -192,6 +192,14 @@
     border-right: 2px #007bc7 solid;
 }
 
+.border-bottom {
+    border-bottom: 2px #007bc7 solid;
+}
+
+.fill-height {
+    height: 100%;
+}
+
 .wodk-title-row {
     background: #01689b;
     color: white;

@@ -1,5 +1,5 @@
-<div uib-popover="WODK Widget" popover-trigger="mouseenter" popover-append-to-body="false" popover-placement="right">
-    <div class="table">
+<div class="fill-height" uib-popover="WODK Widget" popover-trigger="mouseenter" popover-append-to-body="false" popover-placement="right">
+    <div class="table fill-height">
         <div class="row wodk-title-row" style="display: block">
             <div class="col-md-12">
                 <div style="display: inline-block; font-size:16px; font-weight:bold; margin-bottom:2px;">{{vm.widget.title}}</div>
@@ -13,27 +13,32 @@
         </div>
         <div class="row wodk-subtitle-row">
             <div class="col-md-6 border-right">
-                <div>Cumulatief</div>
+                <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='gemeente'">Gemeenten cumulatief</div>
+                <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='buurt'">Wijken cumulatief</div>
             </div>
             <div class="col-md-6">
-                <div>Laatst geselecteerd</div>
+                <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='gemeente'">Gemeente {{vm.wodkWidgetSvc.gemeenteSelectie.slice(-1)[0].properties['Name']}}</div>
+                <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='buurt'">Woning</div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6 border-right">
-                <div ng-repeat="item in vm.items track by $index">
-                    {{$index + 1}}. {{item}}
+                <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='gemeente'" ng-repeat="item in vm.wodkWidgetSvc.gemeenteSelectie track by $index">
+                    {{$index + 1}}. {{item.properties['Name']}}
+                </div>
+                <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='buurt'" ng-repeat="item in vm.wodkWidgetSvc.buurtSelectie track by $index">
+                    {{$index + 1}}. {{item.properties['Name']}}
                 </div>
             </div>
             <div class="col-md-6">
                 <div>Laatst geselecteerd</div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6 border-right">
+        <div class="row fill-height">
+            <div class="col-md-6 border-right fill-height">
                 <row-filter ng-if="filter && filter.filterType=='row'" style="margin-left:25px"></row-filter>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 fill-height">
                 <div>Single rowfilter</div>
             </div>
         </div>

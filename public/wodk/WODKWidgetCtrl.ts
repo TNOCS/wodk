@@ -26,7 +26,8 @@ module wodk {
             '$translate',
             'layerService',
             'messageBusService',
-            'mapService'
+            'mapService',
+            'wodkWidgetSvc'
         ];
 
         constructor(
@@ -35,7 +36,8 @@ module wodk {
             private $translate: ng.translate.ITranslateService,
             private $layerService: csComp.Services.LayerService,
             private $messageBus: csComp.Services.MessageBusService,
-            private $mapService: csComp.Services.MapService
+            private $mapService: csComp.Services.MapService,
+            private wodkWidgetSvc: wodk.WODKWidgetSvc
         ) {
             $scope.vm = this;
             var par = <any>$scope.$parent;
