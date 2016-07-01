@@ -22,7 +22,6 @@ module wodk {
         private parentWidget: JQuery;
         private mBusHandles: csComp.Services.MessageBusHandle[] = [];
         private exporterAvailable: boolean;
-        private items: string[];
 
         public static $inject = [
             '$scope',
@@ -50,10 +49,6 @@ module wodk {
 
             $scope.data = <WODKWidgetData>this.widget.data;
             $scope.minimized = false;
-
-            this.items = [];
-            this.items.push("testitem");
-            this.items.push("another item");
 
             if ((<any>window).canvg) {
                 this.exporterAvailable = true;

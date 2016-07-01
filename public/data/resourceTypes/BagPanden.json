@@ -339,7 +339,7 @@
                     },
                     {
                         "sortKey": "h",
-                        "label": "geen    niet-aanpasbaar",
+                        "label": "geen      niet-aanpasbaar",
                         "interval": {
                             "min": -1,
                             "max": 0
@@ -348,7 +348,7 @@
                     },
                     {
                         "sortKey": "g",
-                        "label": "1 ster  niet-aanpasbaar",
+                        "label": "1 ster    niet-aanpasbaar",
                         "interval": {
                             "min": 0,
                             "max": 1

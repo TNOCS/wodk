@@ -1,7 +1,7 @@
 <div class="fill-height" uib-popover="WODK Widget" popover-trigger="mouseenter" popover-append-to-body="false" popover-placement="right">
     <div class="table fill-height">
-        <div class="row wodk-title-row" style="display: block">
-            <div class="col-md-12">
+        <div class="row wodk-title-row">
+            <div class="col-xs-12">
                 <div style="display: inline-block; font-size:20px; font-weight:bold; margin-bottom:2px;">{{vm.widget.title}}</div>
                 <div style="display: inline-block; margin-right:5px; position: absolute; top: 2px; right: 0px;">
                     <a class="widget-min-max-close" ng-click="vm.close()" ng-show="vm.canClose()"><i class="fa fa-times fa-white"></i></a>
@@ -11,18 +11,18 @@
                 </div>
             </div>
         </div>
-        <div class="row wodk-subtitle-row">
-            <div class="col-md-6 border-right">
+        <div class="row row-eq-height wodk-subtitle-row">
+            <div class="col-xs-6 border-right">
                 <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='gemeente'">Gemeenten cumulatief</div>
                 <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='buurt'">Wijken cumulatief</div>
             </div>
-            <div class="col-md-6">
+            <div class="col-xs-6">
                 <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='gemeente'">Gemeente {{vm.wodkWidgetSvc.gemeenteSelectie.slice(-1)[0].properties['Name']}}</div>
                 <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='buurt'">Woning</div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6 border-right fill-height">
+        <div class="row row-eq-height wodk-cumulative-row">
+            <div class="col-xs-6 border-right fill-height" style="padding-top:6px">
                 <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='gemeente'" ng-repeat="item in vm.wodkWidgetSvc.gemeenteSelectie track by $index">
                     {{$index + 1}}. {{item.properties['Name']}}
                 </div>
@@ -30,18 +30,18 @@
                     {{$index + 1}}. {{item.properties['Name']}}
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-xs-6" style="padding-top:6px">
                 <div style="padding:0px;font-size:12px;margin:0px;" ng-hide="minimized">
                     <wiz-markdown class="active-text" content="data.mdText"></wiz-markdown>
                 </div>
             </div>
         </div>
-        <div class="row fill-height">
-            <div class="col-md-6 border-right fill-height">
-                <row-filter ng-if="filter && filter.filterType=='row'"></row-filter>
+        <div class="row row-eq-height wodk-charts-row fill-height">
+            <div class="col-xs-6 border-right fill-height">
+                <row-filter ng-if="filter && filter.filterType=='row'" style="margin-left:-36px"></row-filter>
             </div>
-            <div class="col-md-6 fill-height">
-                <div>Single rowfilter</div>
+            <div class="col-xs-6 fill-height">
+                <row-visualizer ng-if="filter && filter.filterType=='row'"></row-visualizer>
             </div>
         </div>
     </div>

@@ -63,6 +63,13 @@ module App {
 
             $messageBusService.subscribe('project', (action: string) => {
                 if (action === 'loaded') {
+
+                    this.$dashboardService.widgetTypes['rowvisualizer'] = <csComp.Services.IWidget>{
+                        id: 'rowvisualizer',
+                        icon: 'images/rowvisualizer.png',
+                        description: 'Show rowfilter without filter functionality'
+                    }
+
                     this.areaFilter = new AreaFilter.AreaFilterModel();
                     this.$layerService.addActionService(this.areaFilter);
                     this.contourAction = new ContourAction.ContourActionModel();

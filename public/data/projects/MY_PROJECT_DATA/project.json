@@ -226,8 +226,8 @@
                     "left": "",
                     "right": "0px",
                     "top": "130px",
-                    "bottom": "16px",
-                    "width": "550px",
+                    "bottom": "",
+                    "width": "570px",
                     "height": "",
                     "data": {
                         "canClose": true,

@@ -159,6 +159,10 @@
     cursor: pointer;
 }
 
+#legendboxtip {
+    fill-opacity: 0.8;
+}
+
 #checkboxcheck.deselected {
     opacity: 0;
 }
@@ -186,6 +190,12 @@
 
 .row {
     margin: 0 0 0 0;
+    overflow: hidden;
+}
+
+.row [class*="col-"] {
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
 }
 
 .border-right {
@@ -204,6 +214,7 @@
     background: #01689b;
     color: white;
     padding: 4px;
+    display: block;
 }
 
 .wodk-subtitle-row {
@@ -211,6 +222,9 @@
     font-weight: bold;
     font-size:15px;
     padding: 4px;
+}
+
+.wodk-cumulative-row {
 }
 
 .fa-white {
