@@ -184,6 +184,7 @@ module wodk {
             });
             this.$timeout(() => {
                 this.updateRowFilterScope(gf);
+                this.updateRowVisualizerScope(gf);
             });
             this.parentWidget.show();
             // var propType = this.$layerService.findPropertyTypeById(this.$scope.layer.typeUrl + '#' + gf.property);
@@ -195,10 +196,12 @@ module wodk {
             this.$scope.filter.group.ndx.add(_.map(this.$scope.filter.group.markers, (item: any, key) => { return item.feature; }));
             this.$timeout(() => {
                 this.updateRowFilterScope(this.$scope.filter);
+                this.updateRowVisualizerScope(this.$scope.filter);
             });
         }
 
         private updateRowFilterScope(gf: csComp.Services.GroupFilter) {
+            return;
             if (!gf || !gf.group) {
                 console.log('No filter provided.');
                 return;
@@ -215,6 +218,28 @@ module wodk {
             } else {
                 rowFilterScope.filter = gf;
                 rowFilterScope.vm.initRowFilter();
+                return;
+            }
+        }
+
+        private updateRowVisualizerScope(gf: csComp.Services.GroupFilter) {
+            return;
+            if (!gf || !gf.group) {
+                console.log('No visualizer provided.');
+                return;
+            }
+            var rowFilterElm = angular.element($("#visualizer_" + this.widget.id));
+            if (!rowFilterElm) {
+                console.log('rowVisualizerElm not found.');
+                return;
+            }
+            var rowFilterScope = <wodk.IRowVisualizerScope>rowFilterElm.scope();
+            if (!rowFilterScope) {
+                console.log('rowVisualizerScope not found.');
+                return;
+            } else {
+                rowFilterScope.filter = gf;
+                rowFilterScope.vm.initRowVisualizer();
                 return;
             }
         }

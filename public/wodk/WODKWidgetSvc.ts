@@ -68,6 +68,10 @@ module wodk {
             });
         }
 
+        public getSelectionHistory() {
+            return this.selectionHistory;
+        }
+
         public laadBuurten() {
             // Load buurten by gemeente
             var l = this.$layerService.findLayer('bagbuurten');

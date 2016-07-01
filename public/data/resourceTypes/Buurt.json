@@ -4,7 +4,7 @@
 			"name" : "Buurt",
 			"style" : {
 				"drawingMode": "Polygon",
-				"fillColor" : "#999922",
+				"fillColor" : "#444444",
 				"strokeColor" : "#000000",
 				"selectedStrokeColor" : "#000000",
 				"strokeWidth" : 2,
@@ -320,6 +320,10 @@
                             "max": 100
                         },
                         "color": "#00ff00"
+                    },
+					{
+                        "label": "Onbekend",
+                        "color": "#444444"
                     }
                 ]
             }
@@ -376,6 +380,15 @@
                             "max": 100
                         },
                         "color": "#00ff00"
+                    },
+					{
+						"sortKey": "e",
+                        "label": "Onbekend",
+						"interval": {
+                            "min": 99999,
+                            "max": 99998
+                        },
+                        "color": "#444444"
                     }
                 ]
             }

@@ -61,7 +61,8 @@ module wodk {
             'layerService',
             'messageBusService',
             '$timeout',
-            '$translate'
+            '$translate',
+            'wodkWidgetSvc'
         ];
 
         // dependencies are injected via AngularJS $injector
@@ -71,7 +72,8 @@ module wodk {
             private $layerService: csComp.Services.LayerService,
             private $messageBus: csComp.Services.MessageBusService,
             private $timeout: ng.ITimeoutService,
-            private $translate: ng.translate.ITranslateService
+            private $translate: ng.translate.ITranslateService,
+            private wodkWidgetSvc: wodk.WODKWidgetSvc
         ) {
             $scope.vm = this;
 
@@ -100,15 +102,15 @@ module wodk {
                 this.exporterAvailable = false;
             }
 
-            this.$messageBus.subscribe('filters', (title: string, groupId) => {
-                switch (title) {
-                    case 'updateGroup':
-                        if ($scope.filter && $scope.filter.group.id === groupId) {
-                            this.updateFilter();
-                        }
-                        break;
-                }
-            })
+            // this.$messageBus.subscribe('filters', (title: string, groupId) => {
+            //     switch (title) {
+            //         case 'updateGroup':
+            //             if ($scope.filter && $scope.filter.group.id === groupId) {
+            //                 this.updateFilter();
+            //             }
+            //             break;
+            //     }
+            // })
 
             if ($scope && $scope.filter) {
                 setTimeout(() => this.initRowVisualizer());
@@ -117,11 +119,11 @@ module wodk {
                 $scope.options = (() => {
                     var res = [];
                     res.push([$scope.removeString, () => this.remove()]);
-                    $scope.filter.group.filters.forEach((gf: csComp.Services.GroupFilter) => {
-                        if (gf.filterType == "row" && gf.property != $scope.filter.property) {
-                            res.push([$scope.createScatterString + ' ' + gf.title, () => this.createScatter(gf)]);
-                        }
-                    });
+                    // $scope.filter.group.filters.forEach((gf: csComp.Services.GroupFilter) => {
+                    //     if (gf.filterType == "row" && gf.property != $scope.filter.property) {
+                    //         res.push([$scope.createScatterString + ' ' + gf.title, () => this.createScatter(gf)]);
+                    //     }
+                    // });
 
                     if (this.exporterAvailable) {
                         res.push([$scope.saveAsImageString, () => this.exportToImage()]);
@@ -140,9 +142,35 @@ module wodk {
 
 
         public initRowVisualizer() {
-            var filter = this.$scope.filter;
-            var group = filter.group;
+            var dummyNdx: CrossFilter.CrossFilter<any> = crossfilter([]);
+            var filter = new csComp.Services.GroupFilter();
+            filter.property = this.$scope.filter.property;
+            filter.id = this.$scope.filter.id;
+            var group = this.$scope.filter.group;
             var divid = 'visualizer_' + filter.id;
+            var lastFeatures = this.wodkWidgetSvc.getSelectionHistory() || [];
+            if (lastFeatures.length === 0) return;
+            var lastFeature = lastFeatures[lastFeatures.length - 1];
+            if (!lastFeature) return;
+
+            switch (lastFeature.layerId) {
+                case 'gemeente':
+                    dummyNdx.add(_.map(
+                        _.filter(group.markers, (i) => { return (<any>i).feature.properties['gm_code'] === lastFeature.properties['GM_CODE']; }),
+                        (item: any, key) => { return item.feature; })
+                    );
+                    break;
+                case 'bagbuurten':
+                    dummyNdx.add(_.map(
+                        _.filter(group.markers, (i) => { return (<any>i).feature.properties['buurtcode'] === lastFeature.properties['bu_code']; }),
+                        (item: any, key) => { return item.feature; })
+                    );
+                    break;
+                case 'woning':
+                    break;
+                default:
+                    break;
+            }
 
             // Use the default dc-rowChart, unless a customRowChartViz is available
             if ((<any>window).customRowChartViz) {
@@ -157,7 +185,7 @@ module wodk {
             var pt: csComp.Services.IPropertyType;
             var orderList: { [key: string]: { nr: number, sortKey: string } } = {};
 
-            var dcDim = group.ndx.dimension(d => {
+            var dcDim = dummyNdx.dimension(d => {
                 if (!pt) pt = this.$layerService.getPropertyType(d, filter.property);
                 if (!d.properties.hasOwnProperty(filter.property)) {
                     if (pt && pt.legend && pt.legend.hasOwnProperty('defaultLabel')) {
@@ -270,11 +298,11 @@ module wodk {
                 })
                 .on('renderlet', (e) => {
                     dc.events.trigger(() => {
-                        this.$layerService.updateFilterGroupCount(group);
+                        //this.$layerService.updateFilterGroupCount(group);
                     }, 0);
                     dc.events.trigger(() => {
-                        group.filterResult = dcDim.top(Infinity);
-                        this.$layerService.updateMapFilter(group);
+                        //group.filterResult = dcDim.top(Infinity);
+                        //this.$layerService.updateMapFilter(group);
                     }, 100);
                 })
                 .on('filtered', (e) => {
@@ -320,32 +348,32 @@ module wodk {
 
         private updateFilter() {
             setTimeout(() => {
-                this.dcChart.filter(this.$scope.filter.filterLabel);
+                //this.dcChart.filter(this.$scope.filter.filterLabel);
                 this.dcChart.render();
                 dc.renderAll();
-                this.$layerService.updateMapFilter(this.$scope.filter.group);
+                //this.$layerService.updateMapFilter(this.$scope.filter.group);
             }, 10);
         }
 
         public updateRange() {
             setTimeout(() => {
-                var filter = this.$scope.filter;
-                var group = filter.group;
+                // var filter = this.$scope.filter;
+                // var group = filter.group;
                 this.dcChart.filterAll();
-                this.dcChart.filter(this.$scope.filter.filterLabel);
+                //this.dcChart.filter(this.$scope.filter.filterLabel);
                 this.dcChart.render();
                 dc.redrawAll();
-                group.filterResult = filter.dimension.top(Infinity);
-                this.$layerService.updateMapFilter(this.$scope.filter.group);
-                this.$layerService.triggerUpdateFilter(this.$scope.filter.group.id);
+                //group.filterResult = filter.dimension.top(Infinity);
+                //this.$layerService.updateMapFilter(this.$scope.filter.group);
+                //this.$layerService.triggerUpdateFilter(this.$scope.filter.group.id);
                 this.$scope.$apply();
             }, 0);
         }
 
         public remove() {
-            if (this.$scope.filter) {
-                this.$layerService.removeFilter(this.$scope.filter);
-            }
+            // if (this.$scope.filter) {
+            //     this.$layerService.removeFilter(this.$scope.filter);
+            // }
         }
 
         public exportToImage() {
