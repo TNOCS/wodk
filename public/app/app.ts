@@ -93,6 +93,11 @@ module App {
                         this.wodkWidgetSvc.laadBuurten();
                     });
 
+                    this.$layerService.actionService.addAction('select provincie', (options: csComp.Services.IButtonActionOptions) => {
+                        console.log('select provincie');
+                        this.wodkWidgetSvc.selecteerProvincie();
+                    });
+
                     this.$layerService.actionService.addAction('step back', (options: csComp.Services.IButtonActionOptions) => {
                         console.log('step back');
                         if ($scope.layersLoading != 0) {

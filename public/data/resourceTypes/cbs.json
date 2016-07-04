@@ -1,5 +1,25 @@
 {
     "featureTypes": {
+        "provincie": {
+            "name": "provincie",
+            "style": {
+                "fillColor": "#9999ff",
+                "fillOpacity": 0.99,
+                "strokeColor": "#0000ff",
+                "selectedStrokeColor": "#0000ff",
+                "drawingMode": "Point",
+                "strokeWidth": 2,
+                "selectedStrokeWidth": 4,
+                "cornerRadius": 50,
+                "iconWidth": 24,
+                "iconHeight": 24,
+                "iconUri": "images/empty.png",
+                "nameLabel": "provincienaam"
+            },
+            "selectActions": ["select provincie"],
+            "contourProperty": "contour",
+            "propertyTypeKeys": "ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;ster_totaal;a_huko_onb;a_koopwon;a_huurwon;p_huko_onb;p_koopwon;p_huurwon;a_1gezw;a_mgezw;gemeentecode;gemeentenaam;a_aangep_w;a_apb_w;a_napb_w;p_aangep_w;p_apb_w;p_napb_w;p_apb_onb;p_1gezw;p_mgezw;"
+        },
         "gemeente": {
             "name": "gemeente",
             "style": {
@@ -643,6 +663,7 @@
             "label" : "ster_0",
             "title" : "ster_0",
             "type" : "number",
+            "stringFormat" : "{0:#,#}",
             "visibleInCallOut" : true,
             "canEdit" : true
         },
@@ -650,6 +671,7 @@
             "label" : "ster_1",
             "title" : "ster_1",
             "type" : "number",
+            "stringFormat" : "{0:#,#}",
             "visibleInCallOut" : true,
             "canEdit" : true
         },
@@ -657,6 +679,7 @@
             "label" : "ster_2",
             "title" : "ster_2",
             "type" : "number",
+            "stringFormat" : "{0:#,#}",
             "visibleInCallOut" : true,
             "canEdit" : true
         },
@@ -664,6 +687,7 @@
             "label" : "ster_3",
             "title" : "ster_3",
             "type" : "number",
+            "stringFormat" : "{0:#,#}",
             "visibleInCallOut" : true,
             "canEdit" : true
         },
@@ -671,6 +695,7 @@
             "label" : "ster_4",
             "title" : "ster_4",
             "type" : "number",
+            "stringFormat" : "{0:#,#}",
             "visibleInCallOut" : true,
             "canEdit" : true
         },
@@ -678,6 +703,7 @@
             "label" : "ster_5",
             "title" : "ster_5",
             "type" : "number",
+            "stringFormat" : "{0:#,#}",
             "visibleInCallOut" : true,
             "canEdit" : true
         },
@@ -685,6 +711,7 @@
             "label" : "ster_onb",
             "title" : "ster_onb",
             "type" : "number",
+            "stringFormat" : "{0:#,#}",
             "visibleInCallOut" : true,
             "canEdit" : true
         },
@@ -692,6 +719,7 @@
             "label" : "ster_totaal",
             "title" : "ster_totaal",
             "type" : "number",
+            "stringFormat" : "{0:#,#}",
             "visibleInCallOut" : true,
             "canEdit" : true
         },
@@ -706,6 +734,7 @@
             "label" : "a_koopwon",
             "title" : "a_koopwon",
             "type" : "number",
+            "stringFormat" : "{0:#,#}",
             "visibleInCallOut" : true,
             "canEdit" : true
         },
@@ -713,6 +742,7 @@
             "label" : "a_huurwon",
             "title" : "a_huurwon",
             "type" : "number",
+            "stringFormat" : "{0:#,#}",
             "visibleInCallOut" : true,
             "canEdit" : true
         },
@@ -720,6 +750,7 @@
             "label" : "a_1gezw",
             "title" : "a_1gezw",
             "type" : "number",
+            "stringFormat" : "{0:#,#}",
             "visibleInCallOut" : true,
             "canEdit" : true
         },
@@ -727,6 +758,7 @@
             "label" : "a_mgezw",
             "title" : "a_mgezw",
             "type" : "number",
+            "stringFormat" : "{0:#,#}",
             "visibleInCallOut" : true,
             "canEdit" : true
         },

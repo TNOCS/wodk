@@ -13,12 +13,14 @@
         </div>
         <div class="row row-eq-height wodk-subtitle-row">
             <div class="col-xs-6 border-right">
+                <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='provincie'">-</div>
                 <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='gemeente'">Gemeenten cumulatief</div>
                 <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='buurt'">Wijken cumulatief</div>
             </div>
             <div class="col-xs-6">
-                <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='gemeente'">Gemeente {{vm.wodkWidgetSvc.gemeenteSelectie.slice(-1)[0].properties['Name']}}</div>
-                <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='buurt'">{{vm.wodkWidgetSvc.buurtSelectie.slice(-1)[0].properties['Name']}}</div>
+                <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='provincie'">Provincie {{vm.wodkWidgetSvc.lastSelectedName}}</div>
+                <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='gemeente'">Gemeente {{vm.wodkWidgetSvc.lastSelectedName}}</div>
+                <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='buurt'">{{vm.wodkWidgetSvc.lastSelectedName}}</div>
             </div>
         </div>
         <div class="row row-eq-height wodk-cumulative-row">

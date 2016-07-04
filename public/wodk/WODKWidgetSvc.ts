@@ -9,6 +9,7 @@ module wodk {
             '$http'
         ];
 
+        protected lastSelectedName: string;
         protected lastSelectedType: string;
         protected gemeenteSelectie: IFeature[];
         protected buurtSelectie: IFeature[];
@@ -72,6 +73,14 @@ module wodk {
             return this.selectionHistory;
         }
 
+        public selecteerProvincie() {
+            var l = this.$layerService.findLayer('provincie');
+            var f = this.$layerService.lastSelectedFeature;
+            if (!l || !f || !f.properties || !f.properties['Name']) return;
+            this.lastSelectedName = f.properties['Name'];
+            this.lastSelectedType = 'provincie';
+        }
+
         public laadBuurten() {
             // Load buurten by gemeente
             var l = this.$layerService.findLayer('bagbuurten');
@@ -81,6 +90,7 @@ module wodk {
             this.selectionHistory.push(JSON.parse(JSON.stringify(csComp.Services.Feature.serialize(f))));
             this.gemeenteSelectie.push(JSON.parse(JSON.stringify(csComp.Services.Feature.serialize(f))));
             this.lastSelectedType = 'gemeente';
+            this.lastSelectedName = f.properties['Name'];
             var fClone: IFeature = csComp.Services.Feature.serialize(f);
             // Replace polygon gemeente by polyline
             var gl = this.$layerService.findLayer('gemeente');
@@ -138,6 +148,7 @@ module wodk {
             this.selectionHistory.push(JSON.parse(JSON.stringify(csComp.Services.Feature.serialize(f))));
             this.buurtSelectie.push(JSON.parse(JSON.stringify(csComp.Services.Feature.serialize(f))));
             this.lastSelectedType = 'buurt';
+            this.lastSelectedName = f.properties['Name'];
             var fClone: IFeature = csComp.Services.Feature.serialize(f);
             // Replace polygon buurt by polyline
             var bl = this.$layerService.findLayer('bagbuurten');

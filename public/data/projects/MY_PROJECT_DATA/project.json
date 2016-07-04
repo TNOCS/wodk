@@ -12,6 +12,36 @@
         }
     },
     "groups": [
+                {
+            "id": "Provincie",
+            "description": "Provincies (bron: BAG)",
+            "title": "Provincies",
+            "clustering": false,
+            "oneLayerActive": false,
+            "layers": [
+                {
+                    "id": "provincie",
+                    "reference": "provincie",
+                    "languages": {
+                        "nl": {
+                            "title": "Provincies",
+                            "description": "Provincies (bron: BAG)"
+                        },
+                        "en": {
+                            "title": "Provinces",
+                            "description": "Provinces"
+                        }
+                    },
+                    "refreshBBOX": false,
+                    "defaultFeatureType": "provincie",
+                    "typeUrl": "data/resourceTypes/cbs.json",
+                    "type": "geojson",
+                    "enabled": true,
+                    "url": "data/projects/MY_PROJECT_DATA/CBS_provincie.json",
+                    "renderType": "geojson"
+                }
+            ]
+        },
         {
             "id": "Gemeente",
             "description": "Gemeentes (bron: CBS 2014)",
