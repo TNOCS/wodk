@@ -201,7 +201,6 @@ module wodk {
         }
 
         private updateRowFilterScope(gf: csComp.Services.GroupFilter) {
-            return;
             if (!gf || !gf.group) {
                 console.log('No filter provided.');
                 return;
@@ -223,7 +222,6 @@ module wodk {
         }
 
         private updateRowVisualizerScope(gf: csComp.Services.GroupFilter) {
-            return;
             if (!gf || !gf.group) {
                 console.log('No visualizer provided.');
                 return;

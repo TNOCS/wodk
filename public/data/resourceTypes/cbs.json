@@ -14,11 +14,11 @@
                 "iconWidth": 24,
                 "iconHeight": 24,
                 "iconUri": "images/empty.png",
-                "nameLabel": "GM_NAAM"
+                "nameLabel": "gemeentenaam"
             },
             "selectActions": ["load buurten", "center on map"],
             "contourProperty": "_contour",
-            "propertyTypeKeys": "AANT_INW;AANT_MAN;AANT_VROUW;P_00_14_JR;NR_KIDS;P_15_24_JR;P_25_44_JR;P_45_64_JR;P_65_EO_JR;NR_OUDJES;P_ONGEHUWD;P_GEHUWD;P_GESCHEID;P_VERWEDUW;P_WEST_AL;P_N_W_AL;P_MAROKKO;P_ANT_ARU;P_SURINAM;P_TURKIJE;P_OVER_NW;AUTO_TOT;AUTO_HH;AUTO_LAND;BEDR_AUTO;MOTOR_2W;OPP_TOT;OPP_LAND;OPP_WATER;GM_NAAM;GM_CODE;WATER;BEV_DICHTH;AANTAL_HH;P_EENP_HH;P_HH_Z_K;P_HH_M_K;GEM_HH_GR;A_BST_B;A_BST_NB;A_LFTJ6J;A_LFTO6J;AF_ZIEK_I;AV5_ZIEK_I;AV10ZIEK_I;AV20ZIEK_I;AF_ZIEK_E;AV5_ZIEK_E;AV10ZIEK_E;AV20ZIEK_E;AF_KDV;AV1_KDV;AV3_KDV;AV5_KDV;AF_BSO;AV1_BSO;AV3_BSO;AV5_BSO;AF_OPRITH;AF_TREINST;AF_OVERST;AF_BIBLIO;AF_IJSBAAN",
+            "propertyTypeKeys": "ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;ster_totaal;a_huko_onb;a_koopwon;a_huurwon;p_huko_onb;p_koopwon;p_huurwon;a_1gezw;a_mgezw;gemeentecode;gemeentenaam;a_aangep_w;a_apb_w;a_napb_w;p_aangep_w;p_apb_w;p_napb_w;p_apb_onb;p_1gezw;p_mgezw;",
             "legendExpr": [
                 {
                     "title": "#Inwoners",
@@ -638,7 +638,250 @@
             "visibleInCallOut": false,
             "canEdit": true,
             "isSearchable": false
-        }
+        },
+        "ster_0" : {
+            "label" : "ster_0",
+            "title" : "ster_0",
+            "type" : "number",
+            "visibleInCallOut" : true,
+            "canEdit" : true
+        },
+        "ster_1" : {
+            "label" : "ster_1",
+            "title" : "ster_1",
+            "type" : "number",
+            "visibleInCallOut" : true,
+            "canEdit" : true
+        },
+        "ster_2" : {
+            "label" : "ster_2",
+            "title" : "ster_2",
+            "type" : "number",
+            "visibleInCallOut" : true,
+            "canEdit" : true
+        },
+        "ster_3" : {
+            "label" : "ster_3",
+            "title" : "ster_3",
+            "type" : "number",
+            "visibleInCallOut" : true,
+            "canEdit" : true
+        },
+        "ster_4" : {
+            "label" : "ster_4",
+            "title" : "ster_4",
+            "type" : "number",
+            "visibleInCallOut" : true,
+            "canEdit" : true
+        },
+        "ster_5" : {
+            "label" : "ster_5",
+            "title" : "ster_5",
+            "type" : "number",
+            "visibleInCallOut" : true,
+            "canEdit" : true
+        },
+        "ster_onb" : {
+            "label" : "ster_onb",
+            "title" : "ster_onb",
+            "type" : "number",
+            "visibleInCallOut" : true,
+            "canEdit" : true
+        },
+        "ster_totaal" : {
+            "label" : "ster_totaal",
+            "title" : "ster_totaal",
+            "type" : "number",
+            "visibleInCallOut" : true,
+            "canEdit" : true
+        },
+        "a_huko_onb" : {
+            "label" : "a_huko_onb",
+            "title" : "a_huko_onb",
+            "type" : "number",
+            "visibleInCallOut" : true,
+            "canEdit" : true
+        },
+        "a_koopwon" : {
+            "label" : "a_koopwon",
+            "title" : "a_koopwon",
+            "type" : "number",
+            "visibleInCallOut" : true,
+            "canEdit" : true
+        },
+        "a_huurwon" : {
+            "label" : "a_huurwon",
+            "title" : "a_huurwon",
+            "type" : "number",
+            "visibleInCallOut" : true,
+            "canEdit" : true
+        },
+        "a_1gezw" : {
+            "label" : "a_1gezw",
+            "title" : "a_1gezw",
+            "type" : "number",
+            "visibleInCallOut" : true,
+            "canEdit" : true
+        },
+        "a_mgezw" : {
+            "label" : "a_mgezw",
+            "title" : "a_mgezw",
+            "type" : "number",
+            "visibleInCallOut" : true,
+            "canEdit" : true
+        },
+        "gemeentecode" : {
+            "label" : "gemeentecode",
+            "title" : "gemeentecode",
+            "type" : "text",
+            "visibleInCallOut" : true,
+            "canEdit" : true
+        },
+        "gemeentenaam" : {
+            "label" : "gemeentenaam",
+            "title" : "Naam",
+            "type" : "text",
+            "visibleInCallOut" : true,
+            "canEdit" : true
+        },
+		"a_apb_onb" : {
+			"label" : "a_apb_onb",
+			"type" : "number",
+			"title" : "Aant. aanpasbaarheid onbekend",
+            "description" : "Aantal aanpasbaarheid onbekend",
+            "expression" : "properties.ster_onb || 0",
+            "stringFormat" : "{0:#,#}",
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+		},
+        "a_apb_w" : {
+			"label" : "a_apb_w",
+			"type" : "number",
+			"title" : "Aant. aanpasbare woningen",
+            "description" : "Aantal aanpasbare woningen",
+            "expression" : "(properties.ster_2 || 0) + (properties.ster_3 || 0)",
+            "stringFormat" : "{0:#,#}",
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+		},
+        "a_napb_w" : {
+			"label" : "a_napb_w",
+			"type" : "number",
+			"title" : "Aant. niet-aanpasbare woningen",
+            "description" : "Aantal niet-aanpasbare woningen",
+            "expression" : "(properties.ster_0 || 0) + (properties.ster_1 || 0)",
+            "stringFormat" : "{0:#,#}",
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+		},
+        "a_aangep_w" : {
+			"label" : "a_aangep_w",
+			"type" : "number",
+			"title" : "Aant. aangepaste woningen",
+            "description" : "Aantal aangepaste woningen",
+            "expression" : "(properties.ster_4 || 0) + (properties.ster_5 || 0)",
+            "stringFormat" : "{0:#,#}",
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+		},
+        "p_apb_w" : {
+			"label" : "p_apb_w",
+			"type" : "number",
+			"title" : "Percentage aanpasbare woningen",
+            "expression" : "properties.a_apb_w / properties.ster_totaal * 100",
+            "description" : "Percentage aanpasbare woningen",
+            "stringFormat" : "{0:#,#}%",
+			"min": 0,
+			"max": 100,
+			"visibleInCallOut" : false,
+			"isSearchable" : false
+        },
+        "p_napb_w" : {
+			"label" : "p_napb_w",
+			"type" : "number",
+			"title" : "Perc. niet-aanpasbare woningen",
+            "description" : "Percentage niet-aanpasbare woningen",
+            "expression" : "properties.a_napb_w / properties.ster_totaal * 100",
+            "stringFormat" : "{0:#,#}%",
+			"min": 0,
+			"max": 100,
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+        },
+		"p_apb_onb" : {
+			"label" : "p_apb_onb",
+			"type" : "number",
+			"title" : "Perc. aanpasbaarheid onbekend",
+            "description" : "Percentage aanpasbaarheid onbekend",
+            "expression" : "properties.a_apb_onb / properties.ster_totaal * 100 || 0",
+            "stringFormat" : "{0:#,#}%",
+			"min": 0,
+			"max": 100,
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+        },
+        "p_aangep_w" : {
+			"label" : "p_aangep_w",
+			"type" : "number",
+			"title" : "Perc. aangepaste woningen",
+            "description" : "Percentage aangepaste woningen",
+            "expression" : "properties.a_aangep_w / properties.ster_totaal * 100",
+            "stringFormat" : "{0:#,#}%",
+			"min": 0,
+			"max": 100,
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+        },
+        "p_1gezw" : {
+			"label" : "p_1gezw",
+			"type" : "number",
+			"title" : "Perc. eengezinswoningen",
+            "description" : "Percentage eengezinswoningen",
+            "stringFormat" : "{0:#,#}%",
+            "expression" : "(properties.a_1gezw / properties.ster_totaal) * 100",
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+		},        
+		"p_mgezw" : {
+			"label" : "p_mgezw",
+			"type" : "number",
+			"title" : "Perc. meergezinswoningen",
+            "description" : "Percentage meergezinswoningen",
+            "stringFormat" : "{0:#,#}%",
+            "expression" : "(properties.a_mgezw / properties.ster_totaal) * 100",
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+		},
+        "p_koopwon" : {
+			"label" : "p_koopwon",
+			"type" : "number",
+			"title" : "Perc. koopwoningen",
+            "description" : "Percentage koopwoningen",
+            "expression" : "(properties.a_koopwon / properties.ster_totaal) * 100",
+            "stringFormat" : "{0:#,#}%",
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+		},
+        "p_huurwon" : {
+			"label" : "p_huurwon",
+			"type" : "number",
+			"title" : "Perc. huurwoningen",
+            "description" : "Percentage huurwoningen",
+            "expression" : "(properties.a_huurwon / properties.ster_totaal) * 100",
+            "stringFormat" : "{0:#,#}%",
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+		},
+        "p_huko_onb" : {
+			"label" : "p_huko_onb",
+			"type" : "number",
+			"title" : "Perc. eigendom onbekend",
+            "description" : "Percentage eigendom onbekend",
+            "expression" : "(properties.a_huko_onb / properties.ster_totaal) * 100",
+            "stringFormat" : "{0:#,#}%",
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+		}
     },
     "id": "cbs",
     "propertyTypes": {}
