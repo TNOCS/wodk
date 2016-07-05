@@ -187,24 +187,6 @@
                     }
                 },
                 {
-                    "id": "rangewidgetid",
-                    "directive": "rangewidget",
-                    "elementId": "widget-rangewidgetid",
-                    "enabled": true,
-                    "style": "vws",
-                    "left": "25px",
-                    "right": "",
-                    "top": "490px",
-                    "width": "",
-                    "height": "",
-                    "data": {
-                        "canClose": true,
-                        "title": "Filter kleine buurten",
-                        "groupId": "buurten",
-                        "propId": "data/resourceTypes/Buurt.json#ster_totaal"
-                    }
-                },
-                {
                     "id": "5e75a888-21a4-47c0-de1d-8093ae45e305",
                     "directive": "markdownwidget",
                     "elementId": "widget-5e75a888-21a4-47c0-de1d-8093ae45e305",
