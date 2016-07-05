@@ -183,8 +183,8 @@ module wodk {
                 this.$scope.filter.showInWidget = true;
             });
             this.$timeout(() => {
-                this.updateRowFilterScope(gf);
                 this.updateRowVisualizerScope(gf);
+                this.updateRowFilterScope(gf);
             });
             this.parentWidget.show();
             // var propType = this.$layerService.findPropertyTypeById(this.$scope.layer.typeUrl + '#' + gf.property);
@@ -195,8 +195,8 @@ module wodk {
             this.$scope.filter.group.ndx = crossfilter([]);
             this.$scope.filter.group.ndx.add(_.map(this.$scope.filter.group.markers, (item: any, key) => { return item.feature; }));
             this.$timeout(() => {
-                this.updateRowFilterScope(this.$scope.filter);
                 this.updateRowVisualizerScope(this.$scope.filter);
+                this.updateRowFilterScope(this.$scope.filter);
             });
         }
 
