@@ -70,6 +70,12 @@ module App {
                         description: 'Show rowfilter without filter functionality'
                     }
 
+                    this.$dashboardService.widgetTypes['rangewidget'] = <csComp.Services.IWidget>{
+                        id: 'rangewidget',
+                        icon: 'images/rangewidget.png',
+                        description: 'Show rangewidget with filter functionality'
+                    }
+
                     this.areaFilter = new AreaFilter.AreaFilterModel();
                     this.$layerService.addActionService(this.areaFilter);
                     this.contourAction = new ContourAction.ContourActionModel();

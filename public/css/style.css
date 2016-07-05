@@ -92,9 +92,7 @@
 }
 
 @-webkit-keyframes bouncedelaytext {
-    0%,
-    80%,
-    100% {
+    0%, 80%, 100% {
         -webkit-transform: scale(1.0);
     }
     40% {
@@ -103,9 +101,7 @@
 }
 
 @keyframes bouncedelaytext {
-    0%,
-    80%,
-    100% {
+    0%, 80%, 100% {
         transform: scale(1.0);
         -webkit-transform: scale(1.0);
     }
@@ -253,6 +249,10 @@
 }
 
 .wodk-cumulative-row {}
+
+.fixed-column-width {
+    width: 288px;
+}
 
 .fa-white {
     color: white;

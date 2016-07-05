@@ -1,49 +1,78 @@
-<div class="fill-height" uib-popover="WODK Widget" popover-trigger="mouseenter" popover-append-to-body="false" popover-placement="right">
-    <div class="table fill-height">
-        <div class="row wodk-title-row">
-            <div class="col-xs-12">
-                <div style="display: inline-block; font-size:20px; font-weight:bold; margin-bottom:2px;">{{vm.widget.title}}</div>
-                <div style="display: inline-block; margin-right:5px; position: absolute; top: 2px; right: 0px;">
-                    <a class="widget-min-max-close" ng-click="vm.close()" ng-show="vm.canClose()"><i class="fa fa-times fa-white"></i></a>
-                    <a class="widget-min-max-close" ng-click="vm.minimize()" ng-show="vm.canMinimize() && minimized"> <i class="fa fa-plus fa-white"></i></a>
-                    <a class="widget-min-max-close" ng-click="vm.minimize()" ng-show="vm.canMinimize() && !minimized"> <i class="fa fa-minus fa-white"></i></a>
-                    <a class="widget-min-max-close" ng-click="vm.exportToImage()"><i class="fa fa-save fa-white" uib-tooltip="{{'SAVE_AS_IMAGE' | translate}}" tooltip-trigger="mouseenter" tooltip-append-to-body="true" ng-show="vm.exporterAvailable&&!minimized"></i></a>
+<div class="fill-height">
+    <!-- Province part (single column) -->
+    <div class="fill-height" ng-show="vm.wodkWidgetSvc.lastSelectedType=='provincie'">
+        <div class="table fill-height">
+            <div class="row wodk-title-row">
+                <div class="col-xs-12">
+                    <div style="display: inline-block; font-size:20px; font-weight:bold; margin-bottom:2px;">{{vm.widget.title}}</div>
+                    <div style="display: inline-block; margin-right:5px; position: absolute; top: 2px; right: 0px;">
+                        <a class="widget-min-max-close" ng-click="vm.close()" ng-show="vm.canClose()"><i class="fa fa-times fa-white"></i></a>
+                        <a class="widget-min-max-close" ng-click="vm.minimize()" ng-show="vm.canMinimize() && minimized"> <i class="fa fa-plus fa-white"></i></a>
+                        <a class="widget-min-max-close" ng-click="vm.minimize()" ng-show="vm.canMinimize() && !minimized"> <i class="fa fa-minus fa-white"></i></a>
+                        <a class="widget-min-max-close" ng-click="vm.exportToImage()"><i class="fa fa-save fa-white" uib-tooltip="{{'SAVE_AS_IMAGE' | translate}}" tooltip-trigger="mouseenter" tooltip-placement="left" tooltip-append-to-body="true" ng-show="vm.exporterAvailable&&!minimized"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-eq-height wodk-subtitle-row">
+                <div class="col-xs-12">
+                    <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='provincie'">Provincie {{vm.wodkWidgetSvc.lastSelectedName}}</div>
+                </div>
+            </div>
+            <div class="row row-eq-height wodk-cumulative-row">
+                <div class="col-xs-12" style="padding-top:6px">
+                    <div style="padding:0px;font-size:12px;margin:0px;" ng-hide="minimized">
+                        <wiz-markdown class="active-text" content="data.mdText"></wiz-markdown>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row row-eq-height wodk-subtitle-row">
-            <div class="col-xs-6 border-right">
-                <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='provincie'">-</div>
-                <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='gemeente'">Gemeenten cumulatief</div>
-                <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='buurt'">Wijken cumulatief</div>
-            </div>
-            <div class="col-xs-6">
-                <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='provincie'">Provincie {{vm.wodkWidgetSvc.lastSelectedName}}</div>
-                <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='gemeente'">Gemeente {{vm.wodkWidgetSvc.lastSelectedName}}</div>
-                <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='buurt'">{{vm.wodkWidgetSvc.lastSelectedName}}</div>
-            </div>
-        </div>
-        <div class="row row-eq-height wodk-cumulative-row">
-            <div class="col-xs-6 border-right fill-height" style="padding-top:6px">
-                <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='gemeente'" ng-repeat="item in vm.wodkWidgetSvc.gemeenteSelectie track by $index">
-                    {{$index + 1}}. {{item.properties['Name']}}
-                </div>
-                <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='buurt'" ng-repeat="item in vm.wodkWidgetSvc.buurtSelectie track by $index">
-                    {{$index + 1}}. {{item.properties['Name']}}
+    </div>
+    <!-- Gemeente/buurt part (double columns) -->
+    <div class="fill-height" ng-show="vm.wodkWidgetSvc.lastSelectedType=='gemeente' || vm.wodkWidgetSvc.lastSelectedType=='buurt'">
+        <div class="table fill-height">
+            <div class="row wodk-title-row">
+                <div class="col-xs-12">
+                    <div style="display: inline-block; font-size:20px; font-weight:bold; margin-bottom:2px;">{{vm.widget.title}}</div>
+                    <div style="display: inline-block; margin-right:5px; position: absolute; top: 2px; right: 0px;">
+                        <a class="widget-min-max-close" ng-click="vm.close()" ng-show="vm.canClose()"><i class="fa fa-times fa-white"></i></a>
+                        <a class="widget-min-max-close" ng-click="vm.minimize()" ng-show="vm.canMinimize() && minimized"> <i class="fa fa-plus fa-white"></i></a>
+                        <a class="widget-min-max-close" ng-click="vm.minimize()" ng-show="vm.canMinimize() && !minimized"> <i class="fa fa-minus fa-white"></i></a>
+                        <a class="widget-min-max-close" ng-click="vm.exportToImage()"><i class="fa fa-save fa-white" uib-tooltip="{{'SAVE_AS_IMAGE' | translate}}" tooltip-trigger="mouseenter" tooltip-placement="left" tooltip-append-to-body="true" ng-show="vm.exporterAvailable&&!minimized"></i></a>
+                    </div>
                 </div>
             </div>
-            <div class="col-xs-6" style="padding-top:6px">
-                <div style="padding:0px;font-size:12px;margin:0px;" ng-hide="minimized">
-                    <wiz-markdown class="active-text" content="data.mdText"></wiz-markdown>
+            <div class="row row-eq-height wodk-subtitle-row">
+                <div class="col-xs-6 border-right fixed-column-width">
+                    <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='gemeente'">Gemeenten cumulatief</div>
+                    <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='buurt'">Wijken cumulatief</div>
+                </div>
+                <div class="col-xs-6 fixed-column-width">
+                    <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='gemeente'">Gemeente {{vm.wodkWidgetSvc.lastSelectedName}}</div>
+                    <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='buurt'">{{vm.wodkWidgetSvc.lastSelectedName}}</div>
                 </div>
             </div>
-        </div>
-        <div class="row row-eq-height wodk-charts-row fill-height">
-            <div class="col-xs-6 border-right fill-height">
-                <row-filter ng-if="filter && filter.filterType=='row'" style="margin-left:-36px"></row-filter>
+            <div class="row row-eq-height wodk-cumulative-row">
+                <div class="col-xs-6 border-right fill-height" style="padding-top:6px">
+                    <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='gemeente'" ng-repeat="item in vm.wodkWidgetSvc.gemeenteSelectie track by $index">
+                        {{$index + 1}}. {{item.properties['Name']}}
+                    </div>
+                    <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='buurt'" ng-repeat="item in vm.wodkWidgetSvc.buurtSelectie track by $index">
+                        {{$index + 1}}. {{item.properties['Name']}}
+                    </div>
+                </div>
+                <div class="col-xs-6" style="padding-top:6px">
+                    <div style="padding:0px;font-size:12px;margin:0px;" ng-hide="minimized">
+                        <wiz-markdown class="active-text" content="data.mdText"></wiz-markdown>
+                    </div>
+                </div>
             </div>
-            <div class="col-xs-6 fill-height">
-                <row-visualizer ng-if="filter && filter.filterType=='row'"></row-visualizer>
+            <div class="row row-eq-height wodk-charts-row fill-height">
+                <div class="col-xs-6 border-right fill-height">
+                    <row-filter ng-if="filter && filter.filterType=='row'" style="margin-left:-36px"></row-filter>
+                </div>
+                <div class="col-xs-6 fill-height">
+                    <row-visualizer ng-if="filter && filter.filterType=='row'"></row-visualizer>
+                </div>
             </div>
         </div>
     </div>
