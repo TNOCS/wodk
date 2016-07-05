@@ -23,6 +23,8 @@
     "public/wodk/WODKWidget.ts",
     "public/wodk/WODKWidgetCtrl.ts",
     "public/wodk/RowVisualizer.ts",
+    "public/wodk/RangeWidgetCtrl.ts",
+    "public/wodk/RangeWidget.ts",
     "Scripts/typings/tsd.d.ts",
     "Scripts/typings/angular-translate/angular-translate.d.ts",
     "Scripts/typings/angular-ui-router/angular-ui-router.d.ts",

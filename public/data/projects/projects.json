@@ -19,8 +19,8 @@
         },
         "vws": {
             "borderWidth": 1,
-            "borderColor": "#01689b",
-            "background": "#e5f0f9",
+            "borderColor": "#604A7B",
+            "background": "#e3dce7",
             "opacity": 0.92,
             "borderRadius": "4px"
         },
