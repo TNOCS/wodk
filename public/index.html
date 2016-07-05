@@ -94,20 +94,26 @@
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gemeente <span class="caret"></span></a>
-                        <div class="dropdown-menu" style="width: 350px;height: 300px;">
+                        <div class="dropdown-menu" style="width: 315px;">
                             <form class="navbar-form navbar-left" role="search">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Zoek op gemeente">
+                                    <input type="text" class="form-control" ng-model="vm.cityQuery" ng-change="vm.filterCity(vm.cityQuery)" style="width:285px" placeholder="Zoek op gemeente" autofocus>
                                 </div>
-                                <button type="submit" class="btn btn-default">Submit</button>
+                                <!--<button type="submit" class="btn btn-default">Submit</button>-->
                             </form>
                             <div id="gemeente">
-                                <ul style="list-style:none">
-                                    <li>Amsterdam</li>
-                                    <li>Arnhem</li>
+                                <ul class="list-unstyled" style="margin-left:10px;">
+                                    <li ng-repeat="city in vm.foundCities" ng-click="vm.selectCity(city)">{{city}}</li>
                                 </ul>
                             </div>
                         </div>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="fa fa-filter">&nbsp;</span>{{vm.filterValue}}<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li style="background-color: #AAA; font-weight: bold; font-size: 1.2em; line-height:1.2em">&nbsp;&nbsp;Woningfilter &lt;</li>
+                            <li style="margin-left:10px;" ng-repeat="fv in vm.filterValues" ng-click="vm.selectFilter(fv)">{{fv}}</li>
+                        </ul>
                     </li>
                     <li class="active"><a href="#">Kaart <span class="sr-only">(current)</span></a></li>
                     <li><a href="#">Tabel export</a></li>
