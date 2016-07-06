@@ -99,6 +99,31 @@ module wodk {
                         break;
                 }
             }));
+
+            this.mBusHandles.push(this.$messageBus.subscribe('wodk', (title, value: any) => {
+                switch (title) {
+                    case 'city':
+                        if (!value) return;
+                        this.selectCity(value);
+                        break;
+                    case 'filter':
+                        if (!value && value !== 0) return;
+                        this.addBuurtFilter(value);
+                        break;
+                    case 'back':
+                        this.wodkWidgetSvc.stepBack();
+                        break;
+                    case 'forward':
+                        break;
+                    case 'refresh':
+                        this.$layerService.actionService.execute('reload project');
+                        break;
+                    case 'home':
+                        break;
+                    default:
+                        break;
+                }
+            }));
         }
 
         private canMinimize() {
@@ -131,6 +156,44 @@ module wodk {
                 this.mBusHandles.forEach((mbh) => {
                     this.$messageBus.unsubscribe(mbh);
                 });
+            }
+        }
+
+        private addBuurtFilter(minSize: number) {
+            var propId = 'data/resourceTypes/Buurt.json#ster_totaal';
+            var layer = this.$layerService.findLoadedLayer('bagbuurten');
+            if (!layer) return;
+            var p = this.$layerService.findPropertyTypeById(propId);
+            var propLabel = propId.split('#').pop();
+            var filterDim;
+            if (layer.group.ndx) {
+                filterDim = layer.group.ndx.dimension(d => {
+                    if (!d.properties.hasOwnProperty(propLabel)) return null;
+                    let prop = d.properties[propLabel];
+                    if (prop === null || prop === undefined || isNaN(prop)) return null;
+                    return prop;
+                });
+                this.applyFilter(filterDim, minSize, layer.group);
+            }
+        }
+
+        private applyFilter(filterDim, filterValue, group) {
+            if (filterValue === null || filterValue === undefined || isNaN(filterValue)) return;
+            if (!filterDim) return;
+            if (filterValue > 0) {
+                filterDim.filter([filterValue, Infinity]);
+            } else {
+                filterDim.filterAll();
+            }
+            //group.filterResult = filterDim.top(Infinity);
+            this.$messageBus.publish('filters', 'updateGroup', group.id);
+            // this.$layerService.updateMapFilter(this.group);
+        }
+
+        private selectCity(name: string) {
+            var foundFeatures: csComp.Services.IFeature[] = this.$layerService.filterFeaturesByPropertyValue('Name', name);
+            if (foundFeatures.length > 0) {
+                this.$layerService.selectFeature(foundFeatures[0]);
             }
         }
 
