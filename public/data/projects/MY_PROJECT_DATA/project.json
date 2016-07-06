@@ -11,315 +11,258 @@
             "expertMode": true
         }
     },
-    "groups": [
-                {
-            "id": "Provincie",
-            "description": "Provincies (bron: BAG)",
-            "title": "Provincies",
-            "clustering": false,
-            "oneLayerActive": false,
-            "layers": [
-                {
-                    "id": "provincie",
-                    "reference": "provincie",
-                    "languages": {
-                        "nl": {
-                            "title": "Provincies",
-                            "description": "Provincies (bron: BAG)"
-                        },
-                        "en": {
-                            "title": "Provinces",
-                            "description": "Provinces"
-                        }
-                    },
-                    "refreshBBOX": false,
-                    "defaultFeatureType": "provincie",
-                    "typeUrl": "data/resourceTypes/cbs.json",
-                    "type": "geojson",
-                    "enabled": true,
-                    "url": "data/projects/MY_PROJECT_DATA/CBS_provincie.json",
-                    "renderType": "geojson"
-                }
-            ]
-        },
-        {
-            "id": "Gemeente",
-            "description": "Gemeentes (bron: CBS 2014)",
-            "title": "Gemeentes",
-            "clustering": false,
-            "oneLayerActive": false,
-            "layers": [
-                {
-                    "id": "gemeente",
-                    "reference": "gemeente",
-                    "languages": {
-                        "nl": {
-                            "title": "Gemeentes",
-                            "description": "Gemeentes (bron: CBS 2014)"
-                        },
-                        "en": {
-                            "title": "Municipalities",
-                            "description": "Municipalities (2014)"
-                        }
-                    },
-                    "refreshBBOX": false,
-                    "defaultFeatureType": "gemeente",
-                    "typeUrl": "data/resourceTypes/cbs.json",
-                    "type": "geojson",
-                    "enabled": true,
-                    "url": "data/projects/MY_PROJECT_DATA/CBS_Gemeente.json",
-                    "renderType": "geojson"
-                }
-            ]
-        },
-        {
-            "id": "buurten",
-            "description": "Kaartlagen gebaseerd op de Basis Administratie Gebouwen (Bron: Kadaster)",
-            "title": "Buurten",
-            "clusterLevel": 18,
-            "clustering": false,
-            "oneLayerActive": true,
-            "layers": [
-                {
-                    "id": "bagbuurten",
-                    "reference": "bagbuurten",
-                    "languages": {
-                        "nl": {
-                            "title": "Buurten",
-                            "description": "BAG data gekoppeld aan CBS data voor buurten."
-                        },
-                        "en": {
-                            "title": "Neighborhoods",
-                            "description": "Zoom in on city level to show neighborhoods in the visible extent."
-                        }
-                    },
-                    "refreshBBOX": false,
-                    "opacity": 75,
-                    "defaultFeatureType": "buurt",
-                    "defaultLegendProperty": "data/resourceTypes/Buurt.json#p_apb_w",
-                    "typeUrl": "data/resourceTypes/Buurt.json",
-                    "type": "database",
-                    "enabled": false,
-                    "url": "bagbuurten",
-                    "renderType": "geojson",
-                    "dataSourceParameters": {
-                        "minZoom": 12,
-                        "searchProperty": ""
-                    }
-                }
-            ]
-        },
-        {
-            "id": "BAG",
-            "description": "Kaartlagen gebaseerd op de Basis Administratie Gebouwen (Bron: Kadaster)",
-            "title": "BAG",
-            "clusterLevel": 18,
-            "clustering": true,
-            "oneLayerActive": true,
-            "layers": [
-                {
-                    "id": "bagcontouren",
-                    "reference": "bagcontouren",
-                    "languages": {
-                        "nl": {
-                            "title": "BAG Contouren",
-                            "description": "Zoom in op wijkniveau om woningen in het betreffende gebied te laden."
-                        },
-                        "en": {
-                            "title": "BAG Contouren",
-                            "description": "Zoom in on city level to show buildings in the visible extent."
-                        }
-                    },
-                    "refreshBBOX": false,
-                    "defaultFeatureType": "BagPanden",
-                    "defaultLegendProperty": "data/resourceTypes/BagPanden.json#ster_gem",
-                    "typeUrl": "data/resourceTypes/BagPanden.json",
-                    "type": "database",
-                    "enabled": false,
-                    "url": "bagcontours",
-                    "renderType": "geojson",
-                    "dataSourceParameters": {
-                        "minZoom": 16,
-                        "getPointFeatures": false
-                    }
-                }
-            ]
-        }
-    ],
-    "dashboards": [
-        {
-            "id": "map",
-            "name": "Kaart",
-            "showMap": true,
-            "showTimeline": false,
-            "showLeftmenu": false,
-            "showLegend": false,
-            "showRightmenu": false,
-            "showBackgroundImage": false,
-            "widgets": [
-                {
-                    "id": "82bcc93c-6956-4acb-10c0-139f1e89d4bd",
-                    "directive": "buttonwidget",
-                    "enabled": true,
-                    "style": "transparent",
-                    "left": "120px",
-                    "bottom": "10px",
-                    "height": "32px",
-                    "width": "72px",
-                    "data": {
-                        "minimalLayout": true,
-                        "buttons": [
-                            {
-                                "title": "Stap terug",
-                                "action": "step back",
-                                "image": "images/previous.png",
-                                "defaultEnabled": false,
-                                "showLegend": false
-                            },
-                            {
-                                "title": "Begin opnieuw",
-                                "action": "reload project",
-                                "image": "images/reload.png",
-                                "defaultEnabled": false,
-                                "showLegend": false
-                            }
-                        ]
-                    }
+    "groups": [{
+        "id": "Provincie",
+        "description": "Provincies (bron: BAG)",
+        "title": "Provincies",
+        "clustering": false,
+        "oneLayerActive": false,
+        "layers": [{
+            "id": "provincie",
+            "reference": "provincie",
+            "languages": {
+                "nl": {
+                    "title": "Provincies",
+                    "description": "Provincies (bron: BAG)"
                 },
-                {
-                    "id": "5e75a888-21a4-47c0-de1d-8093ae45e305",
-                    "directive": "markdownwidget",
-                    "elementId": "widget-5e75a888-21a4-47c0-de1d-8093ae45e305",
-                    "enabled": false,
-                    "style": "default",
-                    "left": "20%",
-                    "right": "2px",
-                    "top": "10%",
-                    "bottom": "16px",
-                    "width": "65%",
-                    "height": "80%",
-                    "data": {
-                        "featureTypeName": "Dummy",
-                        "dynamicProperties": ["DummyProp"],
-                        "title": "",
-                        "url": "data/projects/MY_PROJECT_DATA/disclaimer.txt",
-                        "canMinimize": false
-                    }
-                },
-                {
-                    "id": "23bcc93c-6956-4acb-10c0-139f1e89d4bd",
-                    "directive": "buttonwidget",
-                    "enabled": true,
-                    "style": "transparent",
-                    "left": "25px",
-                    "bottom": "10px",
-                    "height": "72px",
-                    "width": "75px",
-                    "data": {
-                        "minimalLayout": true,
-                        "toggleMode": true,
-                        "buttons": [
-                            {
-                                "title": "OpenStreetMap",
-                                "action": "activate baselayer",
-                                "layer": "OpenStreetMap",
-                                "image": "http://otile1.mqcdn.com/tiles/1.0.0/osm/15/16779/10817.png",
-                                "defaultEnabled": false,
-                                "showLegend": false
-                            },
-                            {
-                                "title": "ESRI Earth",
-                                "action": "activate baselayer",
-                                "layer": "World Imagery",
-                                "image": "http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/15/10817/16779.png",
-                                "defaultEnabled": false,
-                                "showLegend": false
-                            },
-                            {
-                                "title": "Positron",
-                                "action": "activate baselayer",
-                                "layer": "Positron",
-                                "image": "http://a.basemaps.cartocdn.com/light_nolabels/15/16779/10817.png",
-                                "defaultEnabled": false,
-                                "showLegend": false
-                            }
-                        ]
-                    }
-                },
-                {
-                    "id": "12181ccc-21a4-47c0-de1d-8093ae45e305",
-                    "directive": "wodkwidget",
-                    "title": "Woninginformatie",
-                    "elementId": "widget-12181ccc-21a4-47c0-de1d-8093ae45e305",
-                    "enabled": false,
-                    "style": "vws",
-                    "left": "",
-                    "right": "0px",
-                    "top": "130px",
-                    "bottom": "",
-                    "width": "",
-                    "height": "",
-                    "data": {
-                        "canClose": true,
-                        "canMinimize": false,
-                        "featureTypeName": "data/resourceTypes/Buurt.json#buurt",
-                        "dynamicProperties": [
-                            "bu_naam",
-                            "ster_totaal",
-                            "a_apb_w",
-                            "a_napb_w",
-                            "a_aangep_w",
-                            "a_apb_onb",
-                            "p_apb_w",
-                            "p_napb_w",
-                            "p_aangep_w",
-                            "p_apb_onb",
-                            "a_koopwon",
-                            "a_huurwon",
-                            "a_huko_onb",
-                            "a_1gezw",
-                            "a_mgezw",
-                            "woz",
-                            "p_koopwon",
-                            "p_huurwon",
-                            "p_huko_onb",
-                            "p_1gezw",
-                            "p_mgezw",
-                            "gm_naam"
-                        ],
-                        "url": "data/projects/MY_PROJECT_DATA/buurttabel.txt"
-                    }
+                "en": {
+                    "title": "Provinces",
+                    "description": "Provinces"
                 }
-            ],
-            "mobile": true
-        },
-        {
-            "id": "datatable",
-            "name": "Tabel",
-            "showMap": false,
-            "showTimeline": false,
-            "showLeftmenu": false,
-            "showLegend": false,
-            "showRightmenu": false,
-            "showBackgroundImage": false,
-            "widgets": [
-                {
-                    "id": "datatable_id",
-                    "directive": "datatable",
-                    "elementId": "widget-datatable_id",
-                    "enabled": true,
-                    "width": "100%",
-                    "height": "100%"
+            },
+            "refreshBBOX": false,
+            "defaultFeatureType": "provincie",
+            "typeUrl": "data/resourceTypes/cbs.json",
+            "type": "geojson",
+            "enabled": true,
+            "url": "data/projects/MY_PROJECT_DATA/CBS_provincie.json",
+            "renderType": "geojson"
+        }]
+    }, {
+        "id": "Gemeente",
+        "description": "Gemeentes (bron: CBS 2014)",
+        "title": "Gemeentes",
+        "clustering": false,
+        "oneLayerActive": false,
+        "layers": [{
+            "id": "gemeente",
+            "reference": "gemeente",
+            "languages": {
+                "nl": {
+                    "title": "Gemeentes",
+                    "description": "Gemeentes (bron: CBS 2014)"
+                },
+                "en": {
+                    "title": "Municipalities",
+                    "description": "Municipalities (2014)"
                 }
-            ],
-            "mobile": true
-        }
-    ],
-    "searchProviders": [
-        {
-            "name": "EsriBagSearch",
-            "url": "https://services.arcgisonline.nl/arcgis/rest/services/Geocoder_BAG/GeocodeServer/findAddressCandidates"
-        }
-    ],
+            },
+            "refreshBBOX": false,
+            "defaultFeatureType": "gemeente",
+            "typeUrl": "data/resourceTypes/cbs.json",
+            "type": "geojson",
+            "enabled": true,
+            "url": "data/projects/MY_PROJECT_DATA/CBS_Gemeente.json",
+            "renderType": "geojson"
+        }]
+    }, {
+        "id": "buurten",
+        "description": "Kaartlagen gebaseerd op de Basis Administratie Gebouwen (Bron: Kadaster)",
+        "title": "Buurten",
+        "clusterLevel": 18,
+        "clustering": false,
+        "oneLayerActive": true,
+        "layers": [{
+            "id": "bagbuurten",
+            "reference": "bagbuurten",
+            "languages": {
+                "nl": {
+                    "title": "Buurten",
+                    "description": "BAG data gekoppeld aan CBS data voor buurten."
+                },
+                "en": {
+                    "title": "Neighborhoods",
+                    "description": "Zoom in on city level to show neighborhoods in the visible extent."
+                }
+            },
+            "refreshBBOX": false,
+            "opacity": 75,
+            "defaultFeatureType": "buurt",
+            "defaultLegendProperty": "data/resourceTypes/Buurt.json#p_apb_w",
+            "typeUrl": "data/resourceTypes/Buurt.json",
+            "type": "database",
+            "enabled": false,
+            "url": "bagbuurten",
+            "renderType": "geojson",
+            "dataSourceParameters": {
+                "minZoom": 12,
+                "searchProperty": ""
+            }
+        }]
+    }, {
+        "id": "BAG",
+        "description": "Kaartlagen gebaseerd op de Basis Administratie Gebouwen (Bron: Kadaster)",
+        "title": "BAG",
+        "clusterLevel": 18,
+        "clustering": true,
+        "oneLayerActive": true,
+        "layers": [{
+            "id": "bagcontouren",
+            "reference": "bagcontouren",
+            "languages": {
+                "nl": {
+                    "title": "BAG Contouren",
+                    "description": "Zoom in op wijkniveau om woningen in het betreffende gebied te laden."
+                },
+                "en": {
+                    "title": "BAG Contouren",
+                    "description": "Zoom in on city level to show buildings in the visible extent."
+                }
+            },
+            "refreshBBOX": false,
+            "defaultFeatureType": "BagPanden",
+            "defaultLegendProperty": "data/resourceTypes/BagPanden.json#ster_gem",
+            "typeUrl": "data/resourceTypes/BagPanden.json",
+            "type": "database",
+            "enabled": false,
+            "url": "bagcontours",
+            "renderType": "geojson",
+            "dataSourceParameters": {
+                "minZoom": 16,
+                "getPointFeatures": false
+            }
+        }]
+    }],
+    "dashboards": [{
+        "id": "map",
+        "name": "Kaart",
+        "showMap": true,
+        "showTimeline": false,
+        "showLeftmenu": false,
+        "showLegend": false,
+        "showRightmenu": false,
+        "showBackgroundImage": false,
+        "widgets": [{
+            "id": "5e75a888-21a4-47c0-de1d-8093ae45e305",
+            "directive": "markdownwidget",
+            "elementId": "widget-5e75a888-21a4-47c0-de1d-8093ae45e305",
+            "enabled": false,
+            "style": "default",
+            "left": "20%",
+            "right": "2px",
+            "top": "10%",
+            "bottom": "16px",
+            "width": "65%",
+            "height": "80%",
+            "data": {
+                "featureTypeName": "Dummy",
+                "dynamicProperties": ["DummyProp"],
+                "title": "",
+                "url": "data/projects/MY_PROJECT_DATA/disclaimer.txt",
+                "canMinimize": false
+            }
+        }, {
+            "id": "23bcc93c-6956-4acb-10c0-139f1e89d4bd",
+            "directive": "buttonwidget",
+            "enabled": true,
+            "style": "transparent",
+            "left": "25px",
+            "bottom": "10px",
+            "height": "72px",
+            "width": "75px",
+            "data": {
+                "minimalLayout": true,
+                "toggleMode": true,
+                "buttons": [{
+                    "title": "OpenStreetMap",
+                    "action": "activate baselayer",
+                    "layer": "OpenStreetMap",
+                    "image": "http://otile1.mqcdn.com/tiles/1.0.0/osm/15/16779/10817.png",
+                    "defaultEnabled": false,
+                    "showLegend": false
+                }, {
+                    "title": "ESRI Earth",
+                    "action": "activate baselayer",
+                    "layer": "World Imagery",
+                    "image": "http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/15/10817/16779.png",
+                    "defaultEnabled": false,
+                    "showLegend": false
+                }, {
+                    "title": "Positron",
+                    "action": "activate baselayer",
+                    "layer": "Positron",
+                    "image": "http://a.basemaps.cartocdn.com/light_nolabels/15/16779/10817.png",
+                    "defaultEnabled": false,
+                    "showLegend": false
+                }]
+            }
+        }, {
+            "id": "12181ccc-21a4-47c0-de1d-8093ae45e305",
+            "directive": "wodkwidget",
+            "title": "Woninginformatie",
+            "elementId": "widget-12181ccc-21a4-47c0-de1d-8093ae45e305",
+            "enabled": false,
+            "style": "vws",
+            "left": "",
+            "right": "0px",
+            "top": "130px",
+            "bottom": "",
+            "width": "",
+            "height": "",
+            "data": {
+                "canClose": true,
+                "canMinimize": false,
+                "featureTypeName": "data/resourceTypes/Buurt.json#buurt",
+                "dynamicProperties": [
+                    "bu_naam",
+                    "ster_totaal",
+                    "a_apb_w",
+                    "a_napb_w",
+                    "a_aangep_w",
+                    "a_apb_onb",
+                    "p_apb_w",
+                    "p_napb_w",
+                    "p_aangep_w",
+                    "p_apb_onb",
+                    "a_koopwon",
+                    "a_huurwon",
+                    "a_huko_onb",
+                    "a_1gezw",
+                    "a_mgezw",
+                    "woz",
+                    "p_koopwon",
+                    "p_huurwon",
+                    "p_huko_onb",
+                    "p_1gezw",
+                    "p_mgezw",
+                    "gm_naam"
+                ],
+                "url": "data/projects/MY_PROJECT_DATA/buurttabel.txt"
+            }
+        }],
+        "mobile": true
+    }, {
+        "id": "datatable",
+        "name": "Tabel",
+        "showMap": false,
+        "showTimeline": false,
+        "showLeftmenu": false,
+        "showLegend": false,
+        "showRightmenu": false,
+        "showBackgroundImage": false,
+        "widgets": [{
+            "id": "datatable_id",
+            "directive": "datatable",
+            "elementId": "widget-datatable_id",
+            "enabled": true,
+            "width": "100%",
+            "height": "100%"
+        }],
+        "mobile": true
+    }],
+    "searchProviders": [{
+        "name": "EsriBagSearch",
+        "url": "https://services.arcgisonline.nl/arcgis/rest/services/Geocoder_BAG/GeocodeServer/findAddressCandidates"
+    }],
     "url": "/data/projects/MY_PROJECT_DATA/project.json"
 }
