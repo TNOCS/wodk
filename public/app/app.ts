@@ -168,7 +168,7 @@ module App {
          * Select the first search result.
          */
         selectFirst() {
-            if (this.foundCities.length > 0) { 
+            if (this.foundCities.length > 0) {
                 this.selectCity(this.foundCities[0]);
             }
         }
@@ -190,6 +190,15 @@ module App {
          */
         publish(msg: string) {
             this.$messageBusService.publish('wodk', msg);
+        }
+
+        toggleShowAttribution() {
+            let attr = $('.leaflet-control-attribution');
+            if (attr.is(':visible')) {
+                attr.fadeOut();
+            } else {
+                attr.fadeIn();
+            }
         }
 
         get showNavigation() { return this.$dashboardService._search.isActive; }

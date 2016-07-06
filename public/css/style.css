@@ -11,6 +11,30 @@
     color: #ccc;
 }
 
+.leaflet-control-attribution {
+    display: none;
+}
+
+.leaflet-container .leaflet-control-attribution {
+    margin: 0 30px 11px 0;
+}
+
+.leaflet-attribution {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: blue;
+    background-color: rgba(0, 0, 255, .5);
+    margin: 5px;
+    padding: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.leaflet-attribution > a {
+    color: white;
+}
+
 .navbar-default .navbar-nav>li>a:focus,
 .navbar-default .navbar-nav>li>a:hover {
     color: #fff;
