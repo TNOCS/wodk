@@ -15,7 +15,7 @@ module wodk {
         protected buurtSelectie: IFeature[];
         protected selectionHistory: IFeature[];
         protected forwardHistory: IFeature[];
-        private htmlStyle = '<div style="display:inline-block;vertical-align:middle;text-align:center;background:rgba(0,0,255,1);width:28px;height:28px;border-radius:50%;border-style:solid;border-color:rgba(0,0,150,1);border-width:2px;opacity:1;box-shadow:2px 3px 6px 0px rgba(0,0,0,0.75);"><img src="images/empty.png" style="width:24px;height:24px;display:block;"></div>';
+        private htmlStyle = '<div style="display:inline-block;vertical-align:middle;text-align:center;background:rgba(0,0,255,1);width:28px;height:28px;border-radius:50% 0 0 50%;border-style:solid;border-color:rgba(0,0,150,1);border-width:2px;opacity:1;box-shadow:2px 3px 6px 0px rgba(0,0,0,0.75);"><img src="images/empty.png" style="width:24px;height:24px;display:block;">i</div>';
         private htmlStyleInvisible = '<div style="display:inline-block;width:2px;height:2px;"></div>';
 
         constructor(

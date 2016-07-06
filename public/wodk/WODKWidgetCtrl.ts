@@ -216,7 +216,7 @@ module wodk {
         }
 
         private selectFeature(feature: csComp.Services.IFeature) {
-            if (!feature || !feature.isSelected) {
+            if (!feature || !feature.isSelected || feature.fType.name === 'BagPanden') {
                 return;
             }
             this.$timeout(() => {
