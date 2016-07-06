@@ -260,7 +260,20 @@
 .wodk-cumulative-row {}
 
 .fixed-column-width {
-    width: 288px;
+    width: 296px;
+}
+
+.active-button {
+    color: #ccc;
+    margin: 0;
+    font-size: 1.3em
+}
+
+.inactive-button {
+    margin: 0;
+    color: #333333!important;
+    pointer-events: none!important;
+    cursor: default;
 }
 
 .fa-white {

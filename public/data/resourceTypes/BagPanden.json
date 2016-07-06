@@ -375,7 +375,7 @@
                     },
                     {
                         "sortKey": "c",
-                        "label": "4 sterren speciaal",
+                        "label": "4 sterren specifiek",
                         "interval": {
                             "min": 3,
                             "max": 4
@@ -384,7 +384,7 @@
                     },
                     {
                         "sortKey": "b",
-                        "label": "5 sterren speciaal",
+                        "label": "5 sterren specifiek",
                         "interval": {
                             "min": 4,
                             "max": 5

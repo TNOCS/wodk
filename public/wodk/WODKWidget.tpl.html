@@ -44,7 +44,7 @@
             <div class="row row-eq-height wodk-subtitle-row">
                 <div class="col-xs-6 border-right border-right fixed-column-width">
                     <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='gemeente'">Gemeenten cumulatief</div>
-                    <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='buurt'">Wijken cumulatief</div>
+                    <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='buurt'">Buurten cumulatief</div>
                 </div>
                 <div class="col-xs-6 fixed-column-width">
                     <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='gemeente'">Gemeente {{vm.wodkWidgetSvc.lastSelectedName}}</div>
@@ -68,7 +68,7 @@
             </div>
             <div class="row row-eq-height wodk-charts-row fill-height">
                 <div class="col-xs-6 border-right fill-height">
-                    <row-filter ng-if="filter && filter.filterType=='row'" style="margin-left:-36px"></row-filter>
+                    <row-filter ng-if="filter && filter.filterType=='row'" style="margin-left:-12px"></row-filter>
                 </div>
                 <div class="col-xs-6 fill-height">
                     <row-visualizer ng-if="filter && filter.filterType=='row'"></row-visualizer>
