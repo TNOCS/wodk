@@ -279,15 +279,24 @@
     </div>
 
     <!--Loading spinner-->
-    <div data-ng-show="layersLoading>0" id="loadingspinner" style="margin:0px auto; width:700px; height:100px; text-align:center">
-        <div class="spinner" style="position: relative; float: none; margin-top: 80px">
-            <h2>Woningen worden geladen</h2>
+    <div data-ng-show="layersLoading>0" style="width:100%;height:100%;z-index:10000;position:absolute;background-color:rgba(0, 0, 0, 0.5);text-align:center;color:white;line-height:100vh">
+        <h2 style="display: inline-block;vertical-align: middle;">
+            data laden
+            <br>
+            .. moment aub ..
+            <br>
+            <i class="fa fa-3x fa-spinner fa-spin spin-big"></i>
+        </h2>
+    </div>
+    <!--<div style="width:100%;height:100%;z-index:10000;position:absolute;background-color:rgba(0, 0, 0, 0.5);text-align:center;color:white;line-height:100vh">
+        <h2 style="display: inline-block;vertical-align: middle;">data laden<br>.. moment aub ..<br>
+        <div class="spinner" style="position: relative; float: none; margin-top: 180px">
             <div class="bounce1" style="width:16px; height:16px;"></div>
             <div class="bounce2" style="width:16px; height:16px;"></div>
             <div class="bounce3" style="width:16px; height:16px;"></div>
         </div>
-    </div>
-
+        </h2>
+    </div>-->
 
     <!--<div id="header-box" class="header-box">
         <a class="menutoggle" style="color:black" ng-click="vm.$layerService.visual.leftPanelVisible = !vm.$layerService.visual.leftPanelVisible;vm.$messageBusService.publish('search','reset')" uib-tooltip="Open/sluit het menu" tooltip-placement="bottom" tooltip-popup-delay="500">
