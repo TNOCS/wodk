@@ -192,6 +192,15 @@ module App {
             this.$messageBusService.publish('wodk', msg);
         }
 
+        toggleShowAttribution() {
+            let attr = $('.leaflet-control-attribution');
+            if (attr.is(':visible')) {
+                attr.fadeOut();
+            } else {
+                attr.fadeIn();
+            }
+        }
+
         get showNavigation() { return this.$dashboardService._search.isActive; }
 
         /**
