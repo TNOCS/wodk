@@ -36,7 +36,7 @@
                 "iconUri": "images/empty.png",
                 "nameLabel": "gemeentenaam"
             },
-            "selectActions": ["load buurten", "center on map"],
+            "selectActions": ["center on map", "load buurten"],
             "contourProperty": "_contour",
             "propertyTypeKeys": "ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;ster_totaal;a_huko_onb;a_koopwon;a_huurwon;p_huko_onb;p_koopwon;p_huurwon;a_1gezw;a_mgezw;gemeentecode;gemeentenaam;a_aangep_w;a_apb_w;a_napb_w;p_aangep_w;p_apb_w;p_napb_w;p_apb_onb;p_1gezw;p_mgezw;",
             "legendExpr": [

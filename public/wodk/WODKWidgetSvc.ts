@@ -14,6 +14,7 @@ module wodk {
         protected gemeenteSelectie: IFeature[];
         protected buurtSelectie: IFeature[];
         protected selectionHistory: IFeature[];
+        protected forwardHistory: IFeature[];
         private htmlStyle = '<div style="display:inline-block;vertical-align:middle;text-align:center;background:rgba(0,0,255,1);width:28px;height:28px;border-radius:50%;border-style:solid;border-color:rgba(0,0,150,1);border-width:2px;opacity:1;box-shadow:2px 3px 6px 0px rgba(0,0,0,0.75);"><img src="images/empty.png" style="width:24px;height:24px;display:block;"></div>';
         private htmlStyleInvisible = '<div style="display:inline-block;width:2px;height:2px;"></div>';
 
@@ -31,6 +32,7 @@ module wodk {
                 description: 'Show wodkwidget'
             }
 
+            this.forwardHistory = [];
             this.selectionHistory = [];
             this.gemeenteSelectie = [];
             this.buurtSelectie = [];
@@ -67,6 +69,10 @@ module wodk {
                     //$rootScope.$apply();
                 }
             });
+        }
+
+        public getGemeenteSelectionHistory() {
+            return this.selectionHistory;
         }
 
         public getSelectionHistory() {
@@ -196,6 +202,16 @@ module wodk {
             }
         }
 
+        public hasForwardHistory() {
+            return (this.forwardHistory && this.forwardHistory.length > 0);
+        }
+
+        public stepForward() {
+            if (!this.forwardHistory || this.forwardHistory.length === 0) return;
+            var f: IFeature = this.forwardHistory.pop();
+            this.$layerService.selectFeature(this.$layerService.findFeatureById(f.id));
+        }
+
         public stepBack() {
             // Step back in history
             if (this.selectionHistory.length === 0) {
@@ -204,6 +220,7 @@ module wodk {
             }
             var lastItem: IFeature = this.selectionHistory.pop();
             if (!lastItem.id || !lastItem.layerId) return;
+            this.forwardHistory.push(JSON.parse(JSON.stringify(lastItem)));
             (lastItem.layerId === 'gemeente' ? this.gemeenteSelectie.pop() : this.buurtSelectie.pop());
             var l = this.$layerService.findLoadedLayer(lastItem.layerId);
             var replacementFeature = this.$layerService.findFeature(l, lastItem.id);

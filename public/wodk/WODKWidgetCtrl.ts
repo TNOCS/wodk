@@ -114,11 +114,13 @@ module wodk {
                         this.wodkWidgetSvc.stepBack();
                         break;
                     case 'forward':
+                        this.wodkWidgetSvc.stepForward();
                         break;
                     case 'refresh':
                         this.$layerService.actionService.execute('reload project');
                         break;
                     case 'home':
+                        location.href = "http://www.zorgopdekaart.nl";
                         break;
                     default:
                         break;
@@ -191,10 +193,26 @@ module wodk {
         }
 
         private selectCity(name: string) {
-            var foundFeatures: csComp.Services.IFeature[] = this.$layerService.filterFeaturesByPropertyValue('Name', name);
-            if (foundFeatures.length > 0) {
-                this.$layerService.selectFeature(foundFeatures[0]);
+            var foundFeature: csComp.Services.IFeature = this.findFeatureByBestMatchingPropertyValue('Name', name);
+            if (foundFeature) {
+                this.$layerService.selectFeature(foundFeature);
             }
+        }
+
+        public findFeatureByBestMatchingPropertyValue(property: string, value: string): IFeature {
+            var fts = this.$layerService.project.features;
+            var maxScore = -1;
+            var bestMatch;
+            fts.forEach((f: IFeature) => {
+                if (f.properties.hasOwnProperty(property) && typeof f.properties[property] === 'string') {
+                    var score = value.score(f.properties[property]);
+                    if (score > maxScore && f.fType.name === 'gemeente') {
+                        maxScore = score;
+                        bestMatch = f;
+                    }
+                }
+            });
+            return bestMatch;
         }
 
         private selectFeature(feature: csComp.Services.IFeature) {
