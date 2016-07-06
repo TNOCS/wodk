@@ -3,17 +3,17 @@
         "provincie": {
             "name": "provincie",
             "style": {
-                "fillColor": "#9999ff",
+                "fillColor": "#0000ff",
                 "fillOpacity": 0.99,
                 "strokeColor": "#0000ff",
                 "selectedStrokeColor": "#0000ff",
                 "drawingMode": "Point",
                 "strokeWidth": 2,
                 "selectedStrokeWidth": 4,
-                "cornerRadius": 50,
+                "cornerRadius": "50% 0 0 50",
                 "iconWidth": 24,
                 "iconHeight": 24,
-                "iconUri": "images/empty.png",
+                "iconUri": "images/i.png",
                 "nameLabel": "provincienaam"
             },
             "selectActions": ["select provincie"],
@@ -33,7 +33,7 @@
                 "cornerRadius": 50,
                 "iconWidth": 24,
                 "iconHeight": 24,
-                "iconUri": "images/empty.png",
+                "iconUri": "images/i.png",
                 "nameLabel": "gemeentenaam"
             },
             "selectActions": ["center on map", "load buurten"],

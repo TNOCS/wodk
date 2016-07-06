@@ -12,7 +12,7 @@
 				"cornerRadius": 50,
 				"iconWidth" : 24,
 				"iconHeight" : 24,
-				"iconUri" : "images/empty.png",
+				"iconUri" : "images/i.png",
                 "nameLabel" : "bu_naam",
 				"maxTitleResolution" : -1
 			},
