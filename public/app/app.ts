@@ -174,6 +174,15 @@ module App {
             this.$messageBusService.publish('wodk', 'filter', +fv);
         }
 
+        /**
+         * Publish a message on the bus.
+         *
+         * @param {string} msg
+         */
+        publish(msg: string) {
+            this.$messageBusService.publish('wodk', msg);
+        }
+
         get showNavigation() { return this.$dashboardService._search.isActive; }
 
         /**

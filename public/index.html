@@ -79,7 +79,7 @@
             <div class="container-fluid" style="font-color: black">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <a href="#" class="navbar-brand" style="color: #5e5e5e;"><span class="fa fa-home"></span>&nbsp;&nbsp;Aanpasbaarheid Woningen</a>
+                    <a href="#" class="navbar-brand" style="color: #5e5e5e;">Aanpasbaarheid Woningen</a>
                 </div>
 
                 <div>
@@ -94,6 +94,10 @@
         <nav class="navbar navbar-default navbar-fixed-subtop">
             <div>
                 <ul class="nav navbar-nav">
+                    <li style="color: #ccc;margin: 0;font-size:1.3em" popover-trigger="mouseenter" uib-popover="Terug naar het begin" popover-placement="top-left"><a data-ng-click="vm.publish('home')"><span class="fa fa-home"></span></a></li>
+                    <li style="color: #ccc;margin: 0;font-size:1.3em" popover-trigger="mouseenter" uib-popover="Begin opnieuw"><a data-ng-click="vm.publish('refresh')"><span class="fa fa-refresh"></span></a></li>
+                    <li style="color: #ccc;margin: 0;font-size:1.3em" popover-trigger="mouseenter" uib-popover="Stap terug"><a data-ng-click="vm.publish('back')"><span class="fa fa-step-backward"></span></a></li>
+                    <li style="color: #ccc;margin: 0;font-size:1.3em" popover-trigger="mouseenter" uib-popover="Stap vooruit"><a data-ng-click="vm.publish('forward')"><span class="fa fa-step-forward"></span></a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gemeente <span class="caret"></span></a>
                         <div class="dropdown-menu" style="width: 315px;">
