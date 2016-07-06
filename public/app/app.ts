@@ -165,6 +165,15 @@ module App {
         }
 
         /**
+         * Select the first search result.
+         */
+        selectFirst() {
+            if (this.foundCities.length > 0) { 
+                this.selectCity(this.foundCities[0]);
+            }
+        }
+
+        /**
          * When a filter is selected, broadcast it.
          *
          * @param {number} fv

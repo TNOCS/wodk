@@ -103,7 +103,7 @@
                         <div class="dropdown-menu" style="width: 315px;">
                             <form class="navbar-form navbar-left" role="search">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" ng-model="vm.cityQuery" ng-change="vm.filterCity(vm.cityQuery)" style="width:285px" placeholder="Zoek op gemeente" autofocus>
+                                    <input type="text" class="form-control" ng-model="vm.cityQuery" ng-change="vm.filterCity(vm.cityQuery)" ng-keyup="$event.keyCode == 13 && vm.selectFirst()" style="width:285px" placeholder="Zoek op gemeente" autofocus>
                                 </div>
                                 <!--<button type="submit" class="btn btn-default">Submit</button>-->
                             </form>
