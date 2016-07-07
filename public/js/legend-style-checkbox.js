@@ -225,9 +225,9 @@
 
             var square = rows.select('#legendbox')
                 .attr('height', height)
-                .attr('width', height)
+                .attr('width', height + checkboxHeight)
                 .attr('transform', function (d, i) {
-                    return 'translate(' + (checkboxHeight) + ',0)';
+                    return 'translate(' + (-1) + ',0)';
                 })
                 .attr('fill', _chart.getColor)
                 .on('click', onClick);
@@ -254,9 +254,8 @@
                     return 'translate(' + (0) + ',' + (((1 - scale) / 2) * height) + ')';
                 })
                 .attr('width', checkboxHeight)
-                .attr('fill', 'none')
-                .attr('stroke', 'black')
-                .attr('stroke-width', 2)
+                .attr('fill', 'white')
+                .attr('stroke-width', 0)
                 .on('click', onClick)
                 .classed('deselected', function (d) {
                     return (_chart.hasFilter()) ? !isSelectedRow(d) : false;
@@ -367,7 +366,7 @@
                     })
                     .text(function (d) {
                         if (d.key) {
-                            return d.key.replace(/\s/g, String.fromCharCode(160))
+                            return d.key.replace(/\%/g, '%   ').replace(/\s/g, String.fromCharCode(160));
                         } else {
                             return _chart.label()(d);
                         }

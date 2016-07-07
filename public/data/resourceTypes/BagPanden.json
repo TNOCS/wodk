@@ -17,15 +17,15 @@
                 "maxTitleResolution": -1,
                 "drawingMode": "Point"
             },
-            "propertyTypeKeys": "Name;aanpasbaarheid;kostenindicatie;Adres;gemeentenaam;streetview;kadaster;pandtype;bouwjaar;lift;pandoppervlakte;gebruiksdoelverblijfsobject;plint;pandhoogte;woningen_in_pand;niet_woningen_in_pand;pandid;kadaster;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;wijknaam;wijkcode;buurtnaam;buurtcode;ster_gem;oppervlakteverblijfsobject;icon;postcode;woonplaatsnaam;leeftijd_bewoner;eigendom;verhuurder;corporatie;"
+            "propertyTypeKeys": "Name;aanpasbaarheid;kostenindicatie;Adres;streetview;kadaster;pandtype;bouwjaar;lift;pandoppervlakte;gebruiksdoelverblijfsobject;plint;woningen_in_pand;niet_woningen_in_pand;pandhoogte;pandid;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;wijknaam;wijkcode;buurtnaam;buurtcode;ster_gem;oppervlakteverblijfsobject;icon;postcode;woonplaatsnaam;leeftijd_bewoner;eigendom;verhuurder;corporatie;gemeentenaam;"
         }
     },
     "propertyTypeData": {
         "Adres": {
             "label": "Adres",
-            "title": "Adres",
+            "title": " ",
             "type": "textarea",
-            "expression": "properties.openbareruimtenaam + ' ' + properties.huisnummer + (properties.huisletter||'') + (properties.huisnummertoevoeging||'') + '\n' + properties.postcode + ' ' + properties.woonplaatsnaam"
+            "expression": "properties.openbareruimtenaam + ' ' + properties.huisnummer + (properties.huisletter||'') + (properties.huisnummertoevoeging||'') + '\n' + properties.postcode + ' ' + properties.woonplaatsnaam + '\n'"
         },
         "kostenindicatie": {
             "label": "kostenindicatie",
@@ -132,7 +132,7 @@
         },
         "plint": {
             "label": "plint",
-            "title": "Hoogteverschil begane grondvloer appartement - maaiveld > 1/2 meter",
+            "title": "Souterrain (voor bergingen)",
             "description": "Hoogteverschil begane grondvloer appartement - maaiveld > 1/2 meter",
             "type": "options",
             "options": {

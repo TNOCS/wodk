@@ -232,7 +232,7 @@ module wodk {
                 case 'gemeente':
                     var buurtLayer = this.$layerService.findLoadedLayer('bagbuurten');
                     if (!buurtLayer) break;
-                    var featsToRemove = _.filter(buurtLayer.data.features, (f: IFeature) => { return (f.properties['gm_code'] && f.properties['gm_code'] === lastItem.properties['GM_CODE']) });
+                    var featsToRemove = _.filter(buurtLayer.data.features, (f: IFeature) => { return (f.properties['gm_code_2015'] && f.properties['gm_code_2015'] === lastItem.properties['GM_CODE']) });
                     featsToRemove.forEach((f) => {
                         this.$layerService.removeFeature(f);
                     });

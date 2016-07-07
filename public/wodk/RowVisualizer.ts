@@ -156,7 +156,7 @@ module wodk {
             switch (lastFeature.layerId) {
                 case 'gemeente':
                     dummyNdx.add(_.map(
-                        _.filter(group.markers, (i) => { return (<any>i).feature.properties['gm_code'] === lastFeature.properties['GM_CODE']; }),
+                        _.filter(group.markers, (i) => { return (<any>i).feature.properties['gm_code_2015'] === lastFeature.properties['GM_CODE']; }),
                         (item: any, key) => { return item.feature; })
                     );
                     break;

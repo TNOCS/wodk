@@ -18,7 +18,7 @@
 			},
 			"contourProperty": "_contour",
 			"selectActions": ["load woningen"],
-			"propertyTypeKeys":"bu_naam;bu_code;gm_naam;gm_code;aant_inw;ster_totaal;a_apb_w;a_napb_w;a_apb_onb;a_aangep_w;p_apb_w;p_napb_w;p_apb_onb;p_aangep_w;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;woningen;p_1gezw;p_mgezw;p_koopwon,p_huurwon;p_huko_onb;a_1gezw;a_mgezw;a_koopwon;a_huurwon;a_huko_onb;woz;p_apb_w_copy;"
+			"propertyTypeKeys":"bu_naam;bu_code;gm_naam;gm_code;gm_code_2015;aant_inw;ster_totaal;a_apb_w;a_napb_w;a_apb_onb;a_aangep_w;p_apb_w;p_napb_w;p_apb_onb;p_aangep_w;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;woningen;p_1gezw;p_mgezw;p_koopwon,p_huurwon;p_huko_onb;a_1gezw;a_mgezw;a_koopwon;a_huurwon;a_huko_onb;woz;p_apb_w_copy;"
 		}
 	},
 	"propertyTypeData" : {
@@ -43,6 +43,12 @@
 		},
 		"gm_code": {
         	"label": "gm_code",
+        	"title": "Gemeentecode",
+        	"type": "text",
+        	"visibleInCallOut" : false
+		},
+        "gm_code_2015": {
+        	"label": "gm_code_2015",
         	"title": "Gemeentecode",
         	"type": "text",
         	"visibleInCallOut" : true

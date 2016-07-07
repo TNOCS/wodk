@@ -6,8 +6,7 @@
     display: block;
 }
 
-.nav > li.dropdown > a,
-.navbar-default .navbar-nav > li > a {
+.nav > li.dropdown > a, .navbar-default .navbar-nav > li > a {
     color: #ccc;
 }
 
@@ -35,14 +34,12 @@
     color: white;
 }
 
-.navbar-default .navbar-nav>li>a:focus,
-.navbar-default .navbar-nav>li>a:hover {
+.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
     color: #fff;
     background-color: transparent;
 }
 
-.nav > li.open > a,
-.nav > li.active > a {
+.nav > li.open > a, .nav > li.active > a {
     color: black;
 }
 
@@ -128,9 +125,7 @@
 }
 
 @-webkit-keyframes bouncedelaytext {
-    0%,
-    80%,
-    100% {
+    0%, 80%, 100% {
         -webkit-transform: scale(1.0);
     }
     40% {
@@ -139,9 +134,7 @@
 }
 
 @keyframes bouncedelaytext {
-    0%,
-    80%,
-    100% {
+    0%, 80%, 100% {
         transform: scale(1.0);
         -webkit-transform: scale(1.0);
     }
@@ -325,9 +318,54 @@
     color: black;
 }
 
+.panel-heading {
+    padding: 2px 2px 2px 10px;
+}
+
+.feature-prop-item {
+    min-height: 20px;
+}
+
+.feature-prop-content {
+    display: none;
+}
+
+.feature-prop-value-align-right {
+    margin-top: -1.5em;
+}
+
+.tab-content {
+    max-height: 550px;
+}
+
+.icons-on-hover {
+    height: 0px;
+}
+
+.icons-on-hover:hover {
+    display: none!important;
+}
+
 .dashboard-active > a > span {
     background: #CCC1DA;
     color: black;
+}
+
+.rightpanel-header {
+    background: #CCC1DA;
+    min-height: 80px;
+}
+
+.rightpanel-tabs {
+    height: 0!important;
+}
+
+.rightpanel-tabs > div {
+    height: 0;
+}
+
+.tab-content {
+    background: rgb(227, 220, 231);
 }
 
 .dc-chart g.row text {
