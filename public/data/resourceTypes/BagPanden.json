@@ -32,7 +32,7 @@
             "title": "Kostenindicatie aanpassingen",
             "visibleInCallOut": true,
             "type": "textarea",
-            "expression": "(properties.woningen_in_pand === 1 && !properties.niet_woningen_in_pand) ? 'traplift (nieuw): €3500 - €7500 \ntraplift (hergebruik): ca. 50% van nieuw' : null"
+            "expression": "(properties.woningen_in_pand === 1 && !properties.niet_woningen_in_pand) ? 'traplift (nieuw): €2500 - €9000 \ntraplift (hergebruik): ca. 50% van nieuw' : null"
         },
         "postcode": {
             "label": "postcode",
@@ -146,8 +146,9 @@
         "oppervlakteverblijfsobject": {
             "label": "oppervlakteverblijfsobject",
             "type": "number",
+            "stringFormat": "{0:#,#} m2",
             "title": "Oppervlakte verblijfsobject",
-            "section": "Overig",
+            "description": "Woonoppervlak (bron: BAG)",
             "visibleInCallOut": true,
             "isSearchable": false
         },
@@ -155,6 +156,7 @@
             "label": "pandoppervlakte",
             "type": "number",
             "title": "Footprint pand",
+            "description": "Oppervlakte van het pand op grondniveau",
             "stringFormat": "{0:#,#} m2",
             "visibleInCallOut": true,
             "isSearchable": false

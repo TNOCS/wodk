@@ -87,6 +87,12 @@
                         <li><a href="#" style="line-height: 1.3em;color: #777">'Langer thuis'</a></li>
                     </ul>
                 </div>
+
+                <div>
+                    <ul class="nav navbar-nav" style="font-size: 1.5em;float:right;cursor:pointer;">
+                        <li><a ng-click="vm.$messageBusService.publish('feature','justShowThisWidget')" style="line-height: 1.3em;color: #777;">Toelichting</a></li>
+                    </ul>
+                </div>
             </div>
 
             <!-- /.container-fluid -->
@@ -98,8 +104,8 @@
                     <li class="active-button" popover-trigger="mouseenter" uib-popover="Begin opnieuw" popover-placement="bottom"><a data-ng-click="vm.publish('refresh')"><span class="fa fa-repeat"></span></a></li>
                     <li class="active-button" popover-trigger="mouseenter" uib-popover="Stap terug" popover-placement="bottom"><a data-ng-click="vm.publish('back')"><span class="fa fa-arrow-left"></span></a></li>
                     <li class="active-button" popover-trigger="mouseenter" uib-popover="Stap vooruit" popover-placement="bottom"><a data-ng-click="vm.publish('forward')"  ng-class="vm.wodkWidgetSvc.hasForwardHistory() ? '' : 'inactive-button'"><span class="fa fa-arrow-right"></span></a></li>
-                    <li class="dropdown" popover-trigger="mouseenter" uib-popover="Zoek een gemeente" popover-placement="bottom">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gemeente <span class="caret"></span></a>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" popover-trigger="mouseenter" uib-popover="Zoek een gemeente" popover-placement="bottom">Gemeente <span class="caret"></span></a>
                         <div class="dropdown-menu" style="width: 315px;">
                             <form class="navbar-form navbar-left" role="search">
                                 <div class="form-group">

@@ -293,6 +293,7 @@
                 "id": "p_apb_w_copy",
                 "visualAspect": "fillColor",
                 "description": "Percentage aanpasbare woningen",
+                "defaultLabel": "In onderzoek",
                 "legendKind": "discrete",
                 "legendEntries": [
                     {
@@ -328,7 +329,7 @@
                         "color": "#00ff00"
                     },
 					{
-                        "label": "Onbekend",
+                        "label": "In onderzoek",
                         "color": "#444444"
                     }
                 ]
@@ -389,7 +390,7 @@
                     },
 					{
 						"sortKey": "e",
-                        "label": "Onbekend",
+                        "label": "In onderzoek",
 						"interval": {
                             "min": 99999,
                             "max": 99998
