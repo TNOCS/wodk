@@ -36,7 +36,7 @@ module App {
             '$timeout'
         ];
 
-        public areaFilter: AreaFilter.AreaFilterModel;
+        // public areaFilter: AreaFilter.AreaFilterModel;
         public contourAction: ContourAction.ContourActionModel;
 
         public filterValues: number[] = [0, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500];
@@ -82,8 +82,8 @@ module App {
                         description: 'Show rangewidget with filter functionality'
                     }
 
-                    this.areaFilter = new AreaFilter.AreaFilterModel();
-                    this.$layerService.addActionService(this.areaFilter);
+                    // this.areaFilter = new AreaFilter.AreaFilterModel();
+                    // this.$layerService.addActionService(this.areaFilter);
                     this.contourAction = new ContourAction.ContourActionModel();
                     this.$layerService.addActionService(this.contourAction);
 

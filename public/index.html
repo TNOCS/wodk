@@ -94,11 +94,11 @@
         <nav class="navbar navbar-default navbar-fixed-subtop">
             <div>
                 <ul class="nav navbar-nav">
-                    <li class="active-button" popover-trigger="mouseenter" uib-popover="Terug naar zorgopdekaart.nl" popover-placement="top-left"><a data-ng-click="vm.publish('home')"><span class="fa fa-home"></span></a></li>
-                    <li class="active-button" popover-trigger="mouseenter" uib-popover="Begin opnieuw"><a data-ng-click="vm.publish('refresh')"><span class="fa fa-repeat"></span></a></li>
-                    <li class="active-button" popover-trigger="mouseenter" uib-popover="Stap terug"><a data-ng-click="vm.publish('back')"><span class="fa fa-arrow-left"></span></a></li>
-                    <li class="active-button" popover-trigger="mouseenter" uib-popover="Stap vooruit"><a data-ng-click="vm.publish('forward')"  ng-class="vm.wodkWidgetSvc.hasForwardHistory() ? '' : 'inactive-button'"><span class="fa fa-arrow-right"></span></a></li>
-                    <li class="dropdown">
+                    <li class="active-button" popover-trigger="mouseenter" uib-popover="Terug naar zorgopdekaart.nl" popover-placement="bottom-left"><a data-ng-click="vm.publish('home')"><span class="fa fa-home"></span></a></li>
+                    <li class="active-button" popover-trigger="mouseenter" uib-popover="Begin opnieuw" popover-placement="bottom"><a data-ng-click="vm.publish('refresh')"><span class="fa fa-repeat"></span></a></li>
+                    <li class="active-button" popover-trigger="mouseenter" uib-popover="Stap terug" popover-placement="bottom"><a data-ng-click="vm.publish('back')"><span class="fa fa-arrow-left"></span></a></li>
+                    <li class="active-button" popover-trigger="mouseenter" uib-popover="Stap vooruit" popover-placement="bottom"><a data-ng-click="vm.publish('forward')"  ng-class="vm.wodkWidgetSvc.hasForwardHistory() ? '' : 'inactive-button'"><span class="fa fa-arrow-right"></span></a></li>
+                    <li class="dropdown" popover-trigger="mouseenter" uib-popover="Zoek een gemeente" popover-placement="bottom">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gemeente <span class="caret"></span></a>
                         <div class="dropdown-menu" style="width: 315px;">
                             <form class="navbar-form navbar-left" role="search">
@@ -114,8 +114,8 @@
                             </div>
                         </div>
                     </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" ng-class="vm.wodkWidgetSvc.getGemeenteSelectionHistory().length > 0 ? '' : 'inactive-button'" data-toggle="dropdown" href="#"><span class="fa fa-filter">&nbsp;</span>{{vm.filterValue}}<span class="caret"></span></a>
+                    <li class="dropdown" popover-trigger="mouseenter" uib-popover="Filter minimum aantal woningen per buurt" popover-placement="bottom">
+                        <a class="dropdown-toggle" ng-class="vm.wodkWidgetSvc.getLastSelectedType() === 'gemeente' ? '' : 'inactive-button'" data-toggle="dropdown" href="#"><span class="fa fa-filter">&nbsp;</span>{{vm.filterValue}}<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li style="background-color: #AAA; font-weight: bold; font-size: 1.2em; line-height:1.2em">&nbsp;&nbsp;Woningfilter &lt;</li>
                             <li style="margin-left:10px;" ng-repeat="fv in vm.filterValues" ng-click="vm.selectFilter(fv)">{{fv}}</li>

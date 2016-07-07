@@ -31,6 +31,8 @@
                 }
             },
             "refreshBBOX": false,
+            "minZoom": 1,
+            "maxZoom": 10,
             "defaultFeatureType": "provincie",
             "typeUrl": "data/resourceTypes/cbs.json",
             "type": "geojson",

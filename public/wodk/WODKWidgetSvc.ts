@@ -83,6 +83,10 @@ module wodk {
             return this.lastSelectedName;
         }
 
+        public getLastSelectedType() {
+            return this.lastSelectedType;
+        }
+
         public selecteerProvincie() {
             var l = this.$layerService.findLayer('provincie');
             var f = this.$layerService.lastSelectedFeature;
