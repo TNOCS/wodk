@@ -22,6 +22,8 @@ module wodk {
         private parentWidget: JQuery;
         private mBusHandles: csComp.Services.MessageBusHandle[] = [];
         private exporterAvailable: boolean;
+        private buurtFilterDim: any;
+        private buurtFilterVal: number;
 
         public static $inject = [
             '$scope',
@@ -162,34 +164,38 @@ module wodk {
         }
 
         private addBuurtFilter(minSize: number) {
+            dc.filterAll();
+            this.buurtFilterVal = minSize;
             var propId = 'data/resourceTypes/Buurt.json#ster_totaal';
             var layer = this.$layerService.findLoadedLayer('bagbuurten');
             if (!layer) return;
             var p = this.$layerService.findPropertyTypeById(propId);
             var propLabel = propId.split('#').pop();
-            var filterDim;
-            if (layer.group.ndx) {
-                filterDim = layer.group.ndx.dimension(d => {
+            if (layer.group.ndx && !this.buurtFilterDim) {
+                this.buurtFilterDim = layer.group.ndx.dimension(d => {
                     if (!d.properties.hasOwnProperty(propLabel)) return null;
                     let prop = d.properties[propLabel];
                     if (prop === null || prop === undefined || isNaN(prop)) return null;
                     return prop;
                 });
-                this.applyFilter(filterDim, minSize, layer.group);
             }
+            this.applyFilter(this.buurtFilterVal, layer.group);
         }
 
-        private applyFilter(filterDim, filterValue, group) {
+        private applyFilter( filterValue, group) {
             if (filterValue === null || filterValue === undefined || isNaN(filterValue)) return;
-            if (!filterDim) return;
+            if (!this.buurtFilterDim) return;
             if (filterValue > 0) {
-                filterDim.filter([filterValue, Infinity]);
+                this.buurtFilterDim.filter([filterValue, Infinity]);
             } else {
-                filterDim.filterAll();
+                this.buurtFilterDim.filterAll();
             }
-            //group.filterResult = filterDim.top(Infinity);
+            group.filterResult = this.buurtFilterDim.top(Infinity);
             this.$messageBus.publish('filters', 'updateGroup', group.id);
-            // this.$layerService.updateMapFilter(this.group);
+            this.$timeout(() => {
+                this.updateRowVisualizerScope(this.$scope.filter);
+                this.updateRowFilterScope(this.$scope.filter);
+            });
         }
 
         private selectCity(name: string) {
@@ -250,15 +256,15 @@ module wodk {
             gf.property = this.$scope.style.property;
             gf.id = this.widget.id;
             gf.group = this.$scope.style.group;
-            if (gf.group.ndx) {
-                gf.group.ndx.remove();
-            }
-            gf.group.ndx = crossfilter([]);
-            gf.group.ndx.add(_.map(gf.group.markers, (item: any, key) => { return item.feature; }));
+            // if (gf.group.ndx) {
+            //     gf.group.ndx.remove();
+            // }
+            // gf.group.ndx = crossfilter([]);
+            // gf.group.ndx.add(_.map(gf.group.markers, (item: any, key) => { return item.feature; }));
             gf.title = this.$scope.style.title;
             gf.filterLabel = null;
             gf.filterType = 'row';
-            gf.group.filters = [];
+            this.$layerService.removeAllFilters(gf.group);
             gf.group.filters.push(gf);
             this.$timeout(() => {
                 this.$scope.filter = gf;
@@ -269,13 +275,15 @@ module wodk {
                 this.updateRowFilterScope(gf);
             });
             this.parentWidget.show();
+            this.buurtFilterDim = null;
+            this.addBuurtFilter(this.buurtFilterVal);
             // var propType = this.$layerService.findPropertyTypeById(this.$scope.layer.typeUrl + '#' + gf.property);
             // this.$layerService.setGroupStyle(this.$scope.style.group, propType);
         }
 
         private updateChart() {
-            this.$scope.filter.group.ndx = crossfilter([]);
-            this.$scope.filter.group.ndx.add(_.map(this.$scope.filter.group.markers, (item: any, key) => { return item.feature; }));
+            // this.$scope.filter.group.ndx = crossfilter([]);
+            // this.$scope.filter.group.ndx.add(_.map(this.$scope.filter.group.markers, (item: any, key) => { return item.feature; }));
             this.$timeout(() => {
                 this.updateRowVisualizerScope(this.$scope.filter);
                 this.updateRowFilterScope(this.$scope.filter);
@@ -338,6 +346,18 @@ module wodk {
                     canvas.parentElement.removeChild(canvas);
                 }
             });
+        }
+       
+        private exportToPDF() {
+            var jsPDF: any = (<any>window).jsPDF || undefined;
+            if (!jsPDF) return;
+            var doc = new jsPDF('p', 'pt', 'a3');
+            doc.setFontSize(12);
+            doc.fromHTML($('#' + this.widget.elementId).get(0), 15, 15, {
+                'width': +this.widget.width
+            });
+            var fileName = this.wodkWidgetSvc.getLastSelectedName() || 'markdown-export';
+            doc.save(fileName + '.pdf');
         }
     }
 }

@@ -248,7 +248,7 @@
         "mobile": true
     }, {
         "id": "datatable",
-        "name": "Tabel",
+        "name": "Tabel export",
         "showMap": false,
         "showTimeline": false,
         "showLeftmenu": false,

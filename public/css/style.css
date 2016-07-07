@@ -302,7 +302,7 @@
 
 .inactive-button {
     margin: 0;
-    color: #333333!important;
+    color: #777777!important;
     pointer-events: none!important;
     cursor: default;
 }
@@ -318,6 +318,16 @@
 .active-text table tbody tr td {
     border-bottom: 1px #CCC1DA solid;
     border-top: 1px #CCC1DA solid;
+}
+
+.dashboard-active {
+    background: #CCC1DA;
+    color: black;
+}
+
+.dashboard-active > a > span {
+    background: #CCC1DA;
+    color: black;
 }
 
 .dc-chart g.row text {

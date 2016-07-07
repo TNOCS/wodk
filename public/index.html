@@ -121,8 +121,13 @@
                             <li style="margin-left:10px;" ng-repeat="fv in vm.filterValues" ng-click="vm.selectFilter(fv)">{{fv}}</li>
                         </ul>
                     </li>
-                    <li class="active"><a href="#">Kaart <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">Tabel export</a></li>
+                    <!--<li class="active"><a href="#">Kaart <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">Tabel export</a></li>-->
+                    <li data-ng-repeat="value in vm.$layerService.project.dashboards" class="active-button" ng-class="{'dashboard-active' : value == vm.$layerService.project.activeDashboard}">
+                        <a ng-click="vm.$dashboardService.selectDashboard(value,'main')">
+                            <span>{{value.name}}</span>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </nav>
