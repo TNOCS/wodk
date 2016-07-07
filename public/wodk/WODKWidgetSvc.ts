@@ -210,6 +210,13 @@ module wodk {
             return (this.forwardHistory && this.forwardHistory.length > 0);
         }
 
+        public clearHistory() {
+            this.selectionHistory.length = 0;
+            this.forwardHistory.length = 0;
+            this.gemeenteSelectie.length = 0;
+            this.buurtSelectie.length = 0;
+        }
+
         public stepForward() {
             if (!this.forwardHistory || this.forwardHistory.length === 0) return;
             var f: IFeature = this.forwardHistory.pop();

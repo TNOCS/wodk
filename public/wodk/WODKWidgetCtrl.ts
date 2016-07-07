@@ -119,6 +119,7 @@ module wodk {
                         this.wodkWidgetSvc.stepForward();
                         break;
                     case 'refresh':
+                        this.wodkWidgetSvc.clearHistory();
                         this.$layerService.actionService.execute('reload project');
                         break;
                     case 'home':
