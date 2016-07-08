@@ -147,7 +147,6 @@ module wodk {
 
         public laadWoningen() {
             // Load woningen by buurt
-
             var l = this.$layerService.findLayer('bagcontouren');
             var f = this.$layerService.lastSelectedFeature;
             if (!l || !f || !f.geometry || !f.geometry.coordinates) return;
@@ -166,6 +165,11 @@ module wodk {
             var fClone: IFeature = csComp.Services.Feature.serialize(f);
             // Replace polygon buurt by polyline
             var bl = this.$layerService.findLayer('bagbuurten');
+            if (bl.group.filters) {
+                bl.group.filters.forEach((fil) => {
+                    this.$layerService.removeFilter(fil);
+                });
+            }
             this.$layerService.removeFeature(f);
             if (bl && bl.data && bl.data.features) {
                 // fClone.geometry.type = (fClone.geometry.type === 'Polygon' ? 'LineString' : 'MultiLineString');
@@ -229,9 +233,13 @@ module wodk {
                 this.$layerService.checkViewBounds();
                 return;
             }
+            // Restore item from history
             var lastItem: IFeature = this.selectionHistory.pop();
             if (!lastItem.id || !lastItem.layerId) return;
             this.forwardHistory.push(JSON.parse(JSON.stringify(lastItem)));
+            this.lastSelectedType = null;
+            if (lastItem.layerId === 'bagbuurten') this.lastSelectedType = 'gemeente'; // Todo: just use layerid
+            this.lastSelectedName = lastItem.properties['Name'] || 'onbekend';
             (lastItem.layerId === 'gemeente' ? this.gemeenteSelectie.pop() : this.buurtSelectie.pop());
             var l = this.$layerService.findLoadedLayer(lastItem.layerId);
             var replacementFeature = this.$layerService.findFeature(l, lastItem.id);

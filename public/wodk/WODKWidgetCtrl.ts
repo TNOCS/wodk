@@ -185,6 +185,7 @@ module wodk {
         }
 
         private applyFilter( filterValue, group) {
+            console.log('Apply buurtfilter');
             if (filterValue === null || filterValue === undefined || isNaN(filterValue)) return;
             if (!this.buurtFilterDim) return;
             if (filterValue > 0) {
@@ -259,11 +260,11 @@ module wodk {
             gf.property = this.$scope.style.property;
             gf.id = this.widget.id;
             gf.group = this.$scope.style.group;
-            // if (gf.group.ndx) {
-            //     gf.group.ndx.remove();
-            // }
-            // gf.group.ndx = crossfilter([]);
-            // gf.group.ndx.add(_.map(gf.group.markers, (item: any, key) => { return item.feature; }));
+            if (gf.group.ndx) {
+                gf.group.ndx.remove();
+            }
+            gf.group.ndx = crossfilter([]);
+            gf.group.ndx.add(_.map(gf.group.markers, (item: any, key) => { return item.feature; }));
             gf.title = this.$scope.style.title;
             gf.filterLabel = null;
             gf.filterType = 'row';
