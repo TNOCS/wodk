@@ -152,10 +152,10 @@
             "style": "default",
             "left": "20%",
             "right": "2px",
-            "top": "110px",
+            "top": "120px",
             "bottom": "16px",
             "width": "65%",
-            "height": "80%",
+            "height": "",
             "data": {
                 "featureTypeName": "Dummy",
                 "dynamicProperties": [

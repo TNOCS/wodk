@@ -14,6 +14,7 @@ module wodk {
         filter: csComp.Services.GroupFilter;
         minimized: boolean;
         selectedFeature: csComp.Services.IFeature;
+        lastSelectedName: string;
     }
 
     export class WODKWidgetCtrl {
@@ -239,6 +240,7 @@ module wodk {
                     }
                     md = this.replaceAll(md, searchPattern, displayText);
                 });
+                this.$scope.lastSelectedName = feature.properties['Name'];
                 this.parentWidget.show();
                 this.$scope.data.mdText = md;
             }, 0);

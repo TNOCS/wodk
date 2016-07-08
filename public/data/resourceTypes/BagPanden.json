@@ -328,7 +328,7 @@
                             "min": -3,
                             "max": -2
                         },
-                        "color": "#222222"
+                        "color": "#444444"
                     },
                     {
                         "sortKey": "f",
@@ -341,7 +341,7 @@
                     },
                     {
                         "sortKey": "h",
-                        "label": "geen      niet-aanpasbaar",
+                        "label": "geen ster niet-aanpasbaar",
                         "interval": {
                             "min": -1,
                             "max": 0

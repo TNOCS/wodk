@@ -29,7 +29,7 @@
     </div>
     <!-- Gemeente/buurt part (double columns) -->
     <div class="fill-height" ng-show="vm.wodkWidgetSvc.lastSelectedType=='gemeente' || vm.wodkWidgetSvc.lastSelectedType=='buurt'">
-        <div class="table fill-height">
+        <div class="table fill-height" style="color:black">
             <div class="row wodk-title-row">
                 <div class="col-xs-12">
                     <div style="display: inline-block; font-size:20px; font-weight:bold; margin-bottom:2px;">{{vm.widget.title}}</div>
@@ -47,8 +47,8 @@
                     <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='buurt'">Buurten cumulatief</div>
                 </div>
                 <div class="col-xs-6 fixed-column-width">
-                    <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='gemeente'">Gemeente {{vm.wodkWidgetSvc.lastSelectedName}}</div>
-                    <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='buurt'">{{vm.wodkWidgetSvc.lastSelectedName}}</div>
+                    <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='gemeente'">Gemeente {{lastSelectedName}}</div>
+                    <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='buurt'">{{lastSelectedName}}</div>
                 </div>
             </div>
             <div class="row row-eq-height wodk-cumulative-row">
