@@ -218,10 +218,10 @@ module App {
                     break;
                 case 'activated':
                     if (this.$scope.layersLoading >= 1) this.$scope.layersLoading -= 1;
-                    if (layer.id === 'bagcontouren') {
+                    // if (layer.id === 'bagcontouren') {
                         // var gemeente = this.$layerService.findLoadedLayer('gemeente');
                         // if (gemeente) this.$layerService.removeLayer(gemeente);
-                    }
+                    // }
                     break;
                 case 'error':
                     this.$scope.layersLoading = 0;
