@@ -34,10 +34,10 @@
         }
     },
     "baselayers": [{
-        "title": "OpenStreetMap HOT",
+        "title": "OpenStreetMap",
         "subtitle": "Road",
         "url": "http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
-        "isDefault": false,
+        "isDefault": true,
         "minZoom": 0,
         "maxZoom": 19,
         "cesium_url": "http://c.tile.openstreetmap.fr/hot/",
@@ -45,19 +45,6 @@
         "subdomains": ["a", "b", "c"],
         "attribution": "Tiles courtesy of <a href='http://hot.openstreetmap.org/' target='_blank'>Humanitarian OpenStreetMap Team</a>",
         "preview": "http://b.tile.openstreetmap.fr/hot/11/1048/675.png"
-    }, {
-        "title": "OpenStreetMap",
-        "id": "OpenStreetMap",
-        "subtitle": "Road",
-        "url": "http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png",
-        "isDefault": true,
-        "cesium_url": "http://otile3.mqcdn.com/tiles/1.0.0/osm/",
-        "cesium_maptype": "openstreetmap",
-        "minZoom": 0,
-        "maxZoom": 19,
-        "subdomains": ["otile1", "otile2", "otile3", "otile4"],
-        "attribution": "Tiles courtesy of <a href='http://www.mapquest.com/' target='_blank'>MapQuest</a> <img src='http://developer.mapquest.com/content/osm/mq_logo.png'>. Map data (c) <a href='http://www.openstreetmap.org/' target='_blank'>OpenStreetMap</a> contributors, CC-BY-SA.",
-        "preview": "http://c.tile.openstreetmap.org/11/1051/673.png"
     }, {
         "title": "OSM Mapnik",
         "subtitle": "Mapnik",

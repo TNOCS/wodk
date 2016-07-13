@@ -198,7 +198,7 @@
                     "title": "Toggle achtergrondkaart: toon namen",
                     "action": "activate baselayer",
                     "layer": "OpenStreetMap",
-                    "image": "http://otile1.mqcdn.com/tiles/1.0.0/osm/15/16779/10817.png",
+                    "image": "http://c.tile.openstreetmap.fr/hot/15/16776/10811.png",
                     "defaultEnabled": false,
                     "showLegend": false
                 }]
