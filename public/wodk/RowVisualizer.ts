@@ -92,9 +92,6 @@ module wodk {
             if (par.hasOwnProperty('filter')) {
                 $scope.filter = par['filter'];
             }
-            else {
-
-            }
 
             if ((<any>window).canvg) {
                 this.exporterAvailable = true;
@@ -151,6 +148,20 @@ module wodk {
             var lastFeatures = this.wodkWidgetSvc.getSelectionHistory() || [];
             if (lastFeatures.length === 0) return;
             var lastFeature = lastFeatures[lastFeatures.length - 1];
+
+            let last = this.$layerService.lastSelectedFeature;
+            if (last) {
+                lastFeatures.some(f => {
+                    if (f.id === last.id) {
+                        lastFeature = last;
+                        return true;
+                    }
+                    return false;
+                });
+            }
+
+            if (lastFeatures.indexOf(last) >= 0) lastFeature = last;
+
             if (!lastFeature) return;
 
             switch (lastFeature.layerId) {

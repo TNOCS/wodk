@@ -244,6 +244,7 @@ module wodk {
                 this.$scope.lastSelectedName = feature.properties['Name'];
                 this.parentWidget.show();
                 this.$scope.data.mdText = md;
+                this.updateChart();
             }, 0);
         }
 
@@ -320,7 +321,7 @@ module wodk {
                 console.log('No visualizer provided.');
                 return;
             }
-            var rowFilterElm = angular.element($("#visualizer_" + this.widget.id));
+            var rowFilterElm = angular.element($('#visualizer_' + this.widget.id));
             if (!rowFilterElm) {
                 console.log('rowVisualizerElm not found.');
                 return;
@@ -339,19 +340,19 @@ module wodk {
         public exportToImage() {
             var canvg = (<any>window).canvg || undefined;
             if (!canvg) return;
-            var svg = new XMLSerializer().serializeToString(document.getElementById("visualizer_" + this.widget.id).firstChild);
+            var svg = new XMLSerializer().serializeToString(document.getElementById('visualizer_' + this.widget.id).firstChild);
             var canvas = document.createElement('canvas');
             document.body.appendChild(canvas);
             canvg(canvas, svg, {
                 renderCallback: () => {
-                    var img = canvas.toDataURL("image/png");
+                    var img = canvas.toDataURL('image/png');
                     var fileName = this.$scope.filter.title || 'rowfilter-export';
                     csComp.Helpers.saveImage(img, fileName + '.png', 'png');
                     canvas.parentElement.removeChild(canvas);
                 }
             });
         }
-       
+
         private exportToPDF() {
             var jsPDF: any = (<any>window).jsPDF || undefined;
             if (!jsPDF) return;
