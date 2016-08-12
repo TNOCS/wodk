@@ -252,9 +252,10 @@ module wodk {
                     var buurtLayer = this.$layerService.findLoadedLayer('bagbuurten');
                     if (!buurtLayer) break;
                     var featsToRemove = _.filter(buurtLayer.data.features, (f: IFeature) => { return (f.properties['gm_code_2015'] && f.properties['gm_code_2015'] === lastItem.properties['GM_CODE']) });
-                    featsToRemove.forEach((f) => {
-                        this.$layerService.removeFeature(f);
-                    });
+                    // featsToRemove.forEach((f) => {
+                    //     this.$layerService.removeFeature(f);
+                    // });
+                    this.$layerService.removeFeatureBatch(_.map(featsToRemove, (val, key) => { return val.id; }), buurtLayer);
                     if (this.$layerService.$mapService.map.getZoom() > 13) this.$layerService.$mapService.map.setZoom(13);
                     break;
                 case 'bagbuurten':

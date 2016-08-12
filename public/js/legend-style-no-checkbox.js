@@ -251,7 +251,7 @@
                         if (d.key.indexOf("%") === -1) {
                             return 3 * height;
                         } else {
-                            return height/2 - 2;
+                            return height + 20;
                         }
                     })
                     .attr('y', function (d) {
@@ -275,7 +275,7 @@
                     })
                     .text(function (d) {
                         if (d.key) {
-                            return d.key.replace(/\%/g, '%  ').replace(/\s/g, String.fromCharCode(160));
+                            return d.key.replace(/\s/g, String.fromCharCode(160));
                         } else {
                             return _chart.label()(d);
                         }
