@@ -18,7 +18,8 @@ var deployPath = process.env.deployPath || '';
 console.log('Process env port: ' + port);
 console.log('deployPath: ' + deployPath );
 
-var cs = new csweb.csServer(__dirname, <csweb.csServerOptions>{
+// var cs = new csweb.csServer(__dirname, <csweb.csServerOptions>{
+var cs = new csweb.csServer(__dirname, <any>{
     port: port,
     swagger: false,
     connectors: { },

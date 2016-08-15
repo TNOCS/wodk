@@ -111,6 +111,8 @@ module wodk {
                         break;
                     case 'filter':
                         if (!value && value !== 0) return;
+                        (this.buurtFilterDim ? this.buurtFilterDim.dispose() : null);
+                        this.buurtFilterDim = null;                      
                         this.addBuurtFilter(value);
                         break;
                     case 'back':
@@ -166,14 +168,21 @@ module wodk {
         }
 
         private addBuurtFilter(minSize: number) {
-            dc.filterAll();
+            var layer = this.$layerService.findLoadedLayer('bagbuurten');
+            if (!layer) {
+                return;
+            }
+            if (layer.group.ndx) {
+                layer.group.ndx.remove();
+            }
+            layer.group.ndx = crossfilter([]);
+            layer.group.ndx.add(_.map(layer.group.markers, (item: any, key) => { return item.feature; }));
+            // dc.filterAll();
             this.buurtFilterVal = minSize;
             var propId = 'data/resourceTypes/Buurt.json#ster_totaal';
-            var layer = this.$layerService.findLoadedLayer('bagbuurten');
-            if (!layer) return;
             var p = this.$layerService.findPropertyTypeById(propId);
             var propLabel = propId.split('#').pop();
-            if (layer.group.ndx && !this.buurtFilterDim) {
+            if (layer.group && layer.group.ndx && !this.buurtFilterDim) {
                 this.buurtFilterDim = layer.group.ndx.dimension(d => {
                     if (!d.properties.hasOwnProperty(propLabel)) return null;
                     let prop = d.properties[propLabel];
@@ -194,11 +203,11 @@ module wodk {
                 this.buurtFilterDim.filterAll();
             }
             group.filterResult = this.buurtFilterDim.top(Infinity);
-            this.$messageBus.publish('filters', 'updateGroup', group.id);
             this.$timeout(() => {
                 this.updateRowVisualizerScope(this.$scope.filter);
                 this.updateRowFilterScope(this.$scope.filter);
             });
+            this.$messageBus.publish('filters', 'updateGroup', group.id);
         }
 
         private selectCity(name: string) {
@@ -244,7 +253,9 @@ module wodk {
                 this.$scope.lastSelectedName = feature.properties['Name'];
                 this.parentWidget.show();
                 this.$scope.data.mdText = md;
-                this.updateChart();
+                if (feature.geometry.type.toLowerCase() === 'point') {
+                    this.updateChart();
+                }
             }, 0);
         }
 
@@ -280,8 +291,11 @@ module wodk {
                 this.updateRowFilterScope(gf);
             });
             this.parentWidget.show();
-            this.buurtFilterDim = null;
-            this.addBuurtFilter(this.buurtFilterVal);
+            if (gf.group.id === "buurten") {
+                (this.buurtFilterDim ? this.buurtFilterDim.dispose() : null);
+                this.buurtFilterDim = null;
+                this.addBuurtFilter(this.buurtFilterVal);
+            }
             // var propType = this.$layerService.findPropertyTypeById(this.$scope.layer.typeUrl + '#' + gf.property);
             // this.$layerService.setGroupStyle(this.$scope.style.group, propType);
         }

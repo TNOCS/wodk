@@ -280,11 +280,7 @@ module wodk {
                 .colors(d => {
                     if (pt && pt.legend) {
                         if (pt.options) {
-                            if (false && typeof d === 'string' && d.indexOf('.') > -1) {
-                                return csComp.Helpers.getColorFromLegend(parseInt(d.split('.')[0]), pt.legend);
-                            } else {
-                                return csComp.Helpers.getColorFromLegend(d, pt.legend);
-                            }
+                            return csComp.Helpers.getColorFromLegend(d, pt.legend);
                         }
                         if (!pt.options) {
                             var arr = pt.legend.legendEntries.filter((le => { return le.label === d }));
@@ -317,7 +313,7 @@ module wodk {
                     }, 100);
                 })
                 .on('filtered', (e) => {
-                    console.log('Filtered rowchart');
+                    console.log('Filtered rowvisualizer ' + e.dimension().top(1000).length + ' ' + e.anchorName());
                 });
             this.dcChart.xAxis().ticks(8);
             this.dcChart.selectAll();

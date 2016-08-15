@@ -121,7 +121,7 @@
                         </div>
                     </li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" ng-class="vm.wodkWidgetSvc.getLastSelectedType() === 'gemeente' ? '' : 'inactive-button'" data-toggle="dropdown" href="#" popover-trigger="mouseenter" uib-popover="Filter minimum aantal woningen per buurt" popover-placement="right"><span class="fa fa-filter">&nbsp;</span>{{vm.filterValue}}<span class="caret"></span></a>
+                        <a class="dropdown-toggle" ng-class="vm.wodkWidgetSvc.gemeenteSelectie.length > 0 ? '' : 'inactive-button'" data-toggle="dropdown" href="#" popover-trigger="mouseenter" uib-popover="Filter minimum aantal woningen per buurt" popover-placement="right"><span class="fa fa-filter">&nbsp;</span>{{vm.filterValue}}<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li style="background-color: #AAA; font-weight: bold; font-size: 1.2em; line-height:1.2em">&nbsp;&nbsp;Woningfilter &lt;</li>
                             <li style="margin-left:10px;" ng-repeat="fv in vm.filterValues" ng-click="vm.selectFilter(fv)">{{fv}}</li>

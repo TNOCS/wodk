@@ -8,8 +8,7 @@
     "noLib": false,
     "sourceMap": false
   },
-  "files" : [
-  ],
+  "files" : ["./public/bower_components/csweb/dist-bower/csComp.d.ts"],
   "include": [
     "./Scripts/**/*.d.ts",
     "./public/app/*.ts",
