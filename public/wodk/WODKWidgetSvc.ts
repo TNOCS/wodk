@@ -140,7 +140,12 @@ module wodk {
                     var propType = this.$layerService.findPropertyTypeById('data/resourceTypes/Buurt.json#p_apb_w');
                     if (typeof propType === 'undefined') return;
                     this.$layerService.setGroupStyle(group, propType);
-                    this.$layerService.layerSources[l.type.toLowerCase()].fitMap(l);
+                    if (this.gemeenteSelectie.length <= 1 && l && l.data && l.data.features && l.data.features.length > 0) {
+                        // Only fit map for the first gemeente
+                        var b = csComp.Helpers.GeoExtensions.getBoundingBox(l.data);
+                        if (b.xMax == 180 || b.yMax == 90) return;
+                        this.$mapService.getMap().fitBounds(new L.LatLngBounds(b.southWest, b.northEast), { paddingBottomRight: new L.Point(610, 0) });
+                    }
                 });
             }
         };
