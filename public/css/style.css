@@ -62,6 +62,7 @@
 
 .active-text {
     font-size: 14px;
+    color: black;
 }
 
 .button-legend-color-entry {
@@ -385,4 +386,9 @@
 .dc-chart g.row text {
     font-size: 12px;
     font-family: Lucida Console, Consolas, Courier New, Monaco, monospace;
+}
+
+.popover-content {
+    min-width: 150px;
+    margin-right: 10px;
 }

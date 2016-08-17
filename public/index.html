@@ -80,20 +80,20 @@
             <div class="container-fluid" style="color: black">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <a href="#" class="navbar-brand" style="color: black;">Aanpasbaarheid Woningen</a>
+                    <a href="#" class="navbar-brand" style="color: black;">Aanpasbaarheid Woningen 'Langer thuis'</a>
                 </div>
 
-                <div>
+                <!--<div>
                     <ul class="nav navbar-nav" style="font-size: 1.5em;">
                         <li><a href="#" style="line-height: 1.3em;color: black">'Langer thuis'</a></li>
                     </ul>
-                </div>
+                </div>-->
 
-                <div>
+                <!--<div>
                     <ul class="nav navbar-nav" style="font-size: 1.5em;float:right;cursor:pointer;">
                         <li><a ng-click="vm.$messageBusService.publish('feature','justShowThisWidget')" style="line-height: 1.3em;color: black;">Toelichting</a></li>
                     </ul>
-                </div>
+                </div>-->
             </div>
 
             <!-- /.container-fluid -->
@@ -110,7 +110,7 @@
                         <div class="dropdown-menu" style="width: 315px;">
                             <form class="navbar-form navbar-left" role="search">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" ng-model="vm.cityQuery" ng-change="vm.filterCity(vm.cityQuery)" ng-keyup="$event.keyCode == 13 && vm.selectFirst()" style="width:285px" placeholder="Zoek op gemeente" autofocus>
+                                    <input id="search-city" type="text" class="form-control" ng-model="vm.cityQuery" ng-change="vm.filterCity(vm.cityQuery)" ng-keyup="$event.keyCode == 13 && vm.selectFirst()" style="width:285px" placeholder="Zoek op gemeente" autofocus>
                                 </div>
                                 <!--<button type="submit" class="btn btn-default">Submit</button>-->
                             </form>
@@ -122,7 +122,7 @@
                         </div>
                     </li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" ng-class="vm.wodkWidgetSvc.gemeenteSelectie.length > 0 ? '' : 'inactive-button'" data-toggle="dropdown" href="#" popover-trigger="mouseenter" uib-popover="Filter minimum aantal woningen per buurt" popover-placement="right"><span class="fa fa-filter">&nbsp;</span>{{vm.filterValue}}<span class="caret"></span></a>
+                        <a class="dropdown-toggle" ng-class="vm.wodkWidgetSvc.gemeenteSelectie.length > 0 ? '' : 'inactive-button'" data-toggle="dropdown" href="#" popover-trigger="mouseenter" uib-popover="Min. aantal woningen per buurt" popover-placement="right"><span class="fa fa-filter">&nbsp;</span>{{vm.filterValue}}<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li style="background-color: #AAA; font-weight: bold; font-size: 1.2em; line-height:1.2em">&nbsp;&nbsp;Woningfilter &lt;</li>
                             <li style="margin-left:10px;" ng-repeat="fv in vm.filterValues" ng-click="vm.selectFilter(fv)">{{fv}}</li>
@@ -133,7 +133,12 @@
                     <li data-ng-repeat="value in vm.$layerService.project.dashboards" class="active-button" ng-class="{'dashboard-active' : value == vm.$layerService.project.activeDashboard}">
                         <a ng-click="vm.$dashboardService.selectDashboard(value,'main')">
                             <span>{{value.name}}</span>
-                        </div>
+                        </a>
+                    </li>
+                    <li class="active-button">
+                        <a ng-click="vm.$messageBusService.publish('feature','justShowThisWidget')">
+                            <span>Toelichting</span>
+                        </a>
                     </li>
                 </ul>
             </div>
