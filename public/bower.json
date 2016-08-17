@@ -26,6 +26,8 @@
   "dependencies": {
     "font-awesome": "~4.4.0",
     "angularUtils-pagination": "angular-utils-pagination#~0.9.2",
-    "jspdf": "^1.2.61"
+    "jspdf": "^1.2.61",
+    "html2canvas": "0.5.0-beta4",
+    "es6-promise": "^3.2.2"
   }
 }

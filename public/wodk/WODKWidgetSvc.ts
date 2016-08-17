@@ -9,6 +9,16 @@ module wodk {
             '$http'
         ];
 
+        /**
+         * We only want to zoom to a feature, when it was selected through the 
+         * search bar, not when it was clicked on the map. Therefore, we set
+         * this flag when a search has been performed, such that we can zoom
+         * to the selected features and then clear this flag again.  
+         * 
+         * @private
+         * @type {boolean} 
+         */
+        public zoomNextFeatureFlag: boolean = false;
         protected lastSelectedName: string;
         protected lastSelectedType: string;
         protected gemeenteSelectie: IFeature[];
@@ -95,7 +105,7 @@ module wodk {
             this.lastSelectedType = 'provincie';
         }
 
-        public laadBuurten() {
+        public laadBuurten(fitMap: boolean = false) {
             // Load buurten by gemeente
             var l = this.$layerService.findLayer('bagbuurten');
             var f = this.$layerService.lastSelectedFeature;
@@ -133,6 +143,10 @@ module wodk {
             if (this.$layerService.findLoadedLayer(l.id)) {
                 this.$layerService.layerSources[l.type.toLowerCase()].refreshLayer(l);
                 this.$messageBusService.publish('updatelegend', 'update', _.find(l.group.styles, (s) => { return s.enabled; }));
+                if (this.zoomNextFeatureFlag) {
+                    this.zoomToLayer(l);
+                    this.zoomNextFeatureFlag = false;
+                }
             } else {
                 this.$layerService.addLayer(l, () => {
                     var group = this.$layerService.findGroupById('buurten');
@@ -140,11 +154,15 @@ module wodk {
                     var propType = this.$layerService.findPropertyTypeById('data/resourceTypes/Buurt.json#p_apb_w');
                     if (typeof propType === 'undefined') return;
                     this.$layerService.setGroupStyle(group, propType);
-                    if (this.gemeenteSelectie.length <= 1 && l && l.data && l.data.features && l.data.features.length > 0) {
-                        // Only fit map for the first gemeente
-                        var b = csComp.Helpers.GeoExtensions.getBoundingBox(l.data);
-                        if (b.xMax == 180 || b.yMax == 90) return;
-                        this.$mapService.getMap().fitBounds(new L.LatLngBounds(b.southWest, b.northEast), { paddingBottomRight: new L.Point(610, 0) });
+                    // Only fit map for the first gemeente, or when the zoomNextFeatureFlag parameter = true
+                    if (this.zoomNextFeatureFlag) {
+                        fitMap = true;
+                        this.zoomNextFeatureFlag = false;
+                    } else if (this.gemeenteSelectie.length <= 1 && l && l.data && l.data.features && l.data.features.length > 0) {
+                        fitMap = true;
+                    }
+                    if (fitMap) {
+                        this.zoomToLayer(l);
                     }
                 });
             }
@@ -159,8 +177,8 @@ module wodk {
                 this.$layerService.visual.rightPanelVisible = false;
                 return;
             }
-            var b: L.LatLngBounds = <L.LatLngBounds>csComp.Helpers.GeoExtensions.getFeatureBounds(f);
-            this.$layerService.map.getMap().fitBounds(b);
+            // var b: L.LatLngBounds = <L.LatLngBounds>csComp.Helpers.GeoExtensions.getFeatureBounds(f);
+            // this.$layerService.map.getMap().fitBounds(b);
             // this.$layerService.centerFeatureOnMap(this.$layerService.selectedFeatures);
             // this.$layerService.map.getMap().setZoom(15);
             this.selectionHistory.push(JSON.parse(JSON.stringify(csComp.Services.Feature.serialize(f))));
@@ -199,7 +217,7 @@ module wodk {
             l.dataSourceParameters['searchProperty'] = f.properties['bu_code'];
             if (this.$layerService.findLoadedLayer(l.id)) {
                 this.$layerService.layerSources[l.type.toLowerCase()].refreshLayer(l);
-                this.$layerService.layerSources[l.type.toLowerCase()].fitMap(l);
+                // this.$layerService.layerSources[l.type.toLowerCase()].fitMap(l);
                 this.$messageBusService.publish('updatelegend', 'update', _.find(l.group.styles, (s) => { return s.enabled; }));
             } else {
                 this.$layerService.addLayer(l, () => {
@@ -213,6 +231,14 @@ module wodk {
                     // this.$.layerSources[l.type.toLowerCase()].fitMap(l);
                 });
             }
+        }
+
+        private zoomToLayer(l: csComp.Services.ProjectLayer) {
+            setTimeout(() => {
+                var b = csComp.Helpers.GeoExtensions.getBoundingBox(l.data);
+                if (b.xMax == 180 || b.yMax == 90) return;
+                this.$mapService.getMap().fitBounds(new L.LatLngBounds(b.southWest, b.northEast), { paddingBottomRight: new L.Point(610, 0), paddingTopLeft: new L.Point(0, 105) });
+            }, 100);
         }
 
         public hasForwardHistory() {

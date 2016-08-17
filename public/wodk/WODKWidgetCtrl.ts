@@ -53,7 +53,7 @@ module wodk {
             $scope.data = <WODKWidgetData>this.widget.data;
             $scope.minimized = false;
 
-            if ((<any>window).canvg) {
+            if ((<any>window).html2canvas) {
                 this.exporterAvailable = true;
             } else {
                 this.exporterAvailable = false;
@@ -213,6 +213,7 @@ module wodk {
         private selectCity(name: string) {
             var foundFeature: csComp.Services.IFeature = this.findFeatureByBestMatchingPropertyValue('Name', name);
             if (foundFeature) {
+                this.wodkWidgetSvc.zoomNextFeatureFlag = true;
                 this.$layerService.selectFeature(foundFeature);
             }
         }
@@ -351,32 +352,31 @@ module wodk {
             }
         }
 
-        public exportToImage() {
-            var canvg = (<any>window).canvg || undefined;
-            if (!canvg) return;
-            var svg = new XMLSerializer().serializeToString(document.getElementById('visualizer_' + this.widget.id).firstChild);
-            var canvas = document.createElement('canvas');
-            document.body.appendChild(canvas);
-            canvg(canvas, svg, {
-                renderCallback: () => {
-                    var img = canvas.toDataURL('image/png');
-                    var fileName = this.$scope.filter.title || 'rowfilter-export';
-                    csComp.Helpers.saveImage(img, fileName + '.png', 'png');
-                    canvas.parentElement.removeChild(canvas);
-                }
+        public exportToImage(id: string) {
+            var html2canvas = (<any>window).html2canvas || undefined;
+            if (!html2canvas) return;
+            // html2canvas(this.parentWidget, {
+            //     onrendered: (canvas) => {
+            //         document.body.appendChild(canvas);
+            //         var img = canvas.toDataURL('image/png');
+            //         var fileName = this.$scope.filter.title || 'rowfilter-export';
+            //         csComp.Helpers.saveImage(img, fileName + '.png', 'png');
+            //         canvas.parentElement.removeChild(canvas);
+            //     }, 
+            //     logging: true
+            // });
+            var promise = html2canvas((id ? document.getElementById(id) : this.parentWidget), {logging: true});
+            promise['catch']((err) => {
+                console.log("html2canvas threw an error", err);
             });
-        }
 
-        private exportToPDF() {
-            var jsPDF: any = (<any>window).jsPDF || undefined;
-            if (!jsPDF) return;
-            var doc = new jsPDF('p', 'pt', 'a3');
-            doc.setFontSize(12);
-            doc.fromHTML($('#' + this.widget.elementId).get(0), 15, 15, {
-                'width': +this.widget.width
+            promise.then((canvas) => {
+                document.body.appendChild(canvas);
+                var img = canvas.toDataURL('image/png');
+                var fileName = this.$scope.filter.title || 'rowfilter-export';
+                csComp.Helpers.saveImage(img, fileName + '.png', 'png');
+                canvas.parentElement.removeChild(canvas);
             });
-            var fileName = this.wodkWidgetSvc.getLastSelectedName() || 'markdown-export';
-            doc.save(fileName + '.pdf');
         }
     }
 }
