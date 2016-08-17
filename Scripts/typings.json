@@ -66,7 +66,7 @@
     "jquery.pnotify": "registry:dt/jquery.pnotify#3.0.0+20160602140319",
     "jsonstream": "registry:dt/jsonstream#0.8.0+20160316155526",
     "jwt-simple": "registry:dt/jwt-simple#0.5.0+20160401095215",
-    "leaflet": "github:rinzeb/DefinitelyTyped/leaflet/leaflet.d.ts#dc94df257e9ab7448d15ba219d0387ed95dba479",
+    "leaflet": "github:rinzeb/DefinitelyTyped/leaflet/leaflet.d.ts#86071fec3f5d1e675a3fc98f5a876d3eb9d456ad",
     "leaflet-draw": "registry:dt/leaflet-draw#0.2.4+20160316171810",
     "leaflet-markercluster": "registry:dt/leaflet-markercluster#0.4.0+20160619034234",
     "mime": "registry:dt/mime#0.0.0+20160316155526",
