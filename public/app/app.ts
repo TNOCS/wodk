@@ -161,6 +161,7 @@ module App {
          * @param {string} city
          */
         selectCity(city: string) {
+            $('#search-city').val('');
             this.$messageBusService.publish('wodk', 'city', city);
         }
 

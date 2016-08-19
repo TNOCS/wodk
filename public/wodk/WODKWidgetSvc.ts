@@ -25,7 +25,7 @@ module wodk {
         protected buurtSelectie: IFeature[];
         protected selectionHistory: IFeature[];
         protected forwardHistory: IFeature[];
-        private htmlStyle = '<div style="display:inline-block;vertical-align:middle;text-align:center;background:rgba(0,0,255,1);width:28px;height:28px;border-radius:50% 0 0 50%;border-style:solid;border-color:rgba(0,0,150,1);border-width:2px;opacity:1;box-shadow:2px 3px 6px 0px rgba(0,0,0,0.75);"><img src="images/i.png" style="width:24px;height:24px;display:block;"></div>';
+        private htmlStyle = '<div style="display:inline-block;vertical-align:middle;text-align:center;background:{{bgColor}};width:28px;height:28px;border-radius:50% 0 0 50%;border-style:solid;border-color:rgba(0,0,150,1);border-width:2px;opacity:1;box-shadow:2px 3px 6px 0px rgba(0,0,0,0.75);"><img src="images/i.png" style="width:24px;height:24px;display:block;"></div>';
         private htmlStyleInvisible = '<div style="display:inline-block;width:2px;height:2px;"></div>';
 
         constructor(
@@ -55,7 +55,7 @@ module wodk {
                         if (this.$mapService.map.getZoom() < 10) {
                             this.$layerService.project.features.forEach((f) => {
                                 if (f.geometry && f.geometry.type.toLowerCase() === 'point') {
-                                    if (f.htmlStyle === this.htmlStyle) {
+                                    if (f.htmlStyle && f.htmlStyle !== this.htmlStyleInvisible) {
                                         f.htmlStyle = this.htmlStyleInvisible;
                                         this.$layerService.activeMapRenderer.updateFeature(f);
                                     }
@@ -66,6 +66,7 @@ module wodk {
                                 if (f.geometry && f.geometry.type.toLowerCase() === 'point') {
                                     if (f.htmlStyle === this.htmlStyleInvisible) {
                                         f.htmlStyle = this.htmlStyle;
+                                        this.replaceIconColor(f);
                                         this.$layerService.activeMapRenderer.updateFeature(f);
                                     }
                                 }
@@ -133,6 +134,7 @@ module wodk {
                 gl.data.features.push(fClone);
                 this.$layerService.initFeature(fClone, gl);
                 fClone.htmlStyle = this.htmlStyle;
+                this.replaceIconColor(fClone);
                 this.$layerService.activeMapRenderer.addFeature(fClone);
                 this.$messageBusService.publish('feature', 'onUpdateWidgets', fClone);
                 if (this.$layerService.$rootScope.$$phase !== '$apply' && this.$layerService.$rootScope.$$phase !== '$digest') { this.$layerService.$rootScope.$apply(); }
@@ -208,6 +210,7 @@ module wodk {
                 bl.data.features.push(fClone);
                 this.$layerService.initFeature(fClone, bl);
                 fClone.htmlStyle = this.htmlStyle;
+                this.replaceIconColor(fClone);
                 this.$layerService.activeMapRenderer.addFeature(fClone);
                 this.$messageBusService.publish('feature', 'onUpdateWidgets', fClone);
                 if (this.$layerService.$rootScope.$$phase !== '$apply' && this.$layerService.$rootScope.$$phase !== '$digest') { this.$layerService.$rootScope.$apply(); }
@@ -315,6 +318,20 @@ module wodk {
 
             if (this.$rootScope.$$phase !== '$apply' && this.$rootScope.$$phase !== '$digest') { this.$rootScope.$apply(); };
         };
+
+        private replaceIconColor(f: IFeature) {
+            switch (f.fType.name) {
+                case 'Buurt':
+                    f.htmlStyle = f.htmlStyle.replace('{{bgColor}}', 'rgba(0,100,255,1)');
+                    break;
+                case 'gemeente':
+                    f.htmlStyle = f.htmlStyle.replace('{{bgColor}}', 'rgba(0,0,255,1)');
+                case 'provincie':
+                    f.htmlStyle = f.htmlStyle.replace('{{bgColor}}', 'rgba(0,0,175,1)')
+                default:
+                    break;
+            }
+        }
     }
 
     /**

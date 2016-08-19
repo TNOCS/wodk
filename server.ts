@@ -2,6 +2,7 @@ import Winston = require('winston');
 // import geojsonvt = require('geojson-vt');
 import fs = require('fs');
 import path = require('path');
+import webshot = require('webshot');
 import * as csweb from "csweb";
 
 Winston.remove(Winston.transports.Console);
@@ -69,6 +70,20 @@ cs.start(() => {
             console.log('/public/bagbuurten');
             mapLayerFactory.processBagBuurten(req, res);
         });
+
+        cs.server.post(deployPath + '/screenshot', (req, res) => {
+            console.log('/public/screenshot');
+            if (req.body && req.body.html) {
+                webshot(req.body.html, 'hello_world.png', {siteType:'html', javascriptEnabled: false, screenSize: {width: 1600, height: 1080}}, (err) => {
+                    if (err) console.log(`Webshot error: ${err}`);
+                });
+                res.sendStatus(200);
+            } else {
+                res.sendStatus(404);                
+            }
+        });
+
+        
 
         // console.log("Just testing the BAG connection ");
         // bagDatabase.searchAddress('gagel', 15, (res) => {

@@ -352,31 +352,56 @@ module wodk {
             }
         }
 
+        private getHTML() {
+               var content = `<!DOCTYPE html><html ng-app="csWebApp" style="overflow:hidden;position:fixed"><head><link rel="stylesheet" href="http://localhost:3002/bower_components/font-awesome/css/font-awesome.min.css" /><link rel="stylesheet" href="http://localhost:3002/bower_components/csweb/dist-bower/csWeb-dep.css" /><link rel="stylesheet" href="http://localhost:3002/bower_components/csweb/dist-bower/css/csStyles.css" /><link rel="stylesheet" href="http://localhost:3002/css/style.css"></head>`;
+               content += $('body').prop('outerHTML').replace('src="images', 'src="http://localhost:3002/images');
+               content += `</html>`;
+               return content;
+        }
+
         public exportToImage(id: string) {
-            var html2canvas = (<any>window).html2canvas || undefined;
-            if (!html2canvas) return;
-            // html2canvas(this.parentWidget, {
-            //     onrendered: (canvas) => {
-            //         document.body.appendChild(canvas);
-            //         var img = canvas.toDataURL('image/png');
-            //         var fileName = this.$scope.filter.title || 'rowfilter-export';
-            //         csComp.Helpers.saveImage(img, fileName + '.png', 'png');
-            //         canvas.parentElement.removeChild(canvas);
-            //     }, 
-            //     logging: true
-            // });
-            var promise = html2canvas((id ? document.getElementById(id) : this.parentWidget), {logging: true});
-            promise['catch']((err) => {
-                console.log("html2canvas threw an error", err);
+            $.ajax({
+                type: 'POST',
+                url: "screenshot",
+                data: {html: this.getHTML()},
+                success: (data) => { console.log('Screenshot command sent');  }
             });
 
-            promise.then((canvas) => {
-                document.body.appendChild(canvas);
-                var img = canvas.toDataURL('image/png');
-                var fileName = this.$scope.filter.title || 'rowfilter-export';
-                csComp.Helpers.saveImage(img, fileName + '.png', 'png');
-                canvas.parentElement.removeChild(canvas);
-            });
+            // var html2canvas = (<any>window).html2canvas || undefined;
+            // if (!html2canvas) return;
+
+            // var promise = html2canvas((id ? document.getElementById(id) : this.parentWidget), {logging: true, background: '#E3DCE7'});
+            // promise['catch']((err) => {
+            //     console.log("html2canvas threw an error", err);
+            // });
+
+            // promise.then((canvas) => {
+            //     document.body.appendChild(canvas);
+            //     var img = canvas.toDataURL('image/png');
+            //     var fileName = this.$scope.filter.title || 'rowfilter-export';
+            //     csComp.Helpers.saveImage(img, fileName + '.png', 'png');
+            //     canvas.parentElement.removeChild(canvas);
+            // });
+
+            // html2canvas((id ? document.getElementById(id) : this.parentWidget), {logging: true, background: '#E3DCE7',
+            // onrendered: (canvas) => {
+            //     document.body.appendChild(canvas);
+            //     var img = canvas.toDataURL('image/png');
+            //     var fileName = this.$scope.filter.title || 'rowfilter-export';
+            //     csComp.Helpers.saveImage(img, fileName + '.png', 'png');
+            //     canvas.parentElement.removeChild(canvas);
+            // }});
+
+            // var domtoimage = (<any>window).domtoimage || undefined;
+            // if (!domtoimage) return;
+            // domtoimage.toPng((id ? document.getElementById(id) : this.parentWidget), {bgcolor: '#E3DCE7'})
+            //     .then((img) => {
+            //         var fileName = this.$scope.filter.title || 'wodk-export';
+            //         csComp.Helpers.saveImage(img, fileName + '.png', 'png');
+            //     })
+            //     .catch((error) => {
+            //         console.error('Something went wrong!', error);
+            //     });
         }
     }
 }

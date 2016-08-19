@@ -3,10 +3,10 @@
         "provincie": {
             "name": "provincie",
             "style": {
-                "fillColor": "#0000ff",
+                "fillColor": "#0000aa",
                 "fillOpacity": 0.99,
-                "strokeColor": "#0000ff",
-                "selectedStrokeColor": "#0000ff",
+                "strokeColor": "#000000",
+                "selectedStrokeColor": "#000000",
                 "drawingMode": "Point",
                 "strokeWidth": 2,
                 "selectedStrokeWidth": 4,

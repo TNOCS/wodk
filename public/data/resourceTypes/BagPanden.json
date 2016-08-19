@@ -17,7 +17,7 @@
                 "maxTitleResolution": -1,
                 "drawingMode": "Point"
             },
-            "propertyTypeKeys": "Name;aanpasbaarheid;kostenindicatie;Adres;streetview;kadaster;pandtype;bouwjaar;lift;pandoppervlakte;gebruiksdoelverblijfsobject;plint;woningen_in_pand;niet_woningen_in_pand;pandhoogte;pandid;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;wijknaam;wijkcode;buurtnaam;buurtcode;ster_gem;oppervlakteverblijfsobject;icon;postcode;woonplaatsnaam;leeftijd_bewoner;eigendom;verhuurder;corporatie;gemeentenaam;"
+            "propertyTypeKeys": "Name;aanpasbaarheid;kostenindicatie;Adres;streetview;kadaster;pandtype;bouwjaar;lift;pandoppervlakte;gebruiksdoelverblijfsobject;plint;woningen_in_pand;niet_woningen_in_pand;pandhoogte;pandid;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;wijknaam;wijkcode;buurtnaam;buurtcode;ster_gem;oppervlakteverblijfsobject;icon;postcode;woonplaatsnaam;leeftijd_bewoner;eigendom;verhuurder;corporatie;gemeentenaam;isonderzocht;"
         }
     },
     "propertyTypeData": {
@@ -33,6 +33,13 @@
             "visibleInCallOut": true,
             "type": "textarea",
             "expression": "(properties.woningen_in_pand === 1 && !properties.niet_woningen_in_pand) ? 'traplift (nieuw): €2500 - €9000 \ntraplift (hergebruik): ca. 50% van nieuw' : null"
+        },
+        "isonderzocht": {
+            "label": "isonderzocht",
+            "title": "Is onderzocht?",
+            "visibleInCallOut": true,
+            "type": "text",
+            "expression": "(properties.lift_oz === 1 || properties.lift_oz === 0 || properties.lift_oz === -1 ) ? 'ja' : null"
         },
         "postcode": {
             "label": "postcode",
