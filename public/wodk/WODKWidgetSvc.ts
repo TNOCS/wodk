@@ -49,7 +49,6 @@ module wodk {
 
             this.$messageBusService.subscribe('project', (action: string) => {
                 if (action === 'loaded') {
-
                     //Hide icons on large zoomlevels
                     this.$mapService.map.on('zoomend', (map) => {
                         if (this.$mapService.map.getZoom() < 10) {
@@ -272,7 +271,17 @@ module wodk {
             if (!lastItem.id || !lastItem.layerId) return;
             this.forwardHistory.push(JSON.parse(JSON.stringify(lastItem)));
             this.lastSelectedType = null;
-            if (lastItem.layerId === 'bagbuurten') this.lastSelectedType = 'gemeente'; // Todo: just use layerid
+            if (this.selectionHistory.length === 0) {
+                this.lastSelectedType = 'gemeente';
+            } else {
+                let firstToLastItem: IFeature = this.selectionHistory[this.selectionHistory.length - 1];
+                if (firstToLastItem.layerId === 'bagbuurten') {
+                    this.lastSelectedType = 'buurt';
+                } else {
+                    this.lastSelectedType = 'gemeente';
+                }
+            }
+            // if (lastItem.layerId === 'bagbuurten') this.lastSelectedType = 'gemeente'; // Todo: just use layerid
             this.lastSelectedName = lastItem.properties['Name'] || 'onbekend';
             (lastItem.layerId === 'gemeente' ? this.gemeenteSelectie.pop() : this.buurtSelectie.pop());
             var l = this.$layerService.findLoadedLayer(lastItem.layerId);
@@ -296,22 +305,29 @@ module wodk {
                     var bagLayer = this.$layerService.findLoadedLayer('bagcontouren');
                     if (!bagLayer) break;
                     var featsToRemove = _.filter(bagLayer.data.features, (f: IFeature) => { return (f.properties['buurtcode'] && f.properties['buurtcode'] === lastItem.properties['bu_code']) });
-                    featsToRemove.forEach((f) => {
-                        this.$layerService.removeFeature(f);
-                    });
+                    this.$layerService.removeFeatureBatch(_.map(featsToRemove, (val, key) => { return val.id; }), bagLayer);
+                    // featsToRemove.forEach((f) => {
+                    //     this.$layerService.removeFeature(f);
+                    // });
                     if (this.$layerService.$mapService.map.getZoom() > 14) this.$layerService.$mapService.map.setZoom(14);
                     break;
             }
             // Update legend
             if (this.selectionHistory.length > 0) {
                 var legendFeature;
-                if (lastItem.layerId === 'gemeente') {
+                if (this.lastSelectedType === 'gemeente') {
                     var buurtLayer = this.$layerService.findLoadedLayer('bagbuurten');
                     this.$messageBusService.publish('updatelegend', 'update', _.find(buurtLayer.group.styles, (s) => { return s.enabled; }));
+                } else if (this.lastSelectedType === 'buurt') {
+                    var woningLayer = this.$layerService.findLoadedLayer('bagcontouren');
+                    this.$messageBusService.publish('updatelegend', 'update', _.find(woningLayer.group.styles, (s) => { return s.enabled; }));
                 } else {
                     this.$messageBusService.publish('updatelegend', 'update', _.find(l.group.styles, (s) => { return s.enabled; }));
                 }
-                this.$messageBusService.publish('feature', 'onUpdateWidgets', lastItem);
+                let lastSelectedItem: IFeature = (this.selectionHistory.length > 0 ? this.selectionHistory[this.selectionHistory.length - 1] : lastItem);
+                lastSelectedItem = this.$layerServer.project.features.find((f) => { return lastSelectedItem.id === f.id; });
+                lastSelectedItem.isSelected = true;
+                this.$messageBusService.publish('feature', 'onUpdateWidgets', lastSelectedItem);
             } else {
                 this.$messageBusService.publish('updatelegend', 'hidelegend');
             }
@@ -319,10 +335,14 @@ module wodk {
             if (this.$rootScope.$$phase !== '$apply' && this.$rootScope.$$phase !== '$digest') { this.$rootScope.$apply(); };
         };
 
+        public setLastSelectedName(name: string) {
+            this.lastSelectedName = name;
+        }
+
         private replaceIconColor(f: IFeature) {
             switch (f.fType.name) {
                 case 'Buurt':
-                    f.htmlStyle = f.htmlStyle.replace('{{bgColor}}', 'rgba(0,100,255,1)');
+                    f.htmlStyle = f.htmlStyle.replace('{{bgColor}}', 'rgba(20,150,255,1)');
                     break;
                 case 'gemeente':
                     f.htmlStyle = f.htmlStyle.replace('{{bgColor}}', 'rgba(0,0,255,1)');

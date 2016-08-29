@@ -71,6 +71,7 @@ module wodk {
                 switch (action) {
                     case 'onFeatureDeselect':
                     case 'onFeatureSelect':
+                    case 'onUpdateWidgets':
                         this.selectFeature(feature);
                         break;
                     default:
@@ -235,7 +236,7 @@ module wodk {
         }
 
         private selectFeature(feature: csComp.Services.IFeature) {
-            if (!feature || !feature.isSelected || feature.fType.name === 'BagPanden') {
+            if (!feature || !feature.isSelected || feature.layerid === 'bagcontouren') {
                 return;
             }
             this.$timeout(() => {
@@ -251,7 +252,7 @@ module wodk {
                     }
                     md = this.replaceAll(md, searchPattern, displayText);
                 });
-                this.$scope.lastSelectedName = feature.properties['Name'];
+                this.wodkWidgetSvc.setLastSelectedName(feature.properties['Name']);
                 this.parentWidget.show();
                 this.$scope.data.mdText = md;
                 if (feature.geometry.type.toLowerCase() === 'point') {
