@@ -220,6 +220,10 @@ module wodk {
             if (this.$layerService.findLoadedLayer(l.id)) {
                 this.$layerService.layerSources[l.type.toLowerCase()].refreshLayer(l);
                 // this.$layerService.layerSources[l.type.toLowerCase()].fitMap(l);
+                // Only fit map for the first buurt
+                if (this.buurtSelectie.length <= 1 && l && l.data && l.data.features && l.data.features.length > 0) {
+                    this.zoomToFeature(this.buurtSelectie[this.buurtSelectie.length - 1]);
+                }
                 this.$messageBusService.publish('updatelegend', 'update', _.find(l.group.styles, (s) => { return s.enabled; }));
             } else {
                 this.$layerService.addLayer(l, () => {
@@ -228,6 +232,10 @@ module wodk {
                     var propType = this.$layerService.findPropertyTypeById('data/resourceTypes/BagPanden.json#ster_gem');
                     if (typeof propType === 'undefined') return;
                     this.$layerService.setGroupStyle(group, propType);
+                    // Only fit map for the first buurt
+                    if (this.buurtSelectie.length <= 1 && l && l.data && l.data.features && l.data.features.length > 0) {
+                        this.zoomToFeature(this.buurtSelectie[this.buurtSelectie.length - 1]);
+                    }
                     // var b = csComp.Helpers.GeoExtensions.getFeatureBounds(fClone);
                     // this.$layerService.map.map.fitBounds(<any>b);
                     // this.$.layerSources[l.type.toLowerCase()].fitMap(l);
@@ -241,6 +249,11 @@ module wodk {
                 if (b.xMax == 180 || b.yMax == 90) return;
                 this.$mapService.getMap().fitBounds(new L.LatLngBounds(b.southWest, b.northEast), { paddingBottomRight: new L.Point(610, 0), paddingTopLeft: new L.Point(0, 105) });
             }, 100);
+        }
+
+        private zoomToFeature(f: IFeature) {
+            let l = {data: {features: [f], type: "FeatureCollection"}};
+            this.zoomToLayer(l);
         }
 
         public hasForwardHistory() {

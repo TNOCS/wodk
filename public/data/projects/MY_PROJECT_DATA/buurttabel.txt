@@ -1,5 +1,6 @@
 |                             | &nbsp;&nbsp;&nbsp;Aantal | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%          |
 |-----------------------------|-------------------------:|-----------------------------:|
+| Aantal inwoners          | {{22}}                   | 100     |
 | Aantal woningen          | {{1}}                    | 100     |
 | | |
 | Specifiek 4/5 sterren    | {{4}}                    | {{8}}   |

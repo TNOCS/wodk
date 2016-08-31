@@ -242,7 +242,8 @@
                     "p_huko_onb",
                     "p_1gezw",
                     "p_mgezw",
-                    "gm_naam"
+                    "gm_naam",
+                    "aant_inw"
                 ],
                 "url": "data/projects/MY_PROJECT_DATA/buurttabel.txt"
             }
