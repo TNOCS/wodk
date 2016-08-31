@@ -236,7 +236,7 @@ module wodk {
         }
 
         private selectFeature(feature: csComp.Services.IFeature) {
-            if (!feature || !feature.isSelected || feature.layerid === 'bagcontouren') {
+            if (!feature || !feature.isSelected || feature.layerId === 'bagcontouren') {
                 return;
             }
             this.$timeout(() => {

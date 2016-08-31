@@ -1,6 +1,6 @@
-import Winston = require('winston');
+import * as Winston from 'winston';
 // import geojsonvt = require('geojson-vt');
-import fs = require('fs');
+import fs = require('fs-extra');
 import path = require('path');
 import webshot = require('webshot');
 import * as csweb from "csweb";
@@ -17,13 +17,13 @@ var startDatabaseConnection = true;
 var port = process.env.PORT || 3002;
 var deployPath = process.env.deployPath || '';
 console.log('Process env port: ' + port);
-console.log('deployPath: ' + deployPath );
+console.log('deployPath: ' + deployPath);
 
 // var cs = new csweb.csServer(__dirname, <csweb.csServerOptions>{
 var cs = new csweb.csServer(__dirname, <any>{
     port: port,
     swagger: false,
-    connectors: { },
+    connectors: {},
     corrsEnabled: false,
     deployPath: deployPath
 });
@@ -33,7 +33,7 @@ cs.start(() => {
 
     if (startDatabaseConnection) {
         this.config = new csweb.ConfigurationService('./configuration.json');
-        this.config.add('server', 'http://www.zorgopdekaart.nl/bagwoningen' + cs.options.port); 
+        this.config.add('server', 'http://www.zorgopdekaart.nl/bagwoningen' + cs.options.port);
         var bagDatabase = new csweb.BagDatabase(this.config);
         var mapLayerFactory = new csweb.MapLayerFactory(<any>bagDatabase, cs.messageBus, cs.api);
         cs.server.post(deployPath + '/public/bagcontours', (req, res) => {
@@ -45,7 +45,7 @@ cs.start(() => {
             console.log('/bagsearchaddress');
             mapLayerFactory.processBagSearchQuery(req, res);
         });
-        
+
         cs.server.post('/bagwoningen/public/bagsearchaddress', (req, res) => {
             console.log('/bagsearchaddress');
             mapLayerFactory.processBagSearchQuery(req, res);
@@ -55,7 +55,7 @@ cs.start(() => {
             console.log('/public/bagbuurten');
             mapLayerFactory.processBagBuurten(req, res);
         });
-        
+
         cs.server.post(deployPath + '/bagcontours', (req, res) => {
             console.log();
             mapLayerFactory.processBagContours(req, res);
@@ -74,16 +74,20 @@ cs.start(() => {
         cs.server.post(deployPath + '/screenshot', (req, res) => {
             console.log('/public/screenshot');
             if (req.body && req.body.html) {
-                webshot(req.body.html, 'hello_world.png', {siteType:'html', javascriptEnabled: false, screenSize: {width: 1600, height: 1080}}, (err) => {
-                    if (err) console.log(`Webshot error: ${err}`);
-                });
-                res.sendStatus(200);
+                if ((<any>window).webshot) {
+                    webshot(req.body.html, 'hello_world.png', { siteType: 'html', javascriptEnabled: false, screenSize: { width: 1600, height: 1080 } }, (err) => {
+                        if (err) console.log(`Webshot error: ${err}`);
+                    });
+                    res.sendStatus(200);
+                } else {
+                    res.sendStatus(404);
+                }
             } else {
-                res.sendStatus(404);                
+                res.sendStatus(404);
             }
         });
 
-        
+
 
         // console.log("Just testing the BAG connection ");
         // bagDatabase.searchAddress('gagel', 15, (res) => {

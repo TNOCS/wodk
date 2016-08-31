@@ -144,7 +144,8 @@ module App {
          */
         filterCity(query: string) {
             this.foundCities.length = 0;
-            if (query.length < 2) return;
+            if (query.length < 2 || typeof query !== 'string') return;
+            query = query.toLowerCase();
             const maxFound = 15;
             let found = [];
             this.cities.some(c => {

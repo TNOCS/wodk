@@ -10,7 +10,7 @@
   },
   "files": [
     "./public/bower_components/csweb/dist-bower/csComp.d.ts",
-    "./Scripts/typings/index.d.ts"
+    "./typings/index.d.ts"
   ],
   "include": [
     "./public/app/*.ts",
