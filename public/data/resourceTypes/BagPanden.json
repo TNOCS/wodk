@@ -17,7 +17,7 @@
                 "maxTitleResolution": -1,
                 "drawingMode": "Point"
             },
-            "propertyTypeKeys": "Name;aanpasbaarheid;kostenindicatie;Adres;streetview;kadaster;pandtype;bouwjaar;lift;pandoppervlakte;gebruiksdoelverblijfsobject;plint;woningen_in_pand;niet_woningen_in_pand;pandhoogte;pandid;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;wijknaam;wijkcode;buurtnaam;buurtcode;ster_gem;oppervlakteverblijfsobject;icon;postcode;woonplaatsnaam;leeftijd_bewoner;eigendom;verhuurder;corporatie;gemeentenaam;isonderzocht;"
+            "propertyTypeKeys": "Name;aanpasbaarheid;kostenindicatie;Adres;streetview;kadaster;pandtype;bouwjaar;lift;pandoppervlakte;gebruiksdoelverblijfsobject;plint;woningen_in_pand;niet_woningen_in_pand;pandhoogte;pandid;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;wijknaam;wijkcode;buurtnaam;buurtcode;ster_gem;oppervlakteverblijfsobject;icon;postcode;woonplaatsnaam;leeftijd_bewoner;eigendom;verhuurder;corporatie;gemeentenaam;isonderzocht;plint_oz;lift_oz;"
         }
     },
     "propertyTypeData": {
@@ -40,6 +40,30 @@
             "visibleInCallOut": true,
             "type": "text",
             "expression": "(properties.lift_oz === 1 || properties.lift_oz === 0 || properties.lift_oz === -1 ) ? 'ja' : null"
+        },
+        "lift_oz": {
+            "label": "lift_oz",
+            "title": "Liftonderzoek",
+            "type": "options",
+            "options": {
+                "-1": "In onderzoek",
+                "0": "Geen lift",
+                "1": "Lift aanwezig",
+                "2": "Aanname geen lift"
+            },
+            "visibleInCallOut": false
+        },
+        "plint_oz": {
+            "label": "plint_oz",
+            "title": "Plintonderzoek",
+            "type": "options",
+            "options": {
+                "-1": "In onderzoek",
+                "0": "Geen plint",
+                "1": "Plint aanwezig",
+                "2": "Aanname geen plint"
+            },
+            "visibleInCallOut": false
         },
         "postcode": {
             "label": "postcode",

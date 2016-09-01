@@ -2,7 +2,7 @@
 -- Lift 0 = nee, 1 = ja, 2 = aanname geen lift, -1 = in onderzoek
 -- Plint 0 = nee, 1 = ja, -1 = in onderzoek
 
--- Reset alle sterren, iconen, types, liften, plinten en voeg onderzoeksresultaat toe
+-- Reset alle sterren, iconen, types, liften, plinten en voeg onderzoeksresultaat toe. Alleen voor panden die op 'in onderzoek' staan
 UPDATE bagactueel.pand
 SET lift_oz = oz.lift, plint_oz = oz.plint,
 ster_onb = NULL,
@@ -18,7 +18,7 @@ plint = NULL,
 pandtype = NULL
 FROM bagactueel.liftonderzoek oz
 WHERE
-identificatie = oz.pandid AND oz.lift <> -1;
+identificatie = oz.pandid AND oz.lift <> -1 AND (pand.lift = -1 OR pand.plint = -1 OR pand.lift IS NULL OR pand.plint IS NULL);
 
 -- case A
 -- Ster 3 voor MGW met bj 1930-1950 of 1970-1992 en hoogte 5-17m en >=9 woningen and lift_oz = ja (A9)
@@ -67,10 +67,10 @@ AND bouwjaar >= 1950 AND bouwjaar < 1970 AND lift_oz = 1;
 
 -- Ster 0 voor bj 1950-1970 en hoogte 5 - 17m (B13, B15) met plint
 UPDATE bagactueel.pand
-SET pandtype = 1, lift = 0, plint = 1, ster_0 = woningen_in_pand, icon = 0
+SET pandtype = 1, lift = lift_oz, plint = 1, ster_0 = woningen_in_pand, icon = 0
 WHERE
 pandhoogte < 17 AND pandhoogte >= 5
-AND bouwjaar >= 1950 AND bouwjaar < 1970 AND lift_oz = 0 AND plint_oz = 1;
+AND bouwjaar >= 1950 AND bouwjaar < 1970 AND plint_oz = 1;
 
 -- Ster mix voor bj 1950-1970 en hoogte 5 - 17m (B16) zonder plint
 UPDATE bagactueel.pand
@@ -129,6 +129,22 @@ WHERE
 woningen_in_pand >= 9
 AND pandhoogte < 17 AND pandhoogte >= 5
 AND bouwjaar >= 1950 AND bouwjaar < 1970 AND lift_oz = 0 AND plint_oz = 0;
+
+-- Ster mix voor bj 1950-1970 en hoogte ? zonder plint (7)
+UPDATE bagactueel.pand
+SET ster_3 = 2, ster_0 = (woningen_in_pand - 2), icon = (woningen_in_pand + 10), pandtype = 1, lift = 0, plint = plint_oz
+WHERE
+woningen_in_pand >= 9
+AND (pandhoogte < 5 OR pandhoogte IS NULL)
+AND bouwjaar >= 1930 AND bouwjaar < 2020 AND lift_oz = 0 AND plint_oz = 0;
+
+-- Set max icon nummer op 19, bijv icon = 30 wordt icon = 19
+UPDATE bagactueel.pand
+SET icon = 19
+WHERE icon > 19
+
+-- TODO:
+-- bj 1850, hoogte 18m, 1 woningen, loz 0, poz 1. 
 
 
 
