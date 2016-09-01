@@ -252,7 +252,7 @@ module wodk {
         }
 
         private zoomToFeature(f: IFeature) {
-            let l = {data: {features: [f], type: "FeatureCollection"}};
+            let l = <csComp.Services.ProjectLayer>{data: {features: [f], type: "FeatureCollection"}};
             this.zoomToLayer(l);
         }
 
@@ -338,7 +338,7 @@ module wodk {
                     this.$messageBusService.publish('updatelegend', 'update', _.find(l.group.styles, (s) => { return s.enabled; }));
                 }
                 let lastSelectedItem: IFeature = (this.selectionHistory.length > 0 ? this.selectionHistory[this.selectionHistory.length - 1] : lastItem);
-                lastSelectedItem = this.$layerService.project.features.find((f) => { return lastSelectedItem.id === f.id; });
+                lastSelectedItem = _.find(this.$layerService.project.features, (f: IFeature) => { return lastSelectedItem.id === f.id; });
                 lastSelectedItem.isSelected = true;
                 this.$messageBusService.publish('feature', 'onUpdateWidgets', lastSelectedItem);
             } else {
