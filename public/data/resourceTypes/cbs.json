@@ -18,7 +18,7 @@
             },
             "selectActions": ["select provincie"],
             "contourProperty": "contour",
-            "propertyTypeKeys": "ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;ster_totaal;a_huko_onb;a_koopwon;a_huurwon;p_huko_onb;p_koopwon;p_huurwon;a_1gezw;a_mgezw;gemeentecode;gemeentenaam;a_aangep_w;a_apb_w;a_napb_w;p_aangep_w;p_apb_w;p_napb_w;p_apb_onb;p_1gezw;p_mgezw;"
+            "propertyTypeKeys": "ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;ster_totaal;a_huko_onb;a_koopwon;a_huurwon;p_huko_onb;p_koopwon;p_huurwon;a_1gezw;a_mgezw;gemeentecode;gemeentenaam;a_aangep_w;a_apb_w;a_napb_w;p_aangep_w;p_apb_w;p_napb_w;p_apb_onb;p_1gezw;p_mgezw;aant_inw;"
         },
         "gemeente": {
             "name": "gemeente",
@@ -38,7 +38,7 @@
             },
             "selectActions": ["load buurten"],
             "contourProperty": "_contour",
-            "propertyTypeKeys": "ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;ster_totaal;a_huko_onb;a_koopwon;a_huurwon;p_huko_onb;p_koopwon;p_huurwon;a_1gezw;a_mgezw;gemeentecode;gemeentenaam;a_aangep_w;a_apb_w;a_napb_w;p_aangep_w;p_apb_w;p_napb_w;p_apb_onb;p_1gezw;p_mgezw;",
+            "propertyTypeKeys": "ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;ster_totaal;a_huko_onb;a_koopwon;a_huurwon;p_huko_onb;p_koopwon;p_huurwon;a_1gezw;a_mgezw;gemeentecode;gemeentenaam;a_aangep_w;a_apb_w;a_napb_w;p_aangep_w;p_apb_w;p_napb_w;p_apb_onb;p_1gezw;p_mgezw;aant_inw;",
             "legendExpr": [
                 {
                     "title": "#Inwoners",
@@ -151,6 +151,14 @@
             "isSearchable": false
         },
         "AANT_INW": {
+            "type": "number",
+            "title": "Aantal inwoners",
+            "stringFormat": "{0:0,0}",
+            "visibleInCallOut": true,
+            "canEdit": true,
+            "isSearchable": false
+        },
+        "aant_inw": {
             "type": "number",
             "title": "Aantal inwoners",
             "stringFormat": "{0:0,0}",
@@ -726,6 +734,7 @@
         "a_huko_onb" : {
             "label" : "a_huko_onb",
             "title" : "a_huko_onb",
+            "stringFormat" : "{0:#,#}",
             "type" : "number",
             "visibleInCallOut" : true,
             "canEdit" : true

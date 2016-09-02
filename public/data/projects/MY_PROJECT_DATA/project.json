@@ -1,5 +1,5 @@
 {
-    "$schema": "./schemas/project_schema.json",
+    "$schema": "../schemas/project_schema.json",
     "id": "a337abc7-ffd6-443f-21dd-152d9c5666f5",
     "storage": "file",
     "title": "Woningen op de kaart",

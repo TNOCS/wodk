@@ -1,1 +1,8 @@
-{"verbose":true,"ext":"js json"}
+{
+    "verbose": true,
+    "ext": "js json",
+    "ignore": [
+        ".git"
+    ],
+    "delay": 500.0
+}

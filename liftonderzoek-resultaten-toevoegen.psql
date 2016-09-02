@@ -18,133 +18,51 @@ plint = NULL,
 pandtype = NULL
 FROM bagactueel.liftonderzoek oz
 WHERE
-identificatie = oz.pandid AND oz.lift <> -1 AND (pand.lift = -1 OR pand.plint = -1 OR pand.lift IS NULL OR pand.plint IS NULL);
+identificatie = oz.pandid AND oz.lift <> -1;
 
--- case A
--- Ster 3 voor MGW met bj 1930-1950 of 1970-1992 en hoogte 5-17m en >=9 woningen and lift_oz = ja (A9)
+-- case 1
+-- Ster 3 alles met lift en geen plint
 UPDATE bagactueel.pand
-SET ster_3 = woningen_in_pand, lift = 1, plint = plint_oz, icon = 3, pandtype = 1
+SET ster_3 = woningen_in_pand, lift = 1, plint = 0, pandtype = 1, icon = 3
 WHERE
-woningen_in_pand >= 9
-AND pandhoogte >= 5 AND pandhoogte < 17
-AND ((bouwjaar >= 1930 AND bouwjaar < 1950) OR (bouwjaar >= 1970 AND bouwjaar < 1992)) AND lift_oz = 1;
+woningen_in_pand >= 2 AND lift_oz = 1 AND plint_oz = 0;
 
--- Ster mix voor MGW met bj 1930-1950 of 1970-1992 en hoogte 5-17m en >=9 woningen and lift_oz = nee (A10)
+-- case 2
+-- Ster 0 voor alles met plint
 UPDATE bagactueel.pand
-SET ster_3 = 2, ster_0 = (woningen_in_pand - 2), icon = 19, pandtype = 1, lift = 0, plint = plint_oz
+SET ster_0 = woningen_in_pand, pandtype = 1, lift = lift_oz, plint = 1, icon = 0
 WHERE
-woningen_in_pand >= 9
-AND pandhoogte >= 5 AND pandhoogte < 17
-AND ((bouwjaar >= 1930 AND bouwjaar < 1950) OR (bouwjaar >= 1970 AND bouwjaar < 1992)) AND lift_oz = 0;
+woningen_in_pand >= 1 AND plint_oz = 1;
 
--- case C
--- Ster 3 voor bj >= 1992 en hoogte < 17m en >=9 woningen en opp < 3500m2 and lift_oz = ja (C18)
+-- Ster 0 voor 1 woning en > 1 niet-woning
 UPDATE bagactueel.pand
-SET ster_3 = woningen_in_pand, lift = 1, plint = plint_oz, icon = 3, pandtype = 1
+SET ster_0 = woningen_in_pand, pandtype = 1, lift = lift_oz, plint = plint_oz, icon = 0
 WHERE
-woningen_in_pand >= 9
-AND pandhoogte >= 5 AND pandhoogte < 17
-AND bouwjaar >= 1992 AND bouwjaar < 2020
-AND (pandoppervlakte < 3500 AND woningen_in_pand < 35) AND lift_oz = 1;
+woningen_in_pand = 1 AND niet_woningen_in_pand > 0 AND lift_oz = 0 and plint_oz = 0;
 
--- Ster mix voor bj >= 1992 en hoogte < 17m en >=9 woningen en opp < 3500m2 and lift_oz = nee (C19)
+-- case 3
+-- Ster mix voor alles zonder lift en geen plint en >= 4 woningen
 UPDATE bagactueel.pand
-SET ster_3 = 2, ster_0 = (woningen_in_pand - 2), icon = 19, pandtype = 1, lift = 0, plint = plint_oz
+SET ster_3 = 2, ster_0 = (woningen_in_pand - 2), icon = (woningen_in_pand + 10), pandtype = 1, lift = 0, plint = 0
 WHERE
-woningen_in_pand >= 9
-AND pandhoogte >= 5 AND pandhoogte < 17
-AND bouwjaar >= 1992 AND bouwjaar < 2020
-AND (pandoppervlakte < 3500 AND woningen_in_pand < 35) AND lift_oz = 0;
+woningen_in_pand >= 4 AND lift_oz = 0 AND plint_oz = 0;
 
--- case B
--- Ster 3 voor bj 1950-1970 en hoogte 5 - 17m (B12)
+-- Ster mix voor alles zonder lift en geen plint en 3 woningen
 UPDATE bagactueel.pand
-SET ster_3 = woningen_in_pand, lift = 1, plint = plint_oz, icon = 3, pandtype = 1
+SET ster_3 = 1, ster_0 = 2, icon = 13, pandtype = 1, lift = 0, plint = 0
 WHERE
-woningen_in_pand >= 9
-AND pandhoogte < 17 AND pandhoogte >= 5
-AND bouwjaar >= 1950 AND bouwjaar < 1970 AND lift_oz = 1;
+woningen_in_pand = 3 AND lift_oz = 0 AND plint_oz = 0;
 
--- Ster 0 voor bj 1950-1970 en hoogte 5 - 17m (B13, B15) met plint
+-- Ster mix voor alles zonder lift en geen plint en 2 woningen
 UPDATE bagactueel.pand
-SET pandtype = 1, lift = lift_oz, plint = 1, ster_0 = woningen_in_pand, icon = 0
+SET ster_3 = 1, ster_0 = 1, icon = 12, pandtype = 1, lift = 0, plint = 0
 WHERE
-pandhoogte < 17 AND pandhoogte >= 5
-AND bouwjaar >= 1950 AND bouwjaar < 1970 AND plint_oz = 1;
-
--- Ster mix voor bj 1950-1970 en hoogte 5 - 17m (B16) zonder plint
-UPDATE bagactueel.pand
-SET ster_3 = 1, ster_0 = 1, icon = 12, pandtype = 1, lift = 0, plint = plint_oz
-WHERE
-woningen_in_pand = 2
-AND pandhoogte < 17 AND pandhoogte >= 5
-AND bouwjaar >= 1950 AND bouwjaar < 1970 AND lift_oz = 0 AND plint_oz = 0;
-
-UPDATE bagactueel.pand
-SET ster_3 = 1, ster_0 = 2, icon = 13, pandtype = 1, lift = 0, plint = plint_oz
-WHERE
-woningen_in_pand = 3
-AND pandhoogte < 17 AND pandhoogte >= 5
-AND bouwjaar >= 1950 AND bouwjaar < 1970 AND lift_oz = 0 AND plint_oz = 0;
-
-UPDATE bagactueel.pand
-SET ster_3 = 2, ster_0 = 2, icon = 14, pandtype = 1, lift = 0, plint = plint_oz
-WHERE
-woningen_in_pand = 4
-AND pandhoogte < 17 AND pandhoogte >= 5
-AND bouwjaar >= 1950 AND bouwjaar < 1970 AND lift_oz = 0 AND plint_oz = 0;
-
-UPDATE bagactueel.pand
-SET ster_3 = 2, ster_0 = 3, icon = 15, pandtype = 1, lift = 0, plint = plint_oz
-WHERE
-woningen_in_pand = 5
-AND pandhoogte < 17 AND pandhoogte >= 5
-AND bouwjaar >= 1950 AND bouwjaar < 1970 AND lift_oz = 0 AND plint_oz = 0;
-
-UPDATE bagactueel.pand
-SET ster_3 = 2, ster_0 = 4, icon = 16, pandtype = 1, lift = 0, plint = plint_oz
-WHERE
-woningen_in_pand = 6
-AND pandhoogte < 17 AND pandhoogte >= 5
-AND bouwjaar >= 1950 AND bouwjaar < 1970 AND lift_oz = 0 AND plint_oz = 0;
-
-UPDATE bagactueel.pand
-SET ster_3 = 2, ster_0 = 5, icon = 17, pandtype = 1, lift = 0, plint = plint_oz
-WHERE
-woningen_in_pand = 7
-AND pandhoogte < 17 AND pandhoogte >= 5
-AND bouwjaar >= 1950 AND bouwjaar < 1970 AND lift_oz = 0 AND plint_oz = 0;
-
-UPDATE bagactueel.pand
-SET ster_3 = 2, ster_0 = 6, icon = 18, pandtype = 1, lift = 0, plint = plint_oz
-WHERE
-woningen_in_pand = 8
-AND pandhoogte < 17 AND pandhoogte >= 5
-AND bouwjaar >= 1950 AND bouwjaar < 1970 AND lift_oz = 0 AND plint_oz = 0;
-
--- Ster mix voor bj 1950-1970 en hoogte 5 - 17m (B14) zonder plint
-UPDATE bagactueel.pand
-SET ster_3 = 2, ster_0 = (woningen_in_pand - 2), icon = 19, pandtype = 1, lift = 0, plint = plint_oz
-WHERE
-woningen_in_pand >= 9
-AND pandhoogte < 17 AND pandhoogte >= 5
-AND bouwjaar >= 1950 AND bouwjaar < 1970 AND lift_oz = 0 AND plint_oz = 0;
-
--- Ster mix voor bj 1950-1970 en hoogte ? zonder plint (7)
-UPDATE bagactueel.pand
-SET ster_3 = 2, ster_0 = (woningen_in_pand - 2), icon = (woningen_in_pand + 10), pandtype = 1, lift = 0, plint = plint_oz
-WHERE
-woningen_in_pand >= 9
-AND (pandhoogte < 5 OR pandhoogte IS NULL)
-AND bouwjaar >= 1930 AND bouwjaar < 2020 AND lift_oz = 0 AND plint_oz = 0;
+woningen_in_pand = 2 AND lift_oz = 0 AND plint_oz = 0;
 
 -- Set max icon nummer op 19, bijv icon = 30 wordt icon = 19
 UPDATE bagactueel.pand
 SET icon = 19
-WHERE icon > 19
-
--- TODO:
--- bj 1850, hoogte 18m, 1 woningen, loz 0, poz 1. 
+WHERE icon > 19; 
 
 
 

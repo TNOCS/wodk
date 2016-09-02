@@ -217,49 +217,53 @@ SET ster_totaal = COALESCE(ster_0, 0) + COALESCE(ster_1, 0) +COALESCE(ster_2, 0)
 VACUUM ANALYZE bagactueel.buurt_2014;
 
 -- Aggregeer buurten op gemeentenivo
--- UPDATE bagactueel.gemeente
--- SET ster_0 = sq.ster_0, ster_1 = sq.ster_1, ster_2 = sq.ster_2, ster_3 = sq.ster_3, ster_4 = sq.ster_4, ster_5 = sq.ster_5, 
--- ster_onb = sq.ster_onb, ster_totaal = sq.ster_totaal, a_koopwon = (sq.a_koopwon),
--- a_huurwon = (sq.a_huurwon), a_huko_onb = (sq.a_huko_onb),
--- a_1gezw = (sq.a_1gezw), a_mgezw = (sq.a_mgezw)
--- FROM 
-	-- ( 
-	-- SELECT SUM(buurten.ster_0) as ster_0, SUM(buurten.ster_1) as ster_1, SUM(buurten.ster_2) as ster_2, SUM(buurten.ster_3) as ster_3,
-	 -- SUM(buurten.ster_4) as ster_4, SUM(buurten.ster_5) as ster_5, SUM(buurten.ster_onb) as ster_onb, SUM(buurten.ster_totaal) as ster_totaal,
-	 -- SUM(buurten.a_huurwon) as a_huurwon, SUM(buurten.a_huko_onb) as a_huko_onb, SUM(buurten.a_koopwon) as a_koopwon,
-	 -- SUM(buurten.a_1gezw) as a_1gezw, SUM(buurten.a_mgezw) as a_mgezw, buurten.gid as gm_gid
-	 -- FROM (
-		-- SELECT bu.ster_0, bu.ster_1, bu.ster_2, bu.ster_3, bu.ster_4, bu.ster_5, 
-		-- bu.ster_onb, bu.ster_totaal, (bu.p_koopwon * bu.ster_totaal / 100) as a_koopwon,
-		-- (bu.p_huurwon * bu.ster_totaal / 100) as a_huurwon, (bu.p_huko_onb * bu.ster_totaal / 100) as a_huko_onb,
-		-- (bu.p_1gezw * bu.ster_totaal / 100) as a_1gezw, (bu.p_mgezw * bu.ster_totaal / 100) as a_mgezw, gemeente.gid
-		-- FROM bagactueel.buurt_2014 bu, bagactueel.gemeente
-		-- WHERE ST_Contains(gemeente.geovlak, ST_Centroid(bu.geom))
-		-- ) AS buurten
-		-- GROUP BY gm_gid
-	 -- ) AS sq
- -- WHERE sq.gm_gid = gemeente.gid
+UPDATE bagactueel.gemeente
+SET ster_0 = sq.ster_0, ster_1 = sq.ster_1, ster_2 = sq.ster_2, ster_3 = sq.ster_3, ster_4 = sq.ster_4, ster_5 = sq.ster_5, 
+ster_onb = sq.ster_onb, ster_totaal = sq.ster_totaal, a_koopwon = (sq.a_koopwon),
+a_huurwon = (sq.a_huurwon), a_huko_onb = (sq.a_huko_onb),
+a_1gezw = (sq.a_1gezw), a_mgezw = (sq.a_mgezw), aant_inw = (sq.aant_inw)
+FROM 
+	( 
+	SELECT SUM(buurten.ster_0) as ster_0, SUM(buurten.ster_1) as ster_1, SUM(buurten.ster_2) as ster_2, SUM(buurten.ster_3) as ster_3,
+	 SUM(buurten.ster_4) as ster_4, SUM(buurten.ster_5) as ster_5, SUM(buurten.ster_onb) as ster_onb, SUM(buurten.ster_totaal) as ster_totaal,
+	 SUM(buurten.a_huurwon) as a_huurwon, SUM(buurten.a_huko_onb) as a_huko_onb, SUM(buurten.a_koopwon) as a_koopwon,
+	 SUM(buurten.a_1gezw) as a_1gezw, SUM(buurten.a_mgezw) as a_mgezw, SUM(buurten.aant_inw) as aant_inw, buurten.gid as gm_gid
+	 FROM (
+		SELECT bu.ster_0, bu.ster_1, bu.ster_2, bu.ster_3, bu.ster_4, bu.ster_5, 
+		bu.ster_onb, bu.ster_totaal, bu.aant_inw, (bu.p_koopwon * bu.ster_totaal / 100) as a_koopwon,
+		(bu.p_huurwon * bu.ster_totaal / 100) as a_huurwon, (bu.p_huko_onb * bu.ster_totaal / 100) as a_huko_onb,
+		(bu.p_1gezw * bu.ster_totaal / 100) as a_1gezw, (bu.p_mgezw * bu.ster_totaal / 100) as a_mgezw, gemeente.gid
+		FROM bagactueel.buurt_2014 bu, bagactueel.gemeente
+		WHERE ST_Contains(gemeente.geovlak, ST_Centroid(bu.geom))
+		) AS buurten
+		GROUP BY gm_gid
+	 ) AS sq
+ WHERE sq.gm_gid = gemeente.gid;
  
--- Aggregeer buurten op gemeentenivo
--- UPDATE bagactueel.provincie
--- SET ster_0 = sq.ster_0, ster_1 = sq.ster_1, ster_2 = sq.ster_2, ster_3 = sq.ster_3, ster_4 = sq.ster_4, ster_5 = sq.ster_5, 
--- ster_onb = sq.ster_onb, ster_totaal = sq.ster_totaal, a_koopwon = (sq.a_koopwon),
--- a_huurwon = (sq.a_huurwon), a_huko_onb = (sq.a_huko_onb),
--- a_1gezw = (sq.a_1gezw), a_mgezw = (sq.a_mgezw)
--- FROM 
-	-- ( 
-	-- SELECT SUM(buurten.ster_0) as ster_0, SUM(buurten.ster_1) as ster_1, SUM(buurten.ster_2) as ster_2, SUM(buurten.ster_3) as ster_3,
-	 -- SUM(buurten.ster_4) as ster_4, SUM(buurten.ster_5) as ster_5, SUM(buurten.ster_onb) as ster_onb, SUM(buurten.ster_totaal) as ster_totaal,
-	 -- SUM(buurten.a_huurwon) as a_huurwon, SUM(buurten.a_huko_onb) as a_huko_onb, SUM(buurten.a_koopwon) as a_koopwon,
-	 -- SUM(buurten.a_1gezw) as a_1gezw, SUM(buurten.a_mgezw) as a_mgezw, buurten.gid as gm_gid
-	 -- FROM (
-		-- SELECT bu.ster_0, bu.ster_1, bu.ster_2, bu.ster_3, bu.ster_4, bu.ster_5, 
-		-- bu.ster_onb, bu.ster_totaal, (bu.p_koopwon * bu.ster_totaal / 100) as a_koopwon,
-		-- (bu.p_huurwon * bu.ster_totaal / 100) as a_huurwon, (bu.p_huko_onb * bu.ster_totaal / 100) as a_huko_onb,
-		-- (bu.p_1gezw * bu.ster_totaal / 100) as a_1gezw, (bu.p_mgezw * bu.ster_totaal / 100) as a_mgezw, provincie.gid
-		-- FROM bagactueel.buurt_2014 bu, bagactueel.provincie
-		-- WHERE ST_Contains(provincie.geovlak, ST_Centroid(bu.geom))
-		-- ) AS buurten
-		-- GROUP BY gm_gid
-	 -- ) AS sq
- -- WHERE sq.gm_gid = provincie.gid;
+-- Aggregeer gemeente op provincienivo
+UPDATE bagactueel.provincie
+SET ster_0 = sq.ster_0, ster_1 = sq.ster_1, ster_2 = sq.ster_2, ster_3 = sq.ster_3, ster_4 = sq.ster_4, ster_5 = sq.ster_5, 
+ster_onb = sq.ster_onb, ster_totaal = sq.ster_totaal, a_koopwon = (sq.a_koopwon),
+a_huurwon = (sq.a_huurwon), a_huko_onb = (sq.a_huko_onb),
+a_1gezw = (sq.a_1gezw), a_mgezw = (sq.a_mgezw), aant_inw = (sq.aant_inw)
+FROM 
+	( 
+	SELECT SUM(buurten.ster_0) as ster_0, SUM(buurten.ster_1) as ster_1, SUM(buurten.ster_2) as ster_2, SUM(buurten.ster_3) as ster_3,
+	 SUM(buurten.ster_4) as ster_4, SUM(buurten.ster_5) as ster_5, SUM(buurten.ster_onb) as ster_onb, SUM(buurten.ster_totaal) as ster_totaal,
+	 SUM(buurten.a_huurwon) as a_huurwon, SUM(buurten.a_huko_onb) as a_huko_onb, SUM(buurten.a_koopwon) as a_koopwon,
+	 SUM(buurten.a_1gezw) as a_1gezw, SUM(buurten.a_mgezw) as a_mgezw, SUM(buurten.aant_inw) as aant_inw, buurten.gid as gm_gid
+	 FROM (
+		SELECT bu.ster_0, bu.ster_1, bu.ster_2, bu.ster_3, bu.ster_4, bu.ster_5, 
+		bu.ster_onb, bu.ster_totaal, bu.aant_inw, (bu.p_koopwon * bu.ster_totaal / 100) as a_koopwon,
+		(bu.p_huurwon * bu.ster_totaal / 100) as a_huurwon, (bu.p_huko_onb * bu.ster_totaal / 100) as a_huko_onb,
+		(bu.p_1gezw * bu.ster_totaal / 100) as a_1gezw, (bu.p_mgezw * bu.ster_totaal / 100) as a_mgezw, provincie.gid
+		FROM bagactueel.buurt_2014 bu, bagactueel.provincie
+		WHERE ST_Contains(provincie.geovlak, ST_Centroid(bu.geom))
+		) AS buurten
+		GROUP BY gm_gid
+	 ) AS sq
+ WHERE sq.gm_gid = provincie.gid;
+ 
+ -- Clean db
+ VACUUM ANALYZE bagactueel.gemeente;
+ VACUUM ANALYZE bagactueel.provincie;
