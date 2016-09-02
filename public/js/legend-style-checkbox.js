@@ -339,14 +339,14 @@
             if (_chart.renderLabel()) {
                 var lab = rows.select('text')
                     .attr('x', function (d) {
-                        if (d.key.indexOf("%") === -1) {
+                        if (d.key && d.key.indexOf("%") === -1) {
                             return 3 * height;
                         } else {
                             return height + 20;
                         }
                     })
                     .attr('y', function (d) {
-                        if (d.key.indexOf("%") === -1) {
+                        if (d.key && d.key.indexOf("%") === -1) {
                             return _labelOffsetY;
                         } else {
                             return 0.67 * height;
@@ -375,7 +375,7 @@
                 var labb = rows.select('#textvalue')
                     .attr('x', _labelOffsetX + 2 * height)
                     .attr('y', function (d) {
-                        if (d.key.indexOf("%") === -1) {
+                        if (d.key && d.key.indexOf("%") === -1) {
                             return _labelOffsetY;
                         } else {
                             return height / 5;
@@ -395,7 +395,7 @@
                 var lab2 = rows.select('#textvalue2')
                     .attr('x', _chart.effectiveWidth() - height + _gap)
                     .attr('y', function (d) {
-                        if (d.key.indexOf("%") === -1) {
+                        if (d.key && d.key.indexOf("%") === -1) {
                             return _labelOffsetY;
                         } else {
                             return 6;
@@ -408,7 +408,7 @@
                         return _rowCssClass + ' _' + i;
                     })
                     .text(function (d) {
-                        if (d.key.indexOf("%") === -1) {
+                        if (d.key && d.key.indexOf("%") === -1) {
                             return "";
                         } else {
                             return String.fromCharCode(160) + "van de buurten hebben"

@@ -357,7 +357,7 @@ module wodk {
             setTimeout(() => {
                 //this.dcChart.filter(this.$scope.filter.filterLabel);
                 this.dcChart.render();
-                dc.renderAll();
+                // dc.renderAll();
                 //this.$layerService.updateMapFilter(this.$scope.filter.group);
             }, 10);
         }
@@ -366,7 +366,7 @@ module wodk {
             setTimeout(() => {
                 // var filter = this.$scope.filter;
                 // var group = filter.group;
-                this.dcChart.filterAll();
+                // this.dcChart.filterAll();
                 //this.dcChart.filter(this.$scope.filter.filterLabel);
                 // this.dcChart.render();
                 this.dcChart.render();

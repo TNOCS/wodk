@@ -83,8 +83,11 @@ module wodk {
 
             this.mBusHandles.push(this.$messageBus.subscribe('layer', (title, l: csComp.Services.ProjectLayer) => {
                 if (title === 'activated') {
-                    if ($scope.filter) {
-                        this.updateChart();
+                    if ($scope.filter && $scope.filter.group && $scope.filter.group.id) {
+                        let g = this.$layerService.findGroupByLayerId(l);
+                        if (g && g.id === $scope.filter.group.id) {
+                            this.updateChart();
+                        }
                     }
                 }
             }));
@@ -208,14 +211,19 @@ module wodk {
                 this.updateRowVisualizerScope(this.$scope.filter);
                 this.updateRowFilterScope(this.$scope.filter);
             });
-            this.$messageBus.publish('filters', 'updateGroup', group.id);
+            // this.$messageBus.publish('filters', 'updateGroup', group.id);
         }
 
         private selectCity(name: string) {
             var foundFeature: csComp.Services.IFeature = this.findFeatureByBestMatchingPropertyValue('Name', name);
             if (foundFeature) {
-                this.wodkWidgetSvc.zoomNextFeatureFlag = true;
-                this.$layerService.selectFeature(foundFeature);
+                if (foundFeature.geometry.type.toLowerCase() !== 'point') {
+                    this.wodkWidgetSvc.zoomNextFeatureFlag = true;
+                    this.$layerService.selectFeature(foundFeature);
+                } else {
+                    // City is already selected, only zoom to it
+                    this.$mapService.getMap().flyTo(new L.LatLng(foundFeature.geometry.coordinates[1], foundFeature.geometry.coordinates[0]));
+                }
             }
         }
 
@@ -270,6 +278,7 @@ module wodk {
         }
 
         private createChart() {
+            console.log(`Create chart ${this.widget.id}`);
             var gf = new csComp.Services.GroupFilter();
             gf.property = this.$scope.style.property;
             gf.id = this.widget.id;

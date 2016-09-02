@@ -143,9 +143,9 @@ module wodk {
             l.dataSourceParameters['searchProperty'] = f.properties['GM_CODE'];
             if (this.$layerService.findLoadedLayer(l.id)) {
                 this.$layerService.layerSources[l.type.toLowerCase()].refreshLayer(l);
-                this.$messageBusService.publish('updatelegend', 'update', _.find(l.group.styles, (s) => { return s.enabled; }));
+                // this.$messageBusService.publish('updatelegend', 'update', _.find(l.group.styles, (s) => { return s.enabled; }));
                 if (this.zoomNextFeatureFlag) {
-                    this.zoomToLayer(l);
+                    this.zoomToLayer(l, this.gemeenteSelectie[this.gemeenteSelectie.length - 1]);
                     this.zoomNextFeatureFlag = false;
                 }
             } else {
@@ -189,11 +189,11 @@ module wodk {
             var fClone: IFeature = csComp.Services.Feature.serialize(f);
             // Replace polygon buurt by polyline
             var bl = this.$layerService.findLayer('bagbuurten');
-            if (bl.group.filters) {
-                bl.group.filters.forEach((fil) => {
-                    this.$layerService.removeFilter(fil);
-                });
-            }
+            // if (bl.group.filters) {
+            //     bl.group.filters.forEach((fil) => {
+            //         this.$layerService.removeFilter(fil);
+            //     });
+            // }
             this.$layerService.removeFeature(f);
             if (bl && bl.data && bl.data.features) {
                 // fClone.geometry.type = (fClone.geometry.type === 'Polygon' ? 'LineString' : 'MultiLineString');
@@ -224,7 +224,7 @@ module wodk {
                 if (this.buurtSelectie.length <= 1 && l && l.data && l.data.features && l.data.features.length > 0) {
                     this.zoomToFeature(this.buurtSelectie[this.buurtSelectie.length - 1]);
                 }
-                this.$messageBusService.publish('updatelegend', 'update', _.find(l.group.styles, (s) => { return s.enabled; }));
+                // this.$messageBusService.publish('updatelegend', 'update', _.find(l.group.styles, (s) => { return s.enabled; }));
             } else {
                 this.$layerService.addLayer(l, () => {
                     var group = this.$layerService.findGroupById('BAG');
@@ -243,15 +243,19 @@ module wodk {
             }
         }
 
-        private zoomToLayer(l: csComp.Services.ProjectLayer) {
+/***
+ * Zoom to the supplied layer. Optionally supply an additional feature to be included in the bounds area.
+ */
+        private zoomToLayer(l: csComp.Services.ProjectLayer, f?: IFeature) {
             setTimeout(() => {
-                var b = csComp.Helpers.GeoExtensions.getBoundingBox(l.data);
+                let features: IFeature[] = (f) ? _.union(l.data.features, [f]) : l.data.features;
+                let b = csComp.Helpers.GeoExtensions.getBoundingBox(features);
                 if (b.xMax == 180 || b.yMax == 90) return;
-                this.$mapService.getMap().fitBounds(new L.LatLngBounds(b.southWest, b.northEast), { paddingBottomRight: new L.Point(610, 0), paddingTopLeft: new L.Point(0, 105) });
+                this.$mapService.getMap().flyToBounds(new L.LatLngBounds(b.southWest, b.northEast), { paddingBottomRight: new L.Point(610, 0), paddingTopLeft: new L.Point(0, 105) });
             }, 100);
         }
 
-        private zoomToFeature(f: IFeature) {
+        public zoomToFeature(f: IFeature) {
             let l = <csComp.Services.ProjectLayer>{data: {features: [f], type: "FeatureCollection"}};
             this.zoomToLayer(l);
         }
