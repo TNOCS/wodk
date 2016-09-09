@@ -30,6 +30,7 @@ module wodk {
             '$scope',
             '$timeout',
             '$translate',
+            '$http',
             'layerService',
             'messageBusService',
             'mapService',
@@ -40,6 +41,7 @@ module wodk {
             private $scope: IWODKWidgetScope,
             private $timeout: ng.ITimeoutService,
             private $translate: ng.translate.ITranslateService,
+            private $http: ng.IHttpService,
             private $layerService: csComp.Services.LayerService,
             private $messageBus: csComp.Services.MessageBusService,
             private $mapService: csComp.Services.MapService,
@@ -53,7 +55,7 @@ module wodk {
             $scope.data = <WODKWidgetData>this.widget.data;
             $scope.minimized = false;
 
-            if ((<any>window).html2canvas) {
+            if ((<any>window).document) {
                 this.exporterAvailable = true;
             } else {
                 this.exporterAvailable = false;
@@ -131,6 +133,9 @@ module wodk {
                         break;
                     case 'home':
                         location.href = "http://www.zorgopdekaart.nl";
+                        break;
+                    case 'address':
+                        this.wodkWidgetSvc.loadAddress(value);
                         break;
                     default:
                         break;
@@ -362,21 +367,36 @@ module wodk {
             }
         }
 
-        private getHTML() {
-               var content = `<!DOCTYPE html><html ng-app="csWebApp" style="overflow:hidden;position:fixed"><head><link rel="stylesheet" href="http://localhost:3002/bower_components/font-awesome/css/font-awesome.min.css" /><link rel="stylesheet" href="http://localhost:3002/bower_components/csweb/dist-bower/csWeb-dep.css" /><link rel="stylesheet" href="http://localhost:3002/bower_components/csweb/dist-bower/css/csStyles.css" /><link rel="stylesheet" href="http://localhost:3002/css/style.css"></head>`;
-               content += $('body').prop('outerHTML').replace('src="images', 'src="http://localhost:3002/images');
-               content += `</html>`;
+        private getHTML(id: string) {
+               var content = `<html><head>`;
+               $.each(document.getElementsByTagName('link'), (ind: number, val: HTMLLinkElement) => { content += val.outerHTML; });
+               $.each(document.getElementsByTagName('script'), (ind: number, val: HTMLLinkElement) => { content += val.outerHTML; });
+               content += `</head><body>`;                       
+               content += $(id).parent().parent().prop('outerHTML');
+               content += `</body></html>`;
                return content;
         }
 
-        public exportToImage(id: string) {
-            $.ajax({
-                type: 'POST',
-                url: "screenshot",
-                data: {html: this.getHTML()},
-                success: (data) => { console.log('Screenshot command sent');  }
-            });
+        private getDimensions(id: string) {
+            let dom = $(id).parent().parent();
+            let w = dom.outerWidth(true);
+            let h = dom.outerHeight(true);
+            return {width: w, height: h};
+        }
 
+        public exportToImage(id: string) {
+            let dim = this.getDimensions('#' + id);
+            this.$http({
+                method: 'POST',
+                url: "screenshot",
+                data: { html: this.getHTML('#' + id), width: dim.width, height: dim.height },
+            }).then((response) => {
+                csComp.Helpers.saveImage(response.data.toString(), 'Woningaanpassingen screenshot', 'png', true);
+            }, (error) => {
+                console.log(error);
+            });
+            console.log('Screenshot command sent');
+            this.$messageBus.notifyWithTranslation('IMAGE_REQUESTED', 'IMAGE_WILL_APPEAR');
             // var html2canvas = (<any>window).html2canvas || undefined;
             // if (!html2canvas) return;
 

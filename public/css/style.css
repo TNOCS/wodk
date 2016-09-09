@@ -61,7 +61,7 @@
 }
 
 .active-text {
-    font-size: 14px;
+    font-size: 12px !important;
     color: black;
 }
 
@@ -319,13 +319,10 @@
     color: white;
 }
 
-.active-text {
-    font-size: 12px;
-}
-
 .active-text table tbody tr td {
     border-bottom: 1px #CCC1DA solid;
     border-top: 1px #CCC1DA solid;
+    font-size: 12px;
 }
 
 .dashboard-active {

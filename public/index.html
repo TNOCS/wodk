@@ -76,7 +76,7 @@
     <link href="http://leaflet.github.io/Leaflet.draw/leaflet.draw.css" rel="stylesheet" />
 
     <div class="body" style="top:0">
-        <div class="justified-brand" style="color: #5e5e5e; z-index:1032">
+        <div class="justified-brand" style="color: #5e5e5e; z-index:1032" id="wodk-body">
             <img src="images/logo.png" height="100" width="79" alt="Logo VWS">
         </div>
         <nav class="navbar navbar-default navbar-fixed-top">
@@ -120,6 +120,22 @@
                             <div id="gemeente">
                                 <ul class="list-unstyled" style="margin-left:10px;">
                                     <li ng-repeat="city in vm.foundCities" ng-click="vm.selectCity(city)">{{city}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="dropdown" style="float: right">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Adres <span class="caret"></span></a>
+                        <div class="dropdown-menu" style="width: 315px;">
+                            <form class="navbar-form navbar-left" role="search">
+                                <div class="form-group">
+                                    <input id="search-address" type="text" class="form-control" ng-model="vm.addressQuery" ng-change="vm.filterAddress()" ng-keyup="$event.keyCode == 13 && vm.selectFirst()" style="width:285px" placeholder="Zoek op adres" autocomplete="off" autofocus>
+                                </div>
+                                <!--<button type="submit" class="btn btn-default">Submit</button>-->
+                            </form>
+                            <div id="address">
+                                <ul class="list-unstyled" style="margin-left:10px;">
+                                    <li ng-repeat="(address, props) in vm.foundAddresses" ng-click="vm.selectAddress(props)">{{props.name}}, {{props.province}}</li>
                                 </ul>
                             </div>
                         </div>

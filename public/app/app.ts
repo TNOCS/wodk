@@ -27,6 +27,7 @@ module App {
         static $inject = [
             '$scope',
             '$location',
+            '$http',
             'mapService',
             'layerService',
             'messageBusService',
@@ -39,8 +40,11 @@ module App {
         // public areaFilter: AreaFilter.AreaFilterModel;
         public contourAction: ContourAction.ContourActionModel;
 
+        public searchCache: { [key: string]: csComp.Services.IEsriSearchResult } = {};
         public filterValues: number[] = [0, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500];
         public filterValue = this.filterValues[0];
+        public foundAddresses: { [key: string]: wodk.IAddressResult } = {};
+        public addressQuery: string;
         public foundCities: string[] = [];
         public cityQuery: string;
         public cities: string[] = ['Aa en Hunze', 'Aalburg', 'Aalsmeer', 'Aalten', 'Achtkarspelen', 'Alblasserdam', 'Albrandswaard', 'Alkmaar', 'Almelo', 'Almere', 'Alphen aan den Rijn', 'Alphen-Chaam', 'Ameland', 'Amersfoort', 'Amstelveen', 'Amsterdam', 'Apeldoorn', 'Appingedam', 'Arnhem', 'Assen', 'Asten', 'Baarle-Nassau', 'Baarn', 'Barendrecht', 'Barneveld', 'Bedum', 'Beek', 'Beemster', 'Beesel', 'Bellingwedde', 'Berg en Dal', 'Bergeijk', 'Bergen (Limburg)', 'Bergen (Noord-Holland)', 'Bergen op Zoom', 'Berkelland', 'Bernheze', 'Best', 'Beuningen', 'Beverwijk', 'Binnenmaas', 'Bladel', 'Blaricum', 'Bloemendaal', 'Bodegraven-Reeuwijk', 'Boekel', 'Bonaire', 'Borger-Odoorn', 'Borne', 'Borsele', 'Boxmeer', 'Boxtel', 'Breda', 'Brielle', 'Bronckhorst', 'Brummen', 'Brunssum', 'Bunnik', 'Bunschoten', 'Buren', 'Capelle aan den IJssel', 'Castricum', 'Coevorden', 'Cranendonck', 'Cromstrijen', 'Cuijk', 'Culemborg', 'Dalfsen', 'Dantumadeel', 'De Bilt', 'De Friese Meren', 'De Marne', 'De Ronde Venen', 'De Wolden', 'Delft', 'Delfzijl', 'Den Haag (\'s-Gravenhage)', 'Den Helder', 'Deurne', 'Deventer', 'Diemen', 'Dinkelland', 'Doesburg', 'Doetinchem', 'Dongen', 'Dongeradeel', 'Dordrecht', 'Drechterland', 'Drimmelen', 'Dronten', 'Druten', 'Duiven', 'Echt-Susteren', 'Edam-Volendam', 'Ede', 'Eemnes', 'Eemsmond', 'Eersel', 'Eijsden-Margraten', 'Eindhoven', 'Elburg', 'Emmen', 'Enkhuizen', 'Enschede', 'Epe', 'Ermelo', 'Etten-Leur', 'Ferwerderadeel', 'Franekeradeel', 'Geertruidenberg', 'Geldermalsen', 'Geldrop-Mierlo', 'Gemert-Bakel', 'Gennep', 'Giessenlanden', 'Gilze en Rijen', 'Goeree-Overflakkee', 'Goes', 'Goirle', 'Gooise Meren', 'Gorinchem (Gorcum of Gorkum)', 'Gouda', 'Grave', 'Groningen', 'Grootegast', 'Gulpen-Wittem', 'Haaksbergen', 'Haaren', 'Haarlem', 'Haarlemmerliede en Spaarnwoude', 'Haarlemmermeer', 'Halderberge', 'Hardenberg', 'Harderwijk', 'Hardinxveld-Giessendam', 'Haren', 'Harlingen', 'Hattem', 'Heemskerk', 'Heemstede', 'Heerde', 'Heerenveen', 'Heerhugowaard', 'Heerlen', 'Heeze-Leende', 'Heiloo', 'Hellendoorn/Nijverdal', 'Hellevoetsluis', 'Helmond', 'Hendrik-Ido-Ambacht', 'Hengelo (Overijssel)', '\'s-Hertogenbosch (Den Bosch)', 'Het Bildt', 'Heumen', 'Heusden', 'Hillegom', 'Hilvarenbeek', 'Hilversum', 'Hof van Twente', 'Hollands Kroon', 'Hoogeveen', 'Hoogezand-Sappemeer', 'Hoorn', 'Horst aan de Maas', 'Houten', 'Huizen', 'Hulst', 'IJsselstein', 'Kaag en Braassem', 'Kampen', 'Kapelle', 'Katwijk', 'Kerkrade', 'Koggenland', 'Kollumerland en Nieuwkruisland', 'Korendijk', 'Krimpen aan den IJssel', 'Krimpenerwaard', 'Laarbeek', 'Landerd', 'Landgraaf', 'Landsmeer', 'Langedijk', 'Lansingerland', 'Laren', 'Leek', 'Leerdam', 'Leeuwarden', 'Leeuwarderadeel', 'Leiden', 'Leiderdorp', 'Leidschendam-Voorburg', 'Lelystad', 'Leudal', 'Leusden', 'Lingewaal', 'Lingewaard', 'Lisse', 'Littenseradeel', 'Lochem', 'Loon op Zand', 'Lopik', 'Loppersum', 'Losser', 'Maasdriel', 'Maasgouw', 'Maassluis', 'Maastricht', 'Marum', 'Medemblik', 'Meerssen', 'Menaldumadeel', 'Menterwolde', 'Meppel', 'Middelburg', 'Midden-Delfland', 'Midden-Drenthe', 'Mill en Sint Hubert', 'Moerdijk', 'Molenwaard', 'Montferland', 'Montfoort', 'Mook en Middelaar', 'Neder-Betuwe', 'Nederweert', 'Neerijnen', 'Nieuwegein', 'Nieuwkoop', 'Nijkerk', 'Nijmegen', 'Nissewaard', 'Noord-Beveland', 'Noordenveld', 'Noordoostpolder', 'Noordwijk', 'Noordwijkerhout', 'Nuenen', ' Gerwen en Nederwetten', 'Nunspeet', 'Nuth', 'Oegstgeest', 'Oirschot', 'Oisterwijk', 'Oldambt', 'Oldebroek', 'Oldenzaal', 'Olst-Wijhe', 'Ommen', 'Onderbanken', 'Oost Gelre', 'Oosterhout', 'Ooststellingwerf', 'Oostzaan', 'Opmeer', 'Opsterland', 'Oss', 'Oud-Beijerland', 'Oude IJsselstreek', 'Ouder-Amstel', 'Oudewater', 'Overbetuwe', 'Papendrecht', 'Peel en Maas', 'Pekela', 'Pijnacker-Nootdorp', 'Purmerend', 'Putten', 'Raalte', 'Reimerswaal', 'Renkum', 'Renswoude', 'Reusel-De Mierden', 'Rheden', 'Rhenen', 'Ridderkerk', 'Rijnwaarden', 'Rijssen-Holten', 'Rijswijk', 'Roerdalen', 'Roermond', 'Roosendaal', 'Rotterdam', 'Rozendaal', 'Rucphen', 'Saba', 'Schagen', 'Scherpenzeel', 'Schiedam', 'Schiermonnikoog', 'Schijndel', 'Schinnen', 'Schouwen-Duiveland', 'Simpelveld', 'Sint Anthonis', 'Sint Eustatius', 'Sint-Michielsgestel', 'Sint-Oedenrode', 'Sittard-Geleen', 'Sliedrecht', 'Slochteren', 'Sluis', 'Smallingerland', 'Soest', 'Someren', 'Son en Breugel', 'Stadskanaal', 'Staphorst', 'Stede Broec', 'Steenbergen', 'Steenwijkerland', 'Stein', 'Stichtse Vecht', 'Strijen', 'Súdwest-Fryslân', 'Ten Boer', 'Terneuzen', 'Terschelling', 'Texel', 'Teylingen', 'Tholen', 'Tiel', 'Tietjerksteradeel', 'Tilburg', 'Tubbergen', 'Twenterand', 'Tynaarlo', 'Uden', 'Uitgeest', 'Uithoorn', 'Urk', 'Utrecht', 'Utrechtse Heuvelrug', 'Vaals', 'Valkenburg aan de Geul', 'Valkenswaard', 'Veendam', 'Veenendaal', 'Veere', 'Veghel', 'Veldhoven', 'Velsen', 'Venlo', 'Venray', 'Vianen', 'Vlaardingen', 'Vlagtwedde', 'Vlieland', 'Vlissingen', 'Voerendaal', 'Voorschoten', 'Voorst', 'Vught', 'Waalre', 'Waalwijk', 'Waddinxveen', 'Wageningen', 'Wassenaar', 'Waterland', 'Weert', 'Weesp', 'Werkendam', 'West Maas en Waal', 'Westerveld', 'Westervoort', 'Westland', 'Weststellingwerf', 'Westvoorne', 'Wierden', 'Wijchen', 'Wijdemeren', 'Wijk bij Duurstede', 'Winsum', 'Winterswijk', 'Woensdrecht', 'Woerden', 'Wormerland', 'Woudenberg', 'Woudrichem', 'Zaanstad', 'Zaltbommel', 'Zandvoort', 'Zederik', 'Zeewolde', 'Zeist', 'Zevenaar', 'Zoetermeer', 'Zoeterwoude', 'Zuidhorn', 'Zuidplas', 'Zundert', 'Zutphen', 'Zwartewaterland', 'Zwijndrecht', 'Zwolle'];
@@ -52,6 +56,7 @@ module App {
         constructor(
             private $scope: IAppScope,
             private $location: IAppLocationService,
+            private $http: ng.IHttpService,
             private $mapService: csComp.Services.MapService,
             private $layerService: csComp.Services.LayerService,
             private $messageBusService: csComp.Services.MessageBusService,
@@ -175,6 +180,40 @@ module App {
             }
         }
 
+        filterAddress = _.debounce(this.filterAddressDebounced, 500);
+
+        filterAddressDebounced() {
+            let q = this.addressQuery;
+            if (this.searchCache.hasOwnProperty(q)) {
+                this.geocodeCallback(this.searchCache[q], q);
+            } else {
+                let uri = 'https://services.arcgisonline.nl/arcgis/rest/services/Geocoder_BAG/GeocodeServer/findAddressCandidates?f=pjson';
+                uri += `&SingleLine=${encodeURIComponent(q)}&outFields=Match_addr,City,Subregion,Region`;
+                this.$http.get(uri)
+                    .success((r: csComp.Services.IEsriSearchResult) => {
+                        this.geocodeCallback(r, q);
+                    })
+                    .error((data, status, error, thing) => {
+                        console.log('Error contacting Esri')
+                    });
+            }
+        }
+
+        geocodeCallback(r: csComp.Services.IEsriSearchResult, q: string) {
+            this.searchCache[q] = r;
+            this.foundAddresses = {};
+            r.candidates.forEach(f => {
+                if (f.score > 0.8) {
+                    this.foundAddresses[f.address] = { name: f.attributes['Match_addr'], score: (f.score / 101), province: f.attributes['Region'], coordinates: [f.location.x, f.location.y] }
+                }
+            });
+        }
+
+        selectAddress(address: any) {
+            $('#search-address').val('');
+            this.$messageBusService.publish('wodk', 'address', address);
+        }
+
         /**
          * When a filter is selected, broadcast it.
          *
@@ -221,8 +260,8 @@ module App {
                 case 'activated':
                     if (this.$scope.layersLoading >= 1) this.$scope.layersLoading -= 1;
                     // if (layer.id === 'bagcontouren') {
-                        // var gemeente = this.$layerService.findLoadedLayer('gemeente');
-                        // if (gemeente) this.$layerService.removeLayer(gemeente);
+                    // var gemeente = this.$layerService.findLoadedLayer('gemeente');
+                    // if (gemeente) this.$layerService.removeLayer(gemeente);
                     // }
                     break;
                 case 'error':
@@ -292,6 +331,39 @@ module App {
                 default:
             }
         }
+
+        private getHTML() {
+            var content = `<html><head>`;
+            $.each(document.getElementsByTagName('link'), (ind: number, val: HTMLLinkElement) => { content += val.outerHTML; });
+            //    $.each(document.getElementsByTagName('script'), (ind: number, val: HTMLLinkElement) => { content += val.outerHTML; });
+            content += `</head>`;
+            content += document.body.outerHTML;
+            content += `</html>`;
+            return content;
+        }
+
+        private getDimensions() {
+            let dom = $("body");
+            let w = dom.outerWidth(true);
+            let h = dom.outerHeight(true);
+            return { width: w, height: h };
+        }
+
+        public exportToImage() {
+            let dim = this.getDimensions();
+            this.$http({
+                method: 'POST',
+                url: "screenshot",
+                data: { html: this.getHTML(), width: dim.width, height: dim.height, fullScreen: true },
+            }).then((response) => {
+                csComp.Helpers.saveImage(response.data.toString(), 'Woningaanpassingen screenshot', 'png', true);
+            }, (error) => {
+                console.log(error);
+            });
+            console.log('Screenshot command sent');
+            this.$messageBusService.notifyWithTranslation('SCREENSHOT_REQUESTED', 'IMAGE_WILL_APPEAR');
+        }
+
 
         toggleMenu(): void {
             this.$mapService.invalidate();

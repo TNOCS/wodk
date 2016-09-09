@@ -18,6 +18,7 @@
     "geojson-vt": "^2.1.8",
     "moment": "^2.13.0",
     "pg": "^4.5.6",
+    "underscore.string": "^3.3.4",
     "webshot": "^0.18.0",
     "winston": "^2.1.0"
   },

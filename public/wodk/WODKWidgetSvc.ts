@@ -1,4 +1,12 @@
 module wodk {
+
+    export interface IAddressResult {
+        province: string;
+        name: string;
+        score: number;
+        coordinates: number[];
+    }
+
     export class WODKWidgetSvc {
         static $inject = [
             '$rootScope',
@@ -243,9 +251,67 @@ module wodk {
             }
         }
 
-/***
- * Zoom to the supplied layer. Optionally supply an additional feature to be included in the bounds area.
- */
+
+        public loadAddress(address: IAddressResult) {
+            console.log(address.name);
+            console.log(JSON.stringify(address.coordinates));
+            let geojson = JSON.stringify({ type: 'Point', coordinates: address.coordinates, crs: { type: "name", properties: { name: "EPSG:4326" } } });
+            // Try to find gemeente first
+            this.findGemeente(geojson, address, (gemeenteResult) => {
+                if (gemeenteResult) {
+                    var f = this.$layerService.findFeatureByPropertyValue('GM_CODE', gemeenteResult);
+                    if (f && !f.isSelected) this.$layerService.selectFeature(f);
+                    this.findBuurt(geojson, address, (buurtResult) => {
+                        if (buurtResult) {
+                            setTimeout(() => {
+                                var f = this.$layerService.findFeatureByPropertyValue('bu_code', buurtResult);
+                                if (f) this.$layerService.selectFeature(f);
+                            }, 1000);
+                        }
+                    });
+                }
+            });
+        }
+
+        private findGemeente(searchQuery: string, address: IAddressResult, cb: Function) {
+            this.$http({
+                method: 'POST',
+                url: "searchgemeente",
+                data: { loc: searchQuery },
+            }).then((response) => {
+                if (response) {
+                    cb(response.data['gm_code']);
+                } else {
+                    this.$messageBusService.notify('Adres niet gevonden', `De gemeente behorende bij het adres '${address.name}' kon niet worden gevonden.`);
+                    cb();
+                }
+            }, (error) => {
+                console.log(error);
+                cb();
+            });
+        }
+
+        private findBuurt(searchQuery: string, address: IAddressResult, cb: Function) {
+            this.$http({
+                method: 'POST',
+                url: "searchbuurt",
+                data: { loc: searchQuery },
+            }).then((response) => {
+                if (response) {
+                    cb(response.data['bu_code']);
+                } else {
+                    this.$messageBusService.notify('Adres niet gevonden', `De buurt behorende bij het adres '${address.name}' kon niet worden gevonden.`);
+                    cb();
+                }
+            }, (error) => {
+                console.log(error);
+                cb();
+            });
+        }
+
+        /***
+         * Zoom to the supplied layer. Optionally supply an additional feature to be included in the bounds area.
+         */
         private zoomToLayer(l: csComp.Services.ProjectLayer, f?: IFeature) {
             setTimeout(() => {
                 let features: IFeature[] = (f) ? _.union(l.data.features, [f]) : l.data.features;
@@ -256,7 +322,7 @@ module wodk {
         }
 
         public zoomToFeature(f: IFeature) {
-            let l = <csComp.Services.ProjectLayer>{data: {features: [f], type: "FeatureCollection"}};
+            let l = <csComp.Services.ProjectLayer>{ data: { features: [f], type: "FeatureCollection" } };
             this.zoomToLayer(l);
         }
 

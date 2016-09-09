@@ -3,7 +3,10 @@ import * as Winston from 'winston';
 import fs = require('fs-extra');
 import path = require('path');
 import webshot = require('webshot');
+import stream = require('stream');
 import * as csweb from "csweb";
+import _ = require("underscore.string");
+
 
 Winston.remove(Winston.transports.Console);
 Winston.add(Winston.transports.Console, <Winston.ConsoleTransportOptions>{
@@ -42,11 +45,11 @@ cs.start(() => {
         });
 
         cs.server.post(deployPath + '/public/bagsearchaddress', (req, res) => {
-            console.log('/bagsearchaddress');
+            console.log('/public/bagsearchaddress');
             mapLayerFactory.processBagSearchQuery(req, res);
         });
 
-        cs.server.post('/bagwoningen/public/bagsearchaddress', (req, res) => {
+        cs.server.post(deployPath + '/bagsearchaddress', (req, res) => {
             console.log('/bagsearchaddress');
             mapLayerFactory.processBagSearchQuery(req, res);
         });
@@ -61,24 +64,54 @@ cs.start(() => {
             mapLayerFactory.processBagContours(req, res);
         });
 
-        cs.server.post(deployPath + '/bagsearchaddress', (req, res) => {
-            console.log('/bagsearchaddress');
-            mapLayerFactory.processBagSearchQuery(req, res);
-        });
-
         cs.server.post(deployPath + '/bagbuurten', (req, res) => {
             console.log('/public/bagbuurten');
             mapLayerFactory.processBagBuurten(req, res);
         });
 
+        cs.server.post(deployPath + '/searchgemeente', (req, res) => {
+            console.log('/searchgemeente');
+            bagDatabase.searchGemeenteAtLocation(req.body.loc, 1, (searchResult: any[]) => {
+                if (!searchResult || !searchResult.length || searchResult.length === 0) {
+                    res.sendStatus(404);
+                } else {
+                    res.status(200).send({ gm_code: 'GM' + _.lpad(searchResult[0].gemeentecode, 4, '0') });
+                }
+            });
+        });
+
+        cs.server.post(deployPath + '/searchbuurt', (req, res) => {
+            console.log('/searchbuurt');
+            bagDatabase.searchBuurtAtLocation(req.body.loc, 1, (searchResult: any[]) => {
+                if (!searchResult || !searchResult.length || searchResult.length === 0) {
+                    res.sendStatus(404);
+                } else {
+                    res.status(200).send({ bu_code: searchResult[0].bu_code });
+                }
+            });
+        });
+
         cs.server.post(deployPath + '/screenshot', (req, res) => {
             console.log('/public/screenshot');
             if (req.body && req.body.html) {
-                if ((<any>window).webshot) {
-                    webshot(req.body.html, 'hello_world.png', { siteType: 'html', javascriptEnabled: false, screenSize: { width: 1600, height: 1080 } }, (err) => {
-                        if (err) console.log(`Webshot error: ${err}`);
+                if (<any>webshot) {
+                    let image = [];
+                    let renderStream: stream.Stream = webshot(req.body.html, { siteType: 'html', javascriptEnabled: true, screenSize: { width: req.body.width || 1200, height: req.body.height || 800 }, shotSize: { width: 'window', height: 'window' }, shotOffset: { top: (req.body.fullScreen ? 0 : 100), left: 0, right: 0, bottom: 0 }, phantomConfig: { 'local-to-remote-url-access': true, 'debug': 'false', "cookies-file": "./cookies.txt", "ignore-ssl-errors": true, "web-security": 'false', 'disk-cache': 'true' }, errorIfJSException: true, renderDelay: (req.body.fullScreen ? 10000 : 1000) });
+
+                    renderStream.on('data', (data) => {
+                        image.push(data);
                     });
-                    res.sendStatus(200);
+
+                    renderStream.on('end', () => {
+                        res.writeHead(200, { "Content-Type": "image/png" });
+                        var b = Buffer.concat(image);
+                        res.end(b.toString('base64'));
+                    });
+
+                    renderStream.on('error', (err) => {
+                        console.log(`Webshot error: ${err}`);
+                    });
+
                 } else {
                     res.sendStatus(404);
                 }
