@@ -17,7 +17,7 @@
                 "maxTitleResolution": -1,
                 "drawingMode": "Point"
             },
-            "propertyTypeKeys": "Name;aanpasbaarheid;kostenindicatie;hellingbaan;drempelvrij;traplift;traplift2;aanname;leeg;Adres;streetview;kadaster;pandtype;bouwjaar;lift;pandoppervlakte;gebruiksdoelverblijfsobject;plint;woningen_in_pand;niet_woningen_in_pand;pandhoogte;pandid;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;wijknaam;wijkcode;buurtnaam;buurtcode;ster_gem;oppervlakteverblijfsobject;icon;postcode;woonplaatsnaam;leeftijd_bewoner;eigendom;verhuurder;corporatie;gemeentenaam;isonderzocht;plint_oz;lift_oz;"
+            "propertyTypeKeys": "Name;aanpasbaarheid;kostenindicatie;hellingbaan;drempelvrij;traplift;aanname;Adres;streetview;kadaster;pandtype;bouwjaar;lift;pandoppervlakte;gebruiksdoelverblijfsobject;plint;woningen_in_pand;niet_woningen_in_pand;pandhoogte;pandid;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;wijknaam;wijkcode;buurtnaam;buurtcode;ster_gem;oppervlakteverblijfsobject;icon;postcode;woonplaatsnaam;leeftijd_bewoner;eigendom;verhuurder;corporatie;gemeentenaam;isonderzocht;plint_oz;lift_oz;"
         }
     },
     "propertyTypeData": {
@@ -56,15 +56,7 @@
             "visibleInCallOut": true,
             "hideInDataTable": true,
             "type": "textarea",
-            "expression": "(properties.ster_2 >= 1) ? 'Traplift:' : null"
-        },
-        "traplift2": {
-            "label": "traplift2",
-            "title": "1 bocht",
-            "visibleInCallOut": true,
-            "hideInDataTable": true,
-            "type": "text",
-            "expression": "(properties.ster_2 >= 1) ? 'ca. EUR 6.000 - 8.000' : null"
+            "expression": "(properties.ster_2 >= 1) ? '<div class=\"feature-prop-title\" style=\"font-weight:normal;padding-left:0px;\">Traplift:\n1 bocht</div><div class=\"feature-prop-value-align-right\">ca. EUR 6.000 - 8.000</div>' : null"
         },
         "leeg": {
             "label": "leeg",
@@ -76,11 +68,11 @@
         },
         "aanname": {
             "label": "aanname",
-            "title": "Aanname",
+            "title": " ",
             "visibleInCallOut": true,
             "hideInDataTable": true,
             "type": "textarea",
-            "expression": "(properties.ster_2 >= 1 || properties.ster_3 >= 1) ? 'Aanpassing aan sanitair en keuken zijn afhankelijk (van de staat) van de woning en de mobiliteitsbeperking.' : null"
+            "expression": "(properties.ster_2 >= 1 || properties.ster_3 >= 1) ? '<div class=\"feature-prop-title\" style=\"font-weight:normal;padding-left:0px;\"><i>Aanname:</i>\nAanpassing aan sanitair en keuken zijn afhankelijk (van de staat) van de woning en de mobiliteitsbeperking.</div><div class=\"feature-prop-value-align-right\" style=\"font-weight:normal\">P.M.</div>' : null"
         },
         "isonderzocht": {
             "label": "isonderzocht",

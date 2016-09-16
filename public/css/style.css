@@ -296,7 +296,9 @@
     padding: 4px;
 }
 
-.wodk-cumulative-row {}
+.list-unstyled > li {
+    color: black;
+}
 
 .fixed-column-width {
     width: 310px;
