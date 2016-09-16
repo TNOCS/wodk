@@ -17,7 +17,7 @@
                 "maxTitleResolution": -1,
                 "drawingMode": "Point"
             },
-            "propertyTypeKeys": "Name;aanpasbaarheid;kostenindicatie;Adres;streetview;kadaster;pandtype;bouwjaar;lift;pandoppervlakte;gebruiksdoelverblijfsobject;plint;woningen_in_pand;niet_woningen_in_pand;pandhoogte;pandid;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;wijknaam;wijkcode;buurtnaam;buurtcode;ster_gem;oppervlakteverblijfsobject;icon;postcode;woonplaatsnaam;leeftijd_bewoner;eigendom;verhuurder;corporatie;gemeentenaam;isonderzocht;plint_oz;lift_oz;"
+            "propertyTypeKeys": "Name;aanpasbaarheid;kostenindicatie;hellingbaan;drempelvrij;traplift;traplift2;aanname;leeg;Adres;streetview;kadaster;pandtype;bouwjaar;lift;pandoppervlakte;gebruiksdoelverblijfsobject;plint;woningen_in_pand;niet_woningen_in_pand;pandhoogte;pandid;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;wijknaam;wijkcode;buurtnaam;buurtcode;ster_gem;oppervlakteverblijfsobject;icon;postcode;woonplaatsnaam;leeftijd_bewoner;eigendom;verhuurder;corporatie;gemeentenaam;isonderzocht;plint_oz;lift_oz;"
         }
     },
     "propertyTypeData": {
@@ -29,10 +29,52 @@
         },
         "kostenindicatie": {
             "label": "kostenindicatie",
-            "title": "Kostenindicatie aanpassingen",
+            "title": "",
             "visibleInCallOut": true,
             "type": "textarea",
-            "expression": "(properties.woningen_in_pand === 1 && !properties.niet_woningen_in_pand) ? 'traplift (nieuw): €2500 - €9000 \ntraplift (hergebruik): ca. 50% van nieuw' : null"
+            "expression": "'Kostenindicatie aanpassingen:'"
+        },
+        "hellingbaan": {
+            "label": "hellingbaan",
+            "title": "Hellingbaan in stoep",
+            "visibleInCallOut": true,
+            "type": "text",
+            "expression": "(properties.ster_2 >= 1 || properties.ster_3 >= 1) ? 'ca: EUR 500\n' : null"
+        },
+        "drempelvrij": {
+            "label": "drempelvrij",
+            "title": "Woning drempelvrij maken",
+            "visibleInCallOut": true,
+            "type": "text",
+            "expression": "(properties.ster_2 >= 1 || properties.ster_3 >= 1) ? 'ca: EUR 600' : null"
+        },
+        "traplift": {
+            "label": "traplift",
+            "title": " ",
+            "visibleInCallOut": true,
+            "type": "textarea",
+            "expression": "(properties.ster_2 >= 1) ? 'Traplift:' : null"
+        },
+        "traplift2": {
+            "label": "traplift2",
+            "title": "1 bocht",
+            "visibleInCallOut": true,
+            "type": "text",
+            "expression": "(properties.ster_2 >= 1) ? 'ca. EUR 6.000 - 8.000' : null"
+        },
+        "leeg": {
+            "label": "leeg",
+            "title": " ",
+            "visibleInCallOut": true,
+            "type": "text",
+            "expression": "(properties.ster_2 >= 1 || properties.ster_3 >= 1) ? ' ' : null"
+        },
+        "aanname": {
+            "label": "aanname",
+            "title": "Aanname",
+            "visibleInCallOut": true,
+            "type": "textarea",
+            "expression": "(properties.ster_2 >= 1 || properties.ster_3 >= 1) ? 'Aanpassing aan sanitair en keuken zijn afhankelijk (van de staat) van de woning en de mobiliteitsbeperking.' : null"
         },
         "isonderzocht": {
             "label": "isonderzocht",

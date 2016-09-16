@@ -7,6 +7,8 @@ module wodk {
         coordinates: number[];
     }
 
+    export var WODK_MAP_PADDING = { paddingBottomRight: new L.Point(610, 0), paddingTopLeft: new L.Point(0, 105) };
+
     export class WODKWidgetSvc {
         static $inject = [
             '$rootScope',
@@ -21,10 +23,7 @@ module wodk {
          * We only want to zoom to a feature, when it was selected through the 
          * search bar, not when it was clicked on the map. Therefore, we set
          * this flag when a search has been performed, such that we can zoom
-         * to the selected features and then clear this flag again.  
-         * 
-         * @private
-         * @type {boolean} 
+         * to the selected features and then clear this flag again.
          */
         public zoomNextFeatureFlag: boolean = false;
         protected lastSelectedName: string;
@@ -253,60 +252,150 @@ module wodk {
 
 
         public loadAddress(address: IAddressResult) {
-            console.log(address.name);
-            console.log(JSON.stringify(address.coordinates));
             let geojson = JSON.stringify({ type: 'Point', coordinates: address.coordinates, crs: { type: "name", properties: { name: "EPSG:4326" } } });
-            // Try to find gemeente first
-            this.findGemeente(geojson, address, (gemeenteResult) => {
-                if (gemeenteResult) {
-                    var f = this.$layerService.findFeatureByPropertyValue('GM_CODE', gemeenteResult);
-                    if (f && !f.isSelected) this.$layerService.selectFeature(f);
-                    this.findBuurt(geojson, address, (buurtResult) => {
-                        if (buurtResult) {
-                            setTimeout(() => {
-                                var f = this.$layerService.findFeatureByPropertyValue('bu_code', buurtResult);
-                                if (f) this.$layerService.selectFeature(f);
-                            }, 1000);
-                        }
-                    });
-                }
-            });
+            var data = { geojson: geojson, address: address };
+            this.findGemeente(data)
+                .then(this.selectGemeente.bind(this))
+                .then(this.findBuurt.bind(this))
+                .then(this.selectBuurt.bind(this))
+                .then(this.findPand.bind(this))
+                .then(this.selectPand.bind(this))
+                .catch((err) => {
+                    console.log('Error while loading address: ' + err);
+                    if (address.coordinates) {
+                        this.$mapService.getMap().flyTo(new L.LatLng(address.coordinates[1], address.coordinates[0]), 16, WODK_MAP_PADDING);
+                    }
+                })
+                .done((finished) => {
+                    if (finished) {
+                        console.log('Finished address search');
+                    }
+                });
         }
 
-        private findGemeente(searchQuery: string, address: IAddressResult, cb: Function) {
+        private findGemeente(data: { geojson: string, address: IAddressResult }): Q.Promise<any> {
+            let cb = Q.defer();
             this.$http({
                 method: 'POST',
                 url: "searchgemeente",
-                data: { loc: searchQuery },
+                data: { loc: data.geojson },
             }).then((response) => {
                 if (response) {
-                    cb(response.data['gm_code']);
+                    data['gm_code'] = response.data['gm_code'];
+                    cb.resolve(data);
+                    // cb(response.data['gm_code']);
                 } else {
-                    this.$messageBusService.notify('Adres niet gevonden', `De gemeente behorende bij het adres '${address.name}' kon niet worden gevonden.`);
-                    cb();
+                    cb.reject(new Error(`Gemeente not found.`));
                 }
             }, (error) => {
                 console.log(error);
-                cb();
+                cb.reject(new Error(`Gemeente not found.`));
             });
+            return cb.promise;
         }
 
-        private findBuurt(searchQuery: string, address: IAddressResult, cb: Function) {
+        private findBuurt(data: { geojson: string, address: IAddressResult, gm_code: string }): Q.Promise<any> {
+            let cb = Q.defer();
             this.$http({
                 method: 'POST',
                 url: "searchbuurt",
-                data: { loc: searchQuery },
+                data: { loc: data.geojson },
             }).then((response) => {
                 if (response) {
-                    cb(response.data['bu_code']);
+                    data['bu_code'] = response.data['bu_code'];
+                    cb.resolve(data);
                 } else {
-                    this.$messageBusService.notify('Adres niet gevonden', `De buurt behorende bij het adres '${address.name}' kon niet worden gevonden.`);
-                    cb();
+                    cb.reject(new Error(`Buurt not found in ${data.gm_code}.`));
                 }
             }, (error) => {
                 console.log(error);
-                cb();
+                cb.reject(new Error(`Buurt not found in ${data.gm_code}.`));
             });
+            return cb.promise;
+        }
+
+        private findPand(data: { geojson: string, address: IAddressResult, gm_code: string, bu_code: string }): Q.Promise<any> {
+            let cb = Q.defer();
+            this.$http({
+                method: 'POST',
+                url: "searchpand",
+                data: { loc: data.geojson },
+            }).then((response) => {
+                if (response && response.data && response.data.hasOwnProperty('identificatie')) {
+                    data['identificatie'] = response.data['identificatie'];
+                    cb.resolve(data);
+                } else {
+                    this.$messageBusService.notify('Adres niet gevonden', `Het pand behorende bij het adres '${data.address.name}' kon niet worden gevonden.`);
+                    cb.reject(new Error(`Pand not found in ${data.bu_code}.`));
+                    cb.resolve(data);
+                }
+            }, (error) => {
+                console.log(error);
+                cb.reject(new Error(`Pand not found in ${data.bu_code}.`));
+            });
+            return cb.promise;
+        }
+
+        private selectGemeente(data: { geojson: string, address: IAddressResult, gm_code: string, bu_code: string }): Q.Promise<any> {
+            let cb = Q.defer();
+            let f = this.$layerService.findFeatureByPropertyValue('GM_CODE', data.gm_code);
+            if (f) {
+                // If gemeente is already loaded
+                if (f.geometry && f.geometry.type.toLowerCase() === 'point') {
+                    cb.resolve(data);
+                } else {
+                    let handle = this.$messageBusService.subscribe('layer', (topic, layer) => {
+                        if (topic === 'activated' && layer.id === 'bagbuurten') {
+                            cb.resolve(data);
+                            this.$messageBusService.unsubscribe(handle);
+                        }
+                    });
+                    this.$layerService.selectFeature(f);
+                }
+            } else {
+                cb.reject(new Error(`Feature with GM_CODE ${data.gm_code} not found.`));
+            }
+            return cb.promise;
+        }
+
+        private selectBuurt(data: { geojson: string, address: IAddressResult, gm_code: string, bu_code: string }): Q.Promise<any> {
+            let cb = Q.defer();
+            setTimeout(() => {
+                let f = this.$layerService.findFeatureByPropertyValue('bu_code', data.bu_code);
+                if (f) {
+                    // If buurt is already loaded
+                    if (f.geometry && f.geometry.type.toLowerCase() === 'point') {
+                        cb.resolve(data);
+                    } else {
+                        let handle = this.$messageBusService.subscribe('layer', (topic, layer) => {
+                            if (topic === 'activated' && layer.id === 'bagcontouren') {
+                                cb.resolve(data);
+                                this.$messageBusService.unsubscribe(handle);
+                            }
+                        });
+                        this.$layerService.selectFeature(f);
+                    }
+                } else {
+                    cb.reject(new Error(`Feature with bu_code ${data.bu_code} not found.`));
+                }
+            }, 500);
+            return cb.promise;
+        }
+
+        private selectPand(data: { geojson: string, address: IAddressResult, gm_code: string, bu_code: string, identificatie: string }): Q.Promise<any> {
+            let cb = Q.defer();
+            setTimeout(() => {
+                let f = this.$layerService.findFeatureById('c_' + data.identificatie);
+                if (f) {
+                    this.$layerService.selectFeature(f);
+                    let geometry = csComp.Helpers.GeoExtensions.getCentroid(f.geometry.coordinates);
+                    this.$mapService.getMap().flyTo(new L.LatLng(geometry.coordinates[1], geometry.coordinates[0]), 18, WODK_MAP_PADDING);
+                    cb.resolve(data);
+                } else {
+                    cb.reject(new Error(`Feature with identificatie ${data.identificatie} not found.`));
+                }
+            }, 500);
+            return cb.promise;
         }
 
         /***
@@ -317,7 +406,7 @@ module wodk {
                 let features: IFeature[] = (f) ? _.union(l.data.features, [f]) : l.data.features;
                 let b = csComp.Helpers.GeoExtensions.getBoundingBox(features);
                 if (b.xMax == 180 || b.yMax == 90) return;
-                this.$mapService.getMap().flyToBounds(new L.LatLngBounds(b.southWest, b.northEast), { paddingBottomRight: new L.Point(610, 0), paddingTopLeft: new L.Point(0, 105) });
+                this.$mapService.getMap().flyToBounds(new L.LatLngBounds(b.southWest, b.northEast), WODK_MAP_PADDING);
             }, 100);
         }
 

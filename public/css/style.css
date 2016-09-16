@@ -325,6 +325,10 @@
     font-size: 12px;
 }
 
+.active-text table tbody tr th {
+    font-size: 12px;
+}    
+
 .dashboard-active {
     background: #CCC1DA;
     color: black;

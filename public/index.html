@@ -71,6 +71,7 @@
     <!--<script src="js/row-filter-checkbox.js"></script>-->
     <script src="js/legend-style-checkbox.js"></script>
     <script src="js/legend-style-no-checkbox.js"></script>
+    <script src="js/q.min.js"></script>
 
     <link rel="shortcut icon" href="favicon.ico" />
     <link href="http://leaflet.github.io/Leaflet.draw/leaflet.draw.css" rel="stylesheet" />
@@ -97,13 +98,18 @@
                         <li><a ng-click="vm.$messageBusService.publish('feature','justShowThisWidget')" style="line-height: 1.3em;color: black;">Toelichting</a></li>
                     </ul>
                 </div>-->
+
+                <!--<div style="margin-top:12px">
+                    <a class="widget-min-max-close" ng-click="vm.exportToImage()"><i class="fa fa-camera fa-white" uib-tooltip="Genereer een screenshot van de website." tooltip-trigger="mouseenter" tooltip-placement="left" tooltip-append-to-body="true"></i>
+                    </a>
+                </div>-->
             </div>
 
             <!-- /.container-fluid -->
         </nav>
         <nav class="navbar navbar-default navbar-fixed-subtop">
             <div>
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav" style="width: 100%">
                     <li class="active-button" popover-trigger="mouseenter" uib-popover="Terug naar zorgopdekaart.nl" popover-placement="bottom-left"><a data-ng-click="vm.publish('home')"><span class="fa fa-home"></span></a></li>
                     <li class="active-button" popover-trigger="mouseenter" uib-popover="Begin opnieuw" popover-placement="bottom"><a data-ng-click="vm.publish('refresh')"><span class="fa fa-repeat"></span></a></li>
                     <li class="active-button" popover-trigger="mouseenter" uib-popover="Stap terug" popover-placement="bottom"><a data-ng-click="vm.publish('back')"><span class="fa fa-arrow-left"></span></a></li>
@@ -113,7 +119,7 @@
                         <div class="dropdown-menu" style="width: 315px;">
                             <form class="navbar-form navbar-left" role="search">
                                 <div class="form-group">
-                                    <input id="search-city" type="text" class="form-control" ng-model="vm.cityQuery" ng-change="vm.filterCity(vm.cityQuery)" ng-keyup="$event.keyCode == 13 && vm.selectFirst()" style="width:285px" placeholder="Zoek op gemeente" autocomplete="off" autofocus>
+                                    <input id="search-city" type="text" class="form-control" ng-model="vm.cityQuery" ng-change="vm.filterCity(vm.cityQuery)" ng-keyup="$event.keyCode == 13 && vm.selectFirstCity()" style="width:285px" placeholder="Zoek op gemeente" autocomplete="off" autofocus>
                                 </div>
                                 <!--<button type="submit" class="btn btn-default">Submit</button>-->
                             </form>
@@ -126,10 +132,10 @@
                     </li>
                     <li class="dropdown" style="float: right">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Adres <span class="caret"></span></a>
-                        <div class="dropdown-menu" style="width: 315px;">
+                        <div class="dropdown-menu" style="width: 335px; right: 0; left: auto; left: initial;">
                             <form class="navbar-form navbar-left" role="search">
                                 <div class="form-group">
-                                    <input id="search-address" type="text" class="form-control" ng-model="vm.addressQuery" ng-change="vm.filterAddress()" ng-keyup="$event.keyCode == 13 && vm.selectFirst()" style="width:285px" placeholder="Zoek op adres" autocomplete="off" autofocus>
+                                    <input id="search-address" type="text" class="form-control" ng-model="vm.addressQuery" ng-change="vm.filterAddress()" ng-keyup="$event.keyCode == 13 && vm.selectFirstAddress()" style="width:285px" placeholder="Zoek op adres" autocomplete="off" autofocus>
                                 </div>
                                 <!--<button type="submit" class="btn btn-default">Submit</button>-->
                             </form>

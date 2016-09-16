@@ -174,13 +174,13 @@ module App {
         /**
          * Select the first search result.
          */
-        selectFirst() {
+        selectFirstCity() {
             if (this.foundCities.length > 0) {
                 this.selectCity(this.foundCities[0]);
             }
         }
 
-        filterAddress = _.debounce(this.filterAddressDebounced, 500);
+        filterAddress = _.debounce(this.filterAddressDebounced, 750);
 
         filterAddressDebounced() {
             let q = this.addressQuery;
@@ -202,16 +202,25 @@ module App {
         geocodeCallback(r: csComp.Services.IEsriSearchResult, q: string) {
             this.searchCache[q] = r;
             this.foundAddresses = {};
-            r.candidates.forEach(f => {
-                if (f.score > 0.8) {
-                    this.foundAddresses[f.address] = { name: f.attributes['Match_addr'], score: (f.score / 101), province: f.attributes['Region'], coordinates: [f.location.x, f.location.y] }
-                }
-            });
+            this.$timeout(() => {
+                r.candidates.forEach(f => {
+                    if (f.score > 80) {
+                        this.foundAddresses[f.address] = { name: f.attributes['Match_addr'], score: (f.score / 101), province: f.attributes['Region'], coordinates: [f.location.x, f.location.y] }
+                    }
+                });
+            }, 0);
         }
 
         selectAddress(address: any) {
             $('#search-address').val('');
+            this.foundAddresses = {};
             this.$messageBusService.publish('wodk', 'address', address);
+        }
+
+        selectFirstAddress() {
+            if (!_.isEmpty(this.foundAddresses)) {
+                this.selectAddress(JSON.parse(JSON.stringify(this.foundAddresses[Object.keys(this.foundAddresses)[0]])));
+            }
         }
 
         /**
