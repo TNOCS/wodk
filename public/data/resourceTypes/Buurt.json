@@ -59,7 +59,7 @@
 			"type" : "number",
 			"title" : "Aantal inwoners",
             "stringFormat" : "{0:#,#}",
-			"visibleInCallOut" : false,
+			"visibleInCallOut" : true,
 			"isSearchable" : false
 		},
 		"ster_totaal" : {
@@ -75,7 +75,7 @@
 			"type" : "number",
 			"title" : "Aantal woningen ster 0",
             "stringFormat" : "{0:#,#}",
-			"visibleInCallOut" : false,
+			"visibleInCallOut" : true,
 			"isSearchable" : false
 		}, 
         "ster_1" : {
@@ -83,7 +83,7 @@
 			"type" : "number",
 			"title" : "Aantal woningen ster 1",
             "stringFormat" : "{0:#,#}",
-			"visibleInCallOut" : false,
+			"visibleInCallOut" : true,
 			"isSearchable" : false
 		}, 
         "ster_2" : {
@@ -91,7 +91,7 @@
 			"type" : "number",
 			"title" : "Aantal woningen ster 2",
             "stringFormat" : "{0:#,#}",
-			"visibleInCallOut" : false,
+			"visibleInCallOut" : true,
 			"isSearchable" : false
 		}, 
         "ster_3" : {
@@ -99,7 +99,7 @@
 			"type" : "number",
 			"title" : "Aantal woningen ster 3",
             "stringFormat" : "{0:#,#}",
-			"visibleInCallOut" : false,
+			"visibleInCallOut" : true,
 			"isSearchable" : false
 		}, 
         "ster_4" : {
@@ -107,7 +107,7 @@
 			"type" : "number",
 			"title" : "Aantal woningen ster 4",
             "stringFormat" : "{0:#,#}",
-			"visibleInCallOut" : false,
+			"visibleInCallOut" : true,
 			"isSearchable" : false
 		}, 
         "ster_5" : {
@@ -115,7 +115,7 @@
 			"type" : "number",
 			"title" : "Aantal woningen ster 5",
             "stringFormat" : "{0:#,#}",
-			"visibleInCallOut" : false,
+			"visibleInCallOut" : true,
 			"isSearchable" : false
 		}, 
         "ster_onb" : {
@@ -123,7 +123,7 @@
 			"type" : "number",
 			"title" : "Aant. woningen ster onbekend",
             "stringFormat" : "{0:#,#}",
-			"visibleInCallOut" : false,
+			"visibleInCallOut" : true,
 			"isSearchable" : false
 		}, 
         "woningen" : {

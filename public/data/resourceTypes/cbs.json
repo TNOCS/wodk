@@ -20,7 +20,7 @@
                 "select provincie"
             ],
             "contourProperty": "contour",
-            "propertyTypeKeys": "ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;ster_totaal;a_huko_onb;a_koopwon;a_huurwon;p_huko_onb;p_koopwon;p_huurwon;a_1gezw;a_mgezw;gemeentecode;gemeentenaam;a_aangep_w;a_apb_w;a_napb_w;p_aangep_w;p_apb_w;p_napb_w;p_apb_onb;p_1gezw;p_mgezw;aant_inw;"
+            "propertyTypeKeys": "aant_inw;ster_totaal;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;a_huko_onb;a_koopwon;a_huurwon;p_huko_onb;p_koopwon;p_huurwon;a_1gezw;a_mgezw;provinciecode;provincienaam;a_aangep_w;a_apb_w;a_napb_w;p_aangep_w;p_apb_w;p_napb_w;p_apb_onb;p_1gezw;p_mgezw;"
         },
         "gemeente": {
             "name": "gemeente",
@@ -43,7 +43,7 @@
                 "load buurten"
             ],
             "contourProperty": "_contour",
-            "propertyTypeKeys": "ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;ster_totaal;a_huko_onb;a_koopwon;a_huurwon;p_huko_onb;p_koopwon;p_huurwon;a_1gezw;a_mgezw;gemeentecode;gemeentenaam;a_aangep_w;a_apb_w;a_napb_w;p_aangep_w;p_apb_w;p_napb_w;p_apb_onb;p_1gezw;p_mgezw;aant_inw;",
+            "propertyTypeKeys": "aant_inw;ster_totaal;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;a_huko_onb;a_koopwon;a_huurwon;p_huko_onb;p_koopwon;p_huurwon;a_1gezw;a_mgezw;gemeentecode;GM_CODE;gemeentenaam;a_aangep_w;a_apb_w;a_napb_w;p_aangep_w;p_apb_w;p_napb_w;p_apb_onb;p_1gezw;p_mgezw;",
             "legendExpr": [
                 {
                     "title": "#Inwoners",
@@ -674,7 +674,7 @@
         },
         "ster_0": {
             "label": "ster_0",
-            "title": "ster_0",
+            "title": "Ster 0",
             "type": "number",
             "stringFormat": "{0:#,#}",
             "visibleInCallOut": true,
@@ -682,7 +682,7 @@
         },
         "ster_1": {
             "label": "ster_1",
-            "title": "ster_1",
+            "title": "Ster 1",
             "type": "number",
             "stringFormat": "{0:#,#}",
             "visibleInCallOut": true,
@@ -690,7 +690,7 @@
         },
         "ster_2": {
             "label": "ster_2",
-            "title": "ster_2",
+            "title": "Ster 2",
             "type": "number",
             "stringFormat": "{0:#,#}",
             "visibleInCallOut": true,
@@ -698,7 +698,7 @@
         },
         "ster_3": {
             "label": "ster_3",
-            "title": "ster_3",
+            "title": "Ster 3",
             "type": "number",
             "stringFormat": "{0:#,#}",
             "visibleInCallOut": true,
@@ -706,7 +706,7 @@
         },
         "ster_4": {
             "label": "ster_4",
-            "title": "ster_4",
+            "title": "Ster 4",
             "type": "number",
             "stringFormat": "{0:#,#}",
             "visibleInCallOut": true,
@@ -714,7 +714,7 @@
         },
         "ster_5": {
             "label": "ster_5",
-            "title": "ster_5",
+            "title": "Ster 5",
             "type": "number",
             "stringFormat": "{0:#,#}",
             "visibleInCallOut": true,
@@ -722,7 +722,7 @@
         },
         "ster_onb": {
             "label": "ster_onb",
-            "title": "ster_onb",
+            "title": "Ster onbekend",
             "type": "number",
             "stringFormat": "{0:#,#}",
             "visibleInCallOut": true,
@@ -730,7 +730,7 @@
         },
         "ster_totaal": {
             "label": "ster_totaal",
-            "title": "ster_totaal",
+            "title": "Aantal woningen",
             "type": "number",
             "stringFormat": "{0:#,#}",
             "visibleInCallOut": true,
@@ -738,7 +738,7 @@
         },
         "a_huko_onb": {
             "label": "a_huko_onb",
-            "title": "a_huko_onb",
+            "title": "Aant. eigendom onbekend",
             "stringFormat": "{0:#,#}",
             "type": "number",
             "visibleInCallOut": true,
@@ -746,7 +746,7 @@
         },
         "a_koopwon": {
             "label": "a_koopwon",
-            "title": "a_koopwon",
+            "title": "Aant. koopwoningen",
             "type": "number",
             "stringFormat": "{0:#,#}",
             "visibleInCallOut": true,
@@ -754,7 +754,7 @@
         },
         "a_huurwon": {
             "label": "a_huurwon",
-            "title": "a_huurwon",
+            "title": "Aant. huurwoningen",
             "type": "number",
             "stringFormat": "{0:#,#}",
             "visibleInCallOut": true,
@@ -762,7 +762,7 @@
         },
         "a_1gezw": {
             "label": "a_1gezw",
-            "title": "a_1gezw",
+            "title": "Aant. eengezinswoningen",
             "type": "number",
             "stringFormat": "{0:#,#}",
             "visibleInCallOut": true,
@@ -770,7 +770,7 @@
         },
         "a_mgezw": {
             "label": "a_mgezw",
-            "title": "a_mgezw",
+            "title": "Aant. meergezinswoningen",
             "type": "number",
             "stringFormat": "{0:#,#}",
             "visibleInCallOut": true,
@@ -778,9 +778,9 @@
         },
         "gemeentecode": {
             "label": "gemeentecode",
-            "title": "gemeentecode",
+            "title": "Gemeentecode",
             "type": "text",
-            "visibleInCallOut": true,
+            "visibleInCallOut": false,
             "canEdit": true
         },
         "gemeentenaam": {

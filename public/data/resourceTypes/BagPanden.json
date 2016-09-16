@@ -25,12 +25,14 @@
             "label": "Adres",
             "title": " ",
             "type": "textarea",
+            "hideInDataTable": true,            
             "expression": "properties.openbareruimtenaam + ' ' + properties.huisnummer + (properties.huisletter||'') + (properties.huisnummertoevoeging||'') + '\n' + properties.postcode + ' ' + properties.woonplaatsnaam + '\n'"
         },
         "kostenindicatie": {
             "label": "kostenindicatie",
             "title": "",
             "visibleInCallOut": true,
+            "hideInDataTable": true,
             "type": "textarea",
             "expression": "'Kostenindicatie aanpassingen:'"
         },
@@ -52,6 +54,7 @@
             "label": "traplift",
             "title": " ",
             "visibleInCallOut": true,
+            "hideInDataTable": true,
             "type": "textarea",
             "expression": "(properties.ster_2 >= 1) ? 'Traplift:' : null"
         },
@@ -59,6 +62,7 @@
             "label": "traplift2",
             "title": "1 bocht",
             "visibleInCallOut": true,
+            "hideInDataTable": true,
             "type": "text",
             "expression": "(properties.ster_2 >= 1) ? 'ca. EUR 6.000 - 8.000' : null"
         },
@@ -66,6 +70,7 @@
             "label": "leeg",
             "title": " ",
             "visibleInCallOut": true,
+            "hideInDataTable": true,
             "type": "text",
             "expression": "(properties.ster_2 >= 1 || properties.ster_3 >= 1) ? ' ' : null"
         },
@@ -73,6 +78,7 @@
             "label": "aanname",
             "title": "Aanname",
             "visibleInCallOut": true,
+            "hideInDataTable": true,
             "type": "textarea",
             "expression": "(properties.ster_2 >= 1 || properties.ster_3 >= 1) ? 'Aanpassing aan sanitair en keuken zijn afhankelijk (van de staat) van de woning en de mobiliteitsbeperking.' : null"
         },
@@ -119,7 +125,7 @@
             "label": "Name",
             "type": "text",
             "title": "Naam",
-            "stringFormat": "{openbareruimtenaam} {huisnummer}{huisletter}",
+            "expression": "properties.openbareruimtenaam + ' ' + properties.huisnummer + (properties.huisletter||'') + (properties.huisnummertoevoeging||'') + '\n' + properties.postcode + ' ' + properties.woonplaatsnaam",
             "visibleInCallOut": false,
             "canEdit": true,
             "isSearchable": false
@@ -379,6 +385,7 @@
             "inlineImage": true,
             "expression": "['images/combi_' + (properties.icon) + '.png']",
             "visibleInCallOut": true,
+            "hideInDataTable": true,
             "isSearchable": false
         },
         "ster_gem": {

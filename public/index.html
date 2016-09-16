@@ -159,7 +159,7 @@
                             <li style="background-color: #AAA; font-weight: bold; font-size: 1.2em; line-height:1.2em">&nbsp;&nbsp;Woningfilter &lt;</li>
                             <li style="margin:4px 4px 2px 4px;">
                                 <div class="input-group">
-                                    <input type="number" class="form-control input-sm" ng-model="value" min="0" max="99999" step="1" ng-keyup="$event.keyCode == 13 && vm.selectFilter(value)"
+                                    <input type="number" class="form-control input-sm" ng-model="value" min="0" max="99999" step="1" placeholder="Aantal" ng-keyup="$event.keyCode == 13 && vm.selectFilter(value)"
                                     />
                                     <span class="input-group-btn">
                                 <button type="button" class="btn btn-primary btn-sm" ng-click="vm.selectFilter(value)" uib-popover="Pas toe" popover-trigger="mouseenter" popover-append-to-body="true" popover-popup-delay="800"><div class="fa fa-check" /></button></span>
