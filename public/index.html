@@ -11,17 +11,17 @@
     <meta name="author" content="Arnoud de Jong, Erik Vullings, Rinze Bruining">
     <meta name="color:Accent" content="#a98e2e" />
 
-    <meta property="og:title" content="WodK">
+    <meta property="og:title" content="Aanpasbaarheid Woningen 'Langer zelfstandig thuis'">
     <meta property="og:type" content="website">
     <meta property="og:url" content="http://github.com/TNOCS/csWeb/">
     <meta property="og:image" content="https://raw.githubusercontent.com/TNOCS/csWeb/gh-pages/images/CommonSenseRound.png">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="73">
     <meta property="og:image:height" content="73">
-    <meta property="og:description" content="csWeb Woningen op de Kaart">
+    <meta property="og:description" content="Aanpasbaarheid Woningen 'Langer zelfstandig thuis' met de csWeb kaartapplicatie.">
 
     <!--TODO Add your title here-->
-    <title>WodK</title>
+    <title>Aanpasbaarheid Woningen 'Langer zelfstandig thuis'</title>
 
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css" />
 
@@ -84,7 +84,7 @@
             <div class="container-fluid" style="color: black">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <a href="#" class="navbar-brand" style="color: black;">Aanpasbaarheid Woningen 'Langer thuis'</a>
+                    <a href="#" class="navbar-brand" style="color: black;">Aanpasbaarheid Woningen 'Langer zelfstandig thuis'</a>
                 </div>
 
                 <!--<div>
@@ -113,13 +113,17 @@
                     <li class="active-button" popover-trigger="mouseenter" uib-popover="Terug naar zorgopdekaart.nl" popover-placement="bottom-left"><a data-ng-click="vm.publish('home')"><span class="fa fa-home"></span></a></li>
                     <li class="active-button" popover-trigger="mouseenter" uib-popover="Begin opnieuw" popover-placement="bottom"><a data-ng-click="vm.publish('refresh')"><span class="fa fa-repeat"></span></a></li>
                     <li class="active-button" popover-trigger="mouseenter" uib-popover="Stap terug" popover-placement="bottom"><a data-ng-click="vm.publish('back')"><span class="fa fa-arrow-left"></span></a></li>
-                    <li class="active-button" popover-trigger="mouseenter" uib-popover="Stap vooruit" popover-placement="bottom"><a data-ng-click="vm.publish('forward')"  ng-class="vm.wodkWidgetSvc.hasForwardHistory() ? '' : 'inactive-button'"><span class="fa fa-arrow-right"></span></a></li>
+                    <li class="active-button" popover-trigger="mouseenter" uib-popover="Stap vooruit" popover-placement="bottom">
+                        <a data-ng-click="vm.publish('forward')" ng-class="vm.wodkWidgetSvc.hasForwardHistory() ? '' : 'inactive-button'"><span class="fa fa-arrow-right"></span></a>
+                    </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gemeente <span class="caret"></span></a>
                         <div class="dropdown-menu" style="width: 315px;">
                             <form class="navbar-form navbar-left" role="search">
                                 <div class="form-group">
-                                    <input id="search-city" type="text" class="form-control" ng-model="vm.cityQuery" ng-change="vm.filterCity(vm.cityQuery)" ng-keyup="$event.keyCode == 13 && vm.selectFirstCity()" style="width:285px" placeholder="Zoek op gemeente" autocomplete="off" autofocus>
+                                    <input id="search-city" type="text" class="form-control" ng-model="vm.cityQuery" ng-change="vm.filterCity(vm.cityQuery)"
+                                        ng-keyup="$event.keyCode == 13 && vm.selectFirstCity()" style="width:285px" placeholder="Zoek op gemeente"
+                                        autocomplete="off" autofocus>
                                 </div>
                                 <!--<button type="submit" class="btn btn-default">Submit</button>-->
                             </form>
@@ -135,7 +139,8 @@
                         <div class="dropdown-menu" style="width: 335px; right: 0; left: auto; left: initial;">
                             <form class="navbar-form navbar-left" role="search">
                                 <div class="form-group">
-                                    <input id="search-address" type="text" class="form-control" ng-model="vm.addressQuery" ng-change="vm.filterAddress()" ng-keyup="$event.keyCode == 13 && vm.selectFirstAddress()" style="width:285px" placeholder="Zoek op adres" autocomplete="off" autofocus>
+                                    <input id="search-address" type="text" class="form-control" ng-model="vm.addressQuery" ng-change="vm.filterAddress()" ng-keyup="$event.keyCode == 13 && vm.selectFirstAddress()"
+                                        style="width:285px" placeholder="Zoek op adres" autocomplete="off" autofocus>
                                 </div>
                                 <!--<button type="submit" class="btn btn-default">Submit</button>-->
                             </form>
@@ -147,9 +152,18 @@
                         </div>
                     </li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" ng-class="vm.wodkWidgetSvc.gemeenteSelectie.length > 0 ? '' : 'inactive-button'" data-toggle="dropdown" href="#" popover-trigger="mouseenter" uib-popover="Min. aantal woningen per buurt" popover-placement="right"><span class="fa fa-filter">&nbsp;</span>{{vm.filterValue}}<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
+                        <a class="dropdown-toggle" ng-class="vm.wodkWidgetSvc.gemeenteSelectie.length > 0 ? '' : 'inactive-button'" data-toggle="dropdown"
+                            href="#" popover-trigger="mouseenter" uib-popover="Min. aantal woningen per buurt" popover-placement="right"
+                            popover-popup-delay="400"><span class="fa fa-filter">&nbsp;</span>{{vm.filterValue}}<span class="caret"></span></a>
+                        <ul class="dropdown-menu" ng-show="vm.wodkWidgetSvc.gemeenteSelectie.length > 0">
                             <li style="background-color: #AAA; font-weight: bold; font-size: 1.2em; line-height:1.2em">&nbsp;&nbsp;Woningfilter &lt;</li>
+                            <li style="margin:4px 4px 2px 4px;">
+                                <div class="input-group">
+                                    <input type="number" class="form-control input-sm" ng-model="value" min="0" max="99999" step="1" ng-keyup="$event.keyCode == 13 && vm.selectFilter(value)"
+                                    />
+                                    <span class="input-group-btn">
+                                <button type="button" class="btn btn-primary btn-sm" ng-click="vm.selectFilter(value)" uib-popover="Pas toe" popover-trigger="mouseenter" popover-append-to-body="true" popover-popup-delay="800"><div class="fa fa-check" /></button></span>
+                            </li>
                             <li style="margin-left:10px;" ng-repeat="fv in vm.filterValues" ng-click="vm.selectFilter(fv)">{{fv}}</li>
                         </ul>
                     </li>
@@ -160,13 +174,19 @@
                             <span>{{value.name}}</span>
                         </a>
                     </li>
-                    <li class="active-button">
+                    <!--<li class="active-button">
                         <a ng-click="vm.$messageBusService.publish('feature','justShowThisWidget')">
                             <span>Toelichting</span>
                         </a>
+                    </li>-->
+                    <li class="active-button">
+                        <a href="http://www.zorgopdekaart.nl/files/2016-09/toelichting-woningvoorraad.pdf" target="_blank">
+                            <span>Toelichting</span>
+                        </a>
                     </li>
+
                 </ul>
-            </div>
+                </div>
         </nav>
 
         <map mapid="main" class="map-main" ng-show="vm.$layerService.visual.mapVisible" style="padding-top: 100px; top:-100px" ng-style="{width: vm.$layerService.visual.mapWidth ? vm.$layerService.visual.mapWidth : '100%', left: vm.$layerService.visual.alignMapRight ? vm.$layerService.visual.mapWidth : 0}"></map>
@@ -183,152 +203,150 @@
 
 
         <!--</div>-->
-    </div>
+        </div>
 
-    <!--<div style="position: absolute;width: 100%;height:100%;pointer-events: none;display:table">-->
-    <div class="sidebar">
+        <!--<div style="position: absolute;width: 100%;height:100%;pointer-events: none;display:table">-->
+        <div class="sidebar">
 
-        <div ng-show="vm.$layerService.visual.leftPanelVisible" class="leftpanel leftpanel-entrance" ng-cloak>
-            <div class="leftpanel-container">
-                <!-- http://stackoverflow.com/questions/1575141/make-div-100-height-of-browser-window -->
-                <div class="leftpanel-tab">
-                    <!-- required for floating -->
-                    <!-- Nav tabs -->
-                    <ul id="left_menu_headers" class="nav nav-pills">
-                        <li id="navigate_header" class="lp-tab" data-target="#navigate" ng-show="vm.showNavigation" data-toggle="tab">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 64 64">
-                                <path d="M61.3 51.2l-16.1-16c1.7-3.3 2.6-7 2.6-10.8 0-6.4-2.5-12.4-7-16.9C36.3 3 30.3.5 23.9.5 17.5.5 11.5 3 7 7.5 2.5 12 0 18 0 24.4c0 6.4 2.5 12.4 7 16.9 4.5 4.5 10.5 7 16.9 7 3.8 0 7.5-.9 10.8-2.6l16 16.1c1.5 1.5 3.4 2.2 5.3 2.2s3.8-.7 5.3-2.2c2.9-3 2.9-7.7 0-10.6zm-48-16.3c-2.8-2.8-4.4-6.6-4.4-10.6s1.6-7.8 4.4-10.6c2.8-2.8 6.6-4.4 10.6-4.4s7.8 1.6 10.6 4.4c2.8 2.8 4.4 6.6 4.4 10.6s-1.6 7.8-4.4 10.6c-2.8 2.8-6.6 4.4-10.6 4.4s-7.7-1.6-10.6-4.4zm0 0"></path>
-                            </svg>
-                        </li>
-                        <li class="lp-tab " data-target="#basestyles" data-toggle="tab">
-                            <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewbox="0 0 64 64">
-                                <style>
-                                    .st0 {
-                                        clip-path: url(#SVGID_2_)
-                                    }
-
-                                    .st1 {
-                                        clip-path: url(#SVGID_4_)
-                                    }
-
-                                    .st2 {
-                                        clip-path: url(#SVGID_6_)
-                                    }
-                                </style>
-                                <path d="M30.5 39.6c.4.4.9.5 1.4.5.5 0 1-.2 1.4-.5.5-.5 12.6-11.2 12.6-22.3 0-7.7-6.3-14-14-14s-14 6.3-14 14C18 28.4 30 39.1 30.5 39.6zm1.4-26c2 0 3.6 1.6 3.6 3.7 0 2-1.6 3.7-3.6 3.7s-3.6-1.6-3.6-3.7 1.6-3.7 3.6-3.7z"
-                                ></path>
-                                <defs>
-                                    <path id="SVGID_1_" d="M0 3.3h64V60H0z" ></path>
-                                </defs>
-                                <clipPath id="SVGID_2_">
-                                    <use xlink:href="#SVGID_1_" overflow="visible" ></use>
-                                </clipPath>
-                                <path class="st0" d="M58.8 39.6l-1.6-5.7c-.3-.9-1.1-1.6-2.1-1.6H43.6c-.4.6-.9 1.2-1.3 1.9-3.2 4.4-6.5 7.3-6.9 7.6-.9.8-2.1 1.3-3.4 1.3-1.3 0-2.5-.5-3.4-1.3-.4-.3-3.7-3.3-6.9-7.6-.5-.6-.9-1.3-1.3-1.9H8.8c-1 0-1.8.6-2.1 1.6l-1.9 6.8 43.1 7.9 10.9-9z" ></path>
-                                <g>
+            <div ng-show="vm.$layerService.visual.leftPanelVisible" class="leftpanel leftpanel-entrance" ng-cloak>
+                <div class="leftpanel-container">
+                    <!-- http://stackoverflow.com/questions/1575141/make-div-100-height-of-browser-window -->
+                    <div class="leftpanel-tab">
+                        <!-- required for floating -->
+                        <!-- Nav tabs -->
+                        <ul id="left_menu_headers" class="nav nav-pills">
+                            <li id="navigate_header" class="lp-tab" data-target="#navigate" ng-show="vm.showNavigation" data-toggle="tab">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 64 64">
+                                    <path d="M61.3 51.2l-16.1-16c1.7-3.3 2.6-7 2.6-10.8 0-6.4-2.5-12.4-7-16.9C36.3 3 30.3.5 23.9.5 17.5.5 11.5 3 7 7.5 2.5 12 0 18 0 24.4c0 6.4 2.5 12.4 7 16.9 4.5 4.5 10.5 7 16.9 7 3.8 0 7.5-.9 10.8-2.6l16 16.1c1.5 1.5 3.4 2.2 5.3 2.2s3.8-.7 5.3-2.2c2.9-3 2.9-7.7 0-10.6zm-48-16.3c-2.8-2.8-4.4-6.6-4.4-10.6s1.6-7.8 4.4-10.6c2.8-2.8 6.6-4.4 10.6-4.4s7.8 1.6 10.6 4.4c2.8 2.8 4.4 6.6 4.4 10.6s-1.6 7.8-4.4 10.6c-2.8 2.8-6.6 4.4-10.6 4.4s-7.7-1.6-10.6-4.4zm0 0"></path>
+                                </svg>
+                            </li>
+                            <li class="lp-tab " data-target="#basestyles" data-toggle="tab">
+                                <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewbox="0 0 64 64">
+                                    <style>
+                                        .st0 {
+                                            clip-path: url(#SVGID_2_)
+                                        }
+                                        
+                                        .st1 {
+                                            clip-path: url(#SVGID_4_)
+                                        }
+                                        
+                                        .st2 {
+                                            clip-path: url(#SVGID_6_)
+                                        }
+                                    </style>
+                                    <path d="M30.5 39.6c.4.4.9.5 1.4.5.5 0 1-.2 1.4-.5.5-.5 12.6-11.2 12.6-22.3 0-7.7-6.3-14-14-14s-14 6.3-14 14C18 28.4 30 39.1 30.5 39.6zm1.4-26c2 0 3.6 1.6 3.6 3.7 0 2-1.6 3.7-3.6 3.7s-3.6-1.6-3.6-3.7 1.6-3.7 3.6-3.7z"></path>
                                     <defs>
-                                        <path id="SVGID_3_" d="M0 3.3h64V60H0z" ></path>
+                                        <path id="SVGID_1_" d="M0 3.3h64V60H0z"></path>
                                     </defs>
-                                    <clipPath id="SVGID_4_">
-                                        <use xlink:href="#SVGID_3_" overflow="visible" ></use>
+                                    <clipPath id="SVGID_2_">
+                                        <use xlink:href="#SVGID_1_" overflow="visible"></use>
                                     </clipPath>
-                                    <path class="st1" d="M63.8 57.1l-4.1-14.5-20.6 17.2h22.6c.7 0 1.3-.3 1.7-.9.5-.4.6-1.1.4-1.8z" ></path>
-                                </g>
-                                <g>
-                                    <defs>
-                                        <path id="SVGID_5_" d="M0 3.3h64V60H0z" ></path>
-                                    </defs>
-                                    <clipPath id="SVGID_6_">
-                                        <use xlink:href="#SVGID_5_" overflow="visible" ></use>
-                                    </clipPath>
-                                    <path class="st2" d="M10.5 44.8L4 43.6.1 57.1c-.2.7-.1 1.4.3 1.9s1 .9 1.7.9h8.4V44.8z" ></path>
-                                </g>
-                                <path d="M13.5 45.3v14.5h21L45 51l-31.5-5.7z" ></path>
-                            </svg>
-                        </li>
-                        <li class="lp-tab active" data-target="#layers" data-toggle="tab">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 64 64">
-                                <g fill="#010002">
-                                    <path d="M64 19.4L32 2 0 19.4l32 17.4z" ></path>
-                                    <path d="M32 42.4L5.9 28.2 0 31.5l32 17.4 32-17.4-5.9-3.3z" ></path>
-                                    <path d="M32 54.5L5.9 40.3 0 43.5l32 17.4 32-17.4-5.9-3.2z" ></path>
-                                </g>
-                            </svg>
-                        </li>
-                        <li class="lp-tab" id="style-tab" data-target="#styles" data-toggle="tab">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 64 64">
-                                <path d="M25.3 34.5c-1.2 1.3-1.5 2.3-3.1 4.8 1 .7 3 2.4 4.4 5.2 2.7-1.6 4-1.8 5.5-3C41.6 33.5 64.8 4.9 64 4c-.8-.8-30.3 21.4-38.7 30.5zm-5.8 7.1c-4.1-.7-8.2 1.9-10.9 8.4C5.9 56.5 1 59.1.1 59c5.1 1.8 20.5 6.5 24.4-11.3-1.7-4.4-5-6.1-5-6.1z"
-                                ></path>
-                            </svg>
-                        </li>
+                                    <path class="st0" d="M58.8 39.6l-1.6-5.7c-.3-.9-1.1-1.6-2.1-1.6H43.6c-.4.6-.9 1.2-1.3 1.9-3.2 4.4-6.5 7.3-6.9 7.6-.9.8-2.1 1.3-3.4 1.3-1.3 0-2.5-.5-3.4-1.3-.4-.3-3.7-3.3-6.9-7.6-.5-.6-.9-1.3-1.3-1.9H8.8c-1 0-1.8.6-2.1 1.6l-1.9 6.8 43.1 7.9 10.9-9z"></path>
+                                    <g>
+                                        <defs>
+                                            <path id="SVGID_3_" d="M0 3.3h64V60H0z"></path>
+                                        </defs>
+                                        <clipPath id="SVGID_4_">
+                                            <use xlink:href="#SVGID_3_" overflow="visible"></use>
+                                        </clipPath>
+                                        <path class="st1" d="M63.8 57.1l-4.1-14.5-20.6 17.2h22.6c.7 0 1.3-.3 1.7-.9.5-.4.6-1.1.4-1.8z"></path>
+                                    </g>
+                                    <g>
+                                        <defs>
+                                            <path id="SVGID_5_" d="M0 3.3h64V60H0z"></path>
+                                        </defs>
+                                        <clipPath id="SVGID_6_">
+                                            <use xlink:href="#SVGID_5_" overflow="visible"></use>
+                                        </clipPath>
+                                        <path class="st2" d="M10.5 44.8L4 43.6.1 57.1c-.2.7-.1 1.4.3 1.9s1 .9 1.7.9h8.4V44.8z"></path>
+                                    </g>
+                                    <path d="M13.5 45.3v14.5h21L45 51l-31.5-5.7z"></path>
+                                </svg>
+                            </li>
+                            <li class="lp-tab active" data-target="#layers" data-toggle="tab">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 64 64">
+                                    <g fill="#010002">
+                                        <path d="M64 19.4L32 2 0 19.4l32 17.4z"></path>
+                                        <path d="M32 42.4L5.9 28.2 0 31.5l32 17.4 32-17.4-5.9-3.3z"></path>
+                                        <path d="M32 54.5L5.9 40.3 0 43.5l32 17.4 32-17.4-5.9-3.2z"></path>
+                                    </g>
+                                </svg>
+                            </li>
+                            <li class="lp-tab" id="style-tab" data-target="#styles" data-toggle="tab">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 64 64">
+                                    <path d="M25.3 34.5c-1.2 1.3-1.5 2.3-3.1 4.8 1 .7 3 2.4 4.4 5.2 2.7-1.6 4-1.8 5.5-3C41.6 33.5 64.8 4.9 64 4c-.8-.8-30.3 21.4-38.7 30.5zm-5.8 7.1c-4.1-.7-8.2 1.9-10.9 8.4C5.9 56.5 1 59.1.1 59c5.1 1.8 20.5 6.5 24.4-11.3-1.7-4.4-5-6.1-5-6.1z"></path>
+                                </svg>
+                            </li>
 
-                        <li class="lp-tab" id="filter-tab" ng-hide="vm.$layerService.noFilters" data-target="#filters" data-toggle="tab">
-                            <svg version="1.1" id="Layer_11" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewbox="0 0 64 64" style="enable-background:new 0 0 64 64;" xml:space="preserve">
-                                <g>
-                                    <path d="M24.1,30.3c0.7,0.7,1,1.7,1,2.7v29c0,1.7,2.1,2.6,3.4,1.4l8.1-9.3c1.1-1.3,1.7-1.9,1.7-3.2v-18c0-1,0.4-1.9,1-2.7L62.6,5
-		c1.7-1.9,0.4-5-2.2-5H3C0.4,0.1-1,3.1,0.8,5L24.1,30.3z" ></path>
-                                </g>
-                            </svg>
-                        </li>
+                            <li class="lp-tab" id="filter-tab" ng-hide="vm.$layerService.noFilters" data-target="#filters" data-toggle="tab">
+                                <svg version="1.1" id="Layer_11" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                    viewbox="0 0 64 64" style="enable-background:new 0 0 64 64;" xml:space="preserve">
+                                    <g>
+                                        <path d="M24.1,30.3c0.7,0.7,1,1.7,1,2.7v29c0,1.7,2.1,2.6,3.4,1.4l8.1-9.3c1.1-1.3,1.7-1.9,1.7-3.2v-18c0-1,0.4-1.9,1-2.7L62.6,5
+		c1.7-1.9,0.4-5-2.2-5H3C0.4,0.1-1,3.1,0.8,5L24.1,30.3z"></path>
+                                    </g>
+                                </svg>
+                            </li>
 
-                        <li class="lp-tab" data-target="#settings" data-toggle="tab">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 64 64">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M63.6 28.4c-.1-.9-1.1-1.6-2-1.6-2.9 0-5.5-1.7-6.6-4.3-1.1-2.7-.4-5.8 1.8-7.8.7-.6.8-1.7.2-2.4-1.5-1.9-3.2-3.6-5-5.1-.7-.6-1.8-.5-2.4.2-1.9 2.1-5.3 2.9-7.9 1.8C39 8 37.2 5.3 37.4 2.3c.1-.9-.6-1.7-1.6-1.9-2.4-.3-4.8-.3-7.1 0-.9.1-1.6.9-1.6 1.8.1 2.9-1.6 5.7-4.3 6.8-2.6 1.1-6 .3-7.8-1.8-.6-.7-1.7-.8-2.4-.2-1.9 1.5-3.6 3.2-5.1 5.1-.6.7-.5 1.8.2 2.4 2.2 2 2.9 5.2 1.8 7.9-1.1 2.6-3.8 4.3-6.9 4.3-1 0-1.7.6-1.8 1.6-.3 2.4-.3 4.8 0 7.2 0 .8 1.1 1.5 2 1.5 2.8-.1 5.4 1.6 6.5 4.3 1.1 2.7.4 5.8-1.8 7.8-.7.6-.8 1.7-.2 2.4 1.5 1.9 3.2 3.6 5 5.1.7.6 1.8.5 2.4-.2 1.9-2.1 5.3-2.9 7.9-1.8 2.7 1.1 4.5 3.9 4.3 6.9-.1.9.6 1.7 1.6 1.9 1.2.1 2.4.2 3.6.2 1.2 0 2.3-.1 3.5-.2.9-.1 1.6-.9 1.6-1.8-.1-2.9 1.6-5.6 4.3-6.8 2.6-1.1 6-.3 7.8 1.8.6.7 1.7.8 2.4.2 1.9-1.5 3.6-3.2 5.1-5.1.6-.7.5-1.8-.2-2.4-2.2-2-2.9-5.2-1.8-7.9 1.1-2.6 3.7-4.3 6.5-4.3h.4c.9.1 1.7-.6 1.9-1.6.3-2.3.3-4.7 0-7.1zM32.2 42.6c-5.8 0-10.6-4.7-10.6-10.6 0-5.8 4.7-10.6 10.6-10.6 5.8 0 10.6 4.7 10.6 10.6 0 5.8-4.8 10.6-10.6 10.6zm0 0"
-                                ></path>
-                            </svg>
-                        </li>
+                            <li class="lp-tab" data-target="#settings" data-toggle="tab">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 64 64">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M63.6 28.4c-.1-.9-1.1-1.6-2-1.6-2.9 0-5.5-1.7-6.6-4.3-1.1-2.7-.4-5.8 1.8-7.8.7-.6.8-1.7.2-2.4-1.5-1.9-3.2-3.6-5-5.1-.7-.6-1.8-.5-2.4.2-1.9 2.1-5.3 2.9-7.9 1.8C39 8 37.2 5.3 37.4 2.3c.1-.9-.6-1.7-1.6-1.9-2.4-.3-4.8-.3-7.1 0-.9.1-1.6.9-1.6 1.8.1 2.9-1.6 5.7-4.3 6.8-2.6 1.1-6 .3-7.8-1.8-.6-.7-1.7-.8-2.4-.2-1.9 1.5-3.6 3.2-5.1 5.1-.6.7-.5 1.8.2 2.4 2.2 2 2.9 5.2 1.8 7.9-1.1 2.6-3.8 4.3-6.9 4.3-1 0-1.7.6-1.8 1.6-.3 2.4-.3 4.8 0 7.2 0 .8 1.1 1.5 2 1.5 2.8-.1 5.4 1.6 6.5 4.3 1.1 2.7.4 5.8-1.8 7.8-.7.6-.8 1.7-.2 2.4 1.5 1.9 3.2 3.6 5 5.1.7.6 1.8.5 2.4-.2 1.9-2.1 5.3-2.9 7.9-1.8 2.7 1.1 4.5 3.9 4.3 6.9-.1.9.6 1.7 1.6 1.9 1.2.1 2.4.2 3.6.2 1.2 0 2.3-.1 3.5-.2.9-.1 1.6-.9 1.6-1.8-.1-2.9 1.6-5.6 4.3-6.8 2.6-1.1 6-.3 7.8 1.8.6.7 1.7.8 2.4.2 1.9-1.5 3.6-3.2 5.1-5.1.6-.7.5-1.8-.2-2.4-2.2-2-2.9-5.2-1.8-7.9 1.1-2.6 3.7-4.3 6.5-4.3h.4c.9.1 1.7-.6 1.9-1.6.3-2.3.3-4.7 0-7.1zM32.2 42.6c-5.8 0-10.6-4.7-10.6-10.6 0-5.8 4.7-10.6 10.6-10.6 5.8 0 10.6 4.7 10.6 10.6 0 5.8-4.8 10.6-10.6 10.6zm0 0"></path>
+                                </svg>
+                            </li>
 
-                        <li class="lp-tab close-tab" ng-click="vm.$layerService.visual.leftPanelVisible = !vm.$layerService.visual.leftPanelVisible" uib-popover="Sluit het menu" popover-trigger="mouseenter" popover-append-to-body="true">
-                            <div>
-                                <i class="fa fa-times"></i>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                            <li class="lp-tab close-tab" ng-click="vm.$layerService.visual.leftPanelVisible = !vm.$layerService.visual.leftPanelVisible"
+                                uib-popover="Sluit het menu" popover-trigger="mouseenter" popover-append-to-body="true">
+                                <div>
+                                    <i class="fa fa-times"></i>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
 
-                <div class="leftpanel-content">
-                    <!-- Tab panes -->
-                    <div class="tab-content ">
-                        <!--<navigate ng-show="vm.showNavigation" class="tab-pane" id="navigate"></navigate>-->
-                        <base-map-list class="tab-pane" id="basestyles"></base-map-list>
-                        <layers-directive class="tab-pane active" id="layers"></layers-directive>
-                        <filter-list ng-hide="vm.$layerService.noFilters" class="tab-pane" id="filters"></filter-list>
-                        <style-list class="tab-pane" id="styles"></style-list>
-                        <dashboard-selection class="tab-pane" id="dashboardselection"></dashboard-selection>
-                        <project-settings class="tab-pane" id="settings"></project-settings>
+                    <div class="leftpanel-content">
+                        <!-- Tab panes -->
+                        <div class="tab-content ">
+                            <!--<navigate ng-show="vm.showNavigation" class="tab-pane" id="navigate"></navigate>-->
+                            <base-map-list class="tab-pane" id="basestyles"></base-map-list>
+                            <layers-directive class="tab-pane active" id="layers"></layers-directive>
+                            <filter-list ng-hide="vm.$layerService.noFilters" class="tab-pane" id="filters"></filter-list>
+                            <style-list class="tab-pane" id="styles"></style-list>
+                            <dashboard-selection class="tab-pane" id="dashboardselection"></dashboard-selection>
+                            <project-settings class="tab-pane" id="settings"></project-settings>
+                        </div>
                     </div>
                 </div>
             </div>
+            <dashboardirective container="main" class="dashboard-container" dashboard="vm.$dashboardService.mainDashboard"></dashboardirective>
         </div>
-        <dashboardirective container="main" class="dashboard-container" dashboard="vm.$dashboardService.mainDashboard"></dashboardirective>
-    </div>
 
-    <div id="rightpanel" class="rightpanel" style="bottom:16px !important; top: 100px">
-        <div id="rightpanelTabContainer" class="tabbable tabs-left rightpanelContainer">
-            <!-- Nav tabs -->
-            <ul ng-hide="true" id="rightpanelTabs" class="nav nav-tabs rightpanelTabs" ng-class="{'rightpanelTabs-collapsed' : !vm.$layerService.visual.rightPanelVisible}">
-                <li style="margin-top:5px" ng-style="!vm.$layerService.visual.rightPanelVisible && {'opacity':0}" ng-click="vm.$layerService.visual.rightPanelVisible = false" uib-popover="{{'HIDE_PANEL' | translate}}" popover-placement="left" popover-trigger="mouseenter"
-                    popover-append-to-body="true">
-                    <a class="rightpanel-hidetab">
-                        <span class="fa fa-2x fa-chevron-right"></span>
-                    </a>
-                </li>
-            </ul>
-            <div id="rightpanelTabPanes" ng-show="vm.$layerService.visual.rightPanelVisible" class="tab-content rightpanelTabPanes">
+        <div id="rightpanel" class="rightpanel" style="bottom:16px !important; top: 100px">
+            <div id="rightpanelTabContainer" class="tabbable tabs-left rightpanelContainer">
+                <!-- Nav tabs -->
+                <ul ng-hide="true" id="rightpanelTabs" class="nav nav-tabs rightpanelTabs" ng-class="{'rightpanelTabs-collapsed' : !vm.$layerService.visual.rightPanelVisible}">
+                    <li style="margin-top:5px" ng-style="!vm.$layerService.visual.rightPanelVisible && {'opacity':0}" ng-click="vm.$layerService.visual.rightPanelVisible = false"
+                        uib-popover="{{'HIDE_PANEL' | translate}}" popover-placement="left" popover-trigger="mouseenter" popover-append-to-body="true">
+                        <a class="rightpanel-hidetab">
+                            <span class="fa fa-2x fa-chevron-right"></span>
+                        </a>
+                    </li>
+                </ul>
+                <div id="rightpanelTabPanes" ng-show="vm.$layerService.visual.rightPanelVisible" class="tab-content rightpanelTabPanes">
+                </div>
             </div>
         </div>
-    </div>
 
-    <!--Loading spinner-->
-    <div data-ng-show="layersLoading>0" style="width:100%;height:100%;z-index:10000;position:absolute;background-color:rgba(0, 0, 0, 0.5);text-align:center;color:white;line-height:100vh">
-        <h2 style="display: inline-block;vertical-align: middle;">
-            data laden
-            <br>
-            .. moment aub ..
-            <br>
-            <i class="fa fa-3x fa-spinner fa-spin spin-big"></i>
-        </h2>
-    </div>
-    <!--<div style="width:100%;height:100%;z-index:10000;position:absolute;background-color:rgba(0, 0, 0, 0.5);text-align:center;color:white;line-height:100vh">
+        <!--Loading spinner-->
+        <div data-ng-show="layersLoading>0" style="width:100%;height:100%;z-index:10000;position:absolute;background-color:rgba(0, 0, 0, 0.5);text-align:center;color:white;line-height:100vh">
+            <h2 style="display: inline-block;vertical-align: middle;">
+                data laden
+                <br> .. moment aub ..
+                <br>
+                <i class="fa fa-3x fa-spinner fa-spin spin-big"></i>
+            </h2>
+        </div>
+        <!--<div style="width:100%;height:100%;z-index:10000;position:absolute;background-color:rgba(0, 0, 0, 0.5);text-align:center;color:white;line-height:100vh">
         <h2 style="display: inline-block;vertical-align: middle;">data laden<br>.. moment aub ..<br>
         <div class="spinner" style="position: relative; float: none; margin-top: 180px">
             <div class="bounce1" style="width:16px; height:16px;"></div>
@@ -338,7 +356,7 @@
         </h2>
     </div>-->
 
-    <!--<div id="header-box" class="header-box">
+        <!--<div id="header-box" class="header-box">
         <a class="menutoggle" style="color:black" ng-click="vm.$layerService.visual.leftPanelVisible = !vm.$layerService.visual.leftPanelVisible;vm.$messageBusService.publish('search','reset')" uib-tooltip="Open/sluit het menu" tooltip-placement="bottom" tooltip-popup-delay="500">
             <i class="fa fa-bars"></i>
         </a>
@@ -351,83 +369,84 @@
         </div>
     </div>-->
 
-    <div class="righttab-box" style="padding-right:30px;display:none">
+        <div class="righttab-box" style="padding-right:30px;display:none">
 
 
-        <!-- Search form -->
-        <!-- <offline-search class="navbar-form navbar-right" style="margin-right:0"></offline-search> -->
-        <!-- Expert mode switch -->
-        <div class="navbar-form navbar-right toggle-icon">
-            <expert-mode style="margin-left: -30px;margin-top: 4px;"></expert-mode>
+            <!-- Search form -->
+            <!-- <offline-search class="navbar-form navbar-right" style="margin-right:0"></offline-search> -->
+            <!-- Expert mode switch -->
+            <div class="navbar-form navbar-right toggle-icon">
+                <expert-mode style="margin-left: -30px;margin-top: 4px;"></expert-mode>
+            </div>
+            <!-- Language switch -->
+            <div ng-if="vm.$layerService.touchMode" ng-click="vm.$layerService.touchMode=false" class="navbar-form navbar-right toggle-icon">
+                <img src="bower_components/csweb/dist-bower/images/widgets/touchbutton.png" style="width:30px;height:30px;margin-top:7px;margin-left:-13px"
+                />
+            </div>
+
+            <div ng-if="!vm.$layerService.touchMode" ng-click="vm.$layerService.touchMode=true" class="navbar-form navbar-right toggle-icon">
+                <span class="fa fa-mouse-pointer" style="font-size:18px;margin-top:10px"></span>
+            </div>
+
         </div>
-        <!-- Language switch -->
-        <div ng-if="vm.$layerService.touchMode" ng-click="vm.$layerService.touchMode=false" class="navbar-form navbar-right toggle-icon">
-            <img src="bower_components/csweb/dist-bower/images/widgets/touchbutton.png" style="width:30px;height:30px;margin-top:7px;margin-left:-13px" />
+
+        <div id="bottom-panel">
+            <timeline data-ng-show="vm.$mapService.timelineVisible && !vm.$layerService.isMobile" style="height: 100vh;"></timeline>
         </div>
 
-        <div ng-if="!vm.$layerService.touchMode" ng-click="vm.$layerService.touchMode=true" class="navbar-form navbar-right toggle-icon">
-            <span class="fa fa-mouse-pointer" style="font-size:18px;margin-top:10px" ></span>
-        </div>
+        <div style="position:absolute;left:400px;display:none">
+            <div id="menu" ng-click="vm.startSketch()">
 
-    </div>
+                <input type="checkbox" id="on-check" name="on-check" />
 
-    <div id="bottom-panel">
-        <timeline data-ng-show="vm.$mapService.timelineVisible && !vm.$layerService.isMobile" style="height: 100vh;"></timeline>
-    </div>
-
-    <div style="position:absolute;left:400px;display:none">
-        <div id="menu" ng-click="vm.startSketch()">
-
-            <input type="checkbox" id="on-check" name="on-check" />
-
-            <label id="on-button" for="on-check">
+                <label id="on-button" for="on-check">
         <span><span class="fa fa-pencil"><!-- Put plus icon here if not using symbol set --></span></span>
         <span><span class="fa fa-save"><!-- Put minus icon here if not using symbol set --></span></span>
     </label>
 
-            <input type="radio" id="info-home" name="radio-check" />
-            <input type="radio" id="info-compass" name="radio-check" checked />
-            <input type="radio" id="info-heart" name="radio-check" />
-            <input type="radio" id="info-rss" name="radio-check" />
-            <input type="radio" id="info-refresh" name="radio-check" />
-            <input type="radio" id="info-star" name="radio-check" />
+                <input type="radio" id="info-home" name="radio-check" />
+                <input type="radio" id="info-compass" name="radio-check" checked />
+                <input type="radio" id="info-heart" name="radio-check" />
+                <input type="radio" id="info-rss" name="radio-check" />
+                <input type="radio" id="info-refresh" name="radio-check" />
+                <input type="radio" id="info-star" name="radio-check" />
 
-            <div id="menu-items">
-                <div class="middle">
-                    <div class="top">
-                        <span class="bg-piece"> </span>
-                        <label class="ss-home" for="info-home"><!-- Put home icon here if not using symbol set --></label>
-                        <span class="bg-piece"> </span>
-                        <label class="ss-compass" for="info-compass"><!-- Put compass icon here if not using symbol set --></label>
-                        <span class="bg-piece"> </span>
-                        <label class="ss-heart" for="info-heart"><!-- Put heart icon here if not using symbol set --></label>
+                <div id="menu-items">
+                    <div class="middle">
+                        <div class="top">
+                            <span class="bg-piece"> </span>
+                            <label class="ss-home" for="info-home"><!-- Put home icon here if not using symbol set --></label>
+                            <span class="bg-piece"> </span>
+                            <label class="ss-compass" for="info-compass"><!-- Put compass icon here if not using symbol set --></label>
+                            <span class="bg-piece"> </span>
+                            <label class="ss-heart" for="info-heart"><!-- Put heart icon here if not using symbol set --></label>
+                        </div>
+                        <div class="bottom">
+                            <span class="bg-piece"> </span>
+                            <label class="ss-rss" for="info-rss"><!-- Put rss icon here if not using symbol set --></label>
+                            <span class="bg-piece"> </span>
+                            <label class="ss-refresh" for="info-refresh"><!-- Put refresh icon here if not using symbol set --></label>
+                            <span class="bg-piece"> </span>
+                            <label class="ss-star" for="info-star"><!-- Put icon here if not using symbol set --></label>
+                        </div>
                     </div>
-                    <div class="bottom">
-                        <span class="bg-piece"> </span>
-                        <label class="ss-rss" for="info-rss"><!-- Put rss icon here if not using symbol set --></label>
-                        <span class="bg-piece"> </span>
-                        <label class="ss-refresh" for="info-refresh"><!-- Put refresh icon here if not using symbol set --></label>
-                        <span class="bg-piece"> </span>
-                        <label class="ss-star" for="info-star"><!-- Put icon here if not using symbol set --></label>
-                    </div>
+
                 </div>
 
+                <div class="info home-info">Lets go home</div>
+                <div class="info compass-info">Want directions?</div>
+                <div class="info heart-info">Love</div>
+                <div class="info rss-info">RSS Feed</div>
+                <div class="info star-info">Galactic domination</div>
+                <div class="info refresh-info">Refreshing</div>
+
+                <div class="faux-shadow"> </div>
             </div>
-
-            <div class="info home-info">Lets go home</div>
-            <div class="info compass-info">Want directions?</div>
-            <div class="info heart-info">Love</div>
-            <div class="info rss-info">RSS Feed</div>
-            <div class="info star-info">Galactic domination</div>
-            <div class="info refresh-info">Refreshing</div>
-
-            <div class="faux-shadow"> </div>
         </div>
-    </div>
-    <!--<canvas id="png-export-placeholder" width="800px" height="600px" style="color:white"></canvas>-->
-    <div class="leaflet-attribution">
-        <a ng-click="vm.toggleShowAttribution()">&nbsp;<i class="fa fa-info">&nbsp;</i></a>
-    </div>
+        <!--<canvas id="png-export-placeholder" width="800px" height="600px" style="color:white"></canvas>-->
+        <div class="leaflet-attribution">
+            <a ng-click="vm.toggleShowAttribution()">&nbsp;<i class="fa fa-info">&nbsp;</i></a>
+        </div>
 </body>
 
 </html>
