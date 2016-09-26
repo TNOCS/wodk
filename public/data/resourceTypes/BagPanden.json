@@ -17,7 +17,7 @@
                 "maxTitleResolution": -1,
                 "drawingMode": "Point"
             },
-            "propertyTypeKeys": "Name;aanpasbaarheid;kostenindicatie;hellingbaan;drempelvrij;traplift;aanname;Adres;streetview;kadaster;pandtype;bouwjaar;lift;pandoppervlakte;gebruiksdoelverblijfsobject;plint;woningen_in_pand;niet_woningen_in_pand;pandhoogte;pandid;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;wijknaam;wijkcode;buurtnaam;buurtcode;ster_gem;oppervlakteverblijfsobject;icon;postcode;woonplaatsnaam;leeftijd_bewoner;eigendom;verhuurder;corporatie;gemeentenaam;isonderzocht;plint_oz;lift_oz;"
+            "propertyTypeKeys": "Name;aanpasbaarheid;kostenindicatie;hellingbaan;drempelvrij;traplift;aanname;Adres;streetview;kadaster;pandtype;bouwjaar;lift;pandoppervlakte;gebruiksdoelverblijfsobject;plint;woningen_in_pand;niet_woningen_in_pand;pandhoogte;pandid;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;ster_in_ond;wijknaam;wijkcode;buurtnaam;buurtcode;ster_gem;oppervlakteverblijfsobject;icon;postcode;woonplaatsnaam;leeftijd_bewoner;eigendom;verhuurder;corporatie;gemeentenaam;isonderzocht;plint_oz;lift_oz;"
         }
     },
     "propertyTypeData": {
@@ -34,7 +34,7 @@
             "visibleInCallOut": true,
             "hideInDataTable": true,
             "type": "textarea",
-            "expression": "'Kostenindicatie aanpassingen:'"
+            "expression": "(properties.ster_2 >= 1 || properties.ster_3 >= 1) ? 'Kostenindicatie aanpassingen:' : null"
         },
         "hellingbaan": {
             "label": "hellingbaan",
@@ -117,7 +117,7 @@
             "label": "Name",
             "type": "text",
             "title": "Naam",
-            "expression": "properties.openbareruimtenaam + ' ' + properties.huisnummer + (properties.huisletter||'') + (properties.huisnummertoevoeging||'') + '\n' + properties.postcode + ' ' + properties.woonplaatsnaam",
+            "expression": "properties.openbareruimtenaam + ' ' + properties.huisnummer + (properties.huisletter||'') + (properties.huisnummertoevoeging||'')",
             "visibleInCallOut": false,
             "canEdit": true,
             "isSearchable": false
@@ -316,6 +316,14 @@
             "visibleInCallOut": true,
             "isSearchable": false
         },
+        "ster_in_ond": {
+            "label": "ster_in_ond",
+            "type": "number",
+            "section": "Overig",
+            "title": "In onderzoek",
+            "visibleInCallOut": true,
+            "isSearchable": false
+        },
         "ster_0": {
             "label": "ster_0",
             "type": "number",
@@ -373,7 +381,7 @@
         "aanpasbaarheid": {
             "label": "aanpasbaarheid",
             "type": "media",
-            "title": "Aanpasbaarheid",
+            "title": "Indicatie aanpasbaarheid",
             "inlineImage": true,
             "expression": "['images/combi_' + (properties.icon) + '.png']",
             "visibleInCallOut": true,
@@ -383,18 +391,27 @@
         "ster_gem": {
             "label": "ster_gem",
             "type": "number",
-            "title": "Aanpasbaarheid woning",
-            "expression": "((properties.icon == 10) ? -2 : ((properties.icon > 10) ? -1 : properties.icon))",
+            "title": "Indicatie aanpasbaarheid woning",
+            "expression": "(properties.icon == 11 ? -3 : (properties.icon == 10 ? -2 : (properties.icon > 10 ? -1 : properties.icon)))",
             "visibleInCallOut": false,
             "isSearchable": false,
             "legend": {
                 "id": "ster_gem",
                 "visualAspect": "fillColor",
-                "description": "Aanpasbaarheidsster",
+                "description": "Indicatie aanpasbaarheidsster",
                 "legendKind": "discrete",
                 "legendEntries": [
                     {
                         "sortKey": "a",
+                        "label": "onbekend",
+                        "interval": {
+                            "min": -4,
+                            "max": -3
+                        },
+                        "color": "#444444"
+                    },
+                    {
+                        "sortKey": "b",
                         "label": "in onderzoek",
                         "interval": {
                             "min": -3,
@@ -403,7 +420,7 @@
                         "color": "#444444"
                     },
                     {
-                        "sortKey": "f",
+                        "sortKey": "g",
                         "label": "0/3 ster  mix",
                         "interval": {
                             "min": -2,
@@ -412,7 +429,7 @@
                         "color": "#ffff00"
                     },
                     {
-                        "sortKey": "h",
+                        "sortKey": "i",
                         "label": "geen ster niet-aanpasbaar",
                         "interval": {
                             "min": -1,
@@ -421,7 +438,7 @@
                         "color": "#ff0000"
                     },
                     {
-                        "sortKey": "g",
+                        "sortKey": "h",
                         "label": "1 ster    niet-aanpasbaar",
                         "interval": {
                             "min": 0,
@@ -430,7 +447,7 @@
                         "color": "#ff5500"
                     },
                     {
-                        "sortKey": "e",
+                        "sortKey": "f",
                         "label": "2 sterren aanpasbaar",
                         "interval": {
                             "min": 1,
@@ -439,7 +456,7 @@
                         "color": "#00ff00"
                     },
                     {
-                        "sortKey": "d",
+                        "sortKey": "e",
                         "label": "3 sterren aanpasbaar",
                         "interval": {
                             "min": 2,
@@ -448,7 +465,7 @@
                         "color": "#00cc00"
                     },
                     {
-                        "sortKey": "c",
+                        "sortKey": "d",
                         "label": "4 sterren specifiek",
                         "interval": {
                             "min": 3,
@@ -457,7 +474,7 @@
                         "color": "#006600"
                     },
                     {
-                        "sortKey": "b",
+                        "sortKey": "c",
                         "label": "5 sterren specifiek",
                         "interval": {
                             "min": 4,

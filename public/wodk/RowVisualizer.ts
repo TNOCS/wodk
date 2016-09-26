@@ -266,7 +266,7 @@ module wodk {
             }
 
             var ensuredGroup = (fakeGroup ? this.ensureAllBins(dcGroup, fakeGroup) : null);
-            var h = (ensuredGroup && ensuredGroup.size() < 6) ? 180 : 240;
+            var h = (ensuredGroup && ensuredGroup.size() < 6) ? 180 : 250;
 
             this.dcChart.width(275)
                 .height(h)

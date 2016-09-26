@@ -16,7 +16,7 @@
             </div>
             <div class="row row-eq-height wodk-subtitle-row">
                 <div class="col-xs-12">
-                    <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='provincie'">Provincie {{vm.wodkWidgetSvc.lastSelectedName}}</div>
+                    <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='provincie'">{{'PROVINCIE' | translate}} {{vm.wodkWidgetSvc.lastSelectedName}}</div>
                 </div>
             </div>
             <div class="row row-eq-height wodk-cumulative-row">
@@ -46,11 +46,11 @@
             </div>
             <div class="row row-eq-height wodk-subtitle-row">
                 <div class="col-xs-6 border-right border-right fixed-column-width">
-                    <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='gemeente'">Gemeenten cumulatief</div>
-                    <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='buurt'">Buurten cumulatief</div>
+                    <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='gemeente'">{{'GEMEENTEN_CUMULATIEF' | translate}}</div>
+                    <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='buurt'">{{'BUURTEN_CUMULATIEF' | translate}}</div>
                 </div>
                 <div class="col-xs-6 fixed-column-width">
-                    <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='gemeente'">Gemeente {{vm.wodkWidgetSvc.lastSelectedName}}</div>
+                    <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='gemeente'">{{'GEMEENTE' | translate}} {{vm.wodkWidgetSvc.lastSelectedName}}</div>
                     <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='buurt'">{{vm.wodkWidgetSvc.lastSelectedName}}</div>
                 </div>
             </div>

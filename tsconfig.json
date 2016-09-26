@@ -16,6 +16,7 @@
   "include": [
     "./public/app/*.ts",
     "./public/wodk/*.ts",
+    "./public/translations/*.ts",
     "./server.ts"
   ],
   "exclude": [

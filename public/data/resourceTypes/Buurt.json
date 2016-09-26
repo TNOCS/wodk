@@ -19,7 +19,7 @@
 			},
 			"contourProperty": "_contour",
 			"selectActions": ["load woningen"],
-			"propertyTypeKeys":"bu_naam;bu_code;gm_naam;gm_code;gm_code_2015;aant_inw;ster_totaal;a_apb_w;a_napb_w;a_apb_onb;a_aangep_w;p_apb_w;p_napb_w;p_apb_onb;p_aangep_w;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;woningen;p_1gezw;p_mgezw;p_koopwon,p_huurwon;p_huko_onb;a_1gezw;a_mgezw;a_koopwon;a_huurwon;a_huko_onb;woz;p_apb_w_copy;"
+			"propertyTypeKeys":"bu_naam;bu_code;gm_naam;gm_code;gm_code_2015;aant_inw;ster_totaal;a_apb_w;a_napb_w;a_apb_in_ond;a_apb_onb;a_aangep_w;p_apb_w;p_napb_w;p_apb_in_ond;p_apb_onb;p_aangep_w;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;woningen;p_1gezw;p_mgezw;p_koopwon,p_huurwon;p_huko_onb;a_1gezw;a_mgezw;a_koopwon;a_huurwon;a_huko_onb;woz;p_apb_w_copy;"
 		}
 	},
 	"propertyTypeData" : {
@@ -235,6 +235,16 @@
 			"title" : "Aant. eigendom onbekend",
             "description" : "Aantal eigendom onbekend",
             "expression" : "properties.ster_totaal * properties.p_huko_onb / 100",
+            "stringFormat" : "{0:#,#}",
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+		},
+		"a_apb_in_ond" : {
+			"label" : "a_apb_in_ond",
+			"type" : "number",
+			"title" : "Aant. in onderzoek",
+            "description" : "Aantal aanpasbaarheid in onderzoek",
+            "expression" : "properties.ster_in_ond || 0",
             "stringFormat" : "{0:#,#}",
 			"visibleInCallOut" : true,
 			"isSearchable" : false
@@ -468,6 +478,58 @@
                 "id": "p_apb_onb",
                 "visualAspect": "fillColor",
                 "description": "Percentage aanpasbaarheid onbekend",
+                "legendKind": "discrete",
+                "legendEntries": [
+                    {
+                        "label": "0-20%",
+                        "interval": {
+                            "min": 0,
+                            "max": 20
+                        },
+                        "color": "#ff0000"
+                    },
+                    {
+                        "label": "20-40%",
+                        "interval": {
+                            "min": 20,
+                            "max": 40
+                        },
+                        "color": "#ff7700"
+                    },
+					{
+                        "label": "40-60%",
+                        "interval": {
+                            "min": 40,
+                            "max": 60
+                        },
+                        "color": "#ccff00"
+                    },
+					{
+                        "label": "60-100%",
+                        "interval": {
+                            "min": 60,
+                            "max": 100
+                        },
+                        "color": "#00ff00"
+                    }
+                ]
+            }
+		},
+		"p_apb_in_ond" : {
+			"label" : "p_apb_in_ond",
+			"type" : "number",
+			"title" : "Perc. aanpasbaarheid in onderzoek",
+            "description" : "Percentage aanpasbaarheid in onderzoek",
+            "expression" : "properties.a_apb_in_ond / properties.ster_totaal * 100 || 0",
+            "stringFormat" : "{0:#,#}%",
+			"min": 0,
+			"max": 100,
+			"visibleInCallOut" : true,
+			"isSearchable" : false,
+			"legend": {
+                "id": "p_apb_in_ond",
+                "visualAspect": "fillColor",
+                "description": "Percentage aanpasbaarheid in onderzoek",
                 "legendKind": "discrete",
                 "legendEntries": [
                     {

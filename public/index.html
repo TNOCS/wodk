@@ -11,17 +11,17 @@
     <meta name="author" content="Arnoud de Jong, Erik Vullings, Rinze Bruining">
     <meta name="color:Accent" content="#a98e2e" />
 
-    <meta property="og:title" content="Aanpasbaarheid Woningen 'Langer zelfstandig thuis'">
+    <meta property="og:title" content="Aanpasbaarheid Woningen 'Langer zelfstandig wonen'">
     <meta property="og:type" content="website">
     <meta property="og:url" content="http://github.com/TNOCS/csWeb/">
     <meta property="og:image" content="https://raw.githubusercontent.com/TNOCS/csWeb/gh-pages/images/CommonSenseRound.png">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="73">
     <meta property="og:image:height" content="73">
-    <meta property="og:description" content="Aanpasbaarheid Woningen 'Langer zelfstandig thuis' met de csWeb kaartapplicatie.">
+    <meta property="og:description" content="Aanpasbaarheid Woningen 'Langer zelfstandig wonen' met de csWeb kaartapplicatie.">
 
     <!--TODO Add your title here-->
-    <title>Aanpasbaarheid Woningen 'Langer zelfstandig thuis'</title>
+    <title>Aanpasbaarheid Woningen 'Langer zelfstandig wonen'</title>
 
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css" />
 
@@ -51,8 +51,10 @@
     <script src="bower_components/csweb/dist-bower/csWeb-dep.js"></script>
 
     <script src="bower_components/angularUtils-pagination/dirPagination.js"></script>
-    <script src="bower_components/csweb/dist-bower/csComp.min.js"></script>
-    <!--<script src="bower_components/csweb/dist-bower/csComp.js"></script>-->
+    <!--<script src="bower_components/csweb/dist-bower/csComp.min.js"></script>-->
+    <script src="bower_components/csweb/dist-bower/csComp.js"></script>
+    <script src="translations/locale-nl.js"></script>
+    <script src="translations/locale-en.js"></script>
     <script src="wodk/WODKWidgetCtrl.js"></script>
     <script src="wodk/WODKWidget.js"></script>
     <script src="wodk/RangeWidgetCtrl.js"></script>
@@ -84,7 +86,7 @@
             <div class="container-fluid" style="color: black">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <a href="#" class="navbar-brand" style="color: black;">Aanpasbaarheid Woningen 'Langer zelfstandig thuis'</a>
+                    <a href="#" class="navbar-brand" style="color: black;margin-left:4px;">{{'SITE_TITLE' | translate}}</a>
                 </div>
 
                 <!--<div>
@@ -110,19 +112,19 @@
         <nav class="navbar navbar-default navbar-fixed-subtop">
             <div>
                 <ul class="nav navbar-nav" style="width: 100%">
-                    <li class="active-button" popover-trigger="mouseenter" uib-popover="Terug naar zorgopdekaart.nl" popover-placement="bottom-left"><a data-ng-click="vm.publish('home')"><span class="fa fa-home"></span></a></li>
-                    <li class="active-button" popover-trigger="mouseenter" uib-popover="Begin opnieuw" popover-placement="bottom"><a data-ng-click="vm.publish('refresh')"><span class="fa fa-repeat"></span></a></li>
-                    <li class="active-button" popover-trigger="mouseenter" uib-popover="Stap terug" popover-placement="bottom"><a data-ng-click="vm.publish('back')"><span class="fa fa-arrow-left"></span></a></li>
-                    <li class="active-button" popover-trigger="mouseenter" uib-popover="Stap vooruit" popover-placement="bottom">
+                    <li class="active-button" popover-trigger="mouseenter" uib-popover="{{'GA_NAAR_HOME' | translate}}" popover-placement="bottom-left"><a data-ng-click="vm.publish('home')"><span class="fa fa-home"></span></a></li>
+                    <li class="active-button" popover-trigger="mouseenter" uib-popover="{{'BEGIN_OPNIEUW' | translate}}" popover-placement="bottom"><a data-ng-click="vm.publish('refresh')"><span class="fa fa-repeat"></span></a></li>
+                    <li class="active-button" popover-trigger="mouseenter" uib-popover="{{'STAP_TERUG' | translate}}" popover-placement="bottom"><a data-ng-click="vm.publish('back')"><span class="fa fa-arrow-left"></span></a></li>
+                    <li class="active-button" popover-trigger="mouseenter" uib-popover="{{'STAP_VOORUIT' | translate}}" popover-placement="bottom">
                         <a data-ng-click="vm.publish('forward')" ng-class="vm.wodkWidgetSvc.hasForwardHistory() ? '' : 'inactive-button'"><span class="fa fa-arrow-right"></span></a>
                     </li>
                     <li class="active-button dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gemeente <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{'GEMEENTE' | translate}} <span class="caret"></span></a>
                         <div class="dropdown-menu" style="width: 315px;">
                             <form class="navbar-form navbar-left" role="search">
                                 <div class="form-group">
                                     <input id="search-city" type="text" class="form-control" ng-model="vm.cityQuery" ng-change="vm.filterCity(vm.cityQuery)"
-                                        ng-keyup="$event.keyCode == 13 && vm.selectFirstCity()" style="width:285px" placeholder="Zoek op gemeente"
+                                        ng-keyup="$event.keyCode == 13 && vm.selectFirstCity()" style="width:285px" placeholder="{{'GEMEENTE' | translate}}"
                                         autocomplete="off" autofocus>
                                 </div>
                                 <!--<button type="submit" class="btn btn-default">Submit</button>-->
@@ -135,7 +137,7 @@
                         </div>
                     </li>
                     <li class="active-button dropdown" style="float: right">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Adres <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{'ADRES' | translate}} <span class="caret"></span></a>
                         <div class="dropdown-menu" style="width: 335px; right: 0; left: auto; left: initial;">
                             <form class="navbar-form navbar-left" role="search">
                                 <div class="form-group">
@@ -156,10 +158,10 @@
                             href="#" popover-trigger="mouseenter" uib-popover="Min. aantal woningen per buurt" popover-placement="right"
                             popover-popup-delay="400"><span class="fa fa-filter">&nbsp;</span>{{vm.filterValue}}<span class="caret"></span></a>
                         <ul class="dropdown-menu" ng-show="vm.wodkWidgetSvc.gemeenteSelectie.length > 0">
-                            <li style="background-color: #AAA; font-weight: bold; font-size: 1.2em; line-height:1.2em">&nbsp;&nbsp;Woningfilter &lt;</li>
+                            <li style="background-color: #AAA; font-weight: bold; font-size: 1.2em; line-height:1.2em">&nbsp;&nbsp;{{'WONINGFILTER' | translate}} &lt;</li>
                             <li style="margin:4px 4px 2px 4px;">
                                 <div class="input-group">
-                                    <input type="number" class="form-control input-sm" ng-model="value" min="0" max="99999" step="1" placeholder="Aantal" ng-keyup="$event.keyCode == 13 && vm.selectFilter(value)"
+                                    <input type="number" class="form-control input-sm" ng-model="value" min="0" max="99999" step="1" placeholder="{{'AANTAL' | translate}}" ng-keyup="$event.keyCode == 13 && vm.selectFilter(value)"
                                     />
                                     <span class="input-group-btn">
                                 <button type="button" class="btn btn-primary btn-sm" ng-click="vm.selectFilter(value)" uib-popover="Pas toe" popover-trigger="mouseenter" popover-append-to-body="true" popover-popup-delay="800"><div class="fa fa-check" /></button></span>

@@ -12,6 +12,7 @@ module wodk {
     export class WODKWidgetSvc {
         static $inject = [
             '$rootScope',
+            '$translate',
             'layerService',
             'messageBusService',
             'mapService',
@@ -37,6 +38,7 @@ module wodk {
 
         constructor(
             private $rootScope: ng.IRootScopeService,
+            private $translate: ng.translate.ITranslateService,
             private $layerService: csComp.Services.LayerService,
             private $messageBusService: csComp.Services.MessageBusService,
             private $mapService: csComp.Services.MapService,

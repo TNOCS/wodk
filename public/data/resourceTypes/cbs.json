@@ -20,7 +20,7 @@
                 "select provincie"
             ],
             "contourProperty": "contour",
-            "propertyTypeKeys": "aant_inw;ster_totaal;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;a_huko_onb;a_koopwon;a_huurwon;p_huko_onb;p_koopwon;p_huurwon;a_1gezw;a_mgezw;provinciecode;provincienaam;a_aangep_w;a_apb_w;a_napb_w;p_aangep_w;p_apb_w;p_napb_w;p_apb_onb;p_1gezw;p_mgezw;"
+            "propertyTypeKeys": "provincienaam;provinciecode;aant_inw;ster_totaal;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;a_huko_onb;a_koopwon;a_huurwon;p_huko_onb;p_koopwon;p_huurwon;a_1gezw;a_mgezw;a_aangep_w;a_apb_w;a_napb_w;p_aangep_w;p_apb_w;p_napb_w;p_apb_onb;p_apb_in_ond;p_1gezw;p_mgezw;"
         },
         "gemeente": {
             "name": "gemeente",
@@ -43,7 +43,7 @@
                 "load buurten"
             ],
             "contourProperty": "_contour",
-            "propertyTypeKeys": "aant_inw;ster_totaal;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;a_huko_onb;a_koopwon;a_huurwon;p_huko_onb;p_koopwon;p_huurwon;a_1gezw;a_mgezw;gemeentecode;GM_CODE;gemeentenaam;a_aangep_w;a_apb_w;a_napb_w;p_aangep_w;p_apb_w;p_napb_w;p_apb_onb;p_1gezw;p_mgezw;",
+            "propertyTypeKeys": "aant_inw;ster_totaal;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;a_huko_onb;a_koopwon;a_huurwon;p_huko_onb;p_koopwon;p_huurwon;a_1gezw;a_mgezw;gemeentecode;GM_CODE;gemeentenaam;a_aangep_w;a_apb_w;a_napb_w;a_apb_in_ond;p_aangep_w;p_apb_w;p_napb_w;p_apb_onb;p_apb_in_ond;p_1gezw;p_mgezw;",
             "legendExpr": [
                 {
                     "title": "#Inwoners",
@@ -790,6 +790,20 @@
             "visibleInCallOut": true,
             "canEdit": true
         },
+        "provincienaam": {
+            "label": "provincienaam",
+            "title": "Naam",
+            "type": "text",
+            "visibleInCallOut": true,
+            "canEdit": true
+        },
+        "provinciecode": {
+            "label": "provinciecode",
+            "title": "Provinciecode",
+            "type": "text",
+            "visibleInCallOut": true,
+            "canEdit": true
+        },
         "a_apb_onb": {
             "label": "a_apb_onb",
             "type": "number",
@@ -800,6 +814,16 @@
             "visibleInCallOut": true,
             "isSearchable": false
         },
+        "a_apb_in_ond" : {
+			"label" : "a_apb_in_ond",
+			"type" : "number",
+			"title" : "Aant. in onderzoek",
+            "description" : "Aantal aanpasbaarheid in onderzoek",
+            "expression" : "properties.ster_in_ond || 0",
+            "stringFormat" : "{0:#,#}",
+			"visibleInCallOut" : true,
+			"isSearchable" : false
+		},
         "a_apb_w": {
             "label": "a_apb_w",
             "type": "number",
@@ -860,6 +884,18 @@
             "title": "Perc. aanpasbaarheid onbekend",
             "description": "Percentage aanpasbaarheid onbekend",
             "expression": "properties.a_apb_onb / properties.ster_totaal * 100 || 0",
+            "stringFormat": "{0:#,#}%",
+            "min": 0,
+            "max": 100,
+            "visibleInCallOut": true,
+            "isSearchable": false
+        },
+        "p_apb_in_ond": {
+            "label": "p_apb_in_ond",
+            "type": "number",
+            "title": "Perc. aanpasbaarheid in onderzoek",
+            "description": "Percentage aanpasbaarheid in onderzoek",
+            "expression": "properties.a_apb_in_ond / properties.ster_totaal * 100 || 0",
             "stringFormat": "{0:#,#}%",
             "min": 0,
             "max": 100,

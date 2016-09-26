@@ -389,7 +389,7 @@ module wodk {
             this.$http({
                 method: 'POST',
                 url: "screenshot",
-                data: { html: this.getHTML('#' + id), width: dim.width, height: dim.height },
+                data: { html: this.getHTML('#' + id), width: dim.width, height: dim.height, topOffset: 100 },
             }).then((response) => {
                 csComp.Helpers.saveImage(response.data.toString(), 'Woningaanpassingen screenshot', 'png', true);
             }, (error) => {

@@ -35,34 +35,35 @@ var tileIndex;
 cs.start(() => {
 
     // Should be set to true for server on zodk
-    var addExplicitPublic = false;
+    var runOnZODKServer = false;
+
     if (startDatabaseConnection) {
         this.config = new csweb.ConfigurationService('./configuration.json');
-        this.config.add('server', 'http://www.zorgopdekaart.nl/bagwoningen' + cs.options.port);
+        this.config.add('server', (runOnZODKServer ? 'http://www.zorgopdekaart.nl/bagwoningen' : 'http://localhost:') + cs.options.port);
         var bagDatabase = new csweb.BagDatabase(this.config);
         var mapLayerFactory = new csweb.MapLayerFactory(<any>bagDatabase, cs.messageBus, cs.api);
-        
-        cs.server.post(deployPath + (addExplicitPublic ? '/public' : '') + '/bagcontours', (req, res) => {
+
+        cs.server.post(deployPath + (runOnZODKServer ? '/public' : '') + '/bagcontours', (req, res) => {
             console.log();
             mapLayerFactory.processBagContours(req, res);
         });
 
-        cs.server.post(deployPath + (addExplicitPublic ? '/public' : '') + '/bagsearchaddress', (req, res) => {
+        cs.server.post(deployPath + (runOnZODKServer ? '/public' : '') + '/bagsearchaddress', (req, res) => {
             console.log('/bagsearchaddress');
             mapLayerFactory.processBagSearchQuery(req, res);
         });
 
-        cs.server.post(deployPath + (addExplicitPublic ? '/public' : '') + '/bagbuurten', (req, res) => {
+        cs.server.post(deployPath + (runOnZODKServer ? '/public' : '') + '/bagbuurten', (req, res) => {
             console.log('/bagbuurten');
             mapLayerFactory.processBagBuurten(req, res);
         });
 
-        cs.server.post(deployPath + (addExplicitPublic ? '/public' : '') + '/bagcontours', (req, res) => {
+        cs.server.post(deployPath + (runOnZODKServer ? '/public' : '') + '/bagcontours', (req, res) => {
             console.log();
             mapLayerFactory.processBagContours(req, res);
         });
 
-        cs.server.post(deployPath + (addExplicitPublic ? '/public' : '') + '/searchgemeente', (req, res) => {
+        cs.server.post(deployPath + (runOnZODKServer ? '/public' : '') + '/searchgemeente', (req, res) => {
             console.log('/searchgemeente');
             bagDatabase.searchGemeenteAtLocation(req.body.loc, 1, (searchResult: any[]) => {
                 if (!searchResult || !searchResult.length || searchResult.length === 0) {
@@ -73,7 +74,7 @@ cs.start(() => {
             });
         });
 
-        cs.server.post(deployPath + (addExplicitPublic ? '/public' : '') + '/searchbuurt', (req, res) => {
+        cs.server.post(deployPath + (runOnZODKServer ? '/public' : '') + '/searchbuurt', (req, res) => {
             console.log('/searchbuurt');
             bagDatabase.searchBuurtAtLocation(req.body.loc, 1, (searchResult: any[]) => {
                 if (!searchResult || !searchResult.length || searchResult.length === 0) {
@@ -84,7 +85,7 @@ cs.start(() => {
             });
         });
 
-        cs.server.post(deployPath + (addExplicitPublic ? '/public' : '') + '/searchpand', (req, res) => {
+        cs.server.post(deployPath + (runOnZODKServer ? '/public' : '') + '/searchpand', (req, res) => {
             console.log('/searchpand');
             bagDatabase.searchPandAtLocation(req.body.loc, 1, (searchResult: any[]) => {
                 if (!searchResult || !searchResult.length || searchResult.length === 0) {
@@ -95,12 +96,17 @@ cs.start(() => {
             });
         });
 
-        cs.server.post(deployPath + (addExplicitPublic ? '/public' : '') + '/screenshot', (req, res) => {
+        cs.server.post(deployPath + (runOnZODKServer ? '/public' : '') + '/exportbuurten', (req, res) => {
+            console.log('/exportbuurten');
+            bagDatabase.exportBuurten(req, res);
+        });
+
+        cs.server.post(deployPath + (runOnZODKServer ? '/public' : '') + '/screenshot', (req, res) => {
             console.log('/screenshot');
             if (req.body && req.body.html) {
                 if (<any>webshot) {
                     let image = [];
-                    let renderStream: stream.Stream = webshot(req.body.html, { hostname: 'http://www.zorgopdekaart.nl/bagwoningen/public/', siteType: 'html', javascriptEnabled: true, screenSize: { width: req.body.width || 1200, height: req.body.height || 800 }, shotSize: { width: 'window', height: 'window' }, shotOffset: { top: (req.body.fullScreen ? 0 : 100), left: 0, right: 0, bottom: 0 }, phantomConfig: { 'local-to-remote-url-access': true, 'debug': 'false', "cookies-file": "./cookies.txt", "ignore-ssl-errors": 'false', "web-security": 'true', 'disk-cache': 'true' }, errorIfJSException: true, renderDelay: (req.body.fullScreen ? 15000 : 1000) });
+                    let renderStream: stream.Stream = webshot(req.body.html, { hostname: (runOnZODKServer ? 'http://www.zorgopdekaart.nl/bagwoningen/public/' : `http://localhost:${cs.options.port}/`), siteType: 'html', javascriptEnabled: true, screenSize: { width: req.body.width || 1200, height: req.body.height || 800 }, shotSize: { width: 'window', height: 'window' }, shotOffset: { top: (req.body.topOffset || 0), left: 0, right: 0, bottom: 0 }, phantomConfig: { 'local-to-remote-url-access': true, 'debug': 'false', "cookies-file": "./cookies.txt", "ignore-ssl-errors": 'false', "web-security": 'true', 'disk-cache': 'true' }, errorIfJSException: true, renderDelay: (req.body.fullScreen ? 15000 : 1000) });
 
                     renderStream.on('data', (data) => {
                         image.push(data);
