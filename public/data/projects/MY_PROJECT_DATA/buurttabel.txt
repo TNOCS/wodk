@@ -3,7 +3,7 @@
 | Aantal inwoners          | {{22}}                   | 100     |
 | Aantal woningen          | {{1}}                    | 100     |
 | | |
-| Indicatie aanpasbaarheid:|                          |         | 
+| **Indicatie aanpasbaarheid:**|                          |         | 
 | Specifiek 4/5 sterren    | {{4}}                    | {{8}}   |
 | Aanpasbaar 2/3 sterren   | {{2}}                    | {{6}}   |
 | Niet-aanpasbaar 0/1 ster | {{3}}                    | {{7}}   |

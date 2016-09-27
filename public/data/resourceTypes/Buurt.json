@@ -349,7 +349,7 @@
         "p_apb_w" : {
 			"label" : "p_apb_w",
 			"type" : "number",
-			"title" : "Aanpasbare woningen",
+			"title" : "Indicatie aanpasbare woningen",
             "expression" : "properties.a_apb_w / properties.ster_totaal * 100",
             "description" : "Percentage aanpasbare woningen",
             "stringFormat" : "{0:#,#}%",
