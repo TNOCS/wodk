@@ -37,7 +37,7 @@ AND (bouwjaar >= 1930 AND bouwjaar < 2020);
 
 -- 11b2
 UPDATE bagactueel.pand
-SET ster_3 = floor(woningen_in_pand / 3), ster_0 = (woningen_in_pand - (floor(woningen_in_pand / 3)), lift = 0, plint = 0, icon = 19, pandtype = 1
+SET ster_3 = floor(woningen_in_pand / 3), ster_0 = (woningen_in_pand - (floor(woningen_in_pand / 3))), lift = 0, plint = 0, icon = 19, pandtype = 1
 WHERE
 woningen_in_pand > 8 AND lift_oz = 0 AND plint_oz = 0
 AND (bouwjaar >= 1930 AND bouwjaar < 2020);
@@ -51,7 +51,7 @@ AND (bouwjaar >= 1930 AND bouwjaar < 2020);
 
 -- 11c2
 UPDATE bagactueel.pand
-SET ster_3 = floor(woningen_in_pand / 3), ster_0 = (woningen_in_pand - (floor(woningen_in_pand / 3)), lift = -1, plint = 0, icon = 19, pandtype = 1
+SET ster_3 = floor(woningen_in_pand / 3), ster_0 = (woningen_in_pand - (floor(woningen_in_pand / 3))), lift = -1, plint = 0, icon = 19, pandtype = 1
 WHERE
 woningen_in_pand > 8 AND lift_oz = -1 AND plint_oz = 0
 AND (bouwjaar >= 1930 AND bouwjaar < 2020);

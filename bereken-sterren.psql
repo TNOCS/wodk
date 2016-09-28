@@ -127,7 +127,7 @@ UPDATE bagactueel.pand
 SET ster_3 = 2, ster_0 = (woningen_in_pand - 2), lift = 0, plint = 0, icon = (10 + woningen_in_pand), pandtype = 1
 WHERE
 woningen_in_pand >= 2 AND woningen_in_pand <= 8 AND niet_woningen_in_pand = 0
-AND (pandhoogte >= 17)
+AND pandhoogte >= 17
 AND bouwjaar >= 1970 AND bouwjaar < 2020;
 
 -- Ster 0 en 3 voor MGW met hoogte >=3 en <=17m en bj onbekend (10a1, 10b1, 10d1)
@@ -136,7 +136,7 @@ SET ster_3 = 2, ster_0 = (woningen_in_pand - 2), plint = 0, icon = (10 + woninge
 WHERE
 woningen_in_pand >= 2 AND woningen_in_pand <= 5
 AND pandhoogte >= 3 AND pandhoogte <= 17
-AND (bouwjaar IS NULL OR bouwjaar < 1800 OR (bouwjaar >= 1950 AND bouwjaar < 1970);
+AND (bouwjaar IS NULL OR bouwjaar < 1800 OR (bouwjaar >= 1950 AND bouwjaar < 1970));
 
 -- Ster 0 en 3 voor MGW met hoogte >=3 en <=17m en bj onbekend (10a2, 10b2, 10d2)
 UPDATE bagactueel.pand
@@ -154,12 +154,12 @@ woningen_in_pand >= 2 AND woningen_in_pand <= 8
 AND pandhoogte >= 3 AND pandhoogte <= 17
 AND ((bouwjaar >= 1930 AND bouwjaar < 1950) OR (bouwjaar >= 1970 AND bouwjaar < 2020));
 
--- Ster onderzoek voor MGW met hoogte >=3 en <=17m en MGW >8 (11)
+-- Ster onderzoek voor MGW met hoogte >=3 en <17m en MGW >8 (11)
 UPDATE bagactueel.pand
 SET ster_in_ond = woningen_in_pand, lift = -1, plint = -1, icon = 10, pandtype = 1
 WHERE
 woningen_in_pand > 8
-AND pandhoogte >= 3 AND pandhoogte <= 17
+AND pandhoogte >= 3 AND pandhoogte < 17
 AND (bouwjaar >= 1930 AND bouwjaar < 2020);
 
 -- Ster onderzoek voor MGW met hoogte onb en MGW >8 (12a)
@@ -176,7 +176,7 @@ SET ster_3 = 2, ster_0 = (woningen_in_pand - 2), lift = 0, plint = 0, icon = (10
 WHERE
 woningen_in_pand >= 2 AND woningen_in_pand <= 5
 AND (pandhoogte < 3 OR pandhoogte IS NULL)
-AND (bouwjaar IS NULL OR bouwjaar < 1800 OR (bouwjaar >= 1950 AND bouwjaar < 1970);
+AND (bouwjaar IS NULL OR bouwjaar < 1800 OR (bouwjaar >= 1950 AND bouwjaar < 1970));
 
 -- Ster 0 en 3 voor MGW met hoogte onb en bj onbekend (11b2, 11c2, 11e2)
 UPDATE bagactueel.pand
@@ -184,7 +184,7 @@ SET ster_0 = woningen_in_pand, lift = 0, plint = 1, icon = 0, pandtype = 1
 WHERE
 woningen_in_pand >= 6 AND woningen_in_pand <= 8
 AND (pandhoogte < 3 OR pandhoogte IS NULL)
-AND (bouwjaar IS NULL OR bouwjaar < 1800 OR (bouwjaar >= 1950 AND bouwjaar < 1970);
+AND (bouwjaar IS NULL OR bouwjaar < 1800 OR (bouwjaar >= 1950 AND bouwjaar < 1970));
 
 -- Ster 0 en 3 voor MGW met hoogte onb en bj onbekend (11d, 11f)
 UPDATE bagactueel.pand
