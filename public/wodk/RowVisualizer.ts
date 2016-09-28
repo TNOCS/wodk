@@ -284,7 +284,7 @@ module wodk {
                         }
                         if (!pt.options) {
                             var arr = pt.legend.legendEntries.filter((le => { return le.label === d }));
-                            return (arr.length > 0 ? arr[0].color : '#444444');
+                            return (arr.length > 0 ? arr[0].color.substring(0, 7) : '#444444');
                         }
                     }
                     else {

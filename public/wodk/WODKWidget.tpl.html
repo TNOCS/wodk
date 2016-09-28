@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div class="row row-eq-height wodk-cumulative-row">
-                <div class="col-xs-6 border-right fill-height" style="padding-top:6px">
+                <div class="col-xs-6 border-right fill-height" style="padding-top:6px;max-width:314px;">
                     <div ng-show="vm.wodkWidgetSvc.lastSelectedType=='gemeente'" ng-repeat="item in vm.wodkWidgetSvc.gemeenteSelectie track by $index">
                         {{$index + 1}}. {{item.properties['Name']}}
                     </div>

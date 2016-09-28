@@ -248,14 +248,14 @@
                         if (_chart.renderLabel()) {
                 var lab = rows.select('text')
                     .attr('x', function (d) {
-                        if (d.key && d.key.indexOf("%") === -1) {
+                        if (d.key.indexOf("%") === -1) {
                             return 3 * height;
                         } else {
                             return height + 20;
                         }
                     })
                     .attr('y', function (d) {
-                        if (d.key && d.key.indexOf("%") === -1) {
+                        if (d.key.indexOf("%") === -1) {
                             return _labelOffsetY;
                         } else {
                             return 0.67 * height;

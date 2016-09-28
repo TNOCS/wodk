@@ -426,6 +426,8 @@ module wodk {
             this.forwardHistory.length = 0;
             this.gemeenteSelectie.length = 0;
             this.buurtSelectie.length = 0;
+            this.lastSelectedName = null;
+            this.lastSelectedType = null;
         }
 
         public stepForward() {
