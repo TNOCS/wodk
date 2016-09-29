@@ -96,7 +96,7 @@ cs.start(() => {
             });
         });
 
-        cs.server.post(deployPath + (runOnZODKServer ? '/public' : '') + '/exportbuurten', (req, res) => {
+        cs.server.get(deployPath + (runOnZODKServer ? '/public' : '') + '/exportbuurten', (req, res) => {
             console.log('/exportbuurten');
             bagDatabase.exportBuurten(req, res);
         });
