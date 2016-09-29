@@ -199,7 +199,7 @@ UPDATE bagactueel.pand
 SET ster_3 = woningen_in_pand, lift = 1, plint = 0, icon = 3, pandtype = 1
 WHERE
 (woningen_in_pand >= 35 OR pandoppervlakte >= 3500)
-AND pandhoogte < 17
+AND (pandhoogte < 17 OR pandhoogte IS NULL)
 AND (bouwjaar >= 1992 AND bouwjaar < 2020);
 
 -- 

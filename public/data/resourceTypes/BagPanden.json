@@ -87,7 +87,7 @@
             "type": "options",
             "options": {
                 "-1": "In onderzoek",
-                "0": "Geen lift",
+                "0": "Aanname geen lift",
                 "1": "Aanname lift",
                 "2": "Aanname geen lift"
             },
@@ -99,7 +99,7 @@
             "type": "options",
             "options": {
                 "-1": "In onderzoek",
-                "0": "Geen plint",
+                "0": "Aanname geen plint",
                 "1": "Aanname plint",
                 "2": "Aanname geen plint"
             },
@@ -195,7 +195,7 @@
             "type": "options",
             "options": {
                 "-1": "In onderzoek",
-                "0": "Geen lift",
+                "0": "Aanname geen lift",
                 "1": "Aanname lift",
                 "2": "Aanname geen lift"
             },
@@ -208,7 +208,7 @@
             "type": "options",
             "options": {
                 "-1": "In onderzoek",
-                "0": "Nee",
+                "0": "Aanname geen hoogteverschil",
                 "1": "Aanname souterrain",
                 "2": "Aanname geen hoogteverschil"
             },
