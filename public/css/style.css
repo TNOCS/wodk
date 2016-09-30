@@ -310,6 +310,25 @@
     font-size: 1.3em
 }
 
+.active-button-toelichting {
+    color: #eee;
+    margin: 0;
+    font-size: 1.0em;
+    margin-left: 24px;
+}
+
+.inactive-button-toelichting {
+    background: #ccc;
+    color: #eee;
+    margin: 0;
+    font-size: 1.0em;
+    pointer-events: none;
+}
+
+.dropdown-menu .divider {
+    margin: 4px 0;
+}
+
 .inactive-button {
     margin: 0;
     color: #777777!important;
