@@ -99,9 +99,9 @@
             "type": "options",
             "options": {
                 "-1": "In onderzoek",
-                "0": "Aanname geen plint",
-                "1": "Aanname plint",
-                "2": "Aanname geen plint"
+                "0": "Aanname geen souterrain of plint",
+                "1": "Aanname souterrain of plint",
+                "2": "Aanname geen souterrain of plint"
             },
             "visibleInCallOut": false
         },
@@ -203,14 +203,14 @@
         },
         "plint": {
             "label": "plint",
-            "title": "Souterrain (voor bergingen)",
+            "title": "Souterrain of plint",
             "description": "Hoogteverschil begane grondvloer appartement - maaiveld > 1/2 meter",
             "type": "options",
             "options": {
                 "-1": "In onderzoek",
-                "0": "Aanname geen hoogteverschil",
-                "1": "Aanname souterrain",
-                "2": "Aanname geen hoogteverschil"
+                "0": "Aanname geen souterrain of plint",
+                "1": "Aanname souterrain of plint",
+                "2": "Aanname geen souterrain of plint"
             },
             "visibleInCallOut": true
         },

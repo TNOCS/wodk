@@ -35,7 +35,7 @@ var tileIndex;
 cs.start(() => {
 
     // Should be set to true for server on zodk
-    var runOnZODKServer = false;
+    var runOnZODKServer = true;
 
     if (startDatabaseConnection) {
         this.config = new csweb.ConfigurationService('./configuration.json');
@@ -99,6 +99,16 @@ cs.start(() => {
         cs.server.get(deployPath + (runOnZODKServer ? '/public' : '') + '/exportbuurten', (req, res) => {
             console.log('/exportbuurten');
             bagDatabase.exportBuurten(req, res);
+        });
+
+        cs.server.get(deployPath + (runOnZODKServer ? '/public' : '') + '/exportwijken', (req, res) => {
+            console.log('/exportwijken');
+            bagDatabase.exportWijken(req, res);
+        });
+
+        cs.server.get(deployPath + (runOnZODKServer ? '/public' : '') + '/exportgemeenten', (req, res) => {
+            console.log('/exportgemeenten');
+            bagDatabase.exportGemeenten(req, res);
         });
 
         cs.server.post(deployPath + (runOnZODKServer ? '/public' : '') + '/screenshot', (req, res) => {
