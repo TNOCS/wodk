@@ -5,6 +5,7 @@ module wodk {
         content: string;
         mdText: string;
         url: string;
+        fileName: string;
     }
 
     export interface IWODKWidgetScope extends ng.IScope {
@@ -268,6 +269,11 @@ module wodk {
                 this.wodkWidgetSvc.setLastSelectedName(feature.properties['Name']);
                 this.parentWidget.show();
                 this.$scope.data.mdText = md;
+                if (feature.properties.hasOwnProperty('bu_code')) {
+                    this.$scope.data.fileName = feature.properties['bu_code'];
+                } else {
+                    this.$scope.data.fileName = null;
+                }
                 if (feature.geometry.type.toLowerCase() === 'point') {
                     this.updateChart();
                 }

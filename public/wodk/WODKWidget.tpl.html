@@ -64,6 +64,10 @@
                     </div>
                 </div>
                 <div class="col-xs-6" style="padding-top:6px">
+                    <div ng-show="data.fileName">
+                        <a ng-href="http://www.zorgopdekaart.nl/bagwoningen/pdfs/{{data.fileName}}.pdf" target="_blank" style="color: black;font-size: 12px;">Rekenmodel Langer zelfstandig wonen
+                        <i class="fa fa-external-link"/></a>
+                    </div>
                     <div style="padding:0px;font-size:12px;margin:0px;" ng-hide="minimized">
                         <wiz-markdown class="active-text" content="data.mdText"></wiz-markdown>
                     </div>
