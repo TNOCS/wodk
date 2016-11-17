@@ -44,6 +44,7 @@ module App {
         public filterValues: number[] = [0, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500];
         public filterValue = this.filterValues[0];
         public foundAddresses: { [key: string]: wodk.IAddressResult } = {};
+        public pdfLinks: any = this.getPdfLinks();
         public addressQuery: string;
         public foundCities: string[] = [];
         public cityQuery: string;
@@ -389,6 +390,175 @@ module App {
 
         isActive(viewLocation: string) {
             return viewLocation === this.$location.path();
+        }
+
+        getPdfLinks() {
+            return [
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 1 Den Haag 117m.pdf",
+            "name": "1. Den Haag Amsterdam Rotterdam"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 2 Utrecht 117m.pdf",
+            "name": "2. Utrecht Eindhoven Tilburg Almere"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 3 Groningen 117m.pdf",
+            "name": "3. Groningen Breda Nijmegen Apeldoorn Enschede"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 4 Haarlem 117m.pdf",
+            "name": "4. Haarlem Amersfoort Arnhem"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 5 Zaanstad 117m.pdf",
+            "name": "5. Zaanstad s-Hertogenbosch Schouwen-Duiveland s-Hertogenbosch Haarlemmermeer Zoetermeer"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 6 Zwolle 117m.pdf",
+            "name": "6. Zwolle Leiden Maastricht Dordrecht"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 7 Ede 117m.pdf",
+            "name": "7. Ede Leeuwarden Alkmaar"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 8 Emmen 117m.pdf",
+            "name": "8. Emmen Westland Alphen aan den Rijn"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 9 Delft 117m.pdf",
+            "name": "9. Delft Deventer Voorst Deventer Venlo Sittard-Geleen Sint-Oedenrode Sittard-Geleen"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 10 Helmond 117m.pdf",
+            "name": "10. Helmond Oss Amstelveen Hilversum Heerlen"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 11 Nissewaard 117m.pdf",
+            "name": "11. Nissewaard Sudwest-Fryslan Strijen Sudwest-Fryslan Hengelo Purmerend Schiedam Scherpenzeel"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 12 Schiedam 117m.pdf",
+            "name": "12. Schiedam Lelystad Roosendaal Leidschendam-Voorburg"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 13 Vlaardingen 117m.pdf",
+            "name": "13. Vlaardingen Gouda Assen Capelle aan den IJssel Velsen"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 14 Bergen 117m.pdf",
+            "name": "14. Bergen op Zoom Stichtse Vecht Stein Stichtse Vecht Katwijk Veenendaal Zeist Nieuwegein Hardenberg De Wolden Hardenberg"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 15 Lansingerland 117m.pdf",
+            "name": "15. Lansingerland Roermond Doetinchem Den Helder Smallingerland Sluis Smallingerland"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 16 Oosterhout 117m.pdf",
+            "name": "16. Oosterhout Barneveld Hoogeveen Heerhugowaard Terneuzen Krimpenerwaard"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 17 De Friese meren 117m.pdf",
+            "name": "17. De Friese meren Pijnacker-Nootdorp"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 18 Barendrecht 117m.pdf",
+            "name": "18. Barendrecht Weert Zutphen Goeree-Overflakkee"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 19 Noordoostpolder 117m.pdf",
+            "name": "19. Noordoostpolder Schagen Sudwest-Fryslan Schagen Utrechtse Heuvelrug Harderwijk Lingewaard Kerkrade Ridderkerk Soest Smallingerland Soest"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 20 Zwijndrecht 117m.pdf",
+            "name": "20. Zwijndrecht Heusden Veldhoven Vlissingen Etten-Leur Medemblik Berkelland Rheden Steenwijkerland Steenbergen"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 21 Steenwijkerland 117m.pdf",
+            "name": "21. Steenwijkerland De Ronde Venen Venray Tiel Peel en Maas Uden Huizen De Bilt Horst aan de Maas"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 22 Wijchen 117m.pdf",
+            "name": "22. Wijchen Dronten Nijkerk Beverwijk Zuidplas Hellevoetsluis Geldrop-Mierlo Oude IJsselstreek Heemskerk"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 23 Wageningen 117m.pdf",
+            "name": "23. Wageningen Neder-Betuwe Wageningen Oldambt Veghel Landgraaf Goes Rijssen-Holten Raalte Bronckhorst Leudal"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 24 Moerdijk 117m.pdf",
+            "name": "24. Moerdijk Hellendoorn Coevorden Hof van Twente Teylingen Castricum Gorinchem Hoogezand-Sappemeer"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 25 IJsselstein 117m.pdf",
+            "name": "25. IJsselstein Schouwen-Duiveland Schinnen Schouwen-Duiveland Twenterand Montferland"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 26 Zevenaar 117m.pdf",
+            "name": "26. Zevenaar Epe Stadskanaal Son en Breugel Stadskanaal Tynaarlo Tytsjerksteradiel Maassluis Echt-Susteren Deurne Valkenswaard Noordenveld"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 27 Renkum 117m.pdf",
+            "name": "27. Renkum Boxtel Aalsmeer Bergen (NH.) Leusden Opsterland Hendrik-Ido-Ambacht Best Bernheze Brunssum Oost Gelre Uithoorn Binnenmaas"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 28 Gemert-Bakel 117m.pdf",
+            "name": "28. Gemert-Bakel Winterswijk Molenwaard"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 29 Hulst 117m.pdf",
+            "name": "29. Hulst Aalten Nieuwkoop Leiderdorp Heemstede Zaltbommel Nunspeet Geldermalsen Gilze en Rijen Werkendam Drimmelen Oisterwijk Buren Dongen"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 30 Ermelo 117m.pdf",
+            "name": "30. Ermelo Wassenaar Aa en Hunze Noordwijk Waddinxveen Kaag en Braassem Beuningen Tholen Dinkelland Weststellingwerf Albrandswaard Barendrecht"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 31 Albrandswaard 117m.pdf",
+            "name": "31. Albrandswaard Ooststellingwerf Duiven Borger-Odoorn Stein Steenwijkerland Stein Cuijk Sliedrecht Sittard-Geleen Sliedrecht Vught Delfzijl Voorschoten Eijsden-Margraten Haaksbergen"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 32 Maasdriel 117m.pdf",
+            "name": "32. Maasdriel Dongeradeel Wierden Putten Baarn Schijndel Schiermonnikoog Schijndel De Wolden Steenbergen Stede Broec Steenbergen Nuenen, Gerwen en Nederwetten Maasgouw Oud-Beijerland Goirle"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 33 Oegstgeest 117m.pdf",
+            "name": "33. Oegstgeest Borne Loon op Zand Lisse Wijdemeren Elburg Heiloo Wijk bij Duurstede Sluis Slochteren Sluis Voorst Oldebroek Borsele Losser Koggenland"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 34 Bloemendaal 117m.pdf",
+            "name": "34. Bloemendaal Reimerswaal Zwartewaterland Geertruidenberg Rucphen Neder-Betuwe Laarbeek Zundert Zeewolde Stede Broec Staphorst Stede Broec Tubbergen Veere Woensdrecht Hillegom Brummen Roerdalen"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 35 Franekeradeel 117m.pdf",
+            "name": "35. Franekeradeel Leerdam Alblasserdam Bunschoten Vianen Bunschoten Eemnes Vianen Bunschoten Vianen Bladel Urk Cranendonck Leek Cranendonck Leek Drechterland Meerssen Rhenen Weesp Someren Soest Someren"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 36 Westerveld 117m.pdf",
+            "name": "36. Westerveld Druten Dantumadiel Zuidhorn Enkhuizen Sint-Oedenrode Sint-Michielsgestel Sint-Oedenrode Midden-Delfland West Maas en Waal Heerde Bergeijk Eersel Groesbeek Haren Ommen Hardinxveld-Giessendam"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 37 Olst-Wijhe 117m.pdf",
+            "name": "37. Olst-Wijhe Oirschot Naarden Gennep Waterland Nederweert Valkenburg aan de Geul Beek Waalre Asten Zandvoort Eemsmond Son en Breugel Someren Son en Breugel Staphorst Stadskanaal Staphorst Brielle Heumen Noordwijkerhout Harlingen Vlagtwedde"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 38 Wormerland 117m.pdf",
+            "name": "38. Wormerland Nuth Slochteren Sliedrecht Slochteren Bunnik Heeze-Leende Hilvarenbeek Westervoort Landerd Gulpen-Wittem Giessenlanden Woudrichem Beesel Winsum Ouder-Amstel Westvoorne Montfoort Menameradiel Lopik Haaren Texel"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 39 Zederik 117m.pdf",
+            "name": "39. Zederik Bergen (L.) Schinnen Schijndel Schinnen Uitgeest Grave Aalburg Kollumerland en Nieuwkruisland Pekela Cromstrijen Reusel-De Mierden Grootegast Appingedam Voerendaal Woudenberg Kapelle Menterwolde"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 40 Mill en 117m.pdf",
+            "name": "40. Mill en Sint Hubert Littenseradiel het Bildt Lingewaal Rijnwaarden Korendijk Simpelveld s-Hertogenbosch Simpelveld Bedum Landsmeer De Marne Loppersum Marum Leeuwarderadeel Boekel Vaals Oudewater Alphen-Chaam Blaricum Scherpenzeel Schagen Scherpenzeel Bellingwedde"
+        },
+        {
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 41 Eemnes 117m.pdf",
+            "name": "41. Eemnes Oostzaan Strijen Weesp Stichtse Vecht Strijen Beemster Ferwerderadiel Mook en Middelaar Zoeterwoude Onderbanken Noord-Beveland Ten Boer Baarle-Nassau Muiden Zeevang Haarlemmerliede en Spaarnwoude Renswoude Terschelling Ameland Rozendaal Vlieland Schiermonnikoog Schiedam Schiermonnikoog"
+        }
+        ]
         }
     }
 

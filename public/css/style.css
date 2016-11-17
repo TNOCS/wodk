@@ -317,6 +317,12 @@
     margin-left: 32px;
 }
 
+.active-button-toelichting > label{
+    color:black;
+    margin-top: 4px;
+    font-weight: 500;
+}
+
 .inactive-button-toelichting {
     background: #ccc;
     color: #eee;
@@ -414,4 +420,10 @@
 
 .navbar-nav > li:hover > .dropdown-menu {
     display: block;
+}
+
+.scrollable-menu {
+    height: auto;
+    max-height: 500px;
+    overflow-x: hidden;
 }

@@ -189,7 +189,7 @@
                     <li class="dropdown active-button">
                         <a class="dropdown-toggle" data-toggle="dropdown"
                             href="#" popover-trigger="none" uib-popover="Toelichting 'Langer zelfstandig wonen'" popover-placement="bottom" popover-popup-delay="400"><span >Toelichting</span><span class="caret"></span></a>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu scrollable-menu">
                             <li class="inactive-button-toelichting" inactive>
                                 <a>
                                 <span>Toelichtingen</span>
@@ -202,7 +202,7 @@
                             </li>
                             <li class="divider"</li>
                             <li class="active-button-toelichting">
-                                <a href="http://www.zorgopdekaart.nl/files/2016-09/toelichting-bij-de-rekenmodellen.pdf" target="_blank">
+                                <a href="http://www.zorgopdekaart.nl/files/2016-11/toelichting-woningvoorraad-woningaanpassingen-en-langer-zelfstandig-thuis-11.pdf" target="_blank">
                                 <span>Toelichting bij de rekenmodellen</span>
                                 </a>
                             </li>
@@ -213,13 +213,33 @@
                                 </a>
                             </li>
                             <li class="active-button-toelichting">
-                                <a href="http://www.zorgopdekaart.nl/files/2016-09/alle-gemeenten-woningvoorraad-woningaanpassingen-en-langer-zelfstandig-wonen-46m.pdf" target="_blank">
-                                <span>Alle gemeenten (volgorde alfabetisch)</span>
+                                <a href="http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 42 Nederland en alle gemeenten 120m.pdf" target="_blank">
+                                <span>Nederland en alle gemeenten</span>
                                 </a>
                             </li>
                             <li class="active-button-toelichting">
-                                <a href="http://www.zorgopdekaart.nl/files/2016-10/buurten-set-b-grootste-buurten-97m.pdf" target="_blank">
-                                <span>400 grootste buurten (volgorde op inwonertal)</span>
+                                <a href="http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 43 400 buurten met hoogste kosten 120m.pdf" target="_blank">
+                                <span>400 buurten met hoogste kosten</span>
+                                </a>
+                            </li>
+                            <li class="active-button-toelichting">
+                                <a href="http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 46 400 buurten met grootste vraag 120m.pdf" target="_blank">
+                                <span>400 buurten met grootste vraag</span>
+                                </a>
+                            </li>
+                            <li class="active-button-toelichting">
+                                <a href="http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 47 400 wijken met grootste vraag 120m.pdf" target="_blank">
+                                <span>400 wijken met grootste vraag</span>
+                                </a>
+                            </li>
+                            <li class="active-button-toelichting">
+                                <a href="http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 48 400 buurten met het hoogste wmo 120m.pdf" target="_blank">
+                                <span>400 buurten met het hoogste % wmo</span>
+                                </a>
+                            </li>
+                            <li class="active-button-toelichting">
+                                <a href="http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 49 400 wijken met het hoogste Wmo 120m.pdf" target="_blank">
+                                <span>400 wijken met het hoogste % Wmo</span>
                                 </a>
                             </li>
                             <li class="divider"</li>
@@ -230,55 +250,13 @@
                                 </a>
                             </li>
                             <li class="active-button-toelichting">
-                                <a href="http://www.zorgopdekaart.nl/files/2016-10/buurten-set-1-den-haag-97m.pdf" target="_blank">
-                                <span>1. Den Haag Amsterdam Rotterdam</span>
-                                </a>
+                                <label>Zoek gemeente: <input ng-model="searchDummy"></label>
                             </li>
-                            <li class="active-button-toelichting">
-                                <a href="http://www.zorgopdekaart.nl/files/2016-10/buurten-set-2-utrecht-97m.pdf" target="_blank">
-                                <span>2. Utrecht Eindhoven Tilburg Groningen</span>
-                                </a>
+                            <li class="active-button-toelichting" ng-repeat="entry in vm.pdfLinks | filter:searchDummy">
+                                <a href="{{entry.url}}" target="_blank">
+                                <span>{{entry.name | limitTo: 80}}{{entry.name.length > 80 ? '&hellip;' : ''}}</span></a>
                             </li>
-                            <li class="active-button-toelichting">
-                                <a href="http://www.zorgopdekaart.nl/files/2016-10/buurten-set-3-almere-97m.pdf" target="_blank">
-                                <span>3. Almere Breda Nijmegen Enschede Apeldoorn Haarlem</span>
-                                </a>
-                            </li>
-                            <li class="active-button-toelichting">
-                                <a href="http://www.zorgopdekaart.nl/files/2016-10/buurten-set-4-amersfoort-97m.pdf" target="_blank">
-                                <span>4. Amersfoort Arnhem Zaanstad s-Hertogenbosch</span>
-                                </a>
-                            </li>
-                            <li class="active-button-toelichting">
-                                <a href="http://www.zorgopdekaart.nl/files/2016-10/buurten-set-5-haarlemmermeer-97m.pdf" target="_blank">
-                                <span>5. Haarlemmermeer Zoetermeer Zwolle Maastricht Leiden</span>
-                                </a>
-                            </li>
-                            <li class="active-button-toelichting">
-                                <a href="http://www.zorgopdekaart.nl/files/2016-10/buurten-set-6-dordrecht-97m.pdf" target="_blank">
-                                <span>6. Dordrecht Ede Emmen Leeuwarden</span>
-                                </a>
-                            </li>
-                            <li class="active-button-toelichting">
-                                <a href="http://www.zorgopdekaart.nl/files/2016-10/buurten-set-7-alkmaar-97m.pdf" target="_blank">
-                                <span>7. Alkmaar Alphen aan den Rijn Westland Venlo</span>
-                                </a>
-                            </li>
-                            <li class="active-button-toelichting">
-                                <a href="http://www.zorgopdekaart.nl/files/2016-10/buurten-set-8-delft-97m.pdf" target="_blank">
-                                <span>8. Delft Deventer Sittard-Geleen Helmond Oss Heerlen</span>
-                                </a>
-                            </li>
-                            <li class="active-button-toelichting">
-                                <a href="http://www.zorgopdekaart.nl/files/2016-10/buurten-set-9-hilversum-97m.pdf" target="_blank">
-                                <span>9. Hilversum Amstelveen Nissewaard Sudwest-Fryslan Hengelo Purmerend</span>
-                                </a>
-                            </li>
-                            <li class="active-button-toelichting">
-                                <a href="http://www.zorgopdekaart.nl/files/2016-10/buurten-set-10-roosendaal-97m.pdf" target="_blank">
-                                <span>10. Roosendaal Schiedam Lelystad Leidschendam-Voorburg Almelo Hoorn Vlaardingen</span>
-                                </a>
-                            </li>
+                        </li>
                         </ul>
                     </li>
                 </ul>
