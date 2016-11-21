@@ -1,0 +1,43 @@
+<div>
+    <div class="row" style="display: inline-block; margin-left: 2px;">
+        <div style="display: inline-block; font-size:16px; font-weight:bold; margin-bottom:2px;">{{widget.title}}</div>
+        <div style="display: inline-block; margin-right:5px; position: absolute; top: 2px; right: 0px;">
+            <a class="widget-min-max-close" ng-click="vm.close()" ng-if="vm.canClose()"><i class="fa fa-times"></i></a>
+            <a class="widget-min-max-close" ng-click="vm.minimize()" ng-show="minimized"> <i class="fa fa-plus"></i></a>
+            <a class="widget-min-max-close" ng-click="vm.minimize()" ng-hide="minimized"> <i class="fa fa-minus"></i></a>
+            <a class="widget-min-max-close" ng-click="vm.exportToImage()"><i class="fa fa-save" uib-tooltip="{{'SAVE_AS_IMAGE' | translate}}" tooltip-trigger="mouseenter" tooltip-append-to-body="true" ng-show="vm.exporterAvailable&&!minimized"></i></a>
+        </div>
+    </div>
+    <div class="row" uib-popover="{{'RANKING_HELP' | translate }}" popover-trigger="mouseenter" popover-append-to-body="false" popover-placement="right">
+        <h3 class="col-xs-10" style="margin-top:0;padding-left:2px">Ranking</h3>
+        <i class="fa fa-info-circle fa-icon-large col-xs-2"/>
+    </div>
+    <div ng-hide="minimized">
+        <div class="form-group row" style="margin-bottom:8px">
+            <label for="bins-input" class="col-xs-7 col-form-label">Aantal groepen:</label>
+            <div class="col-xs-5">
+                <input class="form-control" type="number" min="1" max="10" ng-model="data.bins" id="bins-input" ng-model-options="{ debounce: 1000 }" ng-change="vm.selectProp()" style="max-width: 72px">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="select-prop" class="col-xs-4 col-form-label">Kenmerk:</label>
+            <div class="col-xs-8">
+                <select id="select-prop" class="form-control" ng-change="vm.selectProp()" ng-model="vm.selectedProp" style="padding:2px">
+                    <option class="dropdown-item" ng-repeat="(prop, title) in data.rankingProperties" value="{{prop}}">{{title}}</option>
+                </select>
+            </div>
+        </div>
+        <div data-ng-if="activeLegend.legendKind === 'discrete'">
+            <div class="legend-description">{{activeLegend.description}}</div>
+            <ul class="legend-entry-list">
+                <li data-ng-repeat="le in activeLegend.legendEntries" class="legend-entry-item-d" ng-class="{'pointer-cursor': $parent.$parent.$parent.activeStyleProperty}" ng-click="$parent.$parent.$parent.vm.toggleFilter(activeLegend, le)"
+                    uib-popover="{{'UTILS.FILTER' | translate}}" popover-trigger="mouseenter" popover-append-to-body="true" popover-placement="right" popover-enable="{{$parent.$parent.$parent.activeStyleProperty}}">
+                    <div class="legend-color-square" ng-style="{'float': 'left', 'background': le.color}"></div>
+                    <div class="legend-label-d" style="float: left">{{le.label}}</div>
+                    <div>&nbsp;</div>
+                    <!-- die &nbsp; is echt nodig... -->
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

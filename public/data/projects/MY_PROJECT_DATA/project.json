@@ -61,6 +61,7 @@
             },
             "refreshBBOX": false,
             "defaultFeatureType": "gemeente",
+            "defaultLegendProperty": "data/resourceTypes/cbs.json#aant_inw",
             "typeUrl": "data/resourceTypes/cbs.json",
             "type": "geojson",
             "enabled": true,
@@ -249,6 +250,24 @@
                     "p_apb_in_ond"
                 ],
                 "url": "data/projects/MY_PROJECT_DATA/buurttabel.txt"
+            }
+        }, {
+            "id": "rankingwidg",
+            "directive": "rankingwidget",
+            "elementId": "widget-rankingwidg",
+            "enabled": true,
+            "style": "vws",
+            "width": "250px",
+            "top": "110px",
+            "left": "20px",
+            "data": {
+                "layerId": "gemeente",
+                "rankingProperties": {
+                    "aant_inw": "Aant. inwoners",
+                    "p_65_eo_jr": "Aant. 65-plussers",
+                    "p_apb_w": "Aant. aanpasbare woningen"
+                },
+                "bins": 9
             }
         }],
         "mobile": true

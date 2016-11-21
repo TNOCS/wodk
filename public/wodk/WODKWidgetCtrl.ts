@@ -101,7 +101,7 @@ module wodk {
                         this.close();
                         break;
                     default:
-                        if (gs) {
+                        if (gs && !(gs.activeLegend && gs.activeLegend.id.indexOf('_rank') === 0)) {
                             delete $scope.filter;
                             $scope.style = gs;
                             this.createChart();

@@ -427,3 +427,7 @@
     max-height: 500px;
     overflow-x: hidden;
 }
+
+.form-group.row > label{
+    padding-left: 2px;
+}

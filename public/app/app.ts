@@ -82,10 +82,16 @@ module App {
                         description: 'Show rowfilter without filter functionality'
                     }
 
-                    this.$dashboardService.widgetTypes['rangewidget'] = <csComp.Services.IWidget>{
-                        id: 'rangewidget',
+                    // this.$dashboardService.widgetTypes['rangewidget'] = <csComp.Services.IWidget>{
+                    //     id: 'rangewidget',
+                    //     icon: 'images/rangewidget.png',
+                    //     description: 'Show rangewidget with filter functionality'
+                    // }
+
+                    this.$dashboardService.widgetTypes['rankingwidget'] = <csComp.Services.IWidget>{
+                        id: 'rankingwidget',
                         icon: 'images/rangewidget.png',
-                        description: 'Show rangewidget with filter functionality'
+                        description: 'Show rankingwidget with style functionality'
                     }
 
                     // this.areaFilter = new AreaFilter.AreaFilterModel();

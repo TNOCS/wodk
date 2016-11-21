@@ -26,7 +26,7 @@
             "name": "gemeente",
             "style": {
                 "fillColor": "#9999ff",
-                "fillOpacity": 0.5,
+                "fillOpacity": 0.9,
                 "strokeColor": "#0000ff",
                 "selectedStrokeColor": "#0000ff",
                 "drawingMode": "MultiPolygon",

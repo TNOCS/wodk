@@ -14,7 +14,8 @@ module Translations {
             STAP_TERUG: 'Stap terug',
             STAP_VOORUIT: 'Stap vooruit',
             ZOEK_OP_GEMEENTE: 'Zoek op gemeente',
-            WONINGINFORMATIE: 'Woninginformatie'
+            WONINGINFORMATIE: 'Woninginformatie',
+            RANKING_HELP: 'Gemeenten gerangschikt in groepen op basis van {{property}}'
         };
     }
 }
