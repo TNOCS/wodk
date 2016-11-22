@@ -13,6 +13,8 @@ module wodk {
         minimized: boolean;
         selectedFeature: csComp.Services.IFeature;
         activeLegend: csComp.Services.Legend;
+        activeStyleGroup: csComp.Services.ProjectGroup;
+        activeStyleProperty: csComp.Services.IPropertyType;
     }
 
     export class RankingWidgetCtrl {
@@ -138,10 +140,12 @@ module wodk {
             let pType = this.$layerService.findPropertyTypeById(`${l.typeUrl}#${this.selectedProp}`);
             if (!pType) return;
             let rankProp = `_rank_${this.selectedProp}`;
-            let rankLegend = this.createLegendEntries(pType);
+            let rankPType: csComp.Services.IPropertyType = JSON.parse(JSON.stringify(pType));
+            rankPType.label = rankProp;
+            let rankLegend = this.createLegendEntries(rankPType);
             let gs = new csComp.Services.GroupStyle(this.$translate);
             gs.id = csComp.Helpers.getGuid();
-            gs.title = pType.title;
+            gs.title = rankPType.title;
             gs.visualAspect = 'fillColor';
             gs.canSelectColor = gs.visualAspect.toLowerCase().indexOf('color') > -1;
             gs.property = rankProp;
@@ -150,7 +154,7 @@ module wodk {
             gs.enabled = true;
             gs.group = l.group;
             gs.activeLegend = rankLegend;
-            gs.legends[pType.title] = gs.activeLegend;
+            gs.legends[rankPType.title] = gs.activeLegend;
             let dummy = {
                 feature: {
                     featureTypeName: l.url + '#' + rankProp,
@@ -160,7 +164,7 @@ module wodk {
                 key: rankProp
             }
             let bins = [];
-            var delta = (pInfo.max - pInfo.min) / this.$scope.data.bins;
+            var delta = ((pInfo.max - pInfo.min) / this.$scope.data.bins) * 0.9999;
             for (let l = pInfo.min + delta; l <= pInfo.max; l += delta) bins.push(l);
             this.$layerService.project.features.forEach((f) => {
                 if (!f.fType || f.fType.name !== 'gemeente') return;
@@ -176,6 +180,8 @@ module wodk {
             });
             this.$layerService.setStyle(dummy, false, pInfo, gs);
             this.$scope.activeLegend = gs.activeLegend;
+            this.$scope.activeStyleGroup = gs.group;
+            this.$scope.activeStyleProperty = rankPType;
             console.log(`Created legend for ${rankProp}`);
             // var propType = this.$layerService.findPropertyTypeById(this.$scope.layer.typeUrl + '#' + gf.property);
             // this.$layerService.setGroupStyle(this.$scope.style.group, propType);
@@ -202,6 +208,34 @@ module wodk {
                 leg.legendEntries.push(le);
             }
             return leg;
+        }
+
+        public toggleFilter(legend: csComp.Services.Legend, le: csComp.Services.LegendEntry) {
+            if (!legend || !le) return;
+            var projGroup = this.$scope.activeStyleGroup;
+            var property = this.$scope.activeStyleProperty;
+            if (!projGroup || !property) return;
+            //Check if filter already exists. If so, remove it.
+            var exists: boolean = projGroup.filters.some((f: csComp.Services.GroupFilter) => {
+                if (f.property === property.label) {
+                    this.$layerService.removeFilter(f);
+                    return true;
+                }
+            });
+            if (!exists) {
+                var gf = new csComp.Services.GroupFilter();
+                gf.property = property.label;//prop.split('#').pop();
+                gf.id = 'buttonwidget_filter';
+                gf.group = projGroup;
+                gf.filterType = 'row';
+                gf.title = property.title;
+                gf.rangex = [le.interval.min, le.interval.max];
+                gf.filterLabel = le.label;
+                console.log('Setting filter');
+                this.$layerService.rebuildFilters(projGroup);
+                projGroup.filters = projGroup.filters.filter((f) => { return f.id !== gf.id; });
+                this.$layerService.setFilter(gf, projGroup);
+            }
         }
     }
 }

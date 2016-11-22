@@ -264,8 +264,11 @@
                 "layerId": "gemeente",
                 "rankingProperties": {
                     "aant_inw": "Aant. inwoners",
-                    "p_65_eo_jr": "Aant. 65-plussers",
-                    "p_apb_w": "Aant. aanpasbare woningen"
+                    "p_65p": "Aant. 65-plussers",
+                    "ster3_inw": "Aant. aanpasbare woningen",
+                    "instroom": "Instromers / aant. inwoners",
+                    "wmo-budg": "WMO Budget",
+                    "aanp_kost_wmo": "% aanpassingskosten / WMO"
                 },
                 "bins": 9
             }

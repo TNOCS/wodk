@@ -963,6 +963,36 @@
             "stringFormat": "{0:#,#}%",
             "visibleInCallOut": true,
             "isSearchable": false
+        },
+        "instroom" : {
+            "label" : "instroom",
+            "title" : "Instromers / aantal inwoners",
+            "type" : "number",
+            "visibleInCallOut" : true
+        },
+        "ster3_inw" : {
+            "label" : "ster3_inw",
+            "title" : "Aantal ster 3 woningen",
+            "type" : "number",
+            "visibleInCallOut" : true
+        },
+        "aanp_kost_wmo" : {
+            "label" : "aanp_kost_wmo",
+            "title" : "% Aanpassingskosten / WMO",
+            "type" : "number",
+            "visibleInCallOut" : true
+        },
+        "wmo-budg" : {
+            "label" : "wmo-budg",
+            "title" : "Wmo-budget",
+            "type" : "number",
+            "visibleInCallOut" : true
+        },
+        "p_65p" : {
+            "label" : "p_65p",
+            "title" : "Aantal 65 plussers",
+            "type" : "number",
+            "visibleInCallOut" : true
         }
     },
     "id": "cbs",
