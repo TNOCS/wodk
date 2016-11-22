@@ -9,18 +9,18 @@
         </div>
     </div>
     <div class="row" uib-popover="{{'RANKING_HELP' | translate }}" popover-trigger="mouseenter" popover-append-to-body="false" popover-placement="right">
-        <h3 class="col-xs-10" style="margin-top:0;padding-left:2px">Ranking</h3>
+        <h3 class="col-xs-10" style="margin-top:0;padding-left:2px">{{'RANKING' | translate}}</h3>
         <i class="fa fa-info-circle fa-icon-large col-xs-2"/>
     </div>
     <div ng-hide="minimized">
         <div class="form-group row" style="margin-bottom:8px">
-            <label for="bins-input" class="col-xs-7 col-form-label">Aantal groepen:</label>
+            <label for="bins-input" class="col-xs-7 col-form-label">{{'NR_GROUPS' | translate}}:</label>
             <div class="col-xs-5">
                 <input class="form-control" type="number" min="1" max="10" ng-model="data.bins" id="bins-input" ng-model-options="{ debounce: 1000 }" ng-change="vm.selectProp()" style="max-width: 72px">
             </div>
         </div>
         <div class="form-group row">
-            <label for="select-prop" class="col-xs-4 col-form-label">Kenmerk:</label>
+            <label for="select-prop" class="col-xs-4 col-form-label">{{'PROPERTY' | translate}}:</label>
             <div class="col-xs-8">
                 <select id="select-prop" class="form-control" ng-change="vm.selectProp()" ng-model="vm.selectedProp" style="padding:2px">
                     <option class="dropdown-item" ng-repeat="(prop, title) in data.rankingProperties" value="{{prop}}">{{title}}</option>

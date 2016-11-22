@@ -131,6 +131,20 @@ module wodk {
         private selectProp() {
             let l = this.$layerService.findLoadedLayer(this.$scope.data.layerId);
             if (!l || !this.selectedProp) return;
+            if (this.selectedProp === 'geen') {
+                var oldStyles = l.group.styles.filter((s: csComp.Services.GroupStyle) => { return s.property.startsWith('_rank'); });
+                oldStyles.forEach((s) => {
+                    this.$layerService.removeStyle(s);
+                });
+                var oldFilters = l.group.filters.filter((f: csComp.Services.GroupFilter) => { return f.property.startsWith('_rank'); });
+                oldFilters.forEach((f) => {
+                    this.$layerService.removeFilter(f);
+                });
+                this.$layerService.rebuildFilters(l.group);
+                this.$timeout(() => {
+                    this.$scope.activeLegend = null;
+                });
+            }
             this.createLegend(l);
         }
 

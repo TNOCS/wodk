@@ -263,6 +263,7 @@
             "data": {
                 "layerId": "gemeente",
                 "rankingProperties": {
+                    "geen": "- Geen -",
                     "aant_inw": "Aant. inwoners",
                     "p_65p": "Aant. 65-plussers",
                     "ster3_inw": "Aant. aanpasbare woningen",

@@ -15,7 +15,10 @@ module Translations {
             STAP_VOORUIT: 'Stap vooruit',
             ZOEK_OP_GEMEENTE: 'Zoek op gemeente',
             WONINGINFORMATIE: 'Woninginformatie',
-            RANKING_HELP: 'Gemeenten gerangschikt in groepen op basis van {{property}}'
+            RANKING_HELP: 'Selecteer een eigenschap uit de lijst om de gemeentes te rangschikken',
+            NR_GROUPS: 'Aantal groepen',
+            RANKING: 'Ranking',
+            PROPERTY: 'Eigenschap'
         };
     }
 }
