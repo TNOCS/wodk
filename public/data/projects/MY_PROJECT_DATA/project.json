@@ -257,7 +257,7 @@
             "elementId": "widget-rankingwidg",
             "enabled": true,
             "style": "vws",
-            "width": "250px",
+            "width": "280px",
             "top": "110px",
             "left": "20px",
             "data": {
@@ -268,8 +268,8 @@
                     "p_65p": "Aant. 65-plussers",
                     "ster3_inw": "Aant. aanpasbare woningen",
                     "instroom": "Instromers / aant. inwoners",
-                    "wmo-budg": "WMO Budget",
-                    "aanp_kost_wmo": "% aanpassingskosten / WMO"
+                    "wmo-budg": "Wmo integratiebudget",
+                    "aanp_kost_wmo": "% aanpassingskosten / Wmo"
                 },
                 "bins": 9
             }

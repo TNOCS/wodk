@@ -17,7 +17,7 @@ module Translations {
             WONINGINFORMATIE: 'Woninginformatie',
             RANKING_HELP: 'Selecteer een eigenschap uit de lijst om de gemeentes te rangschikken',
             NR_GROUPS: 'Aantal groepen',
-            RANKING: 'Ranking',
+            RANKING: 'Indeling',
             PROPERTY: 'Eigenschap'
         };
     }

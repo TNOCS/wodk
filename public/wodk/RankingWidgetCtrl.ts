@@ -24,6 +24,7 @@ module wodk {
         private mBusHandles: csComp.Services.MessageBusHandle[] = [];
         private exporterAvailable: boolean;
         private selectedProp: string;
+        private selectedBins: string;
 
         public static $inject = [
             '$scope',
@@ -51,6 +52,7 @@ module wodk {
             $scope.minimized = false;
 
             this.selectedProp = ($scope.data.hasOwnProperty('rankingProperties') ? Object.keys($scope.data.rankingProperties)[0] : null);
+            this.selectedBins = ($scope.data.hasOwnProperty('bins') ? $scope.data.bins.toFixed(0) : '10');
 
             if (( < any > window).canvg) {
                 this.exporterAvailable = true;
@@ -91,6 +93,10 @@ module wodk {
                         break;
                 }
             }));
+
+            if (this.$layerService.$rootScope.$$phase !== '$apply' && this.$layerService.$rootScope.$$phase !== '$digest') {
+                this.$layerService.$rootScope.$apply(); 
+            }
         }
 
         private minimize() {
@@ -178,7 +184,7 @@ module wodk {
                 key: rankProp
             }
             let bins = [];
-            var delta = ((pInfo.max - pInfo.min) / this.$scope.data.bins) * 0.9999;
+            var delta = ((pInfo.max - pInfo.min) / +this.selectedBins) * 0.9999;
             for (let l = pInfo.min + delta; l <= pInfo.max; l += delta) bins.push(l);
             this.$layerService.project.features.forEach((f) => {
                 if (!f.fType || f.fType.name !== 'gemeente') return;
@@ -202,7 +208,7 @@ module wodk {
         }
 
         private createLegendEntries(pType: csComp.Services.IPropertyType): csComp.Services.Legend {
-            let colorscale = chroma.scale(['#f7f7ff', '#7caeff', '#001575']).mode('lab').domain([1, this.$scope.data.bins]);
+            let colorscale = chroma.scale(['#f7f7ff', '#7caeff', '#001575']).mode('lab').domain([1, +this.selectedBins]);
             let leg = new csComp.Services.Legend();
             leg.id = `_rank_${this.selectedProp}`;
             leg.description = pType.title;
@@ -210,7 +216,7 @@ module wodk {
             leg.legendEntries = [];
             leg.defaultLabel = 'onbekend';
             leg.visualAspect = 'fillColor';
-            for (var c = 1; c <= this.$scope.data.bins; c++) {
+            for (var c = 1; c <= +this.selectedBins; c++) {
                 let le = new csComp.Services.LegendEntry();
                 le.color = colorscale(c).hex();
                 le.interval = {

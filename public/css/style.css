@@ -429,5 +429,26 @@
 }
 
 .form-group.row > label{
-    padding-left: 2px;
+    padding-left: 4px;
+    padding-top: 2px;
+}
+
+.form-group.row > div > select{
+    margin: 4px 0px;
+}
+
+.widget-container {
+    padding: 0px;
+}
+
+.widget-min-max-close {
+    color: #eeeeee;
+}
+
+.sub-header-ranking {
+    background: rgb(204, 193, 218);
+}
+
+.popover {
+    color: #222;
 }

@@ -39,6 +39,7 @@ module App {
 
         // public areaFilter: AreaFilter.AreaFilterModel;
         public contourAction: ContourAction.ContourActionModel;
+        public downloadAction: DownloadAction.DownloadActionModel;
 
         public searchCache: { [key: string]: csComp.Services.IEsriSearchResult } = {};
         public filterValues: number[] = [0, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500];
@@ -98,6 +99,9 @@ module App {
                     // this.$layerService.addActionService(this.areaFilter);
                     this.contourAction = new ContourAction.ContourActionModel();
                     this.$layerService.addActionService(this.contourAction);
+
+                    this.downloadAction = new DownloadAction.DownloadActionModel();
+                    this.$layerService.addActionService(this.downloadAction);
 
                     this.$layerService.actionService.addAction('load woningen', (options: csComp.Services.IButtonActionOptions) => {
                         console.log('load woningen');

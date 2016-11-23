@@ -978,13 +978,13 @@
         },
         "aanp_kost_wmo" : {
             "label" : "aanp_kost_wmo",
-            "title" : "% Aanpassingskosten / WMO",
+            "title" : "% Aanpassingskosten / Wmo",
             "type" : "number",
             "visibleInCallOut" : true
         },
         "wmo-budg" : {
             "label" : "wmo-budg",
-            "title" : "Wmo-budget",
+            "title" : "Wmo integratiebudget",
             "type" : "number",
             "visibleInCallOut" : true
         },
