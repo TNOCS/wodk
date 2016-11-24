@@ -435,6 +435,7 @@
 
 .form-group.row > div > select{
     margin: 4px 0px;
+    font-size: 12px;
 }
 
 .widget-container {

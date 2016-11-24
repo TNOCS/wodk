@@ -967,28 +967,28 @@
         "instroom" : {
             "label" : "instroom",
             "title" : "Procentuele instroom mobiliteitsbeperkten per jaar",
-            "stringFormat": "{0:#,#.###}",
+            "stringFormat": "{0:#,#.###}%",
             "type" : "number",
             "visibleInCallOut" : true
         },
         "ster3_inw" : {
             "label" : "ster3_inw",
             "title" : "Aandeel van ster 3 woningen van de woningvoorraad",
-            "stringFormat": "{0:#,#.###}",
+            "stringFormat": "{0:#,#.###}%",
             "type" : "number",
             "visibleInCallOut" : true
         },
         "aanp_kost_wmo" : {
             "label" : "aanp_kost_wmo",
             "title" : "Aandeel van de aanpassingskosten in het Wmo integratie-budget",
-            "stringFormat": "{0:#,#.##}",
+            "stringFormat": "{0:#,#.##}%",
             "type" : "number",
             "visibleInCallOut" : true
         },
         "wmo-budg" : {
             "label" : "wmo-budg",
             "title" : "Wmo integratiebudget per inwoner",
-            "stringFormat": "{0:#,#.##}",
+            "stringFormat": "{0:#,#.##}€",
             "type" : "number",
             "visibleInCallOut" : true
         },
@@ -996,7 +996,7 @@
             "label" : "p_65p",
             "title" : "Aandeel 65+'ers van de inwoners",
             "type" : "number",
-            "stringFormat": "{0:#,#.###}",
+            "stringFormat": "{0:#,#.###}%",
             "visibleInCallOut" : true
         }
     },

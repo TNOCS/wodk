@@ -164,6 +164,7 @@ module wodk {
             let rankProp = `_rank_${this.selectedProp}`;
             let rankPType: csComp.Services.IPropertyType = JSON.parse(JSON.stringify(pType));
             rankPType.label = rankProp;
+            rankPType.id = rankPType.id.replace(this.selectedProp, rankProp);
             let scale: any = d3.scale.linear().domain([pInfo.min, pInfo.max]);
             let bins = scale.nice().ticks(+this.selectedBins);
             if (bins.length === 1) {
@@ -181,6 +182,8 @@ module wodk {
             }
             this.selectedBins = bins.length.toFixed(0);
             let rankLegend = this.createLegendEntries(rankPType, bins);
+            rankPType.legend = rankLegend;
+            this.$layerService.addPropertyType(rankPType, true);
             let gs = new csComp.Services.GroupStyle(this.$translate);
             gs.id = csComp.Helpers.getGuid();
             gs.title = rankPType.title;
@@ -204,20 +207,13 @@ module wodk {
             this.$layerService.project.features.forEach((f) => {
                 if (!f.fType || f.fType.name !== 'gemeente') return;
                 if (!f.properties.hasOwnProperty(this.selectedProp)) return;
-                let val = f.properties[this.selectedProp];
-                let found = bins.some((b, nr) => {
-                    if (val < b) {
-                        f.properties[rankProp] = nr;
-                        return true;
-                    }
-                });
-                if (!found) f.properties[rankProp] = bins.length;
+                f.properties[rankProp] = f.properties[this.selectedProp];
             });
             this.$layerService.setStyle(dummy, false, pInfo, gs);
             this.$scope.activeLegend = gs.activeLegend;
             this.$scope.activeStyleGroup = gs.group;
-            this.$scope.activeStyleProperty = null;
-            // this.$scope.activeStyleProperty = rankPType;
+            // this.$scope.activeStyleProperty = null;
+            this.$scope.activeStyleProperty = rankPType;
             console.log(`Created legend for ${rankProp}`);
             // var propType = this.$layerService.findPropertyTypeById(this.$scope.layer.typeUrl + '#' + gf.property);
             // this.$layerService.setGroupStyle(this.$scope.style.group, propType);
@@ -236,19 +232,26 @@ module wodk {
             for (var c = 0; c < +this.selectedBins; c++) {
                 let le = new csComp.Services.LegendEntry();
                 le.color = colorscale(c).hex();
-                le.interval = {
-                    min: c,
-                    max: c + 1
-                };
                 le.sortKey = String.fromCharCode(65 + c);
-                le.label = `${(c+1).toFixed(0)}. `;
                 if (c === (+this.selectedBins - 1)) {
-                    le.label += `>= ${String.format(stringFmt, bins[c])}`;
-                 } else if (c === 0) {
-                     le.label += `< ${String.format(stringFmt, bins[c + 1])}`;
-                 } else {
-                     le.label += `${String.format(stringFmt, bins[c])} - ${String.format(stringFmt, bins[c + 1])}`;
-                 }
+                    le.label = `>= ${String.format(stringFmt, bins[c])}`;
+                    le.interval = {
+                        min: bins[c],
+                        max: Infinity
+                    };
+                } else if (c === 0) {
+                    le.label = `< ${String.format(stringFmt, bins[c + 1])}`;
+                    le.interval = {
+                        min: -Infinity,
+                        max: bins[c + 1]
+                    };
+                } else {
+                    le.label = `${String.format(stringFmt, bins[c])} - ${String.format(stringFmt, bins[c + 1])}`;
+                    le.interval = {
+                        min: bins[c],
+                        max: bins[c + 1]
+                    };
+                }
                 leg.legendEntries.push(le);
             }
             return leg;

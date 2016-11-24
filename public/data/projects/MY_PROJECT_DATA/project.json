@@ -257,7 +257,7 @@
             "elementId": "widget-rankingwidg",
             "enabled": true,
             "style": "vws",
-            "width": "280px",
+            "width": "300px",
             "top": "110px",
             "left": "20px",
             "data": {
@@ -266,7 +266,7 @@
                     "geen": "- Geen -",
                     "aant_inw": "Inwoners per gemeente",
                     "p_65p": "Aandeel 65+'ers van de inwoners",
-                    "ster3_inw": "Aandeel van ster 3 woningen van de woningvoorraad",
+                    "ster3_inw": "Aandeel van ster 3 woningen in de woningvoorraad",
                     "instroom": "Procentuele instroom mobiliteitsbeperkten per jaar",
                     "wmo-budg": "Wmo integratiebudget per inwoner",
                     "aanp_kost_wmo": "Aandeel van de aanpassingskosten in het Wmo integratie-budget"
