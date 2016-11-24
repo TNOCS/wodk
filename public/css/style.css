@@ -265,7 +265,7 @@
     overflow: hidden;
 }
 
-.row [class*="col-"] {
+#wodk-widget-content .row [class*="col-"] {
     margin-bottom: -99999px;
     padding-bottom: 99999px;
 }
@@ -451,4 +451,24 @@
 
 .popover {
     color: #222;
+}
+
+.legend-entry-color-square {
+    height: 32px;
+    width: 32px;
+    margin: 2px 2px;
+    padding: 2px 2px;
+}
+
+.legend-entry-label {
+    height: 32px;
+    padding-top: 12px;
+}
+
+.legend-entry-item-row {
+    border-bottom: black 1px dashed;
+}
+
+.legend-entry-list-table {
+    margin: 8px 20px; 
 }

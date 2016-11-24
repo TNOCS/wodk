@@ -20,20 +20,16 @@
         <label for="bins-input" class="col-xs-7 col-form-label">{{'NR_GROUPS' | translate}}:</label>
         <div class="col-xs-5">
             <!--<input class="form-control" type="number" min="1" max="10" ng-model="data.bins" id="bins-input" ng-model-options="{ debounce: 1000 }" ng-change="vm.selectProp()" style="max-width: 72px">-->
-            <select id="bins-input" class="form-control" ng-init="vm.selectedBins = selectedBins || '10'; groups = [2,3,4,5,6,7,8,9,10]" ng-change="vm.selectProp()" ng-model="vm.selectedBins" >
+            <select id="bins-input" class="form-control" ng-init="vm.selectedBins = selectedBins || '5'; groups = [2,3,4,5,6,7,8,9,10]" ng-change="vm.selectProp()" ng-model="vm.selectedBins" >
                 <option class="dropdown-item" ng-repeat="nr in groups track by nr" value="{{nr}}">{{nr}}</option>
             </select>
         </div>
     </div>
-    <div data-ng-if="activeLegend.legendKind === 'discrete'" style="margin: 2px 8px">
-        <div class="legend-description">{{activeLegend.description}}</div>
-        <ul class="legend-entry-list">
-            <li data-ng-repeat="le in activeLegend.legendEntries" class="legend-entry-item-d" ng-class="{'pointer-cursor': $parent.$parent.activeStyleProperty}" ng-click="$parent.$parent.vm.toggleFilter(activeLegend, le)"
+    <div class="legend-entry-list-table" data-ng-if="activeLegend.legendKind === 'discrete'">
+            <div class="row legend-entry-item-row" data-ng-repeat="le in activeLegend.legendEntries" ng-class="{'pointer-cursor': $parent.$parent.activeStyleProperty}" ng-click="$parent.$parent.vm.toggleFilter(activeLegend, le)"
                 uib-popover="{{'UTILS.FILTER' | translate}}" popover-trigger="mouseenter" popover-append-to-body="true" popover-placement="right" popover-enable="{{$parent.$parent.activeStyleProperty}}">
-                <div class="legend-color-square" ng-style="{'float': 'left', 'background': le.color}"></div>
-                <div class="legend-label-d" style="float: left">{{le.label}}</div>
-                <div>&nbsp;</div>
-                <!-- die &nbsp; is echt nodig... -->
+                <div class="col-xs-2 legend-entry-color-square" ng-style="{'background': le.color}"></div>
+                <div class="col-xs-10 legend-entry-label text-right">{{le.label}}</div>
             </li>
         </ul>
     </div>

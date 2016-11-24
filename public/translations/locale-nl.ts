@@ -16,7 +16,7 @@ module Translations {
             ZOEK_OP_GEMEENTE: 'Zoek op gemeente',
             WONINGINFORMATIE: 'Woninginformatie',
             RANKING_HELP: 'Selecteer een eigenschap uit de lijst om de gemeentes te rangschikken',
-            NR_GROUPS: 'Aantal groepen',
+            NR_GROUPS: 'Groepen',
             RANKING: 'Indeling',
             PROPERTY: 'Eigenschap'
         };

@@ -17,6 +17,8 @@ module wodk {
         activeStyleProperty: csComp.Services.IPropertyType;
     }
 
+    declare var String;
+
     export class RankingWidgetCtrl {
         private scope: IRankingWidgetScope;
         private widget: csComp.Services.IWidget;
@@ -162,7 +164,23 @@ module wodk {
             let rankProp = `_rank_${this.selectedProp}`;
             let rankPType: csComp.Services.IPropertyType = JSON.parse(JSON.stringify(pType));
             rankPType.label = rankProp;
-            let rankLegend = this.createLegendEntries(rankPType);
+            let scale: any = d3.scale.linear().domain([pInfo.min, pInfo.max]);
+            let bins = scale.nice().ticks(+this.selectedBins);
+            if (bins.length === 1) {
+                if (bins[0] !== 0) {
+                    bins = [0].concat(bins);
+                }
+            }
+            console.log(`bins: ${JSON.stringify(bins)}`);
+            if (bins.length !== +this.selectedBins) {
+                let chosenBins = +this.selectedBins;
+                this.$timeout(() => {
+                    this.$messageBus.notify('Opmerking', `Het aantal van ${chosenBins} levert geen mooie verdeling op en wordt daarom gewijzigd naar ${bins.length}`, csComp.Services.NotifyLocation.TopBar, csComp.Services.NotifyType.Info, 2000);
+                    this.selectedBins === bins.length.toFixed(0);
+                }, 0);
+            }
+            this.selectedBins = bins.length.toFixed(0);
+            let rankLegend = this.createLegendEntries(rankPType, bins);
             let gs = new csComp.Services.GroupStyle(this.$translate);
             gs.id = csComp.Helpers.getGuid();
             gs.title = rankPType.title;
@@ -183,16 +201,13 @@ module wodk {
                 property: rankProp,
                 key: rankProp
             }
-            let bins = [];
-            var delta = ((pInfo.max - pInfo.min) / +this.selectedBins) * 0.9999;
-            for (let l = pInfo.min + delta; l <= pInfo.max; l += delta) bins.push(l);
             this.$layerService.project.features.forEach((f) => {
                 if (!f.fType || f.fType.name !== 'gemeente') return;
                 if (!f.properties.hasOwnProperty(this.selectedProp)) return;
                 let val = f.properties[this.selectedProp];
                 let found = bins.some((b, nr) => {
                     if (val < b) {
-                        f.properties[rankProp] = nr + 1; 
+                        f.properties[rankProp] = nr;
                         return true;
                     }
                 });
@@ -201,30 +216,39 @@ module wodk {
             this.$layerService.setStyle(dummy, false, pInfo, gs);
             this.$scope.activeLegend = gs.activeLegend;
             this.$scope.activeStyleGroup = gs.group;
-            this.$scope.activeStyleProperty = rankPType;
+            this.$scope.activeStyleProperty = null;
+            // this.$scope.activeStyleProperty = rankPType;
             console.log(`Created legend for ${rankProp}`);
             // var propType = this.$layerService.findPropertyTypeById(this.$scope.layer.typeUrl + '#' + gf.property);
             // this.$layerService.setGroupStyle(this.$scope.style.group, propType);
         }
 
-        private createLegendEntries(pType: csComp.Services.IPropertyType): csComp.Services.Legend {
-            let colorscale = chroma.scale(['#f7f7ff', '#7caeff', '#001575']).mode('lab').domain([1, +this.selectedBins]);
+        private createLegendEntries(pType: csComp.Services.IPropertyType, bins: number[]): csComp.Services.Legend {
+            let colorscale = chroma.scale(['#f7f7ff', '#7caeff', '#001575']).mode('lab').domain([0, bins.length - 1]);
             let leg = new csComp.Services.Legend();
+            let stringFmt = pType.stringFormat || '{0:#,#.###}';
             leg.id = `_rank_${this.selectedProp}`;
             leg.description = pType.title;
             leg.legendKind = 'discrete';
             leg.legendEntries = [];
             leg.defaultLabel = 'onbekend';
             leg.visualAspect = 'fillColor';
-            for (var c = 1; c <= +this.selectedBins; c++) {
+            for (var c = 0; c < +this.selectedBins; c++) {
                 let le = new csComp.Services.LegendEntry();
                 le.color = colorscale(c).hex();
                 le.interval = {
-                    min: c - 0.5,
-                    max: c + 0.5
+                    min: c,
+                    max: c + 1
                 };
-                le.sortKey = String.fromCharCode(64 + c);
-                le.label = c.toFixed(0);
+                le.sortKey = String.fromCharCode(65 + c);
+                le.label = `${(c+1).toFixed(0)}. `;
+                if (c === (+this.selectedBins - 1)) {
+                    le.label += `>= ${String.format(stringFmt, bins[c])}`;
+                 } else if (c === 0) {
+                     le.label += `< ${String.format(stringFmt, bins[c + 1])}`;
+                 } else {
+                     le.label += `${String.format(stringFmt, bins[c])} - ${String.format(stringFmt, bins[c + 1])}`;
+                 }
                 leg.legendEntries.push(le);
             }
             return leg;
