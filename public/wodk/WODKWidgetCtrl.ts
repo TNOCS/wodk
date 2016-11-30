@@ -271,6 +271,8 @@ module wodk {
                 this.$scope.data.mdText = md;
                 if (feature.properties.hasOwnProperty('bu_code')) {
                     this.$scope.data.fileName = feature.properties['bu_code'];
+                } else if (feature.properties.hasOwnProperty('GM_CODE')) {
+                    this.$scope.data.fileName = feature.properties['GM_CODE'];
                 } else {
                     this.$scope.data.fileName = null;
                 }

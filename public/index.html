@@ -80,9 +80,9 @@
     <link href="js/leaflet.draw.css" rel="stylesheet" />
 
     <div class="body" style="top:0">
-        <div class="justified-brand" style="color: #5e5e5e; z-index:1032" id="wodk-body">
+        <!--<div class="justified-brand" style="color: #5e5e5e; z-index:1032" id="wodk-body">
             <img src="images/logo.png" height="100" width="79" alt="Logo VWS">
-        </div>
+        </div>-->
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid" style="color: black">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -190,15 +190,10 @@
                     <li class="dropdown active-button">
                         <a class="dropdown-toggle" data-toggle="dropdown"
                             href="#" popover-trigger="none" uib-popover="Toelichting 'Langer zelfstandig wonen'" popover-placement="bottom" popover-popup-delay="400"><span >Toelichting</span><span class="caret"></span></a>
-                        <ul class="dropdown-menu scrollable-menu">
-                            <li class="inactive-button-toelichting" inactive>
-                                <a>
-                                <span>Toelichtingen</span>
-                                </a>
-                            </li>
+                        <ul class="dropdown-menu scrollable-menu" style="min-width: 400px;">
                             <li class="active-button-toelichting">
                                 <a href="http://www.zorgopdekaart.nl/files/2016-11/toelichting-woningvoorraad-woningaanpassingen-en-langer-zelfstandig-thuis-11.pdf" target="_blank">
-                                <span>Toelichting bij de website 'Woningvoorraad, woningaanpassingen `Langer zelfstandig wonen`</span>
+                                <span style="white-space: normal;">Toelichting bij de website 'Woningvoorraad, woningaanpassingen `Langer zelfstandig wonen`</span>
                                 </a>
                             </li>
                             <li class="divider"</li>
@@ -207,7 +202,12 @@
                                 <span>Toelichting bij de rekenmodellen</span>
                                 </a>
                             </li>
-                            <li class="divider"</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown active-button">
+                        <a class="dropdown-toggle" data-toggle="dropdown"
+                            href="#" popover-trigger="none" uib-popover="Rekenmodellen 'Langer zelfstandig wonen'" popover-placement="bottom" popover-popup-delay="400"><span >Rekenmodellen</span><span class="caret"></span></a>
+                        <ul class="dropdown-menu scrollable-menu">
                             <li class="inactive-button-toelichting" inactive>
                                 <a>
                                 <span>Rekenmodellen overzichten</span>
