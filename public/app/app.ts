@@ -2,7 +2,9 @@ module App {
     import IFeature = csComp.Services.IFeature;
 
     export interface IAppLocationService extends ng.ILocationService {
-        $$search: { layers: string };
+        $$search: {
+            layers: string
+        };
     }
 
     export interface IAppScope extends ng.IScope {
@@ -41,10 +43,14 @@ module App {
         public contourAction: ContourAction.ContourActionModel;
         public downloadAction: DownloadAction.DownloadActionModel;
 
-        public searchCache: { [key: string]: csComp.Services.IEsriSearchResult } = {};
+        public searchCache: {
+            [key: string]: csComp.Services.IEsriSearchResult
+        } = {};
         public filterValues: number[] = [0, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500];
         public filterValue = this.filterValues[0];
-        public foundAddresses: { [key: string]: wodk.IAddressResult } = {};
+        public foundAddresses: {
+            [key: string]: wodk.IAddressResult
+        } = {};
         public pdfLinks: any = this.getPdfLinks();
         public addressQuery: string;
         public foundCities: string[] = [];
@@ -77,7 +83,7 @@ module App {
             $messageBusService.subscribe('project', (action: string) => {
                 if (action === 'loaded') {
 
-                    this.$dashboardService.widgetTypes['rowvisualizer'] = <csComp.Services.IWidget>{
+                    this.$dashboardService.widgetTypes['rowvisualizer'] = < csComp.Services.IWidget > {
                         id: 'rowvisualizer',
                         icon: 'images/rowvisualizer.png',
                         description: 'Show rowfilter without filter functionality'
@@ -89,7 +95,7 @@ module App {
                     //     description: 'Show rangewidget with filter functionality'
                     // }
 
-                    this.$dashboardService.widgetTypes['rankingwidget'] = <csComp.Services.IWidget>{
+                    this.$dashboardService.widgetTypes['rankingwidget'] = < csComp.Services.IWidget > {
                         id: 'rankingwidget',
                         icon: 'images/rangewidget.png',
                         description: 'Show rankingwidget with style functionality'
@@ -137,7 +143,9 @@ module App {
 
                     // NOTE EV: You may run into problems here when calling this inside an angular apply cycle.
                     // Alternatively, check for it or use (dependency injected) $timeout.
-                    if ($scope.$root.$$phase !== '$apply' && $scope.$root.$$phase !== '$digest') { $scope.$apply(); }
+                    if ($scope.$root.$$phase !== '$apply' && $scope.$root.$$phase !== '$digest') {
+                        $scope.$apply();
+                    }
                     //$scope.$apply();
                 }
             });
@@ -216,7 +224,12 @@ module App {
             this.$timeout(() => {
                 r.candidates.forEach(f => {
                     if (f.score > 80) {
-                        this.foundAddresses[f.address] = { name: f.attributes['Match_addr'], score: (f.score / 101), province: f.attributes['Region'], coordinates: [f.location.x, f.location.y] }
+                        this.foundAddresses[f.address] = {
+                            name: f.attributes['Match_addr'],
+                            score: (f.score / 101),
+                            province: f.attributes['Region'],
+                            coordinates: [f.location.x, f.location.y]
+                        }
                     }
                 });
             }, 0);
@@ -262,7 +275,9 @@ module App {
             }
         }
 
-        get showNavigation() { return this.$dashboardService._search.isActive; }
+        get showNavigation() {
+            return this.$dashboardService._search.isActive;
+        }
 
         /**
          * Publish a toggle request.
@@ -354,7 +369,9 @@ module App {
 
         private getHTML() {
             var content = `<html><head>`;
-            $.each(document.getElementsByTagName('link'), (ind: number, val: HTMLLinkElement) => { content += val.outerHTML; });
+            $.each(document.getElementsByTagName('link'), (ind: number, val: HTMLLinkElement) => {
+                content += val.outerHTML;
+            });
             //    $.each(document.getElementsByTagName('script'), (ind: number, val: HTMLLinkElement) => { content += val.outerHTML; });
             content += `</head>`;
             content += document.body.outerHTML;
@@ -366,7 +383,10 @@ module App {
             let dom = $("body");
             let w = dom.outerWidth(true);
             let h = dom.outerHeight(true);
-            return { width: w, height: h };
+            return {
+                width: w,
+                height: h
+            };
         }
 
         public exportToImage() {
@@ -374,7 +394,12 @@ module App {
             this.$http({
                 method: 'POST',
                 url: "screenshot",
-                data: { html: this.getHTML(), width: dim.width, height: dim.height, fullScreen: true },
+                data: {
+                    html: this.getHTML(),
+                    width: dim.width,
+                    height: dim.height,
+                    fullScreen: true
+                },
             }).then((response) => {
                 csComp.Helpers.saveImage(response.data.toString(), 'Woningaanpassingen screenshot', 'png', true);
             }, (error) => {
@@ -403,172 +428,130 @@ module App {
         }
 
         getPdfLinks() {
-            return [
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 1 Den Haag 121m.pdf",
-    "name": "1. Den Haag Amsterdam Rotterdam"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 2 Utrecht 121m.pdf",
-    "name": "2. Utrecht Eindhoven Tilburg Almere"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 3 Groningen 121m.pdf",
-    "name": "3. Groningen Breda Nijmegen Apeldoorn Enschede"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 4 Haarlem 121m.pdf",
-    "name": "4. Haarlem Amersfoort Arnhem"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 5 Zaanstad 121m.pdf",
-    "name": "5. Zaanstad s-Hertogenbosch Haarlemmermeer Zoetermeer"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 6 Zwolle 121m.pdf",
-    "name": "6. Zwolle Leiden Maastricht Dordrecht"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 7 Ede 121m.pdf",
-    "name": "7. Ede Leeuwarden Alkmaar"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 8 Emmen 121m.pdf",
-    "name": "8. Emmen Westland Alphen aan den Rijn"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 9 Delft 121m.pdf",
-    "name": "9. Delft Deventer Venlo Sittard-Geleen"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 10 Helmond 121m.pdf",
-    "name": "10. Helmond Oss Amstelveen Hilversum Heerlen"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 11 Nissewaard 121m.pdf",
-    "name": "11. Nissewaard Sudwest-Fryslan Hengelo Purmerend"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 12 Schiedam 121m.pdf",
-    "name": "12. Schiedam Lelystad Roosendaal Leidschendam-Voorburg Almelo"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 13 Hoorn 121m.pdf",
-    "name": "13. Hoorn Vlaardingen Gouda Assen"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 14 Capelle aan den IJssel 121m.pdf",
-    "name": "14. Capelle aan den IJssel Velsen Bergen op Zoom Stichtse Vecht Katwijk Veenendaal Zeist"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 15 Nieuwegein 121m.pdf",
-    "name": "15. Nieuwegein Hardenberg Lansingerland Roermond Doetinchem"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 16 Den Helder 121m.pdf",
-    "name": "16. Den Helder Smallingerland Oosterhout Barneveld Hoogeveen Heerhugowaard"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 17 Terneuzen 121m.pdf",
-    "name": "17. Terneuzen Krimpenerwaard De Friese meren Pijnacker-Nootdorp Woerden Rijswijk"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 18 Kampen 121m.pdf",
-    "name": "18. Kampen Heerenveen Houten Barendrecht Weert Zutphen Goeree-Overflakkee"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 19 Middelburg 121m.pdf",
-    "name": "19. Middelburg Hollands Kroon Waalwijk Overbetuwe Noordoostpolder Schagen Utrechtse Heuvelrug Harderwijk"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 20 Lingewaard 121m.pdf",
-    "name": "20. Lingewaard Kerkrade Ridderkerk Soest Zwijndrecht Heusden Veldhoven Vlissingen Etten-Leur"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 21 Medemblik 121m.pdf",
-    "name": "21. Medemblik Berkelland Rheden Steenwijkerland De Ronde Venen Venray Tiel Peel en Maas Uden"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 22 Huizen 121m.pdf",
-    "name": "22. Huizen De Bilt Horst aan de Maas Wijchen Dronten Nijkerk Beverwijk Zuidplas"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 23 Hellevoetsluis 121m.pdf",
-    "name": "23. Hellevoetsluis Geldrop-Mierlo Oude IJsselstreek Heemskerk Wageningen Oldambt Veghel Landgraaf Goes Rijssen-Holten"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 24 Raalte 121m.pdf",
-    "name": "24. Raalte Bronckhorst Leudal Moerdijk Hellendoorn Coevorden Hof van Twente"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 25 Teylingen 121m.pdf",
-    "name": "25. Teylingen Castricum Gorinchem Hoogezand-Sappemeer IJsselstein Schouwen-Duiveland Twenterand Montferland Meppel"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 26 Midden-Drenthe 121m.pdf",
-    "name": "26. Midden-Drenthe Lochem Oldenzaal Bussum Bodegraven-Reeuwijk Papendrecht Zevenaar Epe Stadskanaal Tynaarlo Tytsjerksteradiel"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 27 Maassluis 121m.pdf",
-    "name": "27. Maassluis Echt-Susteren Deurne Valkenswaard Noordenveld Renkum Boxtel Aalsmeer Bergen (NH.) Leusden Opsterland Hendrik-Ido-Ambacht Best"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 28 Bernheze 121m.pdf",
-    "name": "28. Bernheze Brunssum Oost Gelre Uithoorn Binnenmaas Gemert-Bakel Winterswijk Molenwaard Edam-Volendam Halderberge Krimpen aan den IJssel Boxmeer"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 29 Culemborg 121m.pdf",
-    "name": "29. Culemborg Sint-Michielsgestel Achtkarspelen Diemen Dalfsen Veendam Langedijk Hulst Aalten Nieuwkoop Leiderdorp Heemstede Zaltbommel Nunspeet"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 30 Geldermalsen 121m.pdf",
-    "name": "30. Geldermalsen Gilze en Rijen Werkendam Drimmelen Oisterwijk Buren Dongen Ermelo Wassenaar Aa en Hunze Noordwijk Waddinxveen Kaag en Braassem"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 31 Beuningen 121m.pdf",
-    "name": "31. Beuningen Tholen Dinkelland Weststellingwerf Albrandswaard Ooststellingwerf Duiven Borger-Odoorn Stein Cuijk"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 32 Sliedrecht 121m.pdf",
-    "name": "32. Sliedrecht Vught Delfzijl Voorschoten Eijsden-Margraten Haaksbergen Maasdriel Dongeradeel Wierden Putten Baarn Schijndel"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 33 De Wolden 121m.pdf",
-    "name": "33. De Wolden Steenbergen Nuenen, Gerwen en Nederwetten Maasgouw Oud-Beijerland Goirle Oegstgeest Borne Loon op Zand Lisse Wijdemeren Elburg Heiloo Wijk bij Duurstede"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 34 Sluis 121m.pdf",
-    "name": "34. Sluis Voorst Oldebroek Borsele Losser Koggenland Bloemendaal Reimerswaal Zwartewaterland Geertruidenberg Rucphen Neder-Betuwe Laarbeek Zundert Zeewolde"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 35 Stede 121m.pdf",
-    "name": "35. Stede Broec Tubbergen Veere Woensdrecht Hillegom Brummen Roerdalen Franekeradeel Leerdam Alblasserdam Bunschoten Vianen Bladel Urk Cranendonck"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 36 Leek 121m.pdf",
-    "name": "36. Leek Drechterland Meerssen Rhenen Weesp Someren Westerveld Druten Dantumadiel Zuidhorn Enkhuizen Sint-Oedenrode Midden-Delfland West Maas en Waal Heerde"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 37 Bergeijk 121m.pdf",
-    "name": "37. Bergeijk Eersel Groesbeek Haren Ommen Hardinxveld-Giessendam Olst-Wijhe Oirschot Naarden Gennep Waterland Nederweert Valkenburg aan de Geul Beek Waalre Asten Zandvoort"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 38 Eemsmond 121m.pdf",
-    "name": "38. Eemsmond Son en Breugel Staphorst Brielle Heumen Noordwijkerhout Harlingen Vlagtwedde Wormerland Nuth Slochteren Bunnik Heeze-Leende Hilvarenbeek Westervoort Landerd Gulpen-Wittem"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 39 Giessenlanden 121m.pdf",
-    "name": "39. Giessenlanden Woudrichem Beesel Winsum Ouder-Amstel Westvoorne Montfoort Menameradiel Lopik Haaren Texel Zederik Bergen (L.) Schinnen Uitgeest Grave Aalburg Kollumerland en Nieuwkruisland Pekela Cromstrijen"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 40 Reusel-De Mierden 121m.pdf",
-    "name": "40. Reusel-De Mierden Grootegast Appingedam Voerendaal Woudenberg Kapelle Menterwolde Doesburg Hattem Neerijnen Sint Anthonis Laren Opmeer Mill en Sint Hubert Littenseradiel het Bildt Lingewaal Rijnwaarden Korendijk Simpelveld Bedum Landsmeer"
-  },
-  {
-    "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 41 De Marne 121m.pdf",
-    "name": "41. De Marne Loppersum Marum Leeuwarderadeel Boekel Vaals Oudewater Alphen-Chaam Blaricum Scherpenzeel Bellingwedde Eemnes Oostzaan Strijen Beemster Ferwerderadiel Mook en Middelaar Zoeterwoude Onderbanken Noord-Beveland Ten Boer Baarle-Nassau Muiden Zeevang Haarlemmerliede en Spaarnwoude Renswoude Terschelling Ameland Rozendaal Schiermonnikoog Vlieland\r"
-  }
-]
+            return [{
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 1 Den Haag 121m.pdf",
+                "name": "1. Den Haag Amsterdam Rotterdam"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 2 Utrecht 121m.pdf",
+                "name": "2. Utrecht Eindhoven Tilburg Almere"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 3 Groningen 121m.pdf",
+                "name": "3. Groningen Breda Nijmegen Apeldoorn Enschede"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 4 Haarlem 121m.pdf",
+                "name": "4. Haarlem Amersfoort Arnhem"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 5 Zaanstad 121m.pdf",
+                "name": "5. Zaanstad s-Hertogenbosch Haarlemmermeer Zoetermeer"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 6 Zwolle 121m.pdf",
+                "name": "6. Zwolle Leiden Maastricht Dordrecht"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 7 Ede 121m.pdf",
+                "name": "7. Ede Leeuwarden Alkmaar"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 8 Emmen 121m.pdf",
+                "name": "8. Emmen Westland Alphen aan den Rijn"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 9 Delft 121m.pdf",
+                "name": "9. Delft Deventer Venlo Sittard-Geleen"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 10 Helmond 121m.pdf",
+                "name": "10. Helmond Oss Amstelveen Hilversum Heerlen"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 11 Nissewaard 121m.pdf",
+                "name": "11. Nissewaard Sudwest-Fryslan Hengelo Purmerend"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 12 Schiedam 121m.pdf",
+                "name": "12. Schiedam Lelystad Roosendaal Leidschendam-Voorburg Almelo"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 13 Hoorn 121m.pdf",
+                "name": "13. Hoorn Vlaardingen Gouda Assen"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 14 Capelle aan den IJssel 121m.pdf",
+                "name": "14. Capelle aan den IJssel Velsen Bergen op Zoom Stichtse Vecht Katwijk Veenendaal Zeist"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 15 Nieuwegein 121m.pdf",
+                "name": "15. Nieuwegein Hardenberg Lansingerland Roermond Doetinchem"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 16 Den Helder 121m.pdf",
+                "name": "16. Den Helder Smallingerland Oosterhout Barneveld Hoogeveen Heerhugowaard"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 17 Terneuzen 121m.pdf",
+                "name": "17. Terneuzen Krimpenerwaard De Friese meren Pijnacker-Nootdorp Woerden Rijswijk"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 18 Kampen 121m.pdf",
+                "name": "18. Kampen Heerenveen Houten Barendrecht Weert Zutphen Goeree-Overflakkee"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 19 Middelburg 121m.pdf",
+                "name": "19. Middelburg Hollands Kroon Waalwijk Overbetuwe Noordoostpolder Schagen Utrechtse Heuvelrug Harderwijk"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 20 Lingewaard 121m.pdf",
+                "name": "20. Lingewaard Kerkrade Ridderkerk Soest Zwijndrecht Heusden Veldhoven Vlissingen Etten-Leur"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 21 Medemblik 121m.pdf",
+                "name": "21. Medemblik Berkelland Rheden Steenwijkerland De Ronde Venen Venray Tiel Peel en Maas Uden"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 22 Huizen 121m.pdf",
+                "name": "22. Huizen De Bilt Horst aan de Maas Wijchen Dronten Nijkerk Beverwijk Zuidplas"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 23 Hellevoetsluis 121m.pdf",
+                "name": "23. Hellevoetsluis Geldrop-Mierlo Oude IJsselstreek Heemskerk Wageningen Oldambt Veghel Landgraaf Goes Rijssen-Holten"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 24 Raalte 121m.pdf",
+                "name": "24. Raalte Bronckhorst Leudal Moerdijk Hellendoorn Coevorden Hof van Twente"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 25 Teylingen 121m.pdf",
+                "name": "25. Teylingen Castricum Gorinchem Hoogezand-Sappemeer IJsselstein Schouwen-Duiveland Twenterand Montferland Meppel"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 26 Midden-Drenthe 121m.pdf",
+                "name": "26. Midden-Drenthe Lochem Oldenzaal Bussum Bodegraven-Reeuwijk Papendrecht Zevenaar Epe Stadskanaal Tynaarlo Tytsjerksteradiel"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 27 Maassluis 121m.pdf",
+                "name": "27. Maassluis Echt-Susteren Deurne Valkenswaard Noordenveld Renkum Boxtel Aalsmeer Bergen (NH.) Leusden Opsterland Hendrik-Ido-Ambacht Best"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 28 Bernheze 121m.pdf",
+                "name": "28. Bernheze Brunssum Oost Gelre Uithoorn Binnenmaas Gemert-Bakel Winterswijk Molenwaard Edam-Volendam Halderberge Krimpen aan den IJssel Boxmeer"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 29 Culemborg 121m.pdf",
+                "name": "29. Culemborg Sint-Michielsgestel Achtkarspelen Diemen Dalfsen Veendam Langedijk Hulst Aalten Nieuwkoop Leiderdorp Heemstede Zaltbommel Nunspeet"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 30 Geldermalsen 121m.pdf",
+                "name": "30. Geldermalsen Gilze en Rijen Werkendam Drimmelen Oisterwijk Buren Dongen Ermelo Wassenaar Aa en Hunze Noordwijk Waddinxveen Kaag en Braassem"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 31 Beuningen 121m.pdf",
+                "name": "31. Beuningen Tholen Dinkelland Weststellingwerf Albrandswaard Ooststellingwerf Duiven Borger-Odoorn Stein Cuijk"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 32 Sliedrecht 121m.pdf",
+                "name": "32. Sliedrecht Vught Delfzijl Voorschoten Eijsden-Margraten Haaksbergen Maasdriel Dongeradeel Wierden Putten Baarn Schijndel"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 33 De Wolden 121m.pdf",
+                "name": "33. De Wolden Steenbergen Nuenen, Gerwen en Nederwetten Maasgouw Oud-Beijerland Goirle Oegstgeest Borne Loon op Zand Lisse Wijdemeren Elburg Heiloo Wijk bij Duurstede"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 34 Sluis 121m.pdf",
+                "name": "34. Sluis Voorst Oldebroek Borsele Losser Koggenland Bloemendaal Reimerswaal Zwartewaterland Geertruidenberg Rucphen Neder-Betuwe Laarbeek Zundert Zeewolde"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 35 Stede 121m.pdf",
+                "name": "35. Stede Broec Tubbergen Veere Woensdrecht Hillegom Brummen Roerdalen Franekeradeel Leerdam Alblasserdam Bunschoten Vianen Bladel Urk Cranendonck"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 36 Leek 121m.pdf",
+                "name": "36. Leek Drechterland Meerssen Rhenen Weesp Someren Westerveld Druten Dantumadiel Zuidhorn Enkhuizen Sint-Oedenrode Midden-Delfland West Maas en Waal Heerde"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 37 Bergeijk 121m.pdf",
+                "name": "37. Bergeijk Eersel Groesbeek Haren Ommen Hardinxveld-Giessendam Olst-Wijhe Oirschot Naarden Gennep Waterland Nederweert Valkenburg aan de Geul Beek Waalre Asten Zandvoort"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 38 Eemsmond 121m.pdf",
+                "name": "38. Eemsmond Son en Breugel Staphorst Brielle Heumen Noordwijkerhout Harlingen Vlagtwedde Wormerland Nuth Slochteren Bunnik Heeze-Leende Hilvarenbeek Westervoort Landerd Gulpen-Wittem"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 39 Giessenlanden 121m.pdf",
+                "name": "39. Giessenlanden Woudrichem Beesel Winsum Ouder-Amstel Westvoorne Montfoort Menameradiel Lopik Haaren Texel Zederik Bergen (L.) Schinnen Uitgeest Grave Aalburg Kollumerland en Nieuwkruisland Pekela Cromstrijen"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 40 Reusel-De Mierden 121m.pdf",
+                "name": "40. Reusel-De Mierden Grootegast Appingedam Voerendaal Woudenberg Kapelle Menterwolde Doesburg Hattem Neerijnen Sint Anthonis Laren Opmeer Mill en Sint Hubert Littenseradiel het Bildt Lingewaal Rijnwaarden Korendijk Simpelveld Bedum Landsmeer"
+            }, {
+                "url": "http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 41 De Marne 121m.pdf",
+                "name": "41. De Marne Loppersum Marum Leeuwarderadeel Boekel Vaals Oudewater Alphen-Chaam Blaricum Scherpenzeel Bellingwedde Eemnes Oostzaan Strijen Beemster Ferwerderadiel Mook en Middelaar Zoeterwoude Onderbanken Noord-Beveland Ten Boer Baarle-Nassau Muiden Zeevang Haarlemmerliede en Spaarnwoude Renswoude Terschelling Ameland Rozendaal Schiermonnikoog Vlieland\r"
+            }]
         }
     }
 
@@ -577,18 +560,18 @@ module App {
 
     // Start the application
     angular.module('csWebApp', [
-        'csComp',
-        'ngSanitize',
-        'ui.bootstrap',
-        'ui.select',
-        'LocalStorageModule',
-        'angularUtils.directives.dirPagination',
-        'pascalprecht.translate',
-        'ngCookies',
-        'angularSpectrumColorpicker',
-        'wiz.markdown',
-        'ngAnimate'
-    ])
+            'csComp',
+            'ngSanitize',
+            'ui.bootstrap',
+            'ui.select',
+            'LocalStorageModule',
+            'angularUtils.directives.dirPagination',
+            'pascalprecht.translate',
+            'ngCookies',
+            'angularSpectrumColorpicker',
+            'wiz.markdown',
+            'ngAnimate'
+        ])
         .config(localStorageServiceProvider => {
             localStorageServiceProvider.prefix = 'csMap';
         })
@@ -641,8 +624,16 @@ module App {
             // Defines the GUI languages that you wish to use in your project.
             // They will be available through a popup menu.
             var languages = [];
-            languages.push({ key: 'nl', name: 'Nederlands', img: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAIAAAD5gJpuAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAFXSURBVHjaYvzPgAD/UNlYEUAAkuTgCAAIBgJggq5VoAs1qM0vdzmMz362vezjokxPGimkEQ5WoAQEKuK71zwCCKyB4c//J8+BShn+/vv/+w/D399AEox+//8FJH/9/wUU+cUoKw20ASCAWBhEDf/LyDOw84BU//kDtgGI/oARmAHRDJQSFwVqAAggxo8fP/Ly8oKc9P8/AxjiAoyMjA8ePAAIIJZ///5BVIM0MOBWDpRlZPzz5w9AALH8gyvCbz7QBrCJAAHEyKDYX15r/+j1199//v35++/Xn7+///77DST/wMl/f4Dk378K4jx7O2cABBALw7NP77/+ev3xB0gOpOHfr99AdX9/gTVASKCGP//+8XCyMjC8AwggFoZfIHWSwpwQk4CW/AYjsKlA8u+ff////v33998/YPgBnQQQQIzAaGNg+AVGf5AYf5BE/oCjGEIyAQQYAGvKZ4C6+xXRAAAAAElFTkSuQmCC' });
-            languages.push({ key: 'en', name: 'English', img: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAIAAAD5gJpuAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAflJREFUeNpinDRzn5qN3uFDt16+YWBg+Pv339+KGN0rbVP+//2rW5tf0Hfy/2+mr99+yKpyOl3Ydt8njEWIn8f9zj639NC7j78eP//8739GVUUhNUNuhl8//ysKeZrJ/v7z10Zb2PTQTIY1XZO2Xmfad+f7XgkXxuUrVB6cjPVXef78JyMjA8PFuwyX7gAZj97+T2e9o3d4BWNp84K1NzubTjAB3fH0+fv6N3qP/ir9bW6ozNQCijB8/8zw/TuQ7r4/ndvN5mZgkpPXiis3Pv34+ZPh5t23//79Rwehof/9/NDEgMrOXHvJcrllgpoRN8PFOwy/fzP8+gUlgZI/f/5xcPj/69e/37//AUX+/mXRkN555gsOG2xt/5hZQMwF4r9///75++f3nz8nr75gSms82jfvQnT6zqvXPjC8e/srJQHo9P9fvwNtAHmG4f8zZ6dDc3bIyM2LTNlsbtfM9OPHH3FhtqUz3eXX9H+cOy9ZMB2o6t/Pn0DHMPz/b+2wXGTvPlPGFxdcD+mZyjP8+8MUE6sa7a/xo6Pykn1s4zdzIZ6///8zMGpKM2pKAB0jqy4UE7/msKat6Jw5mafrsxNtWZ6/fjvNLW29qv25pQd///n+5+/fxDDVbcc//P/zx/36m5Ub9zL8+7t66yEROcHK7q5bldMBAgwADcRBCuVLfoEAAAAASUVORK5CYII=' });
+            languages.push({
+                key: 'nl',
+                name: 'Nederlands',
+                img: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAIAAAD5gJpuAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAFXSURBVHjaYvzPgAD/UNlYEUAAkuTgCAAIBgJggq5VoAs1qM0vdzmMz362vezjokxPGimkEQ5WoAQEKuK71zwCCKyB4c//J8+BShn+/vv/+w/D399AEox+//8FJH/9/wUU+cUoKw20ASCAWBhEDf/LyDOw84BU//kDtgGI/oARmAHRDJQSFwVqAAggxo8fP/Ly8oKc9P8/AxjiAoyMjA8ePAAIIJZ///5BVIM0MOBWDpRlZPzz5w9AALH8gyvCbz7QBrCJAAHEyKDYX15r/+j1199//v35++/Xn7+///77DST/wMl/f4Dk378K4jx7O2cABBALw7NP77/+ev3xB0gOpOHfr99AdX9/gTVASKCGP//+8XCyMjC8AwggFoZfIHWSwpwQk4CW/AYjsKlA8u+ff////v33998/YPgBnQQQQIzAaGNg+AVGf5AYf5BE/oCjGEIyAQQYAGvKZ4C6+xXRAAAAAElFTkSuQmCC'
+            });
+            languages.push({
+                key: 'en',
+                name: 'English',
+                img: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAIAAAD5gJpuAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAflJREFUeNpinDRzn5qN3uFDt16+YWBg+Pv339+KGN0rbVP+//2rW5tf0Hfy/2+mr99+yKpyOl3Ydt8njEWIn8f9zj639NC7j78eP//8739GVUUhNUNuhl8//ysKeZrJ/v7z10Zb2PTQTIY1XZO2Xmfad+f7XgkXxuUrVB6cjPVXef78JyMjA8PFuwyX7gAZj97+T2e9o3d4BWNp84K1NzubTjAB3fH0+fv6N3qP/ir9bW6ozNQCijB8/8zw/TuQ7r4/ndvN5mZgkpPXiis3Pv34+ZPh5t23//79Rwehof/9/NDEgMrOXHvJcrllgpoRN8PFOwy/fzP8+gUlgZI/f/5xcPj/69e/37//AUX+/mXRkN555gsOG2xt/5hZQMwF4r9///75++f3nz8nr75gSms82jfvQnT6zqvXPjC8e/srJQHo9P9fvwNtAHmG4f8zZ6dDc3bIyM2LTNlsbtfM9OPHH3FhtqUz3eXX9H+cOy9ZMB2o6t/Pn0DHMPz/b+2wXGTvPlPGFxdcD+mZyjP8+8MUE6sa7a/xo6Pykn1s4zdzIZ6///8zMGpKM2pKAB0jqy4UE7/msKat6Jw5mafrsxNtWZ6/fjvNLW29qv25pQd///n+5+/fxDDVbcc//P/zx/36m5Ub9zL8+7t66yEROcHK7q5bldMBAgwADcRBCuVLfoEAAAAASUVORK5CYII='
+            });
             //languages.push({ key: 'de', name: 'Deutsch', img: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAIAAAD5gJpuAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAGzSURBVHjaYvTxcWb4+53h3z8GZpZff/79+v3n/7/fDAz/GHAAgABi+f37e3FxOZD1Dwz+/v3z9y+E/AMFv3//+Qumfv9et241QACxMDExAVWfOHkJJAEW/gUEP0EQDn78+AHE/gFOQJUAAcQiy8Ag8O+fLFj1n1+/QDp+/gQioK7fP378+vkDqOH39x9A/RJ/gE5lAAhAYhzcAACCQBDkgRXRjP034R0IaDTZTFZn0DItot37S94KLOINerEcI7aKHAHE8v/3r/9//zIA1f36/R+o4tevf1ANYNVA9P07RD9IJQMDQACxADHD3z8Ig4GMHz+AqqHagKp//fwLVA0U//v7LwMDQACx/LZiYFD7/5/53/+///79BqK/EMZ/UPACSYa/v/8DyX9A0oTxx2EGgABi+a/H8F/m339BoCoQ+g8kgRaCQvgPJJiBYmAuw39hxn+uDAABxMLwi+E/0PusRkwMvxhBGoDkH4b/v/+D2EDyz///QB1/QLb8+sP0lQEggFh+vGXYM2/SP6A2Zoaf30Ex/J+PgekHwz9gQDAz/P0FYrAyMfz7wcDAzPDtFwNAgAEAd3SIyRitX1gAAAAASUVORK5CYII=' });
             $languagesProvider.setLanguages(languages);
         })
