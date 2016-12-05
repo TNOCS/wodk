@@ -464,6 +464,7 @@
 .legend-entry-label {
     height: 32px;
     padding-top: 12px;
+    color: #222;
 }
 
 .legend-entry-item-row {
@@ -472,4 +473,24 @@
 
 .legend-entry-list-table {
     margin: 8px 20px; 
+}
+
+#widget-rankingwidg {
+    background-color: #e3dce7;
+}
+
+#widget-rankingwidg label {
+    color: black;
+}
+
+.alert-info {
+    background: #e3dce7;
+}
+
+.csNotify {
+    position : static;
+    top: auto;
+    left: auto;
+    bottom: auto;
+    right: auto;
 }

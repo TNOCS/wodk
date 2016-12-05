@@ -258,7 +258,7 @@
             "enabled": true,
             "style": "vws",
             "width": "300px",
-            "top": "120px",
+            "top": "60px",
             "left": "20px",
             "data": {
                 "layerId": "gemeente",

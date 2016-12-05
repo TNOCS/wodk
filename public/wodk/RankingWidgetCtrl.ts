@@ -176,7 +176,7 @@ module wodk {
             if (bins.length !== +this.selectedBins) {
                 let chosenBins = +this.selectedBins;
                 this.$timeout(() => {
-                    this.$messageBus.notify('Opmerking', `Het aantal van ${chosenBins} levert geen mooie verdeling op en wordt daarom gewijzigd naar ${bins.length}`, csComp.Services.NotifyLocation.TopBar, csComp.Services.NotifyType.Info, 2000);
+                    this.$messageBus.notify('Opmerking', `Het aantal van ${chosenBins} levert geen mooie verdeling op en wordt daarom gewijzigd naar ${bins.length}`, csComp.Services.NotifyLocation.TopLeft, csComp.Services.NotifyType.Info, 2000);
                     this.selectedBins === bins.length.toFixed(0);
                 }, 0);
             }
