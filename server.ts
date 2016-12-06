@@ -7,6 +7,7 @@ import stream = require('stream');
 import * as csweb from "csweb";
 import _ = require("underscore.string");
 
+const LZWSets = require("./setsOverview/setsOverview.json");
 
 Winston.remove(Winston.transports.Console);
 Winston.add(Winston.transports.Console, <Winston.ConsoleTransportOptions>{
@@ -94,6 +95,16 @@ cs.start(() => {
                     res.status(200).send({ identificatie: searchResult[0].identificatie });
                 }
             });
+        });
+
+        cs.server.get(deployPath + (runOnZODKServer ? '/public' : '') + '/findlzwset/:areaId', (req, res) => {
+            console.log('/findlzwset');
+            let searchResult = LZWSets[req.params.areaId];
+            if (!searchResult) {
+                res.sendStatus(404);
+            } else {
+                res.status(200).send(searchResult);
+            }
         });
 
         cs.server.get(deployPath + (runOnZODKServer ? '/public' : '') + '/exportbuurten', (req, res) => {

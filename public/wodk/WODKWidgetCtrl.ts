@@ -270,9 +270,13 @@ module wodk {
                 this.parentWidget.show();
                 this.$scope.data.mdText = md;
                 if (feature.properties.hasOwnProperty('bu_code')) {
-                    this.$scope.data.fileName = feature.properties['bu_code'];
+                    this.getSets(feature.properties['bu_code'], (set) => {
+                        this.$scope.data.fileName = `LZW set ${set.s}.pdf#page=${set.p}`;
+                    });
                 } else if (feature.properties.hasOwnProperty('GM_CODE')) {
-                    this.$scope.data.fileName = feature.properties['GM_CODE'];
+                    this.getSets(feature.properties['GM_CODE'], (set) => {
+                        this.$scope.data.fileName = `LZW set ${set.s}.pdf#page=${set.p}`;
+                    });
                 } else {
                     this.$scope.data.fileName = null;
                 }
@@ -405,41 +409,16 @@ module wodk {
             });
             console.log('Screenshot command sent');
             this.$messageBus.notifyWithTranslation('IMAGE_REQUESTED', 'IMAGE_WILL_APPEAR');
-            // var html2canvas = (<any>window).html2canvas || undefined;
-            // if (!html2canvas) return;
-
-            // var promise = html2canvas((id ? document.getElementById(id) : this.parentWidget), {logging: true, background: '#E3DCE7'});
-            // promise['catch']((err) => {
-            //     console.log("html2canvas threw an error", err);
-            // });
-
-            // promise.then((canvas) => {
-            //     document.body.appendChild(canvas);
-            //     var img = canvas.toDataURL('image/png');
-            //     var fileName = this.$scope.filter.title || 'rowfilter-export';
-            //     csComp.Helpers.saveImage(img, fileName + '.png', 'png');
-            //     canvas.parentElement.removeChild(canvas);
-            // });
-
-            // html2canvas((id ? document.getElementById(id) : this.parentWidget), {logging: true, background: '#E3DCE7',
-            // onrendered: (canvas) => {
-            //     document.body.appendChild(canvas);
-            //     var img = canvas.toDataURL('image/png');
-            //     var fileName = this.$scope.filter.title || 'rowfilter-export';
-            //     csComp.Helpers.saveImage(img, fileName + '.png', 'png');
-            //     canvas.parentElement.removeChild(canvas);
-            // }});
-
-            // var domtoimage = (<any>window).domtoimage || undefined;
-            // if (!domtoimage) return;
-            // domtoimage.toPng((id ? document.getElementById(id) : this.parentWidget), {bgcolor: '#E3DCE7'})
-            //     .then((img) => {
-            //         var fileName = this.$scope.filter.title || 'wodk-export';
-            //         csComp.Helpers.saveImage(img, fileName + '.png', 'png');
-            //     })
-            //     .catch((error) => {
-            //         console.error('Something went wrong!', error);
-            //     });
         }
-    }
-}
+
+        private getSets(query, cb: Function) {
+            this.$http.get(`http://www.zorgopdekaart.nl/bagwoningen/public/findlzwset/${query}`)
+                .success((data) => {
+                    cb(data);
+                })
+                .error((err) => {
+                    console.log(err);
+                    cb();
+                });
+        }
+}}
