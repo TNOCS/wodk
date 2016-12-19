@@ -374,7 +374,7 @@
 }
 
 .feature-prop-value-align-right {
-    margin-top: -1.5em;
+    margin-top: -1.1em;
 }
 
 .icons-on-hover {
@@ -405,7 +405,7 @@
 
 .tab-content {
     background: rgb(227, 220, 231);
-    max-height: 573px;
+    max-height: 588px;
 }
 
 .dc-chart g.row text {
