@@ -1,3 +1,23 @@
+@font-face {
+  font-family: "RO Sans";
+  src:  url('fonts/ROsanswebtextregular.woff') format('woff');
+}
+@font-face {
+  font-family: "RO Sans";
+  font-style: italic;
+  src:  url('fonts/ROsanswebtextitalic.woff') format('woff');
+}
+@font-face {
+  font-family: "RO Sans";
+  font-weight: bold;
+  src:  url('fonts/ROsanswebtextbold.woff') format('woff');
+}
+
+body {
+    font-family: "RO Sans";
+    font-size: 18px;
+}
+
 .justified-brand {
     position: absolute;
     left: 50%;
@@ -493,4 +513,102 @@
     left: auto;
     bottom: auto;
     right: auto;
+}
+
+.wodk-navbar {
+    z-index: 9999;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    font-size: 20px;
+    line-height: 30px;
+    padding: 0px;
+}
+
+h2 {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.wodk-navbar .row {
+    background: white;
+    height: auto;
+    max-height: 200px;
+    -webkit-transition: max-height 0.7s;
+    -moz-transition: max-height 0.7s;
+    -ms-transition: max-height 0.7s;
+    -o-transition: max-height 0.7s;
+    transition: max-height 0.7s;
+}
+
+.wodk-navbar .row.collapsed {
+    max-height: 0px;
+    -webkit-transition: max-height 0.6s, background 0.3s;
+    -moz-transition: max-height 0.6s, background 0.3s;
+    -ms-transition: max-height 0.6s, background 0.3s;
+    -o-transition: max-height 0.6s, background 0.3s;
+    transition: max-height 0.6s, background 0.3s;
+}
+
+.wodk-btn {
+    border-radius: 0px;
+}
+
+.wodk-navbar-logo {
+    height: 128px;
+}
+
+.wodk-navbar-closing-area {
+    height: 240px;
+}
+
+.wodk-form-group {
+    width: 100%;
+    margin-bottom: 0px;
+}
+
+.wodk-form-group button {
+    float: right;
+    line-height: 30px;
+    margin-left: 12px;
+}
+
+.wodk-form-group span {
+    display: block;
+    overflow: hidden;
+}
+
+.wodk-form-group input {
+    border-radius: 0px;
+    line-height: 30px;
+    font-size: 22px;
+    height: auto;
+    display: inline-block;
+    width: 100%;
+    margin-top: 1px;
+}
+
+.text-grey {
+    color: dimgrey;
+}
+
+.ap-with-places {
+}
+
+.ap-dataset-places {
+    max-height: 140px;
+}
+
+.ap-suggestions {
+}
+
+.ap-dropdown-menu {
+    margin-bottom: 6px;
+    overflow-y: auto;
+}
+
+.ap-suggestion {
+    height: 36px;
+    line-height: 36px;
 }

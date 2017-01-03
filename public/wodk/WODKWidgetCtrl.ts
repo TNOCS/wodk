@@ -413,11 +413,11 @@ module wodk {
 
         private getSets(query, cb: Function) {
             this.$http.get(`http://www.zorgopdekaart.nl/bagwoningen/public/findlzwset/${query}`)
-                .success((data) => {
-                    cb(data);
+                .then((res) => {
+                    cb(res.data);
                 })
-                .error((err) => {
-                    console.log(err);
+                .catch(() => {
+                    console.log('Find lzw set');
                     cb();
                 });
         }

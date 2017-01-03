@@ -51,11 +51,11 @@ module DownloadAction {
             function findSet(query: string, layerService: csComp.Services.LayerService, cb: Function) {
             // layerService.$http.get(`http://localhost:3002/findlzwset/${query}`)
             layerService.$http.get(`http://www.zorgopdekaart.nl/bagwoningen/public/findlzwset/${query}`)
-                .success((data) => {
-                    cb(data);
+                .then((res) => {
+                    cb(res.data);
                 })
-                .error((err) => {
-                    console.log(err);
+                .catch(() => {
+                    console.log('Error finding lzwset');
                     cb();
                 });
             }

@@ -209,10 +209,11 @@ module App {
                 let uri = 'https://services.arcgisonline.nl/arcgis/rest/services/Geocoder_BAG/GeocodeServer/findAddressCandidates?f=pjson';
                 uri += `&SingleLine=${encodeURIComponent(q)}&outFields=Match_addr,City,Subregion,Region`;
                 this.$http.get(uri)
-                    .success((r: csComp.Services.IEsriSearchResult) => {
+                    .then((res: {data: csComp.Services.IEsriSearchResult}) => {
+                        let r = res.data;
                         this.geocodeCallback(r, q);
                     })
-                    .error((data, status, error, thing) => {
+                    .catch(() => {
                         console.log('Error contacting Esri')
                     });
             }

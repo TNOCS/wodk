@@ -48,7 +48,7 @@ module wodk {
             $scope.vm = this;
             var par = < any > $scope.$parent;
             this.widget = par.widget;
-            this.parentWidget = $("#" + this.widget.elementId).parent();
+            this.parentWidget = $(`#${this.widget.elementId}-parent`);
 
             $scope.data = < RankingWidgetData > this.widget.data;
             $scope.minimized = false;

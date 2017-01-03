@@ -36,7 +36,7 @@ var tileIndex;
 cs.start(() => {
 
     // Should be set to true for server on zodk
-    var runOnZODKServer = true;
+    var runOnZODKServer = false;
 
     if (startDatabaseConnection) {
         this.config = new csweb.ConfigurationService('./configuration.json');
@@ -127,7 +127,7 @@ cs.start(() => {
             if (req.body && req.body.html) {
                 if (<any>webshot) {
                     let image = [];
-                    let renderStream: stream.Stream = webshot(req.body.html, { hostname: (runOnZODKServer ? 'http://www.zorgopdekaart.nl/bagwoningen/public/' : `http://localhost:${cs.options.port}/`), siteType: 'html', javascriptEnabled: true, screenSize: { width: req.body.width || 1200, height: req.body.height || 800 }, shotSize: { width: 'window', height: 'window' }, shotOffset: { top: (req.body.topOffset || 0), left: 0, right: 0, bottom: 0 }, phantomConfig: { 'local-to-remote-url-access': true, 'debug': 'false', "cookies-file": "./cookies.txt", "ignore-ssl-errors": 'false', "web-security": 'true', 'disk-cache': 'true' }, errorIfJSException: true, renderDelay: (req.body.fullScreen ? 15000 : 1000) });
+                    let renderStream: stream.Stream = (<any>webshot)(req.body.html, { hostname: (runOnZODKServer ? 'http://www.zorgopdekaart.nl/bagwoningen/public/' : `http://localhost:${cs.options.port}/`), siteType: 'html', javascriptEnabled: true, screenSize: { width: req.body.width || 1200, height: req.body.height || 800 }, shotSize: { width: 'window', height: 'window' }, shotOffset: { top: (req.body.topOffset || 0), left: 0, right: 0, bottom: 0 }, phantomConfig: { 'local-to-remote-url-access': true, 'debug': 'false', "cookies-file": "./cookies.txt", "ignore-ssl-errors": 'false', "web-security": 'true', 'disk-cache': 'true' }, errorIfJSException: true, renderDelay: (req.body.fullScreen ? 15000 : 1000) });
 
                     renderStream.on('data', (data) => {
                         image.push(data);

@@ -62,6 +62,7 @@
     <script src="wodk/WODKWidgetSvc.js"></script>
     <script src="wodk/RowVisualizer.js"></script>
     <script src="wodk/DownloadAction.js"></script>
+    <script src="wodk/WodkNavbar.js"></script>
     <script src="app/app.js"></script>
     <script src="bower_components/csweb/dist-bower/csTemplates.js"></script>
     <!--<script src="bower_components/promise-polyfill/promise.js"></script>-->
@@ -75,10 +76,12 @@
     <script src="js/legend-style-checkbox.js"></script>
     <script src="js/legend-style-no-checkbox.js"></script>
     <script src="js/q.min.js"></script>
+    <script src="js/places.js"></script>
 
     <link rel="shortcut icon" href="favicon.ico" />
     <link href="js/leaflet.draw.css" rel="stylesheet" />
-
+    
+    <wodk-navbar></wodk-navbar>
     <div class="body" style="top:0">
         <!--<div class="justified-brand" style="color: #5e5e5e; z-index:1032" id="wodk-body">
             <img src="images/logo.png" height="100" width="79" alt="Logo VWS">
@@ -263,7 +266,7 @@
                     <li class="dropdown active-button">
                         <a class="dropdown-toggle" data-toggle="dropdown"
                             href="#" popover-trigger="none" uib-popover="Deel de gemeenten in op basis van een kenmerk.'" popover-placement="bottom" popover-popup-delay="400"><span >Ranking</span><span class="caret"></span></a>
-                        <div id="widget-rankingwidg" class="dropdown-menu scrollable-menu" style="min-width: 400px;">
+                        <div id="widget-rankingwidg-parent" class="dropdown-menu scrollable-menu" style="min-width: 400px;">
                            
                         </div>
                     </li>
