@@ -1,10 +1,20 @@
 module wodk {
 
+    export enum AdministrationLevel {
+        pand  = 0,
+        buurt = 1,
+        wijk = 2,
+        gemeente = 3,
+        provincie = 4,
+        land = 5
+    }
+
     export interface IAddressResult {
         province: string;
         name: string;
         score: number;
         coordinates: number[];
+        administrationLevel: AdministrationLevel;
     }
 
     export var WODK_MAP_PADDING = { paddingBottomRight: new L.Point(610, 0), paddingTopLeft: new L.Point(0, 105) };
@@ -35,6 +45,16 @@ module wodk {
         protected forwardHistory: IFeature[];
         private htmlStyle = '<div style="display:inline-block;vertical-align:middle;text-align:center;background:{{bgColor}};width:28px;height:28px;border-radius:50% 0 0 50%;border-style:solid;border-color:rgba(0,0,150,1);border-width:2px;opacity:1;box-shadow:2px 3px 6px 0px rgba(0,0,0,0.75);"><img src="images/i.png" style="width:24px;height:24px;display:block;"></div>';
         private htmlStyleInvisible = '<div style="display:inline-block;width:2px;height:2px;"></div>';
+        private rightPanel = {
+                'id': 'wodkright',
+                'title': 'Rechterpaneel',
+                'directive': 'wodkrightpanel',
+                'enabled': true,
+                'style': 'vws-white',
+                'position': 'rightpanel',
+                'icon': 'home',
+                'data': {}
+            };
 
         constructor(
             private $rootScope: ng.IRootScopeService,
@@ -258,8 +278,22 @@ module wodk {
                     province: searchResult.administrative || '',
                     name: searchResult.name || '',
                     score: 0.99,
-                    coordinates: [searchResult.latlng.lng, searchResult.latlng.lat]
-                };
+                    coordinates: [searchResult.latlng.lng, searchResult.latlng.lat],
+                    administrationLevel: AdministrationLevel.pand
+            };
+            switch (searchResult.type) {
+                case 'address':
+                    address.administrationLevel = AdministrationLevel.pand;
+                    break;
+                case 'city':
+                    address.administrationLevel = AdministrationLevel.gemeente;
+                    break;
+                case 'country':
+                    address.administrationLevel = AdministrationLevel.land;
+                    break;
+                default:
+                    break;
+            }
             let geojson = JSON.stringify({ type: 'Point', coordinates: address.coordinates, crs: { type: "name", properties: { name: "EPSG:4326" } } });
             var data = { geojson: geojson, address: address };
             this.findGemeente(data)
@@ -269,9 +303,23 @@ module wodk {
                 .then(this.findPand.bind(this))
                 .then(this.selectPand.bind(this))
                 .catch((err) => {
-                    console.log('Error while loading address: ' + err);
+                    if (typeof err === 'string') {
+                        console.log(`Be happy with the area, don't search for a specific address`);
+                    } else {
+                        console.log('Error while loading address: ' + err.message);
+                    }
                     if (address.coordinates) {
-                        this.$mapService.getMap().flyTo(new L.LatLng(address.coordinates[1], address.coordinates[0]), 16, WODK_MAP_PADDING);
+                        if (address.administrationLevel <= AdministrationLevel.pand) {
+                            this.$mapService.getMap().flyTo(new L.LatLng(address.coordinates[1], address.coordinates[0]), 18, WODK_MAP_PADDING);
+                        } else if (address.administrationLevel <= AdministrationLevel.buurt) {
+                            this.$mapService.getMap().flyTo(new L.LatLng(address.coordinates[1], address.coordinates[0]), 15, WODK_MAP_PADDING);
+                        } else {
+                            this.$mapService.getMap().flyTo(new L.LatLng(address.coordinates[1], address.coordinates[0]), 12, WODK_MAP_PADDING);
+                        }
+                        let w = this.rightPanel;
+                        let rpt = csComp.Helpers.createRightPanelTab(w.id, w.directive, w.data, w.title, '{{"FEATURE_INFO" | translate}}', w.icon, true, false);
+                        rpt.open = true;
+                        this.$messageBusService.publish('rightpanel', 'activate', rpt);
                     }
                 })
                 .done((finished) => {
@@ -304,43 +352,51 @@ module wodk {
 
         private findBuurt(data: { geojson: string, address: IAddressResult, gm_code: string }): Q.Promise<any> {
             let cb = Q.defer();
-            this.$http({
-                method: 'POST',
-                url: "searchbuurt",
-                data: { loc: data.geojson },
-            }).then((response) => {
-                if (response) {
-                    data['bu_code'] = response.data['bu_code'];
-                    cb.resolve(data);
-                } else {
+            if (data.address.administrationLevel <= AdministrationLevel.buurt) {
+                this.$http({
+                    method: 'POST',
+                    url: "searchbuurt",
+                    data: { loc: data.geojson },
+                }).then((response) => {
+                    if (response) {
+                        data['bu_code'] = response.data['bu_code'];
+                        cb.resolve(data);
+                    } else {
+                        cb.reject(new Error(`Buurt not found in ${data.gm_code}.`));
+                    }
+                }, (error) => {
+                    console.log(error);
                     cb.reject(new Error(`Buurt not found in ${data.gm_code}.`));
-                }
-            }, (error) => {
-                console.log(error);
-                cb.reject(new Error(`Buurt not found in ${data.gm_code}.`));
-            });
+                });
+            } else {
+                cb.reject('Too specific');
+            }
             return cb.promise;
         }
 
         private findPand(data: { geojson: string, address: IAddressResult, gm_code: string, bu_code: string }): Q.Promise<any> {
             let cb = Q.defer();
-            this.$http({
-                method: 'POST',
-                url: "searchpand",
-                data: { loc: data.geojson },
-            }).then((response) => {
-                if (response && response.data && response.data.hasOwnProperty('identificatie')) {
-                    data['identificatie'] = response.data['identificatie'];
-                    cb.resolve(data);
-                } else {
-                    this.$messageBusService.notify('Adres niet gevonden', `Het pand behorende bij het adres '${data.address.name}' kon niet worden gevonden.`);
+            if (data.address.administrationLevel <= AdministrationLevel.pand) {
+                this.$http({
+                    method: 'POST',
+                    url: "searchpand",
+                    data: { loc: data.geojson },
+                }).then((response) => {
+                    if (response && response.data && response.data.hasOwnProperty('identificatie')) {
+                        data['identificatie'] = response.data['identificatie'];
+                        cb.resolve(data);
+                    } else {
+                        this.$messageBusService.notify('Adres niet gevonden', `Het pand behorende bij het adres '${data.address.name}' kon niet worden gevonden.`);
+                        cb.reject(new Error(`Pand not found in ${data.bu_code}.`));
+                        cb.resolve(data);
+                    }
+                }, (error) => {
+                    console.log(error);
                     cb.reject(new Error(`Pand not found in ${data.bu_code}.`));
-                    cb.resolve(data);
-                }
-            }, (error) => {
-                console.log(error);
-                cb.reject(new Error(`Pand not found in ${data.bu_code}.`));
-            });
+                });
+            } else {
+                cb.reject('Too specific');
+            }
             return cb.promise;
         }
 

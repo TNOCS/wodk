@@ -34,9 +34,9 @@
         <div id="search-suggestions" class="col-sm-12 col-md-6 col-md-offset-3">
         </div>
     </div>
-    <div class="row" ng-style="{background: (isOpen ? 'white' : 'transparent')}">
+    <div class="row" ng-style="{background: (isOpen ? 'white' : 'transparent'), 'pointer-events': 'none'}">
         <div class="col-sm-12 col-md-6 col-md-offset-3 text-center">
-            <a ng-click="vm.toggle()" class="btn btn-primary wodk-btn">
+            <a ng-click="vm.toggle()" class="btn btn-primary wodk-btn" style="pointer-events: all">
                 <div>
                     <div style="font-size: 22px" ng-class="{fa: true, 'fa-caret-up': isOpen, 'fa-caret-down': isOpen == false}"></div>
                     <div>MENU</div>

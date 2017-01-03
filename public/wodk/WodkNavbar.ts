@@ -31,15 +31,15 @@ module WodkNavbar {
     export interface IPlacesResult {
         name: string;
         administrative: string;
-        city: string;
-        country: string;
-        countryCode: string;
+        city?: string;
+        country?: string;
+        countryCode?: string;
         type: string;
         latlng: {
             lat: number,
             lng: number
         };
-        postcode: string;
+        postcode?: string;
         highlight: any;
         hit: any;
         hitIndex: number;
@@ -87,10 +87,7 @@ module WodkNavbar {
 
             this.placesAutocomplete.on('change', (e) => {
                 console.log(e.suggestion);
-                this.lastResult = e.suggestion;
-                this.messageBusService.publish('wodk', 'address', this.lastResult);
-                this.placesAutocomplete.close();
-                this.toggle();
+                this.selectLocation(e.suggestion);
             });
 
             this.placesAutocomplete.on('suggestions', (e) => {
@@ -105,12 +102,413 @@ module WodkNavbar {
             this.placesAutocomplete.on('error', (e) => {
                 console.log(e.message);
             });
+
+            setTimeout(() => {
+                this.test();
+            }, 5000);
+        }
+
+        private selectLocation(loc: IPlacesResult) {
+            this.lastResult = loc;
+            this.messageBusService.publish('wodk', 'address', this.lastResult);
+            this.placesAutocomplete.close();
+            this.toggle();
         }
 
         public toggle() {
             this.$timeout(() => {
                 this.$scope.isOpen = !this.$scope.isOpen;
             }, 0);
+        }
+
+        private test() {
+            let res = {
+                'name': 'Heerenveen',
+                'administrative': 'Friesland',
+                'country': 'Nederland',
+                'countryCode': 'nl',
+                'type': 'city',
+                'latlng': {
+                    'lat': 52.9568,
+                    'lng': 5.92701
+                },
+                'highlight': {
+                    'name': '<em>Heere</em>nveen',
+                    'administrative': 'Friesland',
+                    'country': 'Nederland'
+                },
+                'hit': {
+                    'is_city': true,
+                    'is_country': false,
+                    '_tags': [
+                        'boundary',
+                        'boundary/administrative',
+                        'country/nl',
+                        'city'
+                    ],
+                    'postcode': [],
+                    'country_code': 'nl',
+                    'country': 'Nederland',
+                    'admin_level': 8,
+                    'locale_names': [
+                        'Heerenveen'
+                    ],
+                    'importance': 16,
+                    'is_highway': false,
+                    'is_popular': false,
+                    'administrative': [
+                        'Friesland'
+                    ],
+                    'population': 29000,
+                    '_geoloc': {
+                        'lat': 52.9568,
+                        'lng': 5.92701
+                    },
+                    'objectID': '156149878_403072',
+                    '_highlightResult': {
+                        'country': {
+                            'value': 'Nederland',
+                            'matchLevel': 'none',
+                            'matchedWords': []
+                        },
+                        'locale_names': [{
+                            'value': '<em>Heere</em>nveen',
+                            'matchLevel': 'full',
+                            'fullyHighlighted': false,
+                            'matchedWords': [
+                                'heere'
+                            ]
+                        }],
+                        'administrative': [{
+                            'value': 'Friesland',
+                            'matchLevel': 'none',
+                            'matchedWords': []
+                        }]
+                    }
+                },
+                'hitIndex': 0,
+                'query': 'heere',
+                'rawAnswer': {
+                    'hits': [{
+                        'is_city': true,
+                        'is_country': false,
+                        '_tags': [
+                            'boundary',
+                            'boundary/administrative',
+                            'country/nl',
+                            'city'
+                        ],
+                        'postcode': [],
+                        'country_code': 'nl',
+                        'country': 'Nederland',
+                        'admin_level': 8,
+                        'locale_names': [
+                            'Heerenveen'
+                        ],
+                        'importance': 16,
+                        'is_highway': false,
+                        'is_popular': false,
+                        'administrative': [
+                            'Friesland'
+                        ],
+                        'population': 29000,
+                        '_geoloc': {
+                            'lat': 52.9568,
+                            'lng': 5.92701
+                        },
+                        'objectID': '156149878_403072',
+                        '_highlightResult': {
+                            'country': {
+                                'value': 'Nederland',
+                                'matchLevel': 'none',
+                                'matchedWords': []
+                            },
+                            'locale_names': [{
+                                'value': '<em>Heere</em>nveen',
+                                'matchLevel': 'full',
+                                'fullyHighlighted': false,
+                                'matchedWords': [
+                                    'heere'
+                                ]
+                            }],
+                            'administrative': [{
+                                'value': 'Friesland',
+                                'matchLevel': 'none',
+                                'matchedWords': []
+                            }]
+                        }
+                    }, {
+                        'is_city': true,
+                        'is_country': false,
+                        '_tags': [
+                            'place',
+                            'place/village',
+                            'country/nl',
+                            'city'
+                        ],
+                        'postcode': [
+                            '6624'
+                        ],
+                        'country_code': 'nl',
+                        'country': 'Nederland',
+                        'admin_level': 15,
+                        'locale_names': [
+                            'Heerewaarden'
+                        ],
+                        'importance': 19,
+                        'is_highway': false,
+                        'is_popular': false,
+                        'administrative': [
+                            'Gelderland'
+                        ],
+                        'population': 1000,
+                        '_geoloc': {
+                            'lat': 51.8182,
+                            'lng': 5.38917
+                        },
+                        'objectID': '220244_43949067',
+                        '_highlightResult': {
+                            'postcode': [{
+                                'value': '6624',
+                                'matchLevel': 'none',
+                                'matchedWords': []
+                            }],
+                            'country': {
+                                'value': 'Nederland',
+                                'matchLevel': 'none',
+                                'matchedWords': []
+                            },
+                            'locale_names': [{
+                                'value': '<em>Heere</em>waarden',
+                                'matchLevel': 'full',
+                                'fullyHighlighted': false,
+                                'matchedWords': [
+                                    'heere'
+                                ]
+                            }],
+                            'administrative': [{
+                                'value': 'Gelderland',
+                                'matchLevel': 'none',
+                                'matchedWords': []
+                            }]
+                        }
+                    }, {
+                        'is_city': true,
+                        'is_country': false,
+                        '_tags': [
+                            'place',
+                            'place/village',
+                            'country/nl',
+                            'city'
+                        ],
+                        'postcode': [],
+                        'country_code': 'nl',
+                        'country': 'Nederland',
+                        'locale_names': [
+                            `s -Heerenberg`
+                        ],
+                        'admin_level': 15,
+                        'importance': 19,
+                        'is_highway': false,
+                        'county': [
+                            'Stadsregio Arnhem Nijmegen'
+                        ],
+                        'is_popular': false,
+                        'administrative': [
+                            'Gelderland'
+                        ],
+                        'population': 5000,
+                        '_geoloc': {
+                            'lat': 51.8778,
+                            'lng': 6.25533
+                        },
+                        'objectID': '223642_44196313',
+                        '_highlightResult': {
+                            'country': {
+                                'value': 'Nederland',
+                                'matchLevel': 'none',
+                                'matchedWords': []
+                            },
+                            'locale_names': [{
+                                'value': `s-<em>Heere </em>nberg`,
+                                'matchLevel': 'full',
+                                'fullyHighlighted': false,
+                                'matchedWords': [
+                                    'heere'
+                                ]
+                            }],
+                            'county': [{
+                                'value': 'Stadsregio Arnhem Nijmegen',
+                                'matchLevel': 'none',
+                                'matchedWords': []
+                            }],
+                            'administrative': [{
+                                'value': 'Gelderland',
+                                'matchLevel': 'none',
+                                'matchedWords': []
+                            }]
+                        }
+                    }, {
+                        'is_city': false,
+                        'is_country': false,
+                        'postcode': [
+                            '1012 ZA',
+                            '1012EZ'
+                        ],
+                        '_tags': [
+                            'highway',
+                            'highway/unclassified',
+                            'country/nl',
+                            'address'
+                        ],
+                        'country_code': 'nl',
+                        'country': 'Nederland',
+                        'city': [
+                            'Amsterdam'
+                        ],
+                        'locale_names': [
+                            'Grimburgwal',
+                            'Heerenlogementsbrug'
+                        ],
+                        'admin_level': 15,
+                        'importance': 26,
+                        'village': [
+                            'Centrum'
+                        ],
+                        'suburb': [
+                            'Amsterdam'
+                        ],
+                        'county': [
+                            'Metropoolregio Amsterdam',
+                            'MRA'
+                        ],
+                        'is_highway': true,
+                        'is_popular': false,
+                        'administrative': [
+                            'Noord-Holland'
+                        ],
+                        'population': 825080,
+                        '_geoloc': {
+                            'lat': 52.3693,
+                            'lng': 4.8948
+                        },
+                        'objectID': '71607827_38314625',
+                        '_highlightResult': {
+                            'postcode': [{
+                                'value': '1012 ZA',
+                                'matchLevel': 'none',
+                                'matchedWords': []
+                            }, {
+                                'value': '1012EZ',
+                                'matchLevel': 'none',
+                                'matchedWords': []
+                            }],
+                            'country': {
+                                'value': 'Nederland',
+                                'matchLevel': 'none',
+                                'matchedWords': []
+                            },
+                            'city': [{
+                                'value': 'Amsterdam',
+                                'matchLevel': 'none',
+                                'matchedWords': []
+                            }],
+                            'locale_names': [{
+                                'value': 'Grimburgwal',
+                                'matchLevel': 'none',
+                                'matchedWords': []
+                            }, {
+                                'value': '<em>Heere</em>nlogementsbrug',
+                                'matchLevel': 'full',
+                                'fullyHighlighted': false,
+                                'matchedWords': [
+                                    'heere'
+                                ]
+                            }],
+                            'village': [{
+                                'value': 'Centrum',
+                                'matchLevel': 'none',
+                                'matchedWords': []
+                            }],
+                            'suburb': [{
+                                'value': 'Amsterdam',
+                                'matchLevel': 'none',
+                                'matchedWords': []
+                            }],
+                            'county': [{
+                                'value': 'Metropoolregio Amsterdam',
+                                'matchLevel': 'none',
+                                'matchedWords': []
+                            }, {
+                                'value': 'MRA',
+                                'matchLevel': 'none',
+                                'matchedWords': []
+                            }],
+                            'administrative': [{
+                                'value': 'Noord-Holland',
+                                'matchLevel': 'none',
+                                'matchedWords': []
+                            }]
+                        }
+                    }, {
+                        'is_city': true,
+                        'is_country': false,
+                        '_tags': [
+                            'place',
+                            'place/village',
+                            'country/nl',
+                            'city'
+                        ],
+                        'postcode': [],
+                        'country_code': 'nl',
+                        'country': 'Nederland',
+                        'admin_level': 15,
+                        'locale_names': [
+                            `s -Heerenhoek`
+                        ],
+                        'importance': 19,
+                        'is_highway': false,
+                        'is_popular': false,
+                        'administrative': [
+                            'Zeeland'
+                        ],
+                        'population': 1939,
+                        '_geoloc': {
+                            'lat': 51.4536,
+                            'lng': 3.76904
+                        },
+                        'objectID': '220533_42666235',
+                        '_highlightResult': {
+                            'country': {
+                                'value': 'Nederland',
+                                'matchLevel': 'none',
+                                'matchedWords': []
+                            },
+                            'locale_names': [{
+                                'value': `s-<em>Heere </em>nhoek`,
+                                'matchLevel': 'full',
+                                'fullyHighlighted': false,
+                                'matchedWords': [
+                                    'heere'
+                                ]
+                            }],
+                            'administrative': [{
+                                'value': 'Zeeland',
+                                'matchLevel': 'none',
+                                'matchedWords': []
+                            }]
+                        }
+                    }],
+                    'nbHits': 5,
+                    'processingTimeMS': 13,
+                    'query': 'heere',
+                    'params': 'countries=%5B%22nl%22%5D&hitsPerPage=5&language=nl&query=heere',
+                    'degradedQuery': false
+                },
+                'value': 'Heerenveen, Friesland, Nederland',
+                'administrationLevel': wodk.AdministrationLevel.gemeente
+            };
+            this.selectLocation(res);
         }
     }
 }

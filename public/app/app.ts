@@ -87,7 +87,7 @@ module App {
                         id: 'rowvisualizer',
                         icon: 'images/rowvisualizer.png',
                         description: 'Show rowfilter without filter functionality'
-                    }
+                    };
 
                     // this.$dashboardService.widgetTypes['rangewidget'] = <csComp.Services.IWidget>{
                     //     id: 'rangewidget',
@@ -99,7 +99,13 @@ module App {
                         id: 'rankingwidget',
                         icon: 'images/rangewidget.png',
                         description: 'Show rankingwidget with style functionality'
-                    }
+                    };
+
+                    this.$dashboardService.widgetTypes['wodkrightpanel'] = < csComp.Services.IWidget > {
+                        id: 'wodkrightpanel',
+                        icon: 'images/rangewidget.png',
+                        description: 'Show rightpanel with wodk info'
+                    };
 
                     // this.areaFilter = new AreaFilter.AreaFilterModel();
                     // this.$layerService.addActionService(this.areaFilter);

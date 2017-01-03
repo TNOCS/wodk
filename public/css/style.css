@@ -59,10 +59,10 @@ body {
 }
 
 .wodk-navbar-title-only {
-    font-size: 28px;
+    font-size: 26px;
     background-color: transparent;  
     float: left;
-    margin: 64px 24px 6px;
+    margin: 64px 2px 2px 20px;
     color: black;
     cursor: default;
 }
@@ -129,8 +129,22 @@ body {
     background: #007bc7;
 }
 
-.rightpanel {
-    bottom: 16px !important;
+.rightpanel-main {
+    background: white;
+    z-index: 9998;
+    position: relative;
+    height: 100%;
+    padding: 0;
+}
+
+.rightpanel-container {
+    padding: 0;
+    height: 100%;
+}
+
+.rightpanel-container > .row {
+    padding: 0;
+    height: 100%;
 }
 
 .spinner > div {
@@ -334,8 +348,8 @@ body {
 
 .active-button {
     color: #eee;
-    margin: 0;
-    font-size: 1.3em
+    font-size: 1.3em;
+    cursor: pointer;
 }
 
 .active-button-toelichting {
@@ -418,22 +432,19 @@ body {
     color: black;
 }
 
-.rightpanel-header {
-    background: #CCC1DA;
-    min-height: 80px;
+.rightpanel-tabs-container {
+    height: 100%;
 }
 
-.rightpanel-tabs {
-    height: 0!important;
-}
-
-.rightpanel-tabs > div {
-    height: 0;
+.tab-pane {
+    height: 100%;
+    width: 100%;
 }
 
 .tab-content {
-    background: rgb(227, 220, 231);
-    max-height: 588px;
+    background: white;
+    height: 100%;
+    width: 100%;
 }
 
 .dc-chart g.row text {

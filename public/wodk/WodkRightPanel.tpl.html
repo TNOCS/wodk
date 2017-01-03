@@ -1,0 +1,13 @@
+<div style="font-size:13px;width:100%;height:100%;overflow-x:hidden;overflow-y:auto;padding-top:16px;">
+    <div class="row">
+        <div class="col-xs-2 col-xs-offset-1 active-button" popover-trigger="mouseenter" uib-popover="{{'GA_NAAR_HOME' | translate}}" popover-placement="bottom-left"><a data-ng-click="vm.publish('home')"><span class="fa fa-home"></span></a></div>
+        <div class="col-xs-2 active-button" popover-trigger="mouseenter" uib-popover="{{'BEGIN_OPNIEUW' | translate}}" popover-placement="bottom-left"><a data-ng-click="vm.publish('refresh')"><span class="fa fa-repeat"></span></a></div>
+        <div class="col-xs-2 active-button" popover-trigger="mouseenter" uib-popover="{{'STAP_TERUG' | translate}}" popover-placement="bottom-left"><a data-ng-click="vm.publish('back')"><span class="fa fa-arrow-left"></span></a></div>
+        <div class="col-xs-2 active-button" popover-trigger="mouseenter" uib-popover="{{'STAP_VOORUIT' | translate}}" popover-placement="bottom-left">
+            <a data-ng-click="vm.publish('forward')" ng-class="vm.wodkWidgetSvc.hasForwardHistory() ? '' : 'inactive-button'"><span class="fa fa-arrow-right"></span></a>
+        </div>
+        <div class="col-xs-2 active-button" popover-trigger="mouseenter" uib-popover="{{'CLOSE' | translate}}" popover-placement="bottom-left">
+            <a data-ng-click="vm.close()"><span class="fa fa-times"></span></a>
+        </div>
+    </div>
+</div>
