@@ -258,8 +258,8 @@
             "enabled": true,
             "style": "vws",
             "width": "300px",
-            "top": "60px",
-            "left": "20px",
+            "top": "-6000px",
+            "left": "-2000px",
             "data": {
                 "layerId": "gemeente",
                 "rankingProperties": {

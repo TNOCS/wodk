@@ -253,7 +253,13 @@ module wodk {
         }
 
 
-        public loadAddress(address: IAddressResult) {
+        public loadAddress(searchResult: WodkNavbar.IPlacesResult) {
+            let address: IAddressResult = {
+                    province: searchResult.administrative || '',
+                    name: searchResult.name || '',
+                    score: 0.99,
+                    coordinates: [searchResult.latlng.lng, searchResult.latlng.lat]
+                };
             let geojson = JSON.stringify({ type: 'Point', coordinates: address.coordinates, crs: { type: "name", properties: { name: "EPSG:4326" } } });
             var data = { geojson: geojson, address: address };
             this.findGemeente(data)

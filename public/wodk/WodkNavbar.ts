@@ -88,13 +88,7 @@ module WodkNavbar {
             this.placesAutocomplete.on('change', (e) => {
                 console.log(e.suggestion);
                 this.lastResult = e.suggestion;
-                let addressResult: wodk.IAddressResult = {
-                    province: this.lastResult.administrative || '',
-                    name: this.lastResult.name || '',
-                    score: 0.99,
-                    coordinates: [this.lastResult.latlng.lng, this.lastResult.latlng.lat]
-                };
-                this.messageBusService.publish('wodk', 'address', addressResult);
+                this.messageBusService.publish('wodk', 'address', this.lastResult);
                 this.placesAutocomplete.close();
                 this.toggle();
             });
@@ -105,6 +99,7 @@ module WodkNavbar {
 
             this.placesAutocomplete.on('limit', (e) => {
                 console.log(e.message);
+                this.messageBusService.notifyError('Limiet bereikt', `De limiet voor de adressen-zoekfunctie is bereikt. ${e.message}`);
             });
 
             this.placesAutocomplete.on('error', (e) => {

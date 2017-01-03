@@ -119,7 +119,7 @@ module wodk {
                     case 'filter':
                         if (!value && value !== 0) return;
                         (this.buurtFilterDim ? this.buurtFilterDim.dispose() : null);
-                        this.buurtFilterDim = null;                      
+                        this.buurtFilterDim = null;
                         this.addBuurtFilter(value);
                         break;
                     case 'back':

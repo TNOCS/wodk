@@ -86,193 +86,32 @@
         <!--<div class="justified-brand" style="color: #5e5e5e; z-index:1032" id="wodk-body">
             <img src="images/logo.png" height="100" width="79" alt="Logo VWS">
         </div>-->
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container-fluid" style="color: black">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <a href="#" class="navbar-brand" style="color: black;margin-left:4px;">{{'SITE_TITLE' | translate}}</a>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="hidden-xs col-sm-5 col-md-4 col-lg-3" style="z-index:10">
+                    <h2 class="wodk-navbar-title-only">
+                    {{'SITE_TITLE' | translate}}
+                    </h2>
                 </div>
-
-                <!--<div>
-                    <ul class="nav navbar-nav" style="font-size: 1.5em;">
-                        <li><a href="#" style="line-height: 1.3em;color: black">'Langer thuis'</a></li>
-                    </ul>
-                </div>-->
-
-                <!--<div>
-                    <ul class="nav navbar-nav" style="font-size: 1.5em;float:right;cursor:pointer;">
-                        <li><a ng-click="vm.$messageBusService.publish('feature','justShowThisWidget')" style="line-height: 1.3em;color: black;">Toelichting</a></li>
-                    </ul>
-                </div>-->
-
-                <!--<div style="margin-top:12px">
-                    <a class="widget-min-max-close" ng-click="vm.exportToImage()"><i class="fa fa-camera fa-white" uib-tooltip="Genereer een screenshot van de website." tooltip-trigger="mouseenter" tooltip-placement="left" tooltip-append-to-body="true"></i>
-                    </a>
-                </div>-->
             </div>
+        </div>
 
-            <!-- /.container-fluid -->
-        </nav>
-        <nav class="navbar navbar-default navbar-fixed-subtop">
-            <div>
-                <ul class="nav navbar-nav" style="width: 100%">
-                    <li class="active-button" popover-trigger="mouseenter" uib-popover="{{'GA_NAAR_HOME' | translate}}" popover-placement="bottom-left"><a data-ng-click="vm.publish('home')"><span class="fa fa-home"></span></a></li>
-                    <li class="active-button" popover-trigger="mouseenter" uib-popover="{{'BEGIN_OPNIEUW' | translate}}" popover-placement="bottom"><a data-ng-click="vm.publish('refresh')"><span class="fa fa-repeat"></span></a></li>
-                    <li class="active-button" popover-trigger="mouseenter" uib-popover="{{'STAP_TERUG' | translate}}" popover-placement="bottom"><a data-ng-click="vm.publish('back')"><span class="fa fa-arrow-left"></span></a></li>
-                    <li class="active-button" popover-trigger="mouseenter" uib-popover="{{'STAP_VOORUIT' | translate}}" popover-placement="bottom">
-                        <a data-ng-click="vm.publish('forward')" ng-class="vm.wodkWidgetSvc.hasForwardHistory() ? '' : 'inactive-button'"><span class="fa fa-arrow-right"></span></a>
-                    </li>
-                    <li class="active-button dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{'GEMEENTE' | translate}} <span class="caret"></span></a>
-                        <div class="dropdown-menu" style="width: 315px;">
-                            <form class="navbar-form navbar-left" role="search">
-                                <div class="form-group">
-                                    <input id="search-city" type="text" class="form-control" ng-model="vm.cityQuery" ng-change="vm.filterCity(vm.cityQuery)"
-                                        ng-keyup="$event.keyCode == 13 && vm.selectFirstCity()" style="width:285px" placeholder="{{'GEMEENTE' | translate}}"
-                                        autocomplete="off" autofocus>
-                                </div>
-                                <!--<button type="submit" class="btn btn-default">Submit</button>-->
-                            </form>
-                            <div id="gemeente">
-                                <ul class="list-unstyled" style="margin-left:10px;">
-                                    <li ng-repeat="city in vm.foundCities" ng-click="vm.selectCity(city)">{{city}}</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="active-button dropdown" style="float: right">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{'ADRES' | translate}} <span class="caret"></span></a>
-                        <div class="dropdown-menu" style="width: 335px; right: 0; left: auto; left: initial;">
-                            <form class="navbar-form navbar-left" role="search">
-                                <div class="form-group">
-                                    <input id="search-address" type="text" class="form-control" ng-model="vm.addressQuery" ng-change="vm.filterAddress()" ng-keyup="$event.keyCode == 13 && vm.selectFirstAddress()"
-                                        style="width:285px" placeholder="Zoek op adres" autocomplete="off" autofocus>
-                                </div>
-                                <!--<button type="submit" class="btn btn-default">Submit</button>-->
-                            </form>
-                            <div id="address">
-                                <ul class="list-unstyled" style="margin-left:10px;">
-                                    <li ng-repeat="(address, props) in vm.foundAddresses" ng-click="vm.selectAddress(props)">{{props.name}}, {{props.province}}</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" ng-class="vm.wodkWidgetSvc.gemeenteSelectie.length > 0 ? '' : 'inactive-button'" data-toggle="dropdown"
-                            href="#" popover-trigger="mouseenter" uib-popover="Min. aantal woningen per buurt" popover-placement="right"
-                            popover-popup-delay="400"><span class="fa fa-filter">&nbsp;</span>{{vm.filterValue}}<span class="caret"></span></a>
-                        <ul class="dropdown-menu" ng-show="vm.wodkWidgetSvc.gemeenteSelectie.length > 0">
-                            <li style="background-color: #AAA; font-weight: bold; font-size: 1.2em; line-height:1.2em">&nbsp;&nbsp;{{'WONINGFILTER' | translate}} &lt;</li>
-                            <li style="margin:4px 4px 2px 4px;">
-                                <div class="input-group">
-                                    <input type="number" class="form-control input-sm" ng-model="value" min="0" max="99999" step="1" placeholder="{{'AANTAL' | translate}}" ng-keyup="$event.keyCode == 13 && vm.selectFilter(value)"
-                                    />
-                                    <span class="input-group-btn">
-                                <button type="button" class="btn btn-primary btn-sm" ng-click="vm.selectFilter(value)" uib-popover="Pas toe" popover-trigger="mouseenter" popover-append-to-body="true" popover-popup-delay="800"><div class="fa fa-check" /></button></span>
-                            </li>
-                            <li style="margin-left:10px;" ng-repeat="fv in vm.filterValues" ng-click="vm.selectFilter(fv)">{{fv}}</li>
-                        </ul>
-                    </li>
-                    <!--<li class="active"><a href="#">Kaart <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">Tabel export</a></li>-->
-                    <li data-ng-repeat="value in vm.$layerService.project.dashboards" class="active-button" ng-class="{'dashboard-active' : value == vm.$layerService.project.activeDashboard}">
-                        <a ng-click="vm.$dashboardService.selectDashboard(value,'main')">
-                            <span>{{value.name}}</span>
-                        </a>
-                    </li>
-                    <!--<li class="active-button">
-                        <a ng-click="vm.$messageBusService.publish('feature','justShowThisWidget')">
-                            <span>Toelichting</span>
-                        </a>
-                    </li>-->
-                    <!--<li class="active-button">
-                        <a href="http://www.zorgopdekaart.nl/files/2016-09/toelichting-woningvoorraad.pdf" target="_blank">
-                            <span>Toelichting</span>
-                        </a>
-                    </li>-->
-                    <li class="dropdown active-button">
-                        <a class="dropdown-toggle" data-toggle="dropdown"
-                            href="#" popover-trigger="none" uib-popover="Toelichting 'Langer zelfstandig wonen'" popover-placement="bottom" popover-popup-delay="400"><span >Toelichting</span><span class="caret"></span></a>
-                        <ul class="dropdown-menu scrollable-menu" style="min-width: 400px;">
-                            <li class="active-button-toelichting">
-                                <a href="http://www.zorgopdekaart.nl/files/2016-11/toelichting-woningvoorraad-woningaanpassingen-en-langer-zelfstandig-thuis-11.pdf" target="_blank">
-                                <span style="white-space: normal;">Toelichting bij de website 'Woningvoorraad, woningaanpassingen `Langer zelfstandig wonen`</span>
-                                </a>
-                            </li>
-                            <li class="divider"</li>
-                            <li class="active-button-toelichting">
-                                <a href="http://www.zorgopdekaart.nl/files/2016-09/toelichting-bij-de-rekenmodellen.pdf" target="_blank">
-                                <span>Toelichting bij de rekenmodellen</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown active-button">
-                        <a class="dropdown-toggle" data-toggle="dropdown"
-                            href="#" popover-trigger="none" uib-popover="Rekenmodellen 'Langer zelfstandig wonen'" popover-placement="bottom" popover-popup-delay="400"><span >Rekenmodellen</span><span class="caret"></span></a>
-                        <ul class="dropdown-menu scrollable-menu">
-                            <li class="inactive-button-toelichting" inactive>
-                                <a>
-                                <span>Rekenmodellen overzichten</span>
-                                </a>
-                            </li>
-                            <li class="active-button-toelichting">
-                                <a href="http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 42 Nederland en alle gemeenten 120m.pdf" target="_blank">
-                                <span>Nederland en alle gemeenten</span>
-                                </a>
-                            </li>
-                            <li class="active-button-toelichting">
-                                <a href="http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 43 400 buurten met hoogste kosten 120m.pdf" target="_blank">
-                                <span>400 buurten met hoogste kosten</span>
-                                </a>
-                            </li>
-                            <li class="active-button-toelichting">
-                                <a href="http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 46 400 buurten met grootste vraag 120m.pdf" target="_blank">
-                                <span>400 buurten met grootste vraag</span>
-                                </a>
-                            </li>
-                            <li class="active-button-toelichting">
-                                <a href="http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 47 400 wijken met grootste vraag 120m.pdf" target="_blank">
-                                <span>400 wijken met grootste vraag</span>
-                                </a>
-                            </li>
-                            <li class="active-button-toelichting">
-                                <a href="http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 48 400 buurten met het hoogste wmo 120m.pdf" target="_blank">
-                                <span>400 buurten met het hoogste % wmo</span>
-                                </a>
-                            </li>
-                            <li class="active-button-toelichting">
-                                <a href="http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 49 400 wijken met het hoogste Wmo 120m.pdf" target="_blank">
-                                <span>400 wijken met het hoogste % Wmo</span>
-                                </a>
-                            </li>
-                            <li class="divider"</li>
-                            <li class="inactive-button-toelichting">
-                                <a>
-                                <span>Rekenmodellen met de buurten van:</span><br>
-                                <span>(volgorde: regeringszetel, dan op inwoners van gemeente, dan op buurten in alfabetische volgorde)</span>
-                                </a>
-                            </li>
-                            <li class="active-button-toelichting">
-                                <label>Zoek gemeente: <input ng-model="searchDummy"></label>
-                            </li>
-                            <li class="active-button-toelichting" ng-repeat="entry in vm.pdfLinks | filter:searchDummy">
-                                <a href="{{entry.url}}" target="_blank">
-                                <span>{{entry.name | limitTo: 80}}{{entry.name.length > 80 ? '&hellip;' : ''}}</span></a>
-                            </li>
-                        </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown active-button">
-                        <a class="dropdown-toggle" data-toggle="dropdown"
-                            href="#" popover-trigger="none" uib-popover="Deel de gemeenten in op basis van een kenmerk.'" popover-placement="bottom" popover-popup-delay="400"><span >Ranking</span><span class="caret"></span></a>
-                        <div id="widget-rankingwidg-parent" class="dropdown-menu scrollable-menu" style="min-width: 400px;">
-                           
-                        </div>
-                    </li>
-                </ul>
-                </div>
-        </nav>
+        <!--<div>
+            <ul class="nav navbar-nav" style="font-size: 1.5em;">
+                <li><a href="#" style="line-height: 1.3em;color: black">'Langer thuis'</a></li>
+            </ul>
+        </div>-->
+
+        <!--<div>
+            <ul class="nav navbar-nav" style="font-size: 1.5em;float:right;cursor:pointer;">
+                <li><a ng-click="vm.$messageBusService.publish('feature','justShowThisWidget')" style="line-height: 1.3em;color: black;">Toelichting</a></li>
+            </ul>
+        </div>-->
+
+        <!--<div style="margin-top:12px">
+            <a class="widget-min-max-close" ng-click="vm.exportToImage()"><i class="fa fa-camera fa-white" uib-tooltip="Genereer een screenshot van de website." tooltip-trigger="mouseenter" tooltip-placement="left" tooltip-append-to-body="true"></i>
+            </a>
+        </div>--> 
 
         <map mapid="main" class="map-main" ng-show="vm.$layerService.visual.mapVisible" style="padding-top: 100px; top:-100px" ng-style="{width: vm.$layerService.visual.mapWidth ? vm.$layerService.visual.mapWidth : '100%', left: vm.$layerService.visual.alignMapRight ? vm.$layerService.visual.mapWidth : 0}"></map>
 
