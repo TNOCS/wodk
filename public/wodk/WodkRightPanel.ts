@@ -35,6 +35,8 @@ module WodkRightPanel {
 
     export class WodkRightPanelCtrl {
 
+        private placesAutocomplete;
+
         public static $inject = [
             '$scope',
             '$http',
@@ -67,7 +69,38 @@ module WodkRightPanel {
         }
 
         public init() {
-            if (!this.layerService.project || !this.layerService.project.groups) return;
+            this.placesAutocomplete = (( < any > window).places)({
+                container: document.querySelector('#search-address-rp'),
+                countries: ['nl'],
+                autocompleteOptions: {
+                    minLength: 3,
+                    openOnFocus: true,
+                    dropdownMenuContainer: document.querySelector('#search-suggestions-rp')
+                }
+            });
+
+            this.placesAutocomplete.on('change', (e) => {
+                console.log(e.suggestion);
+                this.selectLocation(e.suggestion);
+            });
+
+            this.placesAutocomplete.on('suggestions', (e) => {
+                // console.log(e.suggestions);
+            });
+
+            this.placesAutocomplete.on('limit', (e) => {
+                console.log(e.message);
+                this.messageBusService.notifyError('Limiet bereikt', `De limiet voor de adressen-zoekfunctie is bereikt. ${e.message}`);
+            });
+
+            this.placesAutocomplete.on('error', (e) => {
+                console.log(e.message);
+            });
+        }
+
+        private selectLocation(loc: WodkNavbar.IPlacesResult) {
+            this.messageBusService.publish('wodk', 'address', loc);
+            this.placesAutocomplete.close();
         }
 
         public update() {

@@ -22,6 +22,8 @@ module App {
     declare var omnivore;
     declare var L;
 
+    export var ARCGIS_GEOCODE_URL = 'https://services.arcgisonline.nl/arcgis/rest/services/Geocoder_BAG/GeocodeServer/findAddressCandidates?f=pjson';
+
     export class AppCtrl {
         // It provides $injector with information about dependencies to be injected into constructor
         // it is better to have it close to the constructor, because the parameters must match in count and type.
@@ -212,7 +214,7 @@ module App {
             if (this.searchCache.hasOwnProperty(q)) {
                 this.geocodeCallback(this.searchCache[q], q);
             } else {
-                let uri = 'https://services.arcgisonline.nl/arcgis/rest/services/Geocoder_BAG/GeocodeServer/findAddressCandidates?f=pjson';
+                let uri = ARCGIS_GEOCODE_URL;
                 uri += `&SingleLine=${encodeURIComponent(q)}&outFields=Match_addr,City,Subregion,Region`;
                 this.$http.get(uri)
                     .then((res: {data: csComp.Services.IEsriSearchResult}) => {
@@ -235,8 +237,9 @@ module App {
                             name: f.attributes['Match_addr'],
                             score: (f.score / 101),
                             province: f.attributes['Region'],
-                            coordinates: [f.location.x, f.location.y]
-                        }
+                            coordinates: [f.location.x, f.location.y],
+                            administrationLevel: (f.attributes['Addr_type'].indexOf('Admin') >= 0 ? wodk.AdministrationLevel.gemeente : wodk.AdministrationLevel.pand)
+                        };
                     }
                 });
             }, 0);

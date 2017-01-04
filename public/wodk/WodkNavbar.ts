@@ -62,6 +62,7 @@ module WodkNavbar {
         private elementClass = 'wodk-navbar';
         private placesAutocomplete;
         private lastResult: IPlacesResult;
+        private lastSuggestion: IPlacesResult;
 
         constructor(
             private $scope: IWodkNavbarScope,
@@ -92,6 +93,7 @@ module WodkNavbar {
 
             this.placesAutocomplete.on('suggestions', (e) => {
                 // console.log(e.suggestions);
+                this.lastSuggestion = (e.suggestions ? e.suggestions[0] : {});
             });
 
             this.placesAutocomplete.on('limit', (e) => {
@@ -109,10 +111,15 @@ module WodkNavbar {
         }
 
         private selectLocation(loc: IPlacesResult) {
+            if (!loc || _.isEmpty(loc)) return;
             this.lastResult = loc;
             this.messageBusService.publish('wodk', 'address', this.lastResult);
             this.placesAutocomplete.close();
             this.toggle();
+        }
+
+        private selectFirstResult() {
+            this.selectLocation(this.lastSuggestion);
         }
 
         public toggle() {

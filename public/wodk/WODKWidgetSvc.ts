@@ -18,6 +18,9 @@ module wodk {
     }
 
     export var WODK_MAP_PADDING = { paddingBottomRight: new L.Point(610, 0), paddingTopLeft: new L.Point(0, 105) };
+    export var SEARCH_GEMEENTE_URL = 'searchgemeente';
+    export var SEARCH_BUURT_URL = 'searchbuurt';
+    export var SEARCH_PAND_URL = 'searchpand';
 
     export class WODKWidgetSvc {
         static $inject = [
@@ -333,7 +336,7 @@ module wodk {
             let cb = Q.defer();
             this.$http({
                 method: 'POST',
-                url: "searchgemeente",
+            url: SEARCH_GEMEENTE_URL,
                 data: { loc: data.geojson },
             }).then((response) => {
                 if (response) {
@@ -355,7 +358,7 @@ module wodk {
             if (data.address.administrationLevel <= AdministrationLevel.buurt) {
                 this.$http({
                     method: 'POST',
-                    url: "searchbuurt",
+                    url: SEARCH_BUURT_URL,
                     data: { loc: data.geojson },
                 }).then((response) => {
                     if (response) {
@@ -379,7 +382,7 @@ module wodk {
             if (data.address.administrationLevel <= AdministrationLevel.pand) {
                 this.$http({
                     method: 'POST',
-                    url: "searchpand",
+                    url: SEARCH_PAND_URL,
                     data: { loc: data.geojson },
                 }).then((response) => {
                     if (response && response.data && response.data.hasOwnProperty('identificatie')) {
