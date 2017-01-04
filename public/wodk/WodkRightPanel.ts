@@ -44,7 +44,8 @@ module WodkRightPanel {
             'messageBusService',
             'actionService',
             '$timeout',
-            '$sce'
+            '$sce',
+            'wodkWidgetSvc'
         ];
 
         constructor(
@@ -54,7 +55,8 @@ module WodkRightPanel {
             private messageBusService: csComp.Services.MessageBusService,
             private actionService: csComp.Services.ActionService,
             private $timeout: ng.ITimeoutService,
-            private $sce: ng.ISCEService
+            private $sce: ng.ISCEService,
+            private wodkWidgetSvc: wodk.WODKWidgetSvc
         ) {
             $scope.vm = this;
 
@@ -96,19 +98,31 @@ module WodkRightPanel {
             this.placesAutocomplete.on('error', (e) => {
                 console.log(e.message);
             });
+
+            let lastPlace: wodk.IAddressResult = this.wodkWidgetSvc.lastLoadedAddress;
+            if (lastPlace) {
+                this.placesAutocomplete.setVal(`${lastPlace.name}, ${lastPlace.province}`);
+                this.placesAutocomplete.autocomplete.pin.style.display = 'none';
+                this.placesAutocomplete.autocomplete.clear.style.display = '';
+            }
         }
 
-        private selectLocation(loc: WodkNavbar.IPlacesResult) {
+        private selectLocation(loc: wodk.IPlacesResult) {
             this.messageBusService.publish('wodk', 'address', loc);
             this.placesAutocomplete.close();
         }
 
-        public update() {
-            
+        public publish(msg: string) {
+            this.messageBusService.publish('wodk', msg);
         }
 
         public close() {
-            this.layerService.visual.rightPanelVisible = false;
+            this.$timeout(() => {
+                this.layerService.visual.rightPanelVisible = false;
+            }, 0);
+            this.$timeout(() => {
+                this.layerService.visual.rightPanelVisible = true;
+            }, 1000);
         }
     }
 }

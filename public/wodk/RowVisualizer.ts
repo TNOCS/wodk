@@ -25,7 +25,7 @@ module wodk {
                     var fn = $compile(el);
                     //console.log('this is the compile function of legendDirective');
                     return scope => {
-                        fn(scope);
+                        fn(scope, () => {}); //https://docs.angularjs.org/error/$compile/multilink
                     };
                 },
                 replace: true,    // Remove the directive from the DOM

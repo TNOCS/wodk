@@ -535,7 +535,7 @@ body {
 }
 
 .wodk-navbar {
-    z-index: 9999;
+    z-index: 1111;
     position: absolute;
     top: 0px;
     left: 0px;
@@ -559,6 +559,9 @@ h2 {
     -ms-transition: max-height 0.7s;
     -o-transition: max-height 0.7s;
     transition: max-height 0.7s;
+}
+
+.wodk-navbar .row.opened {
 }
 
 .wodk-navbar .row.collapsed {
@@ -616,6 +619,10 @@ h2 {
     padding: 0 6px 0 6px;
 }
 
+.small-margin-top {
+    margin: 8px 0 0 0;
+}
+
 .wodk-form-group input.small {
     line-height: 24px;
     font-size: 16px;
@@ -645,3 +652,13 @@ h2 {
     height: 36px;
     line-height: 36px;
 }
+
+.animate-rightpanel {
+    max-width: 5000px;
+    -webkit-transition: max-width 0.7s;
+    -moz-transition: max-width 0.7s;
+    -ms-transition: max-width 0.7s;
+    -o-transition: max-width 0.7s;
+    transition: max-width 0.7s;
+}
+

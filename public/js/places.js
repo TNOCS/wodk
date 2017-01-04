@@ -231,6 +231,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  clear.innerHTML = _clear2.default;
 	  autocompleteContainer.appendChild(clear);
 	  clear.style.display = 'none';
+		autocompleteInstance.clear = clear;
 	
 	  var pin = document.createElement('button');
 	  pin.setAttribute('type', 'button');
@@ -238,6 +239,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  pin.classList.add(prefix + '-icon-pin');
 	  pin.innerHTML = _address2.default;
 	  autocompleteContainer.appendChild(pin);
+		autocompleteInstance.pin = pin;
 	
 	  pin.addEventListener('click', function () {
 	    return autocompleteInstance.focus();
@@ -6301,9 +6303,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      } else if (this.autoselectOnBlur && topSuggestionDatum) {
 	        this._select(topSuggestionDatum);
 	      } else {
-	        // this.isActivated = false;
-	        // this.dropdown.empty();
-	        // this.dropdown.close();
+	        this.isActivated = false;
+	        this.dropdown.empty();
+	        this.dropdown.close();
 	      }
 	    }
 	  },

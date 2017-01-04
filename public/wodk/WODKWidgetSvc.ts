@@ -17,10 +17,35 @@ module wodk {
         administrationLevel: AdministrationLevel;
     }
 
+    export interface IPlacesResult {
+        name: string;
+        administrative: string;
+        city?: string;
+        country?: string;
+        countryCode?: string;
+        type: string;
+        latlng: {
+            lat: number,
+            lng: number
+        };
+        postcode?: string;
+        highlight: any;
+        hit: any;
+        hitIndex: number;
+        query: string;
+        rawAnswer: any;
+        value: string;
+    }
+
     export var WODK_MAP_PADDING = { paddingBottomRight: new L.Point(610, 0), paddingTopLeft: new L.Point(0, 105) };
-    export var SEARCH_GEMEENTE_URL = 'searchgemeente';
-    export var SEARCH_BUURT_URL = 'searchbuurt';
-    export var SEARCH_PAND_URL = 'searchpand';
+
+    // export var SEARCH_GEMEENTE_URL = 'searchgemeente';
+    // export var SEARCH_BUURT_URL = 'searchbuurt';
+    // export var SEARCH_PAND_URL = 'searchpand';
+
+    export var SEARCH_GEMEENTE_URL = 'http://zorgopdekaart.nl/bagwoningen/public/searchgemeente';
+    export var SEARCH_BUURT_URL = 'http://zorgopdekaart.nl/bagwoningen/public/searchbuurt';
+    export var SEARCH_PAND_URL = 'http://zorgopdekaart.nl/bagwoningen/public/searchpand';
 
     export class WODKWidgetSvc {
         static $inject = [
@@ -40,6 +65,7 @@ module wodk {
          * to the selected features and then clear this flag again.
          */
         public zoomNextFeatureFlag: boolean = false;
+        public lastLoadedAddress: IAddressResult;
         protected lastSelectedName: string;
         protected lastSelectedType: string;
         protected gemeenteSelectie: IFeature[];
@@ -78,6 +104,29 @@ module wodk {
             this.selectionHistory = [];
             this.gemeenteSelectie = [];
             this.buurtSelectie = [];
+
+            this.$messageBusService.subscribe('wodk', (title, value: any) => {
+                switch (title) {
+                    case 'back':
+                        this.stepBack();
+                        break;
+                    case 'forward':
+                        this.stepForward();
+                        break;
+                    case 'refresh':
+                        this.clearHistory();
+                        this.$layerService.actionService.execute('reload project');
+                        break;
+                    case 'home':
+                        location.href = 'http://www.zorgopdekaart.nl';
+                        break;
+                    case 'address':
+                        this.loadAddress(value);
+                        break;
+                    default:
+                        break;
+                }
+            });
 
             this.$messageBusService.subscribe('project', (action: string) => {
                 if (action === 'loaded') {
@@ -275,8 +324,7 @@ module wodk {
             }
         }
 
-
-        public loadAddress(searchResult: WodkNavbar.IPlacesResult) {
+        public loadAddress(searchResult: IPlacesResult) {
             let address: IAddressResult = {
                     province: searchResult.administrative || '',
                     name: searchResult.name || '',
@@ -284,6 +332,7 @@ module wodk {
                     coordinates: [searchResult.latlng.lng, searchResult.latlng.lat],
                     administrationLevel: AdministrationLevel.pand
             };
+            this.lastLoadedAddress = address;
             switch (searchResult.type) {
                 case 'address':
                     address.administrationLevel = AdministrationLevel.pand;
@@ -317,12 +366,9 @@ module wodk {
                         } else if (address.administrationLevel <= AdministrationLevel.buurt) {
                             this.$mapService.getMap().flyTo(new L.LatLng(address.coordinates[1], address.coordinates[0]), 15, WODK_MAP_PADDING);
                         } else {
-                            this.$mapService.getMap().flyTo(new L.LatLng(address.coordinates[1], address.coordinates[0]), 12, WODK_MAP_PADDING);
+                            this.$mapService.getMap().flyTo(new L.LatLng(address.coordinates[1], address.coordinates[0]), 11, WODK_MAP_PADDING);
                         }
-                        let w = this.rightPanel;
-                        let rpt = csComp.Helpers.createRightPanelTab(w.id, w.directive, w.data, w.title, '{{"FEATURE_INFO" | translate}}', w.icon, true, false);
-                        rpt.open = true;
-                        this.$messageBusService.publish('rightpanel', 'activate', rpt);
+                        this.openRightPanel();
                     }
                 })
                 .done((finished) => {
@@ -330,6 +376,13 @@ module wodk {
                         console.log('Finished address search');
                     }
                 });
+        }
+
+        private openRightPanel() {
+            let w = this.rightPanel;
+            let rpt = csComp.Helpers.createRightPanelTab(w.id, w.directive, w.data, w.title, '{{"FEATURE_INFO" | translate}}', w.icon, true, false);
+            rpt.open = true;
+            this.$messageBusService.publish('rightpanel', 'activate', rpt);
         }
 
         private findGemeente(data: { geojson: string, address: IAddressResult }): Q.Promise<any> {

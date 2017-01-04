@@ -122,22 +122,6 @@ module wodk {
                         this.buurtFilterDim = null;
                         this.addBuurtFilter(value);
                         break;
-                    case 'back':
-                        this.wodkWidgetSvc.stepBack();
-                        break;
-                    case 'forward':
-                        this.wodkWidgetSvc.stepForward();
-                        break;
-                    case 'refresh':
-                        this.wodkWidgetSvc.clearHistory();
-                        this.$layerService.actionService.execute('reload project');
-                        break;
-                    case 'home':
-                        location.href = "http://www.zorgopdekaart.nl";
-                        break;
-                    case 'address':
-                        this.wodkWidgetSvc.loadAddress(value);
-                        break;
                     default:
                         break;
                 }

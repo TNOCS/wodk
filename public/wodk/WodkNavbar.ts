@@ -28,26 +28,6 @@ module WodkNavbar {
         isOpen: boolean;
     }
 
-    export interface IPlacesResult {
-        name: string;
-        administrative: string;
-        city?: string;
-        country?: string;
-        countryCode?: string;
-        type: string;
-        latlng: {
-            lat: number,
-            lng: number
-        };
-        postcode?: string;
-        highlight: any;
-        hit: any;
-        hitIndex: number;
-        query: string;
-        rawAnswer: any;
-        value: string;
-    }
-
     export class WodkNavbarCtrl {
         public static $inject = [
             '$scope',
@@ -61,8 +41,8 @@ module WodkNavbar {
 
         private elementClass = 'wodk-navbar';
         private placesAutocomplete;
-        private lastResult: IPlacesResult;
-        private lastSuggestion: IPlacesResult;
+        private lastResult: wodk.IPlacesResult;
+        private lastSuggestion: wodk.IPlacesResult;
 
         constructor(
             private $scope: IWodkNavbarScope,
@@ -110,10 +90,11 @@ module WodkNavbar {
             }, 5000);
         }
 
-        private selectLocation(loc: IPlacesResult) {
+        private selectLocation(loc: wodk.IPlacesResult) {
             if (!loc || _.isEmpty(loc)) return;
             this.lastResult = loc;
             this.messageBusService.publish('wodk', 'address', this.lastResult);
+            this.placesAutocomplete.setVal('');
             this.placesAutocomplete.close();
             this.toggle();
         }
@@ -125,6 +106,7 @@ module WodkNavbar {
         public toggle() {
             this.$timeout(() => {
                 this.$scope.isOpen = !this.$scope.isOpen;
+                if (this.$scope.isOpen) document.getElementById('search-address').focus();
             }, 0);
         }
 
