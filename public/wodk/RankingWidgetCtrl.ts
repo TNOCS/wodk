@@ -17,7 +17,8 @@ module wodk {
         activeStyleProperty: csComp.Services.IPropertyType;
     }
 
-    declare var String;
+    declare
+    var String;
 
     export class RankingWidgetCtrl {
         private scope: IRankingWidgetScope;
@@ -97,7 +98,7 @@ module wodk {
             }));
 
             if (this.$layerService.$rootScope.$$phase !== '$apply' && this.$layerService.$rootScope.$$phase !== '$digest') {
-                this.$layerService.$rootScope.$apply(); 
+                this.$layerService.$rootScope.$apply();
             }
         }
 
@@ -140,11 +141,15 @@ module wodk {
             let l = this.$layerService.findLoadedLayer(this.$scope.data.layerId);
             if (!l || !this.selectedProp) return;
             if (this.selectedProp === 'geen') {
-                var oldStyles = l.group.styles.filter((s: csComp.Services.GroupStyle) => { return s.property.startsWith('_rank'); });
+                var oldStyles = l.group.styles.filter((s: csComp.Services.GroupStyle) => {
+                    return s.property.startsWith('_rank');
+                });
                 oldStyles.forEach((s) => {
                     this.$layerService.removeStyle(s);
                 });
-                var oldFilters = l.group.filters.filter((f: csComp.Services.GroupFilter) => { return f.property.startsWith('_rank'); });
+                var oldFilters = l.group.filters.filter((f: csComp.Services.GroupFilter) => {
+                    return f.property.startsWith('_rank');
+                });
                 oldFilters.forEach((f) => {
                     this.$layerService.removeFilter(f);
                 });
@@ -271,7 +276,7 @@ module wodk {
             });
             if (!exists) {
                 var gf = new csComp.Services.GroupFilter();
-                gf.property = property.label;//prop.split('#').pop();
+                gf.property = property.label; //prop.split('#').pop();
                 gf.id = 'buttonwidget_filter';
                 gf.group = projGroup;
                 gf.filterType = 'row';
@@ -280,7 +285,9 @@ module wodk {
                 gf.filterLabel = le.label;
                 console.log('Setting filter');
                 this.$layerService.rebuildFilters(projGroup);
-                projGroup.filters = projGroup.filters.filter((f) => { return f.id !== gf.id; });
+                projGroup.filters = projGroup.filters.filter((f) => {
+                    return f.id !== gf.id;
+                });
                 this.$layerService.setFilter(gf, projGroup);
             }
         }

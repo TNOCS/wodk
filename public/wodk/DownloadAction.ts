@@ -7,22 +7,22 @@ module DownloadAction {
         public id: string = 'DownloadActionModel';
         private layerService: csComp.Services.LayerService;
 
-        stop() { }
-        addFeature(feature: IFeature) { }
-        removeFeature(feature: IFeature) { }
-        selectFeature(feature: IFeature) { }
-        addLayer(layer : csComp.Services.IProjectLayer) {}
-        removeLayer(layer : csComp.Services.IProjectLayer) {}
+        stop() {}
+        addFeature(feature: IFeature) {}
+        removeFeature(feature: IFeature) {}
+        selectFeature(feature: IFeature) {}
+        addLayer(layer: csComp.Services.IProjectLayer) {}
+        removeLayer(layer: csComp.Services.IProjectLayer) {}
 
         getFeatureActions(feature: IFeature): IActionOption[] {
             if (feature.properties.hasOwnProperty('Name') && feature.fType && feature.fType.name.toLowerCase() === 'buurt') {
-                var downloadPdfOption = <IActionOption>{
+                var downloadPdfOption = < IActionOption > {
                     title: `Open rekenmodel voor buurt "${feature.properties['Name']}"`
                 };
                 downloadPdfOption.callback = this.downloadPdf;
                 return [downloadPdfOption];
             } else if (feature.properties.hasOwnProperty('Name') && feature.fType && feature.fType.name.toLowerCase() === 'gemeente') {
-                var downloadPdfOption = <IActionOption>{
+                var downloadPdfOption = < IActionOption > {
                     title: `Open rekenmodel voor gemeente "${feature.properties['Name']}"`
                 };
                 downloadPdfOption.callback = this.downloadPdf;
@@ -32,8 +32,7 @@ module DownloadAction {
             }
         }
 
-        getLayerActions(layer : csComp.Services.IProjectLayer)
-        {
+        getLayerActions(layer: csComp.Services.IProjectLayer) {
             return null;
         }
 
@@ -41,27 +40,27 @@ module DownloadAction {
             return [];
         }
 
-        deselectFeature(feature: IFeature) { }
+        deselectFeature(feature: IFeature) {}
 
-        updateFeature(feuture: IFeature) { }
+        updateFeature(feuture: IFeature) {}
 
         private downloadPdf(feature: IFeature, layerService: csComp.Services.LayerService) {
             if (!feature) return;
 
             function findSet(query: string, layerService: csComp.Services.LayerService, cb: Function) {
-            // layerService.$http.get(`http://localhost:3002/findlzwset/${query}`)
-            layerService.$http.get(`http://www.zorgopdekaart.nl/bagwoningen/public/findlzwset/${query}`)
-                .then((res) => {
-                    cb(res.data);
-                })
-                .catch(() => {
-                    console.log('Error finding lzwset');
-                    cb();
-                });
+                // layerService.$http.get(`http://localhost:3002/findlzwset/${query}`)
+                layerService.$http.get(`http://www.zorgopdekaart.nl/bagwoningen/public/findlzwset/${query}`)
+                    .then((res) => {
+                        cb(res.data);
+                    })
+                    .catch(() => {
+                        console.log('Error finding lzwset');
+                        cb();
+                    });
             }
 
             if (feature.properties.hasOwnProperty('bu_code') && feature.fType && feature.fType.name.toLowerCase() === 'buurt') {
-                let wdw = window.open('','_blank');
+                let wdw = window.open('', '_blank');
                 findSet(feature.properties['bu_code'], layerService, (set) => {
                     if (set) {
                         let url = `http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set ${set.s}.pdf#page=${set.p}`;
@@ -70,7 +69,7 @@ module DownloadAction {
                 });
             }
             if (feature.properties.hasOwnProperty('GM_CODE') && feature.fType && feature.fType.name.toLowerCase() === 'gemeente') {
-                let wdw = window.open('','_blank');
+                let wdw = window.open('', '_blank');
                 findSet(feature.properties['GM_CODE'], layerService, (set) => {
                     if (set) {
                         let url = `http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set ${set.s}.pdf#page=${set.p}`;

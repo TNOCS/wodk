@@ -1,12 +1,12 @@
 module wodk {
 
     export enum AdministrationLevel {
-        pand  = 0,
-        buurt = 1,
-        wijk = 2,
-        gemeente = 3,
-        provincie = 4,
-        land = 5
+        pand = 0,
+            buurt = 1,
+            wijk = 2,
+            gemeente = 3,
+            provincie = 4,
+            land = 5
     }
 
     export interface IAddressResult {
@@ -15,32 +15,35 @@ module wodk {
         score: number;
         coordinates: number[];
         administrationLevel: AdministrationLevel;
-        bu_code?: string;
+        bu_code ? : string;
     }
 
     export interface IPlacesResult {
         name: string;
         administrative: string;
-        city?: string;
-        country?: string;
-        countryCode?: string;
+        city ? : string;
+        country ? : string;
+        countryCode ? : string;
         type: string;
         latlng: {
             lat: number,
             lng: number
         };
-        postcode?: string;
+        postcode ? : string;
         highlight: any;
         hit: any;
         hitIndex: number;
         query: string;
         rawAnswer: any;
         value: string;
-        bu_naam?: string;
-        bu_code?: string;
+        bu_naam ? : string;
+        bu_code ? : string;
     }
 
-    export var WODK_MAP_PADDING = { paddingBottomRight: new L.Point(610, 0), paddingTopLeft: new L.Point(0, 105) };
+    export var WODK_MAP_PADDING = {
+        paddingBottomRight: new L.Point(610, 0),
+        paddingTopLeft: new L.Point(0, 105)
+    };
 
     // export var SEARCH_GEMEENTE_URL = 'searchgemeente';
     // export var SEARCH_BUURT_URL = 'searchbuurt';
@@ -78,15 +81,15 @@ module wodk {
         private htmlStyle = '<div style="display:inline-block;vertical-align:middle;text-align:center;background:{{bgColor}};width:28px;height:28px;border-radius:50% 0 0 50%;border-style:solid;border-color:rgba(0,0,150,1);border-width:2px;opacity:1;box-shadow:2px 3px 6px 0px rgba(0,0,0,0.75);"><img src="images/i.png" style="width:24px;height:24px;display:block;"></div>';
         private htmlStyleInvisible = '<div style="display:inline-block;width:2px;height:2px;"></div>';
         private rightPanel = {
-                'id': 'wodkright',
-                'title': 'Rechterpaneel',
-                'directive': 'wodkrightpanel',
-                'enabled': true,
-                'style': 'vws-white',
-                'position': 'rightpanel',
-                'icon': 'home',
-                'data': {}
-            };
+            'id': 'wodkright',
+            'title': 'Rechterpaneel',
+            'directive': 'wodkrightpanel',
+            'enabled': true,
+            'style': 'vws-white',
+            'position': 'rightpanel',
+            'icon': 'home',
+            'data': {}
+        };
 
         constructor(
             private $rootScope: ng.IRootScopeService,
@@ -97,7 +100,7 @@ module wodk {
             private dashboardService: csComp.Services.DashboardService,
             private $http: ng.IHttpService) {
 
-            this.dashboardService.widgetTypes['wodkwidget'] = <csComp.Services.IWidget>{
+            this.dashboardService.widgetTypes['wodkwidget'] = < csComp.Services.IWidget > {
                 id: 'wodkwidget',
                 icon: 'images/wodkwidget.png',
                 description: 'Show wodkwidget'
@@ -159,7 +162,9 @@ module wodk {
 
                     // NOTE EV: You may run into problems here when calling this inside an angular apply cycle.
                     // Alternatively, check for it or use (dependency injected) $timeout.
-                    if ($rootScope.$$phase !== '$apply' && $rootScope.$$phase !== '$digest') { $rootScope.$apply(); }
+                    if ($rootScope.$$phase !== '$apply' && $rootScope.$$phase !== '$digest') {
+                        $rootScope.$apply();
+                    }
                     //$rootScope.$apply();
                 }
             });
@@ -220,7 +225,9 @@ module wodk {
                 this.replaceIconColor(fClone);
                 this.$layerService.activeMapRenderer.addFeature(fClone);
                 this.$messageBusService.publish('feature', 'onUpdateWidgets', fClone);
-                if (this.$layerService.$rootScope.$$phase !== '$apply' && this.$layerService.$rootScope.$$phase !== '$digest') { this.$layerService.$rootScope.$apply(); }
+                if (this.$layerService.$rootScope.$$phase !== '$apply' && this.$layerService.$rootScope.$$phase !== '$digest') {
+                    this.$layerService.$rootScope.$apply();
+                }
             }
 
             if (!l.dataSourceParameters) l.dataSourceParameters = {};
@@ -296,7 +303,9 @@ module wodk {
                 this.replaceIconColor(fClone);
                 this.$layerService.activeMapRenderer.addFeature(fClone);
                 this.$messageBusService.publish('feature', 'onUpdateWidgets', fClone);
-                if (this.$layerService.$rootScope.$$phase !== '$apply' && this.$layerService.$rootScope.$$phase !== '$digest') { this.$layerService.$rootScope.$apply(); }
+                if (this.$layerService.$rootScope.$$phase !== '$apply' && this.$layerService.$rootScope.$$phase !== '$digest') {
+                    this.$layerService.$rootScope.$apply();
+                }
             }
 
             if (!l.dataSourceParameters) l.dataSourceParameters = {};
@@ -353,8 +362,20 @@ module wodk {
                 default:
                     break;
             }
-            let geojson = JSON.stringify({ type: 'Point', coordinates: address.coordinates, crs: { type: "name", properties: { name: "EPSG:4326" } } });
-            var data = { geojson: geojson, address: address };
+            let geojson = JSON.stringify({
+                type: 'Point',
+                coordinates: address.coordinates,
+                crs: {
+                    type: "name",
+                    properties: {
+                        name: "EPSG:4326"
+                    }
+                }
+            });
+            var data = {
+                geojson: geojson,
+                address: address
+            };
             this.findGemeente(data)
                 .then(this.selectGemeente.bind(this))
                 .then(this.findBuurt.bind(this))
@@ -368,7 +389,7 @@ module wodk {
                         console.log('Error while loading address: ' + err.message);
                     }
                     if (address.coordinates && address.administrationLevel === AdministrationLevel.pand) {
-                            this.$mapService.getMap().flyTo(new L.LatLng(address.coordinates[1], address.coordinates[0]), 18, WODK_MAP_PADDING);
+                        this.$mapService.getMap().flyTo(new L.LatLng(address.coordinates[1], address.coordinates[0]), 18, WODK_MAP_PADDING);
                     }
                     this.openRightPanel();
                 })
@@ -386,12 +407,19 @@ module wodk {
             this.$messageBusService.publish('rightpanel', 'activate', rpt);
         }
 
-        private findGemeente(data: { geojson: string, address: IAddressResult }): Q.Promise<any> {
+        private findGemeente(data: {
+            geojson: string,
+            address: IAddressResult
+        }): Q.Promise < any > {
             let cb = Q.defer();
-            let urlData = (data.address.administrationLevel === AdministrationLevel.buurt) ? {bu_code: data.address.bu_code} : {loc: data.geojson};
+            let urlData = (data.address.administrationLevel === AdministrationLevel.buurt) ? {
+                bu_code: data.address.bu_code
+            } : {
+                loc: data.geojson
+            };
             this.$http({
                 method: 'POST',
-            url: SEARCH_GEMEENTE_URL,
+                url: SEARCH_GEMEENTE_URL,
                 data: urlData,
             }).then((response) => {
                 if (response) {
@@ -408,7 +436,11 @@ module wodk {
             return cb.promise;
         }
 
-        private findBuurt(data: { geojson: string, address: IAddressResult, gm_code: string }): Q.Promise<any> {
+        private findBuurt(data: {
+            geojson: string,
+            address: IAddressResult,
+            gm_code: string
+        }): Q.Promise < any > {
             let cb = Q.defer();
             if (data.address.administrationLevel <= AdministrationLevel.buurt) {
                 if (data.address.bu_code) {
@@ -418,7 +450,9 @@ module wodk {
                     this.$http({
                         method: 'POST',
                         url: SEARCH_BUURT_URL,
-                        data: { loc: data.geojson },
+                        data: {
+                            loc: data.geojson
+                        },
                     }).then((response) => {
                         if (response) {
                             data['bu_code'] = response.data['bu_code'];
@@ -437,13 +471,20 @@ module wodk {
             return cb.promise;
         }
 
-        private findPand(data: { geojson: string, address: IAddressResult, gm_code: string, bu_code: string }): Q.Promise<any> {
+        private findPand(data: {
+            geojson: string,
+            address: IAddressResult,
+            gm_code: string,
+            bu_code: string
+        }): Q.Promise < any > {
             let cb = Q.defer();
             if (data.address.administrationLevel <= AdministrationLevel.pand) {
                 this.$http({
                     method: 'POST',
                     url: SEARCH_PAND_URL,
-                    data: { loc: data.geojson },
+                    data: {
+                        loc: data.geojson
+                    },
                 }).then((response) => {
                     if (response && response.data && response.data.hasOwnProperty('identificatie')) {
                         data['identificatie'] = response.data['identificatie'];
@@ -463,7 +504,12 @@ module wodk {
             return cb.promise;
         }
 
-        private selectGemeente(data: { geojson: string, address: IAddressResult, gm_code: string, bu_code: string }): Q.Promise<any> {
+        private selectGemeente(data: {
+            geojson: string,
+            address: IAddressResult,
+            gm_code: string,
+            bu_code: string
+        }): Q.Promise < any > {
             let cb = Q.defer();
             let f = this.$layerService.findFeatureByPropertyValue('GM_CODE', data.gm_code);
             if (f) {
@@ -485,7 +531,12 @@ module wodk {
             return cb.promise;
         }
 
-        private selectBuurt(data: { geojson: string, address: IAddressResult, gm_code: string, bu_code: string }): Q.Promise<any> {
+        private selectBuurt(data: {
+            geojson: string,
+            address: IAddressResult,
+            gm_code: string,
+            bu_code: string
+        }): Q.Promise < any > {
             let cb = Q.defer();
             setTimeout(() => {
                 let f = this.$layerService.findFeatureByPropertyValue('bu_code', data.bu_code);
@@ -509,7 +560,13 @@ module wodk {
             return cb.promise;
         }
 
-        private selectPand(data: { geojson: string, address: IAddressResult, gm_code: string, bu_code: string, identificatie: string }): Q.Promise<any> {
+        private selectPand(data: {
+            geojson: string,
+            address: IAddressResult,
+            gm_code: string,
+            bu_code: string,
+            identificatie: string
+        }): Q.Promise < any > {
             let cb = Q.defer();
             setTimeout(() => {
                 let f = this.$layerService.findFeatureById('c_' + data.identificatie);
@@ -528,7 +585,7 @@ module wodk {
         /***
          * Zoom to the supplied layer. Optionally supply an additional feature to be included in the bounds area.
          */
-        private zoomToLayer(l: csComp.Services.ProjectLayer, f?: IFeature) {
+        private zoomToLayer(l: csComp.Services.ProjectLayer, f ? : IFeature) {
             setTimeout(() => {
                 let features: IFeature[] = (f) ? _.union(l.data.features, [f]) : l.data.features;
                 let b = csComp.Helpers.GeoExtensions.getBoundingBox(features);
@@ -538,7 +595,12 @@ module wodk {
         }
 
         public zoomToFeature(f: IFeature) {
-            let l = <csComp.Services.ProjectLayer>{ data: { features: [f], type: "FeatureCollection" } };
+            let l = < csComp.Services.ProjectLayer > {
+                data: {
+                    features: [f],
+                    type: "FeatureCollection"
+                }
+            };
             this.zoomToLayer(l);
         }
 
@@ -595,18 +657,26 @@ module wodk {
                 case 'gemeente':
                     var buurtLayer = this.$layerService.findLoadedLayer('bagbuurten');
                     if (!buurtLayer) break;
-                    var featsToRemove = _.filter(buurtLayer.data.features, (f: IFeature) => { return (f.properties['gm_code_2015'] && f.properties['gm_code_2015'] === lastItem.properties['GM_CODE']) });
+                    var featsToRemove = _.filter(buurtLayer.data.features, (f: IFeature) => {
+                        return (f.properties['gm_code_2015'] && f.properties['gm_code_2015'] === lastItem.properties['GM_CODE'])
+                    });
                     // featsToRemove.forEach((f) => {
                     //     this.$layerService.removeFeature(f);
                     // });
-                    this.$layerService.removeFeatureBatch(_.map(featsToRemove, (val, key) => { return val.id; }), buurtLayer);
+                    this.$layerService.removeFeatureBatch(_.map(featsToRemove, (val, key) => {
+                        return val.id;
+                    }), buurtLayer);
                     if (this.$layerService.$mapService.map.getZoom() > 13) this.$layerService.$mapService.map.setZoom(13);
                     break;
                 case 'bagbuurten':
                     var bagLayer = this.$layerService.findLoadedLayer('bagcontouren');
                     if (!bagLayer) break;
-                    var featsToRemove = _.filter(bagLayer.data.features, (f: IFeature) => { return (f.properties['buurtcode'] && f.properties['buurtcode'] === lastItem.properties['bu_code']) });
-                    this.$layerService.removeFeatureBatch(_.map(featsToRemove, (val, key) => { return val.id; }), bagLayer);
+                    var featsToRemove = _.filter(bagLayer.data.features, (f: IFeature) => {
+                        return (f.properties['buurtcode'] && f.properties['buurtcode'] === lastItem.properties['bu_code'])
+                    });
+                    this.$layerService.removeFeatureBatch(_.map(featsToRemove, (val, key) => {
+                        return val.id;
+                    }), bagLayer);
                     // featsToRemove.forEach((f) => {
                     //     this.$layerService.removeFeature(f);
                     // });
@@ -618,22 +688,32 @@ module wodk {
                 var legendFeature;
                 if (this.lastSelectedType === 'gemeente') {
                     var buurtLayer = this.$layerService.findLoadedLayer('bagbuurten');
-                    this.$messageBusService.publish('updatelegend', 'update', _.find(buurtLayer.group.styles, (s) => { return s.enabled; }));
+                    this.$messageBusService.publish('updatelegend', 'update', _.find(buurtLayer.group.styles, (s) => {
+                        return s.enabled;
+                    }));
                 } else if (this.lastSelectedType === 'buurt') {
                     var woningLayer = this.$layerService.findLoadedLayer('bagcontouren');
-                    this.$messageBusService.publish('updatelegend', 'update', _.find(woningLayer.group.styles, (s) => { return s.enabled; }));
+                    this.$messageBusService.publish('updatelegend', 'update', _.find(woningLayer.group.styles, (s) => {
+                        return s.enabled;
+                    }));
                 } else {
-                    this.$messageBusService.publish('updatelegend', 'update', _.find(l.group.styles, (s) => { return s.enabled; }));
+                    this.$messageBusService.publish('updatelegend', 'update', _.find(l.group.styles, (s) => {
+                        return s.enabled;
+                    }));
                 }
                 let lastSelectedItem: IFeature = (this.selectionHistory.length > 0 ? this.selectionHistory[this.selectionHistory.length - 1] : lastItem);
-                lastSelectedItem = _.find(this.$layerService.project.features, (f: IFeature) => { return lastSelectedItem.id === f.id; });
+                lastSelectedItem = _.find(this.$layerService.project.features, (f: IFeature) => {
+                    return lastSelectedItem.id === f.id;
+                });
                 lastSelectedItem.isSelected = true;
                 this.$messageBusService.publish('feature', 'onUpdateWidgets', lastSelectedItem);
             } else {
                 this.$messageBusService.publish('updatelegend', 'hidelegend');
             }
 
-            if (this.$rootScope.$$phase !== '$apply' && this.$rootScope.$$phase !== '$digest') { this.$rootScope.$apply(); };
+            if (this.$rootScope.$$phase !== '$apply' && this.$rootScope.$$phase !== '$digest') {
+                this.$rootScope.$apply();
+            };
         };
 
         public setLastSelectedName(name: string) {
@@ -661,8 +741,8 @@ module wodk {
     var moduleName = 'csComp';
 
     /**
-      * Module
-      */
+     * Module
+     */
     export var myModule;
     try {
         myModule = angular.module(moduleName);

@@ -49,14 +49,14 @@ module wodk {
             private wodkWidgetSvc: wodk.WODKWidgetSvc
         ) {
             $scope.vm = this;
-            var par = <any>$scope.$parent;
+            var par = < any > $scope.$parent;
             this.widget = par.widget;
             this.parentWidget = $("#" + this.widget.elementId).parent();
 
-            $scope.data = <WODKWidgetData>this.widget.data;
+            $scope.data = < WODKWidgetData > this.widget.data;
             $scope.minimized = false;
 
-            if ((<any>window).document) {
+            if (( < any > window).document) {
                 this.exporterAvailable = true;
             } else {
                 this.exporterAvailable = false;
@@ -129,9 +129,9 @@ module wodk {
         }
 
         private canMinimize() {
-            return (this.$scope.data.hasOwnProperty('canMinimize'))
-                ? this.$scope.data['canMinimize']
-                : true;
+            return (this.$scope.data.hasOwnProperty('canMinimize')) ?
+                this.$scope.data['canMinimize'] :
+                true;
         }
 
         private minimize() {
@@ -144,9 +144,9 @@ module wodk {
         }
 
         private canClose() {
-            return (this.$scope.data.hasOwnProperty('canClose'))
-                ? this.$scope.data['canClose']
-                : true;
+            return (this.$scope.data.hasOwnProperty('canClose')) ?
+                this.$scope.data['canClose'] :
+                true;
         }
 
         private close() {
@@ -170,7 +170,9 @@ module wodk {
                 layer.group.ndx.remove();
             }
             layer.group.ndx = crossfilter([]);
-            layer.group.ndx.add(_.map(layer.group.markers, (item: any, key) => { return item.feature; }));
+            layer.group.ndx.add(_.map(layer.group.markers, (item: any, key) => {
+                return item.feature;
+            }));
             // dc.filterAll();
             this.buurtFilterVal = minSize;
             var propId = 'data/resourceTypes/Buurt.json#ster_totaal';
@@ -187,7 +189,7 @@ module wodk {
             this.applyFilter(this.buurtFilterVal, layer.group);
         }
 
-        private applyFilter( filterValue, group) {
+        private applyFilter(filterValue, group) {
             console.log('Apply buurtfilter');
             if (filterValue === null || filterValue === undefined || isNaN(filterValue)) return;
             if (!this.buurtFilterDim) return;
@@ -288,7 +290,9 @@ module wodk {
                 gf.group.ndx.remove();
             }
             gf.group.ndx = crossfilter([]);
-            gf.group.ndx.add(_.map(gf.group.markers, (item: any, key) => { return item.feature; }));
+            gf.group.ndx.add(_.map(gf.group.markers, (item: any, key) => {
+                return item.feature;
+            }));
             gf.title = this.$scope.style.title;
             gf.filterLabel = null;
             gf.filterType = 'row';
@@ -331,7 +335,7 @@ module wodk {
                 console.log('rowFilterElm not found.');
                 return;
             }
-            var rowFilterScope = <Filters.IRowFilterScope>rowFilterElm.scope();
+            var rowFilterScope = < Filters.IRowFilterScope > rowFilterElm.scope();
             if (!rowFilterScope) {
                 console.log('rowFilterScope not found.');
                 return;
@@ -352,7 +356,7 @@ module wodk {
                 console.log('rowVisualizerElm not found.');
                 return;
             }
-            var rowFilterScope = <wodk.IRowVisualizerScope>rowFilterElm.scope();
+            var rowFilterScope = < wodk.IRowVisualizerScope > rowFilterElm.scope();
             if (!rowFilterScope) {
                 console.log('rowVisualizerScope not found.');
                 return;
@@ -364,20 +368,27 @@ module wodk {
         }
 
         private getHTML(id: string) {
-               var content = `<html><head>`;
-               $.each(document.getElementsByTagName('link'), (ind: number, val: HTMLLinkElement) => { content += val.outerHTML; });
-               $.each(document.getElementsByTagName('script'), (ind: number, val: HTMLLinkElement) => { content += val.outerHTML; });
-               content += `</head><body>`;                       
-               content += $(id).parent().parent().prop('outerHTML');
-               content += `</body></html>`;
-               return content;
+            var content = `<html><head>`;
+            $.each(document.getElementsByTagName('link'), (ind: number, val: HTMLLinkElement) => {
+                content += val.outerHTML;
+            });
+            $.each(document.getElementsByTagName('script'), (ind: number, val: HTMLLinkElement) => {
+                content += val.outerHTML;
+            });
+            content += `</head><body>`;
+            content += $(id).parent().parent().prop('outerHTML');
+            content += `</body></html>`;
+            return content;
         }
 
         private getDimensions(id: string) {
             let dom = $(id).parent().parent();
             let w = dom.outerWidth(true);
             let h = dom.outerHeight(true);
-            return {width: w, height: h};
+            return {
+                width: w,
+                height: h
+            };
         }
 
         public exportToImage(id: string) {
@@ -385,7 +396,12 @@ module wodk {
             this.$http({
                 method: 'POST',
                 url: "screenshot",
-                data: { html: this.getHTML('#' + id), width: dim.width, height: dim.height, topOffset: 100 },
+                data: {
+                    html: this.getHTML('#' + id),
+                    width: dim.width,
+                    height: dim.height,
+                    topOffset: 100
+                },
             }).then((response) => {
                 csComp.Helpers.saveImage(response.data.toString(), 'Woningaanpassingen screenshot', 'png', true);
             }, (error) => {
@@ -405,4 +421,5 @@ module wodk {
                     cb();
                 });
         }
-}}
+    }
+}

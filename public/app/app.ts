@@ -217,7 +217,9 @@ module App {
                 let uri = ARCGIS_GEOCODE_URL;
                 uri += `&SingleLine=${encodeURIComponent(q)}&outFields=Match_addr,City,Subregion,Region`;
                 this.$http.get(uri)
-                    .then((res: {data: csComp.Services.IEsriSearchResult}) => {
+                    .then((res: {
+                        data: csComp.Services.IEsriSearchResult
+                    }) => {
                         let r = res.data;
                         this.geocodeCallback(r, q);
                     })
