@@ -246,10 +246,10 @@
             <dashboardirective container="main" class="dashboard-container" dashboard="vm.$dashboardService.mainDashboard"></dashboardirective>
         </div>
 
-        <div class="container-fluid rightpanel-container animate-rightpanel" ng-style="!vm.$layerService.visual.rightPanelVisible && {'max-width':0, 'margin-right':0}" >
+        <div class="container-fluid rightpanel-container animate-rightpanel" ng-show="vm.$layerService.visual.rightPanelVisible" >
             <div class="row">
                 <div id="rightpanel" class="col-xs-12 col-sm-offset-6 col-sm-6 col-md-offset-8 col-md-4 col-md-offset-9 col-lg-3 pull-right rightpanel-main" style="bottom: 0; top: 0">
-                    <div id="rightpanelTabContainer" class="rightpanel-tabs-container animate-rightpanel">
+                    <div id="rightpanelTabContainer" class="rightpanel-tabs-container">
                         <!-- Nav tabs -->
                         <ul ng-hide="true" id="rightpanelTabs" class="nav nav-tabs" ng-class="{'rightpanelTabs-collapsed' : !vm.$layerService.visual.rightPanelVisible}">
                             <li style="margin-top:5px" ng-style="!vm.$layerService.visual.rightPanelVisible && {'opacity':0}" ng-click="vm.$layerService.visual.rightPanelVisible = false"

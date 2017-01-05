@@ -16,7 +16,7 @@ module WodkRightPanel {
         return {
             restrict: 'E', // E = elements, other options are A=attributes and C=classes
             scope: {}, // isolated scope, separated from parent. Is however empty, as this directive is self contained by using the messagebus.
-            templateUrl: '/wodk/WodkRightPanel.tpl.html',
+            templateUrl: 'wodk/WodkRightPanel.tpl.html',
             replace: true, // Remove the directive from the DOM
             transclude: false, // Add elements and attributes to the template
             controller: WodkRightPanelCtrl
@@ -122,7 +122,7 @@ module WodkRightPanel {
             }, 0);
             this.$timeout(() => {
                 this.layerService.visual.rightPanelVisible = true;
-            }, 1000);
+            }, 2000);
         }
     }
 }

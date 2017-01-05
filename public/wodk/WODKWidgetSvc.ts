@@ -15,6 +15,7 @@ module wodk {
         score: number;
         coordinates: number[];
         administrationLevel: AdministrationLevel;
+        bu_code?: string;
     }
 
     export interface IPlacesResult {
@@ -35,6 +36,8 @@ module wodk {
         query: string;
         rawAnswer: any;
         value: string;
+        bu_naam?: string;
+        bu_code?: string;
     }
 
     export var WODK_MAP_PADDING = { paddingBottomRight: new L.Point(610, 0), paddingTopLeft: new L.Point(0, 105) };
@@ -326,16 +329,20 @@ module wodk {
 
         public loadAddress(searchResult: IPlacesResult) {
             let address: IAddressResult = {
-                    province: searchResult.administrative || '',
-                    name: searchResult.name || '',
-                    score: 0.99,
-                    coordinates: [searchResult.latlng.lng, searchResult.latlng.lat],
-                    administrationLevel: AdministrationLevel.pand
+                province: searchResult.administrative || '',
+                name: searchResult.name || '',
+                score: 0.99,
+                coordinates: [searchResult.latlng.lng || 0, searchResult.latlng.lat || 0],
+                administrationLevel: AdministrationLevel.pand,
+                bu_code: searchResult.bu_code
             };
             this.lastLoadedAddress = address;
             switch (searchResult.type) {
                 case 'address':
                     address.administrationLevel = AdministrationLevel.pand;
+                    break;
+                case 'buurt':
+                    address.administrationLevel = AdministrationLevel.buurt;
                     break;
                 case 'city':
                     address.administrationLevel = AdministrationLevel.gemeente;
@@ -360,16 +367,10 @@ module wodk {
                     } else {
                         console.log('Error while loading address: ' + err.message);
                     }
-                    if (address.coordinates) {
-                        if (address.administrationLevel <= AdministrationLevel.pand) {
+                    if (address.coordinates && address.administrationLevel === AdministrationLevel.pand) {
                             this.$mapService.getMap().flyTo(new L.LatLng(address.coordinates[1], address.coordinates[0]), 18, WODK_MAP_PADDING);
-                        } else if (address.administrationLevel <= AdministrationLevel.buurt) {
-                            this.$mapService.getMap().flyTo(new L.LatLng(address.coordinates[1], address.coordinates[0]), 15, WODK_MAP_PADDING);
-                        } else {
-                            this.$mapService.getMap().flyTo(new L.LatLng(address.coordinates[1], address.coordinates[0]), 11, WODK_MAP_PADDING);
-                        }
-                        this.openRightPanel();
                     }
+                    this.openRightPanel();
                 })
                 .done((finished) => {
                     if (finished) {
@@ -387,10 +388,11 @@ module wodk {
 
         private findGemeente(data: { geojson: string, address: IAddressResult }): Q.Promise<any> {
             let cb = Q.defer();
+            let urlData = (data.address.administrationLevel === AdministrationLevel.buurt) ? {bu_code: data.address.bu_code} : {loc: data.geojson};
             this.$http({
                 method: 'POST',
             url: SEARCH_GEMEENTE_URL,
-                data: { loc: data.geojson },
+                data: urlData,
             }).then((response) => {
                 if (response) {
                     data['gm_code'] = response.data['gm_code'];
@@ -409,21 +411,26 @@ module wodk {
         private findBuurt(data: { geojson: string, address: IAddressResult, gm_code: string }): Q.Promise<any> {
             let cb = Q.defer();
             if (data.address.administrationLevel <= AdministrationLevel.buurt) {
-                this.$http({
-                    method: 'POST',
-                    url: SEARCH_BUURT_URL,
-                    data: { loc: data.geojson },
-                }).then((response) => {
-                    if (response) {
-                        data['bu_code'] = response.data['bu_code'];
-                        cb.resolve(data);
-                    } else {
+                if (data.address.bu_code) {
+                    data['bu_code'] = data.address.bu_code;
+                    cb.resolve(data);
+                } else {
+                    this.$http({
+                        method: 'POST',
+                        url: SEARCH_BUURT_URL,
+                        data: { loc: data.geojson },
+                    }).then((response) => {
+                        if (response) {
+                            data['bu_code'] = response.data['bu_code'];
+                            cb.resolve(data);
+                        } else {
+                            cb.reject(new Error(`Buurt not found in ${data.gm_code}.`));
+                        }
+                    }, (error) => {
+                        console.log(error);
                         cb.reject(new Error(`Buurt not found in ${data.gm_code}.`));
-                    }
-                }, (error) => {
-                    console.log(error);
-                    cb.reject(new Error(`Buurt not found in ${data.gm_code}.`));
-                });
+                    });
+                }
             } else {
                 cb.reject('Too specific');
             }

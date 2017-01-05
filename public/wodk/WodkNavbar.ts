@@ -43,6 +43,7 @@ module WodkNavbar {
         private placesAutocomplete;
         private lastResult: wodk.IPlacesResult;
         private lastSuggestion: wodk.IPlacesResult;
+        private lastSuggestionDataset: string;
 
         constructor(
             private $scope: IWodkNavbarScope,
@@ -67,13 +68,14 @@ module WodkNavbar {
             });
 
             this.placesAutocomplete.on('change', (e) => {
-                console.log(e.suggestion);
-                this.selectLocation(e.suggestion);
+                console.log(e.dataset, e.suggestion);
+                this.selectLocation(e.suggestion, e.dataset);
             });
 
             this.placesAutocomplete.on('suggestions', (e) => {
                 // console.log(e.suggestions);
                 this.lastSuggestion = (e.suggestions ? e.suggestions[0] : {});
+                this.lastSuggestionDataset = (e.dataset ? e.dataset : '');
             });
 
             this.placesAutocomplete.on('limit', (e) => {
@@ -86,12 +88,17 @@ module WodkNavbar {
             });
 
             setTimeout(() => {
-                this.test();
+                // this.test();
             }, 5000);
         }
 
-        private selectLocation(loc: wodk.IPlacesResult) {
+        private selectLocation(loc: wodk.IPlacesResult, dataset: string) {
             if (!loc || _.isEmpty(loc)) return;
+            if (dataset && dataset === 'buurten') {
+                loc.type = 'buurt';
+                loc.name = loc.bu_naam;
+                loc.latlng = {lng: 0, lat: 0};
+            }
             this.lastResult = loc;
             this.messageBusService.publish('wodk', 'address', this.lastResult);
             this.placesAutocomplete.setVal('');
@@ -100,14 +107,16 @@ module WodkNavbar {
         }
 
         private selectFirstResult() {
-            this.selectLocation(this.lastSuggestion);
+            this.selectLocation(this.lastSuggestion, this.lastSuggestionDataset);
         }
 
         public toggle() {
             this.$timeout(() => {
                 this.$scope.isOpen = !this.$scope.isOpen;
-                if (this.$scope.isOpen) document.getElementById('search-address').focus();
             }, 0);
+            this.$timeout(() => {
+                if (this.$scope.isOpen) document.getElementById('search-address').focus();
+            }, 100);
         }
 
         private test() {
@@ -497,7 +506,7 @@ module WodkNavbar {
                 'value': 'Heerenveen, Friesland, Nederland',
                 'administrationLevel': wodk.AdministrationLevel.gemeente
             };
-            this.selectLocation(res);
+            this.selectLocation(res, '');
         }
     }
 }

@@ -17,6 +17,7 @@
     "./public/app/*.ts",
     "./public/wodk/*.ts",
     "./public/translations/*.ts",
+    "./searchData/*.ts",
     "./server.ts"
   ],
   "exclude": [

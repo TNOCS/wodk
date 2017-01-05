@@ -561,16 +561,26 @@ h2 {
     transition: max-height 0.7s;
 }
 
+.container-fluid {
+    width: 100%;
+    padding: 0 0 0 0;
+}
+
 .wodk-navbar .row.opened {
 }
 
-.wodk-navbar .row.collapsed {
+.wodk-navbar .row.collapsed2 {
     max-height: 0px;
     -webkit-transition: max-height 0.6s, background 0.3s;
     -moz-transition: max-height 0.6s, background 0.3s;
     -ms-transition: max-height 0.6s, background 0.3s;
     -o-transition: max-height 0.6s, background 0.3s;
     transition: max-height 0.6s, background 0.3s;
+}
+
+.open-navbar-btn {
+    top: 0;
+    margin: 0 auto 0 auto;
 }
 
 .wodk-btn {
@@ -637,7 +647,6 @@ h2 {
 }
 
 .ap-dataset-places {
-    max-height: 140px;
 }
 
 .ap-suggestions {
@@ -645,6 +654,7 @@ h2 {
 
 .ap-dropdown-menu {
     margin-bottom: 6px;
+    max-height: 140px;
     overflow-y: auto;
 }
 
@@ -653,12 +663,71 @@ h2 {
     line-height: 36px;
 }
 
-.animate-rightpanel {
-    max-width: 5000px;
-    -webkit-transition: max-width 0.7s;
-    -moz-transition: max-width 0.7s;
-    -ms-transition: max-width 0.7s;
-    -o-transition: max-width 0.7s;
-    transition: max-width 0.7s;
+.animate-rightpanel.ng-hide-add {
+  transform: rotateY(0);
+  transform-origin: right;
+  transition: all 0.4s ease-in;
 }
 
+.animate-rightpanel.ng-hide-add.ng-hide-add-active {
+  transform: rotateY(-90deg);
+}
+
+.animate-rightpanel.ng-hide-remove {
+  transform: rotateY(-90deg);
+  transform-origin: right;
+  transition: all 0.5s ease-out;
+}
+
+.animate-rightpanel.ng-hide-remove.ng-hide-remove-active {
+  transform: rotateY(0);
+}
+
+.animate-navbar {
+    z-index: 1111;
+}
+
+
+.animate-navbar.ng-hide-add {
+  transform: rotateX(0);
+  transform-origin: top;
+  transition: all 0.4s ease-in;
+}
+
+.animate-navbar.ng-hide-add.ng-hide-add-active {
+  transform: rotateX(-90deg);
+}
+
+.animate-navbar.ng-hide-remove {
+  transform: rotateX(-90deg);
+  transform-origin: top;
+  transition: all 0.5s ease-out;
+}
+
+.animate-navbar.ng-hide-remove.ng-hide-remove-active {
+  transform: rotateX(0);
+}
+
+.animate-navbar-btn {
+  z-index: 1110;
+}
+
+.animate-navbar-btn.ng-hide-add {
+  transform: rotateX(0);
+  transform-origin: down;
+  transition: all 0.1s ease-in;
+}
+
+.animate-navbar-btn.ng-hide-add.ng-hide-add-active {
+  transform: rotateX(-90deg);
+}
+
+.animate-navbar-btn.ng-hide-remove {
+  transform: rotateX(-90deg);
+  transform-origin: top;
+  transition: all 0.4s cubic-bezier(0.75, 0, 1, -0.25);
+}
+
+.animate-navbar-btn.ng-hide-remove.ng-hide-remove-active {
+  transform: rotateX(0);
+}
