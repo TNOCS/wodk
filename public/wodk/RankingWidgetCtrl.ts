@@ -17,8 +17,7 @@ module wodk {
         activeStyleProperty: csComp.Services.IPropertyType;
     }
 
-    declare
-    var String;
+    declare var String;
 
     export class RankingWidgetCtrl {
         private scope: IRankingWidgetScope;

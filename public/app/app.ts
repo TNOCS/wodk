@@ -238,7 +238,7 @@ module App {
                         this.foundAddresses[f.address] = {
                             name: f.attributes['Match_addr'],
                             score: (f.score / 101),
-                            province: f.attributes['Region'],
+                            administrative: f.attributes['Region'],
                             coordinates: [f.location.x, f.location.y],
                             administrationLevel: (f.attributes['Addr_type'].indexOf('Admin') >= 0 ? wodk.AdministrationLevel.gemeente : wodk.AdministrationLevel.pand)
                         };

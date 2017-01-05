@@ -97,6 +97,7 @@ module WodkNavbar {
             if (dataset && dataset === 'buurten') {
                 loc.type = 'buurt';
                 loc.name = loc.bu_naam;
+                loc.administrative = loc.gm_naam;
                 loc.latlng = {lng: 0, lat: 0};
             }
             this.lastResult = loc;

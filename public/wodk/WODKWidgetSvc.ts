@@ -10,7 +10,7 @@ module wodk {
     }
 
     export interface IAddressResult {
-        province: string;
+        administrative: string;
         name: string;
         score: number;
         coordinates: number[];
@@ -38,6 +38,7 @@ module wodk {
         value: string;
         bu_naam ? : string;
         bu_code ? : string;
+        gm_naam ? : string;
     }
 
     export var WODK_MAP_PADDING = {
@@ -229,6 +230,15 @@ module wodk {
                     this.$layerService.$rootScope.$apply();
                 }
             }
+            this.lastLoadedAddress = {
+                administrationLevel: AdministrationLevel.gemeente,
+                bu_code: f.properties['GM_CODE'],
+                name: this.lastSelectedName,
+                score: 0.99,
+                administrative: 'Nederland',
+                coordinates: f.geometry.coordinates
+            };
+            this.openRightPanel();
 
             if (!l.dataSourceParameters) l.dataSourceParameters = {};
             l.dataSourceParameters['searchProperty'] = f.properties['GM_CODE'];
@@ -277,6 +287,14 @@ module wodk {
             this.buurtSelectie.push(JSON.parse(JSON.stringify(csComp.Services.Feature.serialize(f))));
             this.lastSelectedType = 'buurt';
             this.lastSelectedName = f.properties['Name'];
+            this.lastLoadedAddress = {
+                administrationLevel: AdministrationLevel.buurt,
+                bu_code: f.properties['bu_code'],
+                name: this.lastSelectedName,
+                score: 0.99,
+                administrative: f.properties['gm_naam'],
+                coordinates: f.geometry.coordinates
+            };
             var fClone: IFeature = csComp.Services.Feature.serialize(f);
             // Replace polygon buurt by polyline
             var bl = this.$layerService.findLayer('bagbuurten');
@@ -303,6 +321,7 @@ module wodk {
                 this.replaceIconColor(fClone);
                 this.$layerService.activeMapRenderer.addFeature(fClone);
                 this.$messageBusService.publish('feature', 'onUpdateWidgets', fClone);
+                this.openRightPanel();
                 if (this.$layerService.$rootScope.$$phase !== '$apply' && this.$layerService.$rootScope.$$phase !== '$digest') {
                     this.$layerService.$rootScope.$apply();
                 }
@@ -338,7 +357,7 @@ module wodk {
 
         public loadAddress(searchResult: IPlacesResult) {
             let address: IAddressResult = {
-                province: searchResult.administrative || '',
+                administrative: searchResult.administrative || '',
                 name: searchResult.name || '',
                 score: 0.99,
                 coordinates: [searchResult.latlng.lng || 0, searchResult.latlng.lat || 0],

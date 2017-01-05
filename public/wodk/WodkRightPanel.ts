@@ -82,8 +82,8 @@ module WodkRightPanel {
             });
 
             this.placesAutocomplete.on('change', (e) => {
-                console.log(e.suggestion);
-                this.selectLocation(e.suggestion);
+                console.log(e.dataset, e.suggestion);
+                this.selectLocation(e.suggestion, e.dataset);
             });
 
             this.placesAutocomplete.on('suggestions', (e) => {
@@ -101,13 +101,20 @@ module WodkRightPanel {
 
             let lastPlace: wodk.IAddressResult = this.wodkWidgetSvc.lastLoadedAddress;
             if (lastPlace) {
-                this.placesAutocomplete.setVal(`${lastPlace.name}, ${lastPlace.province}`);
+                this.placesAutocomplete.setVal(`${lastPlace.name}, ${lastPlace.administrative}`);
                 this.placesAutocomplete.autocomplete.pin.style.display = 'none';
                 this.placesAutocomplete.autocomplete.clear.style.display = '';
             }
         }
 
-        private selectLocation(loc: wodk.IPlacesResult) {
+        private selectLocation(loc: wodk.IPlacesResult, dataset: string) {
+            if (!loc || _.isEmpty(loc)) return;
+            if (dataset && dataset === 'buurten') {
+                loc.type = 'buurt';
+                loc.name = loc.bu_naam;
+                loc.administrative = loc.gm_naam;
+                loc.latlng = {lng: 0, lat: 0};
+            }
             this.messageBusService.publish('wodk', 'address', loc);
             this.placesAutocomplete.close();
         }
