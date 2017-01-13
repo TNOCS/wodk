@@ -66,13 +66,25 @@ cs.start(() => {
 
         cs.server.post(deployPath + (runOnZODKServer ? '/public' : '') + '/searchgemeente', (req, res) => {
             console.log('/searchgemeente');
-            bagDatabase.searchGemeenteAtLocation(req.body.loc, 1, (searchResult: any[]) => {
-                if (!searchResult || !searchResult.length || searchResult.length === 0) {
-                    res.sendStatus(404);
-                } else {
-                    res.status(200).send({ gm_code: 'GM' + _.lpad(searchResult[0].gemeentecode, 4, '0') });
-                }
-            });
+            if (req.body.loc) {
+                bagDatabase.searchGemeenteAtLocation(req.body.loc, 1, (searchResult: any[]) => {
+                    if (!searchResult || !searchResult.length || searchResult.length === 0) {
+                        res.sendStatus(404);
+                    } else {
+                        res.status(200).send({ gm_code: 'GM' + _.lpad(searchResult[0].gemeentecode, 4, '0') });
+                    }
+                });
+            } else if (req.body.bu_code) {
+                bagDatabase.searchGemeenteWithBuCode(req.body.bu_code, 1, (searchResult: any[]) => {
+                    if (!searchResult || !searchResult.length || searchResult.length === 0) {
+                        res.sendStatus(404);
+                    } else {
+                        res.status(200).send({ gm_code: searchResult[0].gemeentecode });
+                    }
+                });
+            } else {
+                res.sendStatus(404);
+            }
         });
 
         cs.server.post(deployPath + (runOnZODKServer ? '/public' : '') + '/searchbuurt', (req, res) => {
