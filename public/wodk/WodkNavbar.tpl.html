@@ -6,8 +6,16 @@
             </div>
         </div>
         <div class="row" ng-class="{collapsed: !isOpen, opened: isOpen}">
+            <div class="col-sm-12 col-md-6 col-md-offset-3" style="margin-top: 16px;">
+                <a data-ng-click="vm.publish('home')" class="text-grey">
+                    <i class="fa fa-long-arrow-left"></i>
+                    <span>{{'TERUG_NAAR_ZODK' | translate}}</span>
+                </a>
+            </div>
+        </div>
+        <div class="row" ng-class="{collapsed: !isOpen, opened: isOpen}">
             <div class="col-sm-12 col-md-6 col-md-offset-3">
-                <h2>Aanpasbaarheid woningen</h2>
+                <h2>{{'AANPASBAARHEID_WONINGEN' | translate}}</h2>
                 <div>
                     Een goed beeld geven van de regionale situatie van de aanpasbaarheid van woningen zodat partijen beter in staat zijn het
                     gesprek aan te gaan m.b.t. tot toekomstig perspectief voor de infrastructuur.
@@ -17,10 +25,10 @@
         <div class="row" ng-class="{collapsed: !isOpen, opened: isOpen}">
             <div class="col-sm-12 col-md-6 col-md-offset-3">
                 <br>
-                <div class="text-grey">Zoek op plaatsnaam, postcode of adres</div>
+                <div class="text-grey">{{'SEARCH_HINT' | translate}}</div>
                 <form class="" role="search">
                     <div class="form-group wodk-form-group">
-                        <button ng-click="vm.selectFirstResult()" class="btn btn-success wodk-btn">Zoeken</button>
+                        <button ng-click="vm.selectFirstResult()" class="btn btn-success wodk-btn wodk-btn-green">Zoeken</button>
                         <!--<span><input id="search-address" type="text" class="form-control" ng-model="vm.addressQuery" ng-change="vm.filterAddress()" ng-keyup="$event.keyCode == 13 && vm.selectFirstAddress()"
                         placeholder="" autocomplete="off" autofocus>
                     </span>-->
@@ -37,10 +45,10 @@
         </div>
         <div class="row">
             <div class="col-sm-12 col-md-6 col-md-offset-3 text-center">
-                <a ng-click="vm.toggle()" class="btn btn-primary wodk-btn">
+                <a ng-click="vm.toggle()" class="btn btn-primary wodk-btn wodk-btn-blue">
                     <div>
                         <div style="font-size: 22px" class="fa fa-caret-up"></div>
-                        <div>MENU</div>
+                        <div>{{'MENU' | translate | uppercase}}</div>
                     </div>
                 </a>
             </div>
@@ -49,10 +57,10 @@
     <div class="container-fluid animate-navbar-btn" ng-show="!isOpen" style="position:absolute;top:0">
         <div class="row" style="background: transparent">
             <div class="col-sm-12 col-md-6 col-md-offset-3 text-center">
-                <a class="btn btn-primary wodk-btn open-navbar-btn" ng-click="vm.toggle()">
+                <a class="btn btn-primary wodk-btn wodk-btn-blue open-navbar-btn" ng-click="vm.toggle()">
                     <div>
                         <div style="font-size: 22px" class="fa fa-caret-down"></div>
-                        <div>MENU</div>
+                        <div>{{'MENU' | translate | uppercase}}</div>
                     </div>
                 </a>
             </div>

@@ -201,8 +201,10 @@ module wodk {
             var f = this.$layerService.lastSelectedFeature;
             if (!l || !f || !f.properties || !f.properties['GM_CODE']) return;
             if (f.geometry.type.toLowerCase() === 'point') return;
-            this.selectionHistory.push(JSON.parse(JSON.stringify(csComp.Services.Feature.serialize(f))));
-            this.gemeenteSelectie.push(JSON.parse(JSON.stringify(csComp.Services.Feature.serialize(f))));
+            let serializedF = csComp.Services.Feature.serialize(f);
+            serializedF.featureTypeName = f.fType.id;
+            this.selectionHistory.push(JSON.parse(JSON.stringify(serializedF)));
+            this.gemeenteSelectie.push(JSON.parse(JSON.stringify(serializedF)));
             this.lastSelectedType = 'gemeente';
             this.lastSelectedName = f.properties['Name'];
             var fClone: IFeature = csComp.Services.Feature.serialize(f);
@@ -283,8 +285,10 @@ module wodk {
             // this.$layerService.map.getMap().fitBounds(b);
             // this.$layerService.centerFeatureOnMap(this.$layerService.selectedFeatures);
             // this.$layerService.map.getMap().setZoom(15);
-            this.selectionHistory.push(JSON.parse(JSON.stringify(csComp.Services.Feature.serialize(f))));
-            this.buurtSelectie.push(JSON.parse(JSON.stringify(csComp.Services.Feature.serialize(f))));
+            let serializedF = csComp.Services.Feature.serialize(f);
+            serializedF.featureTypeName = f.fType.id;
+            this.selectionHistory.push(JSON.parse(JSON.stringify(serializedF)));
+            this.buurtSelectie.push(JSON.parse(JSON.stringify(serializedF)));
             this.lastSelectedType = 'buurt';
             this.lastSelectedName = f.properties['Name'];
             this.lastLoadedAddress = {

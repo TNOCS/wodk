@@ -37,7 +37,7 @@
         "title": "OpenStreetMap",
         "subtitle": "Road",
         "url": "http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
-        "isDefault": true,
+        "isDefault": false,
         "minZoom": 0,
         "maxZoom": 19,
         "cesium_url": "http://c.tile.openstreetmap.fr/hot/",
@@ -123,6 +123,19 @@
         "cesium_url": "http://d.basemaps.cartocdn.com/light_nolabels/",
         "attribution": "Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community",
         "preview": "http://a.basemaps.cartocdn.com/light_nolabels/11/673/1051.png"
+    }, {
+        "title": "Positron with labels",
+        "id": "Positronlabels",
+        "subtitle": "From CartoDB",
+        "subdomains": ["a", "b", "c", "d"],
+        "minZoom": 0,
+        "maxZoom": 20,
+        "isDefault": true,
+        "cesium_maptype": "openstreetmap",
+        "url": "http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+        "cesium_url": "http://d.basemaps.cartocdn.com/light_all/",
+        "attribution": "Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community",
+        "preview": "http://a.basemaps.cartocdn.com/light_all/11/673/1051.png"
     }],
     "projects": [{
         "title": "MY_TITLE",

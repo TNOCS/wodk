@@ -18,7 +18,8 @@ module Translations {
             RANKING_HELP: 'Selecteer een eigenschap uit de lijst om de gemeentes te rangschikken',
             NR_GROUPS: 'Groepen',
             RANKING: 'Overzichten',
-            PROPERTY: 'Eigenschap'
+            PROPERTY: 'Eigenschap',
+            SEARCH_HINT: 'Zoek op plaatsnaam, postcode of adres'
         };
     }
 }

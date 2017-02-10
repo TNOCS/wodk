@@ -224,7 +224,8 @@ module wodk {
         }
 
         private createLegendEntries(pType: csComp.Services.IPropertyType, bins: number[]): csComp.Services.Legend {
-            let colorscale = chroma.scale(['#f7f7ff', '#7caeff', '#001575']).mode('lab').domain([0, bins.length - 1]);
+            // let colorscale = chroma.scale(['#f7f7ff', '#7caeff', '#001575']).mode('lab').domain([0, bins.length - 1]);
+            let colorscale = chroma.scale(['#efeada', '#dfd4b5', '#dfd4b5']).mode('lab').domain([0, bins.length - 1]);
             let leg = new csComp.Services.Legend();
             let stringFmt = pType.stringFormat || '{0:#,#.###}';
             leg.id = `_rank_${this.selectedProp}`;

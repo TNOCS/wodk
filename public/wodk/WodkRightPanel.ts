@@ -36,6 +36,9 @@ module WodkRightPanel {
     export class WodkRightPanelCtrl {
 
         private placesAutocomplete;
+        private propertyTable: PropertyTable;
+        private selectedItems: IFeature[];
+        private mBusHandles: csComp.Services.MessageBusHandle[] = [];
 
         public static $inject = [
             '$scope',
@@ -44,6 +47,7 @@ module WodkRightPanel {
             'messageBusService',
             'actionService',
             '$timeout',
+            '$translate',
             '$sce',
             'wodkWidgetSvc'
         ];
@@ -55,6 +59,7 @@ module WodkRightPanel {
             private messageBusService: csComp.Services.MessageBusService,
             private actionService: csComp.Services.ActionService,
             private $timeout: ng.ITimeoutService,
+            private $translate: ng.translate.ITranslateService,
             private $sce: ng.ISCEService,
             private wodkWidgetSvc: wodk.WODKWidgetSvc
         ) {
@@ -66,6 +71,12 @@ module WodkRightPanel {
             } else {
                 $scope.data = < any > par.data;
             }
+
+            this.mBusHandles.push(this.messageBusService.subscribe('feature', (title, f) => {
+                this.featureMessageReceived(title, f);
+            }));
+
+            this.propertyTable = new PropertyTable(this.layerService);
 
             this.init();
         }
@@ -99,12 +110,8 @@ module WodkRightPanel {
                 console.log(e.message);
             });
 
-            let lastPlace: wodk.IAddressResult = this.wodkWidgetSvc.lastLoadedAddress;
-            if (lastPlace) {
-                this.placesAutocomplete.setVal(`${lastPlace.name}, ${lastPlace.administrative}`);
-                this.placesAutocomplete.autocomplete.pin.style.display = 'none';
-                this.placesAutocomplete.autocomplete.clear.style.display = '';
-            }
+            this.selectedItems = this.wodkWidgetSvc.getSelectionHistory();
+            this.selectFeature(_.last(this.selectedItems));
         }
 
         private selectLocation(loc: wodk.IPlacesResult, dataset: string) {
@@ -113,11 +120,41 @@ module WodkRightPanel {
                 loc.type = 'buurt';
                 loc.name = loc.bu_naam;
                 loc.administrative = loc.gm_naam;
-                loc.latlng = {lng: 0, lat: 0};
+                loc.latlng = {
+                    lng: 0,
+                    lat: 0
+                };
             }
             this.messageBusService.publish('wodk', 'address', loc);
             this.placesAutocomplete.close();
         }
+
+        private selectFeature(f: IFeature) {
+            if (!f || _.isEmpty(f)) return;
+            this.propertyTable.displayFeature(f);
+            this.updateSearchInput();
+        }
+
+        private updateSearchInput() {
+            let lastPlace: wodk.IAddressResult = this.wodkWidgetSvc.lastLoadedAddress;
+            if (lastPlace) {
+                this.placesAutocomplete.setVal(`${lastPlace.name}, ${lastPlace.administrative}`);
+                this.placesAutocomplete.autocomplete.pin.style.display = 'none';
+                this.placesAutocomplete.autocomplete.clear.style.display = '';
+            }
+        }
+
+        private featureMessageReceived(title: string, f: IFeature): void {
+            switch (title) {
+                case 'onFeatureDeselect':
+                    break;
+                case 'onFeatureSelect':
+                    this.selectFeature(f);
+                    this.selectedItems = this.wodkWidgetSvc.getSelectionHistory();
+                    break;
+            };
+        }
+
 
         public publish(msg: string) {
             this.messageBusService.publish('wodk', msg);
@@ -127,9 +164,6 @@ module WodkRightPanel {
             this.$timeout(() => {
                 this.layerService.visual.rightPanelVisible = false;
             }, 0);
-            this.$timeout(() => {
-                this.layerService.visual.rightPanelVisible = true;
-            }, 2000);
         }
     }
 }

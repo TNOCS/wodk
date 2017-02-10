@@ -107,6 +107,10 @@ module WodkNavbar {
             this.toggle();
         }
 
+        private publish(message: string) {
+            this.messageBusService.publish('wodk', message);
+        }
+
         private selectFirstResult() {
             this.selectLocation(this.lastSuggestion, this.lastSuggestionDataset);
         }
