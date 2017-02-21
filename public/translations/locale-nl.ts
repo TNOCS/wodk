@@ -21,7 +21,9 @@ module Translations {
             PROPERTY: 'Eigenschap',
             SEARCH_HINT: 'Zoek op plaatsnaam, postcode of adres',
             AANPASBAARHEID_WONINGEN: 'Aanpasbaarheid woningen',
-            TERUG_NAAR_ZODK: 'Terug naar Zorg op de kaart website'
+            TERUG_NAAR_ZODK: 'Terug naar Zorg op de kaart website',
+            WAT_TONEN: 'Wat wil je op de kaart zien?',
+            COMPARE_ITEMS: 'Vergelijk'
         };
     }
 }

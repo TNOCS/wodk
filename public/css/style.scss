@@ -179,6 +179,38 @@ body {
     height: 100%;
 }
 
+.modal-backdrop.in {
+    display: block;
+}
+
+.modal {
+    overflow-y: hidden!important;
+    z-index: 9997!important;
+}
+
+.modal-dialog {
+    height: 100%;
+    padding-bottom: 50px;
+}
+
+.modal-header {
+    height: 10%;
+}
+
+.modal-body-scrollable {
+    height: 80%;
+    width: 100%;
+    overflow: auto;
+}
+
+.modal-content {
+    height: 100%;
+}
+
+.modal-footer {
+    height: 10%;
+}
+
 .spinner>div {
     background-color: black;
     width: 24px;
@@ -530,17 +562,33 @@ body {
     color: #222;
 }
 
+#selected-items-rp .btn-group {
+    padding: 2px 1px;
+}
+
 .legend-entry-color-square {
     height: 32px;
-    width: 32px;
+    width: 10px;
     margin: 2px 2px;
     padding: 2px 2px;
 }
 
 .legend-entry-label {
     height: 32px;
+    line-height: 32px;
+    color: #000;
+    font-size: 14px;
+}
+
+.legend-hint {
+    font-size: 14px;
+    color: dimgrey;
     padding-top: 12px;
-    color: #222;
+}
+
+.legend-description-label {
+    color: #000;
+    font-size: 14px;
 }
 
 .legend-entry-item-row {
@@ -548,7 +596,8 @@ body {
 }
 
 .legend-entry-list-table {
-    margin: 8px 20px;
+    margin: 8px 15px;
+    padding-bottom: 8px;
 }
 
 #widget-rankingwidg {
@@ -671,6 +720,11 @@ a {
     margin-top: 1px;
 }
 
+.streetview-img {
+    padding: 8px;
+    text-align: center;
+}
+
 .text-grey {
     color: dimgrey;
 }
@@ -685,6 +739,11 @@ a {
 
 .medium-margin {
     margin: 16px;
+}
+
+.medium-margin-vertical {
+    margin-top: 16px;
+    margin-bottom: 16px;
 }
 
 .wodk-form-group input.small {
@@ -782,6 +841,16 @@ a {
     transform: rotateX(0);
 }
 
+.dropdown-selected, .dropdown-selected:focus  {
+    font-weight: bold;
+    font-size: 16px!important;
+    color: $vws-donkerblauw-1;
+    cursor: pointer;
+    border: none;
+    border-radius: 0px;
+    box-shadow: none;
+}
+
 .table-section-title {
     font-weight: bold;
     font-size: 125%;
@@ -796,7 +865,7 @@ a {
 }
 
 .table-row-value {
-    padding-right: 0px;
+    padding: 0px;
 }
 
 .table-row {
@@ -814,6 +883,13 @@ a {
 .table-entry-header {
     font-weight: bold;
     font-size: 125%;
+}
+
+.table-dash-grey {
+    background-image: linear-gradient(to right, #999 60%, dimgrey 0%);
+    background-position: bottom;
+    background-size: 16px 1px;
+    background-repeat: repeat-x;
 }
 
 .table-dash {

@@ -1,8 +1,8 @@
 {
-    "verbose": true,
-    "ext": "js json",
-    "ignore": [
-        ".git"
+    "verbose": false,
+    "ext": "js",
+    "watch": [
+        "server.js"
     ],
-    "delay": 500.0
+    "delay": 400
 }

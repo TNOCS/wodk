@@ -137,6 +137,31 @@ body {
   padding: 0;
   height: 100%; }
 
+.modal-backdrop.in {
+  display: block; }
+
+.modal {
+  overflow-y: hidden !important;
+  z-index: 9997 !important; }
+
+.modal-dialog {
+  height: 100%;
+  padding-bottom: 50px; }
+
+.modal-header {
+  height: 10%; }
+
+.modal-body-scrollable {
+  height: 80%;
+  width: 100%;
+  overflow: auto; }
+
+.modal-content {
+  height: 100%; }
+
+.modal-footer {
+  height: 10%; }
+
 .spinner > div {
   background-color: black;
   width: 24px;
@@ -416,22 +441,36 @@ body {
 .popover {
   color: #222; }
 
+#selected-items-rp .btn-group {
+  padding: 2px 1px; }
+
 .legend-entry-color-square {
   height: 32px;
-  width: 32px;
+  width: 10px;
   margin: 2px 2px;
   padding: 2px 2px; }
 
 .legend-entry-label {
   height: 32px;
-  padding-top: 12px;
-  color: #222; }
+  line-height: 32px;
+  color: #000;
+  font-size: 14px; }
+
+.legend-hint {
+  font-size: 14px;
+  color: dimgrey;
+  padding-top: 12px; }
+
+.legend-description-label {
+  color: #000;
+  font-size: 14px; }
 
 .legend-entry-item-row {
   border-bottom: black 1px dashed; }
 
 .legend-entry-list-table {
-  margin: 8px 20px; }
+  margin: 8px 15px;
+  padding-bottom: 8px; }
 
 #widget-rankingwidg {
   background-color: #e3dce7; }
@@ -531,6 +570,10 @@ a {
   width: 100%;
   margin-top: 1px; }
 
+.streetview-img {
+  padding: 8px;
+  text-align: center; }
+
 .text-grey {
   color: dimgrey; }
 
@@ -542,6 +585,10 @@ a {
 
 .medium-margin {
   margin: 16px; }
+
+.medium-margin-vertical {
+  margin-top: 16px;
+  margin-bottom: 16px; }
 
 .wodk-form-group input.small {
   line-height: 24px;
@@ -614,6 +661,15 @@ a {
 .animate-navbar-btn.ng-hide-remove.ng-hide-remove-active {
   transform: rotateX(0); }
 
+.dropdown-selected, .dropdown-selected:focus {
+  font-weight: bold;
+  font-size: 16px !important;
+  color: #01689b;
+  cursor: pointer;
+  border: none;
+  border-radius: 0px;
+  box-shadow: none; }
+
 .table-section-title {
   font-weight: bold;
   font-size: 125%;
@@ -626,7 +682,7 @@ a {
   padding-left: 0px; }
 
 .table-row-value {
-  padding-right: 0px; }
+  padding: 0px; }
 
 .table-row {
   padding: 6px 0px; }
@@ -640,6 +696,12 @@ a {
 .table-entry-header {
   font-weight: bold;
   font-size: 125%; }
+
+.table-dash-grey {
+  background-image: linear-gradient(to right, #999 60%, dimgrey 0%);
+  background-position: bottom;
+  background-size: 16px 1px;
+  background-repeat: repeat-x; }
 
 .table-dash {
   background-image: linear-gradient(to right, #999 60%, rgba(255, 255, 255, 0) 0%);

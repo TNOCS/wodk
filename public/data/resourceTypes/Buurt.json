@@ -360,7 +360,7 @@
 			"legend": {
                 "id": "p_apb_w",
                 "visualAspect": "fillColor",
-                "description": "Percentage aanpasbare woningen",
+                "description": "Het percentage aanpasbare woningen ten opzichte van alle woningen in het getoonde gebied.",
                 "legendKind": "discrete",
                 "legendEntries": [
                     {

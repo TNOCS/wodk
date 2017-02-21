@@ -135,6 +135,11 @@ module App {
                         this.wodkWidgetSvc.laadBuurten();
                     });
 
+                    this.$layerService.actionService.addAction('select pand', (options: csComp.Services.IButtonActionOptions) => {
+                        console.log('select pand');
+                        this.wodkWidgetSvc.selecteerPand();
+                    });
+
                     this.$layerService.actionService.addAction('select provincie', (options: csComp.Services.IButtonActionOptions) => {
                         console.log('select provincie');
                         this.wodkWidgetSvc.selecteerProvincie();
@@ -654,5 +659,15 @@ module App {
                 appendToBody: true
             });
         })
+        .filter('trusted', ($sce) => {
+            return (html) => {
+                if (html === undefined || html === null) {
+                    return $sce.trustAsHtml(html);
+                } else {
+                    return $sce.trustAsHtml(html.toString());
+                }
+            };
+        })
+        .controller('CompareModalCtrl', WodkModalCtrl.CompareModalCtrl)
         .controller('appCtrl', AppCtrl);
 }

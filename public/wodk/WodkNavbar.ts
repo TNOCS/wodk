@@ -44,6 +44,7 @@ module WodkNavbar {
         private lastResult: wodk.IPlacesResult;
         private lastSuggestion: wodk.IPlacesResult;
         private lastSuggestionDataset: string;
+        private msgBusHandle: csComp.Services.MessageBusHandle;
 
         constructor(
             private $scope: IWodkNavbarScope,
@@ -56,6 +57,10 @@ module WodkNavbar {
         ) {
             $scope.vm = this;
             $scope.isOpen = true;
+
+            this.msgBusHandle = this.messageBusService.subscribe('wodk', (message, data) => {
+                this.handleMessage(message, data);
+            });
 
             this.placesAutocomplete = (( < any > window).places)({
                 container: document.querySelector('#search-address'),
@@ -107,6 +112,16 @@ module WodkNavbar {
             this.toggle();
         }
 
+        private handleMessage(message: string, data?: any) {
+            switch (message) {
+                case 'closenavbar':
+                    this.toggle(true);
+                    break;
+                default:
+                    break;
+            }
+        }
+
         private publish(message: string) {
             this.messageBusService.publish('wodk', message);
         }
@@ -115,12 +130,15 @@ module WodkNavbar {
             this.selectLocation(this.lastSuggestion, this.lastSuggestionDataset);
         }
 
-        public toggle() {
+        public toggle(forceClose?: boolean) {
             this.$timeout(() => {
-                this.$scope.isOpen = !this.$scope.isOpen;
+                this.$scope.isOpen = (forceClose ? false : !this.$scope.isOpen);
             }, 0);
             this.$timeout(() => {
-                if (this.$scope.isOpen) document.getElementById('search-address').focus();
+                if (this.$scope.isOpen) {
+                    document.getElementById('search-address').focus();
+                    this.messageBusService.publish('rightpanel', 'deactiveContainer', 'wodkright');
+                }
             }, 100);
         }
 

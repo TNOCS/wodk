@@ -192,8 +192,8 @@
                 }, {
                     "title": "Toggle achtergrondkaart: toon zo leeg mogelijk",
                     "action": "activate baselayer",
-                    "layer": "Positron",
-                    "image": "http://a.basemaps.cartocdn.com/light_nolabels/15/16779/10817.png",
+                    "layer": "Positronlabels",
+                    "image": "http://a.basemaps.cartocdn.com/light_all/15/16779/10817.png",
                     "defaultEnabled": false,
                     "showLegend": false
                 }, {
@@ -272,6 +272,25 @@
                     "aanp_kost_wmo": "Aandeel van de aanpassingskosten in het Wmo integratie-budget"
                 },
                 "bins": 5
+            }
+        }, {
+            "id": "wodklegend",
+            "directive": "wodklegend",
+            "elementId": "widget-wodklegend",
+            "enabled": true,
+            "style": "vws2",
+            "width": "300px",
+            "bottom": "20px",
+            "left": "20px",
+            "data": {
+                "layerId": "bagbuurten",
+                "rankingProperties": [
+                    "p_apb_w",
+                    "p_napb_w",
+                    "p_aangep_w",
+                    "p_apb_onb",
+                    "ster_gem"
+                ]
             }
         }],
         "mobile": true

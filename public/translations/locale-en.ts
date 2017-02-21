@@ -19,7 +19,9 @@ module Translations {
             NR_GROUPS: 'Groepen',
             RANKING: 'Overzichten',
             PROPERTY: 'Eigenschap',
-            SEARCH_HINT: 'Zoek op plaatsnaam, postcode of adres'
+            SEARCH_HINT: 'Zoek op plaatsnaam, postcode of adres',
+            WAT_TONEN: 'Wat wil je op de kaart zien?',
+            COMPARE_ITEMS: 'Vergelijk'
         };
     }
 }

@@ -49,6 +49,7 @@ module WodkRightPanel {
             '$timeout',
             '$translate',
             '$sce',
+            '$uibModal',
             'wodkWidgetSvc'
         ];
 
@@ -61,6 +62,7 @@ module WodkRightPanel {
             private $timeout: ng.ITimeoutService,
             private $translate: ng.translate.ITranslateService,
             private $sce: ng.ISCEService,
+            private $uibModal: ng.ui.bootstrap.IModalService,
             private wodkWidgetSvc: wodk.WODKWidgetSvc
         ) {
             $scope.vm = this;
@@ -76,7 +78,7 @@ module WodkRightPanel {
                 this.featureMessageReceived(title, f);
             }));
 
-            this.propertyTable = new PropertyTable(this.layerService);
+            this.propertyTable = new PropertyTable(this.layerService, this.$timeout, this.$http);
 
             this.init();
         }
@@ -111,7 +113,7 @@ module WodkRightPanel {
             });
 
             this.selectedItems = this.wodkWidgetSvc.getSelectionHistory();
-            this.selectFeature(_.last(this.selectedItems));
+            this.selectFeature(this.layerService.lastSelectedFeature);
         }
 
         private selectLocation(loc: wodk.IPlacesResult, dataset: string) {
@@ -155,9 +157,33 @@ module WodkRightPanel {
             };
         }
 
+        private selectItem(item: IFeature) {
+            this.propertyTable.displayFeature(item);
+        }
 
-        public publish(msg: string) {
-            this.messageBusService.publish('wodk', msg);
+        private removeItem(item: IFeature) {
+            this.wodkWidgetSvc.removeItem(item);
+        }
+
+        private compareItems() {
+            this.close();
+            this.messageBusService.publish('wodk', 'closenavbar');
+            var modalInstance = this.$uibModal.open({
+                templateUrl: 'wodk/WodkCompareModal.tpl.html',
+                size: 'lg',
+                controller: 'CompareModalCtrl',
+                resolve: {
+                    features: () => this.selectedItems
+                }
+            });
+
+            modalInstance.result.then(() => { }, () => {
+                console.log('Modal dismissed at: ' + new Date());
+            });
+        }
+
+        public publish(msg: string, data ? : any) {
+            this.messageBusService.publish('wodk', msg, data);
         }
 
         public close() {

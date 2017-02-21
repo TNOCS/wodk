@@ -24,6 +24,13 @@
             "opacity": 0.999,
             "borderRadius": "4px"
         },
+        "vws2": {
+            "borderWidth": 0,
+            "borderColor": "#ffffff",
+            "background": "#ffffff",
+            "opacity": 0.90,
+            "borderRadius": "0px"
+        },
         "transparent": {
             "borderWidth": 0,
             "background": "transparent"

@@ -187,6 +187,28 @@ module wodk {
             return this.lastSelectedType;
         }
 
+        public selecteerPand() {
+            var f = this.$layerService.lastSelectedFeature;
+            let data: any = {identificatie: f.id.replace('c_', '')};
+            this.selectPand(data)
+                .catch((err) => {
+                    if (err) {
+                        console.log('Error while loading address: ' + err.message);
+                    }
+                })
+                .done((finished) => {
+                    this.lastSelectedName = f.properties['Name'];
+                    this.lastLoadedAddress = {
+                        administrationLevel: AdministrationLevel.pand,
+                        name: this.lastSelectedName,
+                        score: 0.99,
+                        administrative: f.properties['woonplaatsnaam'],
+                        coordinates: f.geometry.coordinates
+                    };
+                    this.openRightPanel();
+                });
+        }
+
         public selecteerProvincie() {
             var l = this.$layerService.findLayer('provincie');
             var f = this.$layerService.lastSelectedFeature;
@@ -427,6 +449,7 @@ module wodk {
             let w = this.rightPanel;
             let rpt = csComp.Helpers.createRightPanelTab(w.id, w.directive, w.data, w.title, '{{"FEATURE_INFO" | translate}}', w.icon, true, false);
             rpt.open = true;
+            this.$messageBusService.publish('wodk', 'closenavbar');
             this.$messageBusService.publish('rightpanel', 'activate', rpt);
         }
 
@@ -594,7 +617,6 @@ module wodk {
             setTimeout(() => {
                 let f = this.$layerService.findFeatureById('c_' + data.identificatie);
                 if (f) {
-                    this.$layerService.selectFeature(f);
                     let geometry = csComp.Helpers.GeoExtensions.getCentroid(f.geometry.coordinates);
                     this.$mapService.getMap().flyTo(new L.LatLng(geometry.coordinates[1], geometry.coordinates[0]), 18, WODK_MAP_PADDING);
                     cb.resolve(data);
@@ -738,6 +760,10 @@ module wodk {
                 this.$rootScope.$apply();
             };
         };
+
+        public removeItem(item: IFeature) {
+
+        }
 
         public setLastSelectedName(name: string) {
             this.lastSelectedName = name;

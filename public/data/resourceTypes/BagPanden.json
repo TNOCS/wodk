@@ -17,6 +17,7 @@
                 "maxTitleResolution": -1,
                 "drawingMode": "Point"
             },
+			"selectActions": ["select pand"],
             "propertyTypeKeys": "Name;aanpasbaarheid;kostenindicatie;hellingbaan;drempelvrij;traplift;aanname;Adres;streetview;kadaster;pandtype;bouwjaar;lift;pandoppervlakte;gebruiksdoelverblijfsobject;plint;woningen_in_pand;niet_woningen_in_pand;pandhoogte;pandid;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;ster_in_ond;wijknaam;wijkcode;buurtnaam;buurtcode;ster_gem;oppervlakteverblijfsobject;icon;postcode;woonplaatsnaam;leeftijd_bewoner;eigendom;verhuurder;corporatie;gemeentenaam;isonderzocht;plint_oz;lift_oz;"
         }
     },
@@ -24,6 +25,7 @@
         "Adres": {
             "label": "Adres",
             "title": " ",
+            "section": "Adresgegevens",
             "type": "textarea",
             "hideInDataTable": true,            
             "expression": "properties.openbareruimtenaam + ' ' + properties.huisnummer + (properties.huisletter||'') + (properties.huisnummertoevoeging||'') + '\n' + properties.postcode + ' ' + properties.woonplaatsnaam + '\n'"
@@ -31,7 +33,8 @@
         "kostenindicatie": {
             "label": "kostenindicatie",
             "title": "",
-            "visibleInCallOut": true,
+            "section": "Kostenindicatie aanpassingen",
+            "visibleInCallOut": false,
             "hideInDataTable": true,
             "type": "textarea",
             "expression": "(properties.ster_2 >= 1 || properties.ster_3 >= 1) ? 'Kostenindicatie aanpassingen:' : null"
@@ -39,6 +42,7 @@
         "hellingbaan": {
             "label": "hellingbaan",
             "title": "Hellingbaan in stoep",
+            "section": "Kostenindicatie aanpassingen",
             "visibleInCallOut": true,
             "type": "text",
             "expression": "(properties.ster_2 >= 1 || properties.ster_3 >= 1) ? 'ca: EUR 500\n' : null"
@@ -46,17 +50,19 @@
         "drempelvrij": {
             "label": "drempelvrij",
             "title": "Woning drempelvrij maken",
+            "section": "Kostenindicatie aanpassingen",
             "visibleInCallOut": true,
             "type": "text",
             "expression": "(properties.ster_2 >= 1 || properties.ster_3 >= 1) ? 'ca: EUR 600' : null"
         },
         "traplift": {
             "label": "traplift",
-            "title": " ",
+            "title": "Traplift",
+            "section": "Kostenindicatie aanpassingen",
             "visibleInCallOut": true,
             "hideInDataTable": true,
             "type": "textarea",
-            "expression": "(properties.ster_2 >= 1) ? '<div class=\"feature-prop-title\" style=\"font-weight:normal;padding-left:0px;\">Traplift:\n1 bocht</div><div class=\"feature-prop-value-align-right\">ca. EUR 6.000 - 8.000</div>' : null"
+            "expression": "(properties.ster_2 >= 1) ? '1 bocht<div class=\"pull-right text-right\">ca. EUR 6.000 - 8.000</div>' : null"
         },
         "leeg": {
             "label": "leeg",
@@ -69,14 +75,16 @@
         "aanname": {
             "label": "aanname",
             "title": " ",
+            "section": "Kostenindicatie aanpassingen",
             "visibleInCallOut": true,
             "hideInDataTable": true,
             "type": "textarea",
-            "expression": "(properties.ster_2 >= 1 || properties.ster_3 >= 1) ? '<div class=\"feature-prop-title\" style=\"font-weight:normal;padding-left:0px;\"><i>Aanname:</i>\nAanpassing aan sanitair en keuken zijn afhankelijk (van de staat) van de woning en de mobiliteitsbeperking.</div><div class=\"feature-prop-value-align-right\" style=\"font-weight:normal\">P.M.</div>' : null"
+            "expression": "(properties.ster_2 >= 1 || properties.ster_3 >= 1) ? '<i>Aanname:</i>\nAanpassing aan sanitair en keuken zijn afhankelijk (van de staat) van de woning en de mobiliteitsbeperking.<div class=\"text-right\">P.M.</div>' : null"
         },
         "isonderzocht": {
             "label": "isonderzocht",
             "title": "Is onderzocht?",
+            "section": "Liftonderzoek",
             "visibleInCallOut": true,
             "type": "text",
             "expression": "(properties.lift_oz === 1 || properties.lift_oz === 0 || properties.lift_oz === -1 ) ? 'ja' : null"
@@ -84,6 +92,7 @@
         "lift_oz": {
             "label": "lift_oz",
             "title": "Liftonderzoek",
+            "section": "Liftonderzoek",
             "type": "options",
             "options": {
                 "-1": "In onderzoek",
@@ -96,6 +105,7 @@
         "plint_oz": {
             "label": "plint_oz",
             "title": "Plintonderzoek",
+            "section": "Liftonderzoek",
             "type": "options",
             "options": {
                 "-1": "In onderzoek",
@@ -108,6 +118,7 @@
         "postcode": {
             "label": "postcode",
             "type": "text",
+            "section": "Adresgegevens",
             "title": "Postcode",
             "visibleInCallOut": false,
             "canEdit": false,
@@ -116,6 +127,7 @@
         "Name": {
             "label": "Name",
             "type": "text",
+            "section": "Adresgegevens",
             "title": "Naam",
             "expression": "properties.openbareruimtenaam + ' ' + properties.huisnummer + (properties.huisletter||'') + (properties.huisnummertoevoeging||'')",
             "visibleInCallOut": false,
@@ -125,6 +137,7 @@
         "huisnummer": {
             "label": "huisnummer",
             "type": "number",
+            "section": "Adresgegevens",
             "title": "huisnummer",
             "visibleInCallOut": false,
             "isSearchable": false
@@ -132,6 +145,7 @@
         "huisletter": {
             "label": "huisletter",
             "type": "text",
+            "section": "Adresgegevens",
             "title": "huisletter",
             "visibleInCallOut": false,
             "isSearchable": false
@@ -139,6 +153,7 @@
         "huisnummertoevoeging": {
             "label": "huisnummertoevoeging",
             "type": "text",
+            "section": "Adresgegevens",
             "title": "huisnummertoevoeging",
             "visibleInCallOut": false,
             "isSearchable": false
@@ -146,6 +161,7 @@
         "bouwjaar": {
             "label": "bouwjaar",
             "type": "number",
+            "section": "Woninggegevens",
             "title": "Bouwjaar",
             "visibleInCallOut": true,
             "isSearchable": false
@@ -154,12 +170,14 @@
             "label": "openbareruimtenaam",
             "type": "text",
             "title": "straat",
+            "section": "Adresgegevens",
             "visibleInCallOut": false,
             "isSearchable": false
         },
         "woningen_in_pand": {
             "label": "woningen_in_pand",
             "type": "number",
+            "section": "Woninggegevens",
             "title": "Aantal woningen in pand",
             "visibleInCallOut": true,
             "isSearchable": false
@@ -167,6 +185,7 @@
         "niet_woningen_in_pand": {
             "label": "niet_woningen_in_pand",
             "type": "number",
+            "section": "Woninggegevens",
             "title": "Aantal niet-woningen in pand",
             "expression": "(properties.niet_woningen_in_pand > 0) ? properties.niet_woningen_in_pand : null",
             "visibleInCallOut": true,
@@ -175,6 +194,7 @@
         "woningtype": {
             "label": "woningtype",
             "titel": "Woningtype",
+            "section": "Woninggegevens",
             "visibleInCallOut": false,
             "type": "text",
             "expression": "(properties.woningen_in_pand === 1 && !properties.niet_woningen_in_pand) ? 'EGW' : 'Appartement'"
@@ -182,6 +202,7 @@
         "pandtype": {
             "label": "pandtype",
             "title": "Woningtype",
+            "section": "Woninggegevens",
             "type": "options",
             "options": {
                 "0": "Eengezinswoning",
@@ -192,6 +213,7 @@
         "lift": {
             "label": "lift",
             "title": "Lift",
+            "section": "Woninggegevens",
             "type": "options",
             "options": {
                 "-1": "In onderzoek",
@@ -206,6 +228,7 @@
             "title": "Souterrain of plint",
             "description": "Hoogteverschil begane grondvloer appartement - maaiveld > 1/2 meter",
             "type": "options",
+            "section": "Woninggegevens",
             "options": {
                 "-1": "In onderzoek",
                 "0": "Aanname geen souterrain of plint",
@@ -217,6 +240,7 @@
         "oppervlakteverblijfsobject": {
             "label": "oppervlakteverblijfsobject",
             "type": "number",
+            "section": "Woninggegevens",
             "stringFormat": "{0:#,#} m2",
             "title": "Oppervlakte verblijfsobject",
             "description": "Woonoppervlak (bron: BAG)",
@@ -226,6 +250,7 @@
         "pandoppervlakte": {
             "label": "pandoppervlakte",
             "type": "number",
+            "section": "Woninggegevens",
             "title": "Footprint pand",
             "description": "Oppervlakte van het pand op grondniveau",
             "stringFormat": "{0:#,#} m2",
@@ -235,6 +260,7 @@
         "gebruiksdoelverblijfsobject": {
             "label": "gebruiksdoelverblijfsobject",
             "type": "text",
+            "section": "Woninggegevens",
             "title": "Gebruiksdoel",
             "visibleInCallOut": true,
             "isSearchable": false
@@ -243,6 +269,7 @@
             "label": "woonplaatsnaam",
             "type": "text",
             "title": "Woonplaats",
+            "section": "Adresgegevens",
             "visibleInCallOut": false,
             "isSearchable": false
         },
@@ -250,6 +277,7 @@
             "label": "gemeentenaam",
             "type": "text",
             "title": "Gemeente",
+            "section": "Adresgegevens",
             "visibleInCallOut": true,
             "isSearchable": false
         },
@@ -266,6 +294,7 @@
             "type": "text",
             "section": "Overig",
             "title": "Buurt",
+            "section": "Adresgegevens",
             "visibleInCallOut": true,
             "isSearchable": false
         },
@@ -305,6 +334,7 @@
             "label": "pandid",
             "type": "text",
             "title": "Pand identificatie",
+            "section": "Overig",
             "visibleInCallOut": true,
             "isSearchable": false
         },
@@ -380,10 +410,10 @@
         },
         "aanpasbaarheid": {
             "label": "aanpasbaarheid",
-            "type": "media",
+            "type": "image",
             "title": "Indicatie aanpasbaarheid",
             "inlineImage": true,
-            "expression": "['images/combi_' + (properties.icon) + '.png']",
+            "expression": "'images/combi_' + (properties.icon) + '.png'",
             "visibleInCallOut": true,
             "hideInDataTable": true,
             "isSearchable": false
@@ -488,6 +518,7 @@
         "pandhoogte": {
             "label": "pandhoogte",
             "type": "number",
+            "section": "Woninggegevens",
             "title": "Pandhoogte",
             "stringFormat": "{0:#,#} m",
             "visibleInCallOut": true,
@@ -506,7 +537,7 @@
             "type": "bbcode",
             "expression": "'[url=http://maps.google.com/maps?q=' + properties.openbareruimtenaam + ' ' + properties.huisnummer + ' ' + properties.woonplaatsnaam + ']Streetview link[/url]'",
             "title": "Streetview",
-            "visibleInCallOut": true,
+            "visibleInCallOut": false,
             "canEdit": false,
             "isSearchable": false
         },
@@ -515,6 +546,7 @@
             "type": "bbcode",
             "expression": "'[url=https://bagviewer.kadaster.nl/lvbag/bag-viewer/index.html#?searchQuery=' + properties.openbareruimtenaam + ' ' + properties.huisnummer + ' ' + properties.woonplaatsnaam + '&zoomlevel=13]BAG link[/url]'",
             "title": "Kadaster",
+            "section": "Woninggegevens",
             "visibleInCallOut": true,
             "canEdit": false,
             "isSearchable": false
