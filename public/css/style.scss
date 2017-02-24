@@ -620,15 +620,55 @@ body {
     right: auto;
 }
 
+.wodk-navbar-backdrop {
+    background-color: rgba(0,0,0,0.5);
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    z-index: 0;
+}
+
+.animate-backdrop {
+    z-index: 1109;
+}
+
+.animate-backdrop.ng-hide-add {
+    background-color: rgba(0,0,0,0.5);
+    transition: all 0.4s ease-in;
+}
+
+.animate-backdrop.ng-hide-add.ng-hide-add-active {
+    background-color: rgba(0,0,0,0);
+}
+
+.animate-backdrop.ng-hide-remove {
+    background-color: rgba(0,0,0,0);
+    transition: all 0.5s ease-out;
+}
+
+.animate-backdrop.ng-hide-remove.ng-hide-remove-active {
+    background-color: rgba(0,0,0,0.5);
+}
+
 .wodk-navbar {
     z-index: 1111;
-    position: absolute;
+    position: relative;
     top: 0px;
+    bottom: 0px;
     left: 0px;
     width: 100%;
+    height: 100%;
     font-size: 20px;
     line-height: 30px;
     padding: 0px;
+}
+
+.no-mouse-events {
+    pointer-events: none;
+}
+
+.all-mouse-events {
+    pointer-events: all;
 }
 
 h2 {
@@ -795,6 +835,7 @@ a {
 
 .animate-navbar {
     z-index: 1111;
+    position: relative;
 }
 
 .animate-navbar.ng-hide-add {

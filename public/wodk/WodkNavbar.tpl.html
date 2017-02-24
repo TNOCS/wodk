@@ -1,4 +1,4 @@
-<div class="wodk-navbar">
+<div class="wodk-navbar" ng-class="{'no-mouse-events': !isOpen}">
     <div class="container-fluid animate-navbar" ng-show="isOpen">
         <div class="row" ng-class="{collapsed: !isOpen, opened: isOpen}">
             <div class="col-sm-12 col-md-6 col-md-offset-3 text-center">
@@ -54,7 +54,9 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid animate-navbar-btn" ng-show="!isOpen" style="position:absolute;top:0">
+    <div class="container-fluid wodk-navbar-backdrop animate-backdrop" ng-click="vm.toggle()" ng-show="isOpen">
+    </div>
+    <div class="container-fluid animate-navbar-btn all-mouse-events" ng-show="!isOpen" style="position:absolute;top:0">
         <div class="row" style="background: transparent">
             <div class="col-sm-12 col-md-6 col-md-offset-3 text-center">
                 <a class="btn btn-primary wodk-btn wodk-btn-blue open-navbar-btn" ng-click="vm.toggle()">
