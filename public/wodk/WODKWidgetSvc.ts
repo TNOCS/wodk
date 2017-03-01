@@ -74,7 +74,7 @@ module wodk {
         public zoomNextFeatureFlag: boolean = false;
         public lastLoadedAddress: IAddressResult;
         protected lastSelectedName: string;
-        protected lastSelectedType: string;
+        protected lastSelectedType: 'provincie' | 'gemeente' | 'buurt';
         protected gemeenteSelectie: IFeature[];
         protected buurtSelectie: IFeature[];
         protected selectionHistory: IFeature[];
@@ -172,7 +172,24 @@ module wodk {
         }
 
         public getGemeenteSelectionHistory() {
-            return this.selectionHistory;
+            return this.gemeenteSelectie;
+        }
+
+        public getBuurtSelectionHistory() {
+            return this.buurtSelectie;
+        }
+
+        public getSelectionHistoryOfLastSelectedType() {
+            switch (this.lastSelectedType) {
+                case 'provincie':
+                    return [];
+                case 'gemeente':
+                    return this.gemeenteSelectie;
+                case 'buurt':
+                    return this.buurtSelectie;
+                default:
+                    return [];
+            }
         }
 
         public getSelectionHistory() {
@@ -189,7 +206,9 @@ module wodk {
 
         public selecteerPand() {
             var f = this.$layerService.lastSelectedFeature;
-            let data: any = {identificatie: f.id.replace('c_', '')};
+            let data: any = {
+                identificatie: f.id.replace('c_', '')
+            };
             this.selectPand(data)
                 .catch((err) => {
                     if (err) {

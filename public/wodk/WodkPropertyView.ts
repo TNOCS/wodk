@@ -117,7 +117,6 @@ module WodkRightPanel {
                     let imageUrl = urlCreator.createObjectURL(blob);
                     (<HTMLImageElement>document.querySelector('#streetview-img')).src = imageUrl;
                     (<HTMLLinkElement>document.querySelector('#streetview-link')).href = linkUrl;
-                    linkUrl
                 }).catch((err) => {
                     console.warn(`Could not get streetview image: ${err}`);
                     this.streetview = null;

@@ -112,7 +112,7 @@ module WodkRightPanel {
                 console.log(e.message);
             });
 
-            this.selectedItems = this.wodkWidgetSvc.getSelectionHistory();
+            this.selectedItems = this.wodkWidgetSvc.getSelectionHistoryOfLastSelectedType();
             this.selectFeature(this.layerService.lastSelectedFeature);
         }
 
@@ -152,7 +152,7 @@ module WodkRightPanel {
                     break;
                 case 'onFeatureSelect':
                     this.selectFeature(f);
-                    this.selectedItems = this.wodkWidgetSvc.getSelectionHistory();
+                    this.selectedItems = this.wodkWidgetSvc.getSelectionHistoryOfLastSelectedType();
                     break;
             };
         }
