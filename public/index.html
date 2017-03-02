@@ -84,7 +84,7 @@
 
     <link rel="shortcut icon" href="favicon.ico" />
     <link href="js/leaflet.draw.css" rel="stylesheet" />
-    
+
     <wodk-navbar></wodk-navbar>
     <div class="body" style="top:0">
         <!--<div class="justified-brand" style="color: #5e5e5e; z-index:1032" id="wodk-body">
@@ -94,7 +94,7 @@
             <div class="row">
                 <div class="hidden-xs col-sm-5 col-md-4 col-lg-3" style="z-index:10">
                     <h2 class="wodk-navbar-title-only">
-                    {{'SITE_TITLE' | translate}}
+                        {{'SITE_TITLE' | translate}}
                     </h2>
                 </div>
             </div>
@@ -115,7 +115,7 @@
         <!--<div style="margin-top:12px">
             <a class="widget-min-max-close" ng-click="vm.exportToImage()"><i class="fa fa-camera fa-white" uib-tooltip="Genereer een screenshot van de website." tooltip-trigger="mouseenter" tooltip-placement="left" tooltip-append-to-body="true"></i>
             </a>
-        </div>--> 
+        </div>-->
 
         <map mapid="main" class="map-main" ng-show="vm.$layerService.visual.mapVisible" style="padding-top: 100px; top:-100px" ng-style="{width: vm.$layerService.visual.mapWidth ? vm.$layerService.visual.mapWidth : '100%', left: vm.$layerService.visual.alignMapRight ? vm.$layerService.visual.mapWidth : 0}"></map>
 
@@ -154,11 +154,11 @@
                                         .st0 {
                                             clip-path: url(#SVGID_2_)
                                         }
-                                        
+
                                         .st1 {
                                             clip-path: url(#SVGID_4_)
                                         }
-                                        
+
                                         .st2 {
                                             clip-path: url(#SVGID_6_)
                                         }
@@ -249,13 +249,14 @@
             <dashboardirective container="main" class="dashboard-container" dashboard="vm.$dashboardService.mainDashboard"></dashboardirective>
         </div>
 
-        <div class="rightpanel-container animate-rightpanel" ng-show="vm.$layerService.visual.rightPanelVisible" >
+        <div class="rightpanel-container animate-rightpanel" ng-show="vm.$layerService.visual.rightPanelVisible">
             <div id="rightpanel" class="rightpanel-main">
                 <div id="rightpanelTabContainer" class="rightpanel-tabs-container">
                     <!-- Nav tabs -->
                     <ul ng-hide="true" id="rightpanelTabs" class="nav nav-tabs" ng-class="{'rightpanelTabs-collapsed' : !vm.$layerService.visual.rightPanelVisible}">
                         <li style="margin-top:5px" ng-style="!vm.$layerService.visual.rightPanelVisible && {'opacity':0}" ng-click="vm.$layerService.visual.rightPanelVisible = false"
-                            uib-popover="{{'HIDE_PANEL' | translate}}" popover-placement="left" popover-trigger="'mouseenter'" popover-append-to-body="true">
+                            uib-popover="{{'HIDE_PANEL' | translate}}" popover-placement="left" popover-trigger="'mouseenter'"
+                            popover-append-to-body="true">
                             <a class="rightpanel-hidetab">
                                 <span class="fa fa-2x fa-chevron-right"></span>
                             </a>
@@ -268,7 +269,7 @@
         </div>
 
         <!--Loading spinner-->
-        <div data-ng-show="layersLoading>0" style="width:100%;height:100%;z-index:10000;position:absolute;background-color:rgba(0, 0, 0, 0.5);text-align:center;color:white;line-height:100vh">
+        <div data-ng-show="layersLoading>0" style="width:100%;height:100%;z-index:10000;position:absolute;background-color:rgba(0, 0, 0, 0.5);text-align:center;color:white;line-height:100vh;top:0">
             <h2 style="display: inline-block;vertical-align: middle;">
                 data laden
                 <br> .. moment aub ..
@@ -324,55 +325,6 @@
             <timeline data-ng-show="vm.$mapService.timelineVisible && !vm.$layerService.isMobile" style="height: 100vh;"></timeline>
         </div>
 
-        <div style="position:absolute;left:400px;display:none">
-            <div id="menu" ng-click="vm.startSketch()">
-
-                <input type="checkbox" id="on-check" name="on-check" />
-
-                <label id="on-button" for="on-check">
-        <span><span class="fa fa-pencil"><!-- Put plus icon here if not using symbol set --></span></span>
-        <span><span class="fa fa-save"><!-- Put minus icon here if not using symbol set --></span></span>
-    </label>
-
-                <input type="radio" id="info-home" name="radio-check" />
-                <input type="radio" id="info-compass" name="radio-check" checked />
-                <input type="radio" id="info-heart" name="radio-check" />
-                <input type="radio" id="info-rss" name="radio-check" />
-                <input type="radio" id="info-refresh" name="radio-check" />
-                <input type="radio" id="info-star" name="radio-check" />
-
-                <div id="menu-items">
-                    <div class="middle">
-                        <div class="top">
-                            <span class="bg-piece"> </span>
-                            <label class="ss-home" for="info-home"><!-- Put home icon here if not using symbol set --></label>
-                            <span class="bg-piece"> </span>
-                            <label class="ss-compass" for="info-compass"><!-- Put compass icon here if not using symbol set --></label>
-                            <span class="bg-piece"> </span>
-                            <label class="ss-heart" for="info-heart"><!-- Put heart icon here if not using symbol set --></label>
-                        </div>
-                        <div class="bottom">
-                            <span class="bg-piece"> </span>
-                            <label class="ss-rss" for="info-rss"><!-- Put rss icon here if not using symbol set --></label>
-                            <span class="bg-piece"> </span>
-                            <label class="ss-refresh" for="info-refresh"><!-- Put refresh icon here if not using symbol set --></label>
-                            <span class="bg-piece"> </span>
-                            <label class="ss-star" for="info-star"><!-- Put icon here if not using symbol set --></label>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="info home-info">Lets go home</div>
-                <div class="info compass-info">Want directions?</div>
-                <div class="info heart-info">Love</div>
-                <div class="info rss-info">RSS Feed</div>
-                <div class="info star-info">Galactic domination</div>
-                <div class="info refresh-info">Refreshing</div>
-
-                <div class="faux-shadow"> </div>
-            </div>
-        </div>
         <!--<canvas id="png-export-placeholder" width="800px" height="600px" style="color:white"></canvas>-->
         <div class="leaflet-attribution">
             <a ng-click="vm.toggleShowAttribution()">&nbsp;<i class="fa fa-info">&nbsp;</i></a>
