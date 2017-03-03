@@ -31,12 +31,12 @@
                 }
             },
             "refreshBBOX": false,
-            "minZoom": 1,
-            "maxZoom": 10,
+            "minZoom": 25,
+            "maxZoom": 25,
             "defaultFeatureType": "provincie",
             "typeUrl": "data/resourceTypes/cbs.json",
             "type": "geojson",
-            "enabled": true,
+            "enabled": false,
             "url": "data/projects/MY_PROJECT_DATA/CBS_provincie.json",
             "renderType": "geojson"
         }]
@@ -89,7 +89,7 @@
                 }
             },
             "refreshBBOX": false,
-            "opacity": 75,
+            "opacity": 100,
             "defaultFeatureType": "buurt",
             "defaultLegendProperty": "data/resourceTypes/Buurt.json#p_apb_w",
             "typeUrl": "data/resourceTypes/Buurt.json",
@@ -280,8 +280,8 @@
             "enabled": true,
             "style": "vws2",
             "width": "300px",
-            "bottom": "20px",
-            "left": "20px",
+            "bottom": "50px",
+            "left": "0px",
             "data": {
                 "layerId": "bagbuurten",
                 "rankingProperties": [

@@ -1,6 +1,8 @@
 <div>
     <div class="row" style="width: 100%">
-        <div class="col-xs-12 legend-hint">{{'WAT_TONEN' | translate}}</div>
+        <div class="row" data-ng-show="activeStyleGroup">
+            <div class="col-xs-12 legend-description-title bold">{{activeStyleGroup.styles[0].title}}</div>
+        </div>
         <div ng-hide="true" class="col-xs-8" style="margin-right:5px; position: absolute; top: 2px; right: 0px; padding-bottom: 4px; ">
             <a class="widget-min-max-close" ng-click="vm.close()" ng-show="vm.canClose()"><i class="fa fa-times"></i></a>
             <a class="widget-min-max-close" ng-click="vm.minimize()" ng-show="minimized"> <i class="fa fa-plus"></i></a>
@@ -8,23 +10,28 @@
             <a class="widget-min-max-close" ng-click="vm.exportToImage()"><i class="fa fa-save" uib-tooltip="{{'SAVE_AS_IMAGE' | translate}}" tooltip-trigger="mouseenter" tooltip-append-to-body="true" ng-show="vm.exporterAvailable&&!minimized"></i></a>
         </div>
     </div>
-    <div class="form-group row" ng-hide="minimized">
+    <!--<div class="form-group row" ng-hide="minimized">
         <div class="col-xs-12">
             <select id="select-prop" class="form-control dropdown-selected table-dash" ng-change="vm.selectProp()" ng-model="activeStyleProperty"
                 style="padding:0px 2px;">
-                <option class="dropdown-item" ng-repeat="prop in vm.selectableProps" value="{{prop.label}}">{{prop.title}}</option>
+                <option class="dropdown-item" ng-repeat="prop in vm.selectableProps" value="{{prop.label}}">{{'WAT_TONEN' | translate}}</option>
             </select>
         </div>
-    </div>
+    </div>-->
     <div class="row" data-ng-show="activeStyleProperty && activeLegend.description">
+        <div class="col-xs-12 legend-padding">
+            <a class="legend-description-link">Wat wil je op de kaart zien?<span class="small-padding-lr"><i class="fa fa-arrow-r"></i></span></a>
+        </div>
+    </div>
+    <div class="row" data-ng-show="activeStyleProperty && activeLegend.description" style="padding-top: 8px";>
         <div class="col-xs-12 legend-description-label">{{activeLegend.description}}</div>
     </div>
     <div class="legend-entry-list-table" data-ng-if="activeStyleProperty && activeLegend.legendKind === 'discrete'">
         <div class="row" data-ng-repeat="le in activeLegend.legendEntries" ng-class="{'pointer-cursor': $parent.$parent.activeStyleProperty}"
             ng-click="$parent.$parent.vm.toggleFilter(activeLegend, le)" uib-popover="{{'UTILS.FILTER' | translate}}" popover-trigger="mouseenter"
             popover-append-to-body="true" popover-placement="right" popover-enable="{{$parent.$parent.activeStyleProperty}}">
-            <div class="col-xs-1 legend-entry-color-square" ng-style="{'background': le.color}"></div>
-            <div class="col-xs-11 legend-entry-label">{{le.label}}</div>
+            <div class="col-xs-2 legend-entry-color-square" ng-style="{'background': le.color}"></div>
+            <div class="col-xs-10 legend-entry-label">{{le.label}}</div>
             </li>
             </ul>
         </div>

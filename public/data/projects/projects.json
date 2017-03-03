@@ -28,7 +28,7 @@
             "borderWidth": 0,
             "borderColor": "#ffffff",
             "background": "#ffffff",
-            "opacity": 0.90,
+            "opacity": 0.95,
             "borderRadius": "0px"
         },
         "transparent": {

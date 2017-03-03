@@ -174,6 +174,14 @@ module App {
             this.$layerService.openSolution('data/projects/projects.json', $location.$$search.layers);
         }
 
+        zoomIn() {
+            this.$mapService.getMap().zoomIn();
+        }
+
+        zoomOut() {
+            this.$mapService.getMap().zoomOut();
+        }
+
         /**
          * Simple filter that returns a list of cities that match the criteria.
          *

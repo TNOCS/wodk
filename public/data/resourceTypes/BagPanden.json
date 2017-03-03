@@ -8,7 +8,7 @@
                 "fillOpacity": 0.85,
                 "opacity": 0.85,
                 "strokeColor": "#000000",
-                "strokeWidth": 1,
+                "strokeWidth": 0,
                 "strokeOpacity": 1,
                 "iconWidth": 30,
                 "iconHeight": 30,
@@ -456,7 +456,7 @@
                             "min": -2,
                             "max": -1
                         },
-                        "color": "#ffff00"
+                        "color": "#ffef11"
                     },
                     {
                         "sortKey": "i",
@@ -478,39 +478,21 @@
                     },
                     {
                         "sortKey": "f",
-                        "label": "2 sterren aanpasbaar",
+                        "label": "2/3 sterren aanpasbaar",
                         "interval": {
                             "min": 1,
-                            "max": 2
-                        },
-                        "color": "#00ff00"
-                    },
-                    {
-                        "sortKey": "e",
-                        "label": "3 sterren aanpasbaar",
-                        "interval": {
-                            "min": 2,
                             "max": 3
                         },
-                        "color": "#00cc00"
+                        "color": "#33cc00"
                     },
                     {
                         "sortKey": "d",
-                        "label": "4 sterren specifiek",
+                        "label": "4/5 sterren specifiek",
                         "interval": {
                             "min": 3,
-                            "max": 4
-                        },
-                        "color": "#006600"
-                    },
-                    {
-                        "sortKey": "c",
-                        "label": "5 sterren specifiek",
-                        "interval": {
-                            "min": 4,
                             "max": 5
                         },
-                        "color": "#005500"
+                        "color": "#339900"
                     }
                 ]
             }

@@ -25,10 +25,10 @@
         "gemeente": {
             "name": "gemeente",
             "style": {
-                "fillColor": "#dfd4b5",
-                "fillOpacity": 0.9,
-                "strokeColor": "#000000",
-                "selectedStrokeColor": "#131000",
+                "fillColor": "#dfd5b2",
+                "fillOpacity": 1.0,
+                "strokeColor": "#999966",
+                "selectedStrokeColor": "#999966",
                 "drawingMode": "MultiPolygon",
                 "strokeWidth": 1,
                 "selectedStrokeWidth": 3,
@@ -37,7 +37,7 @@
                 "iconHeight": 24,
                 "iconUri": "images/i.png",
                 "nameLabel": "gemeentenaam",
-                "tooltipStringFormat": "Gemeente {0}"
+                "hoverColor": "#ddbb55"
             },
             "selectActions": [
                 "load buurten"
@@ -802,7 +802,7 @@
         },
         "gemeentenaam": {
             "label": "gemeentenaam",
-            "title": "Naam",
+            "title": "Gemeente",
             "section": "Info",
             "type": "text",
             "visibleInCallOut": true,

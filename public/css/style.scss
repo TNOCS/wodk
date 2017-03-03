@@ -15,8 +15,14 @@
     src: url('fonts/ROsanswebtextbold.woff') format('woff');
 }
 
-$header-grijs: rgba(238, 238, 238, 1);
-$header-donkergrijs: rgba(190, 190, 190, 1);
+$header-grijs: rgba(238,
+238,
+238,
+1);
+$header-donkergrijs: rgba(190,
+190,
+190,
+1);
 $vws-donkerblauw-logo: #154273;
 $vws-donkerblauw-1: #01689b;
 $vws-donkerblauw-2: #cce0f1;
@@ -567,10 +573,10 @@ body {
 }
 
 .legend-entry-color-square {
-    height: 32px;
-    width: 10px;
-    margin: 2px 2px;
-    padding: 2px 2px;
+    height: 18px;
+    width: 18px;
+    margin: 7px;
+    padding: 7px;
 }
 
 .legend-entry-label {
@@ -578,6 +584,7 @@ body {
     line-height: 32px;
     color: #000;
     font-size: 14px;
+    padding-left: 0px;
 }
 
 .legend-hint {
@@ -589,10 +596,36 @@ body {
 .legend-description-label {
     color: #000;
     font-size: 14px;
+    padding-left: 20px;
+}
+
+.legend-padding {
+    padding: 0px 20px;
+}
+
+.legend-description-link {
+    font-style: italic;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    display: inline-block;
+    padding-bottom: 8px;
+    font-size: 16px;
+}
+
+.legend-description-title {
+    color: #000;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 24px 12px 0px 20px;
+    line-height: 1.2em;
 }
 
 .legend-entry-item-row {
     border-bottom: black 1px dashed;
+}
+
+.bold {
+    font-weight: bold;
 }
 
 .legend-entry-list-table {
@@ -621,7 +654,7 @@ body {
 }
 
 .wodk-navbar-backdrop {
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     top: 0;
     bottom: 0;
     position: absolute;
@@ -633,21 +666,21 @@ body {
 }
 
 .animate-backdrop.ng-hide-add {
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     transition: all 0.4s ease-in;
 }
 
 .animate-backdrop.ng-hide-add.ng-hide-add-active {
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .animate-backdrop.ng-hide-remove {
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0);
     transition: all 0.5s ease-out;
 }
 
 .animate-backdrop.ng-hide-remove.ng-hide-remove-active {
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .wodk-navbar {
@@ -720,6 +753,8 @@ a {
 
 .wodk-btn-blue {
     background-color: $vws-donkerblauw-logo;
+    width: 44px;
+    height: 35px;
 }
 
 .wodk-btn-green {
@@ -792,8 +827,8 @@ a {
 }
 
 .wodk-form-group button.small {
-    line-height: 26px;
-    margin-left: 8px;
+    line-height: 29px;
+    margin-left: 4px;
 }
 
 .ap-with-places {}
@@ -882,7 +917,8 @@ a {
     transform: rotateX(0);
 }
 
-.dropdown-selected, .dropdown-selected:focus  {
+.dropdown-selected,
+.dropdown-selected:focus {
     font-weight: bold;
     font-size: 16px!important;
     color: $vws-donkerblauw-1;
@@ -918,7 +954,7 @@ a {
 }
 
 .table-section-title {
-    padding-left: 0px;    
+    padding-left: 0px;
 }
 
 .table-entry-header {
@@ -927,14 +963,14 @@ a {
 }
 
 .table-dash-grey {
-    background-image: linear-gradient(to right, #999 60%, dimgrey 0%);
+    background-image: linear-gradient(to right, #ccc 100%, rgba(255, 255, 255, 0) 0%);
     background-position: bottom;
     background-size: 16px 1px;
     background-repeat: repeat-x;
 }
 
 .table-dash {
-    background-image: linear-gradient(to right, #999 60%, rgba(255, 255, 255, 0) 0%);
+    background-image: linear-gradient(to right, #ccc 100%, rgba(255, 255, 255, 0) 0%);
     background-position: bottom;
     background-size: 16px 1px;
     background-repeat: repeat-x;
@@ -970,7 +1006,7 @@ a {
 }
 
 .btn-label-close {
-    background-color: $header-donkergrijs;    
+    background-color: $header-donkergrijs;
 }
 
 .rp-header {
@@ -979,4 +1015,131 @@ a {
     font-weight: bold;
     padding-top: 8px;
     padding-bottom: 8px;
+}
+
+.navbar-fixed-bottom {
+    background: #f2eeee;
+    color: black;
+    border-color: transparent;
+}
+
+.navbar-nav>li>a {
+    color: black;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: black;
+}
+
+.navbar-inverse .navbar-nav>li>a:focus,
+.navbar-inverse .navbar-nav>li>a:hover {
+    color: #555;
+}
+
+.navbar-dash-grey {
+    background-image: linear-gradient(to bottom, #999 60%, dimgrey 0%);
+    background-position: right;
+    background-size: 16px 1px;
+    background-repeat: repeat-y;
+}
+
+.featureTooltip tr td {
+    background: white;
+    background-color: white;
+    text-align: left;
+    font-family: "RO Sans";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.featureTooltip tr:first-child td {
+    background: white;
+    background-color: white;
+    text-align: left;
+    font-family: "RO Sans";
+    font-style: normal;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.wodk-tooltip {
+    background: white;
+    background-color: white;
+    text-align: left;
+    font-family: "RO Sans";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.wodk-tooltip-label {
+    background: white;
+    background-color: white;
+    text-align: left;
+    font-family: "RO Sans";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    padding: 8px 8px 0px 14px;
+    line-height: 1em;
+}
+
+.wodk-tooltip-value {
+    background: white;
+    background-color: white;
+    text-align: left;
+    font-family: "RO Sans";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 4px 8px 8px 14px;
+    line-height: 1em;
+}
+
+.wodk-tooltip-label-entry {
+    background: white;
+    background-color: white;
+    text-align: left;
+    font-family: "RO Sans";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    padding: 8px 8px 0px 14px;
+    line-height: 1em;
+    border-top: solid 1px #ccc;
+}
+
+.wodk-tooltip-padding {
+    padding: 8px;
+    background: white;
+}
+
+.navbar {
+    border: none;
+}
+
+.navbar-inverse .navbar-nav>.active>a,
+.navbar-inverse .navbar-nav>.open>a {
+    background: white;
+    color: #333;
+    background-image: none;
+    box-shadow: none;
+}
+
+.navbar-inverse .navbar-nav>.active>a,
+.navbar-inverse .navbar-nav>.active>a:focus,
+.navbar-inverse .navbar-nav>.active>a:hover {
+    color: #333;
+    background: white;
+}
+
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a {
+    text-shadow: none;
+    padding: 9px 0px;
+}
+
+.navbar-inverse .navbar-nav li > a > div{
+    border-right: 1px solid #ccc;
+    padding: 6px 12px;
 }
