@@ -329,6 +329,33 @@
         <div class="leaflet-attribution">
             <a ng-click="vm.toggleShowAttribution()">&nbsp;<i class="fa fa-info">&nbsp;</i></a>
         </div>
+
+        <nav class="navbar navbar-inverse navbar-fixed-bottom">
+            <div class="container-fluid">
+                <ul class="nav navbar-nav">
+                    <li class="active" ng-click="">
+                        <a>
+                            <div><span class="small-padding-lr"><i class="fa fa-list-ul"></i></span>Legenda</div>
+                        </a>
+                    </li>
+                    <li ng-click="vm.toggleBaselayer()">
+                        <a>
+                            <div><span class="small-padding-lr"><i class="fa fa-globe"></i></span>Weergave</div>
+                        </a>
+                    </li>
+                    <li ng-click="vm.zoomIn()">
+                        <a>
+                            <div><i class="fa fa-search-plus"></i></div>
+                        </a>
+                    </li>
+                    <li ng-click="vm.zoomOut()">
+                        <a>
+                            <div><i class="fa fa-search-minus"></i></div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 </body>
 
 </html>
