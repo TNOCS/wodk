@@ -18,47 +18,43 @@ module wodk {
     /**
      * Directive to display the available map layers.
      */
-    myModule.directive('wodklegend', [function (): ng.IDirective {
+    myModule.directive('wodkbaselayers', [function (): ng.IDirective {
         return {
             restrict: 'E', // E = elements, other options are A=attributes and C=classes
             scope: {}, // isolated scope, separated from parent. Is however empty, as this directive is self contained by using the messagebus.
-            templateUrl: 'wodk/WodkLegend.tpl.html',
+            templateUrl: 'wodk/WodkBaselayers.tpl.html',
             replace: true, // Remove the directive from the DOM
             transclude: false, // Add elements and attributes to the template
-            controller: WodkLegendCtrl
+            controller: WodkBaselayersCtrl
         }
     }]);
 
-    export class WodkLegendData {
-        title: string;
-        rankingProperties: Dictionary < string > ;
-        bins: number;
-        layerId: string;
-        hint: string;
+    export class WodkBaselayersData {
+        baselayers: IBaseLayerOption[];
+        showLabels: boolean;
     }
 
-    export interface IWodkLegendScope extends ng.IScope {
-        vm: WodkLegendCtrl;
-        data: WodkLegendData;
+    export interface IBaseLayerOption {
+        image: string;
+        title: string;
+        layerWithoutLabels: string;
+        layerWithLabels: string;
+    }
+
+    export interface IWodkBaselayersScope extends ng.IScope {
+        vm: WodkBaselayersCtrl;
+        data: WodkBaselayersData;
         style: csComp.Services.GroupStyle;
         filter: csComp.Services.GroupFilter;
         minimized: boolean;
-        selectedFeature: csComp.Services.IFeature;
-        activeLegend: csComp.Services.Legend;
-        activeStyleGroup: csComp.Services.ProjectGroup;
-        activeStyleProperty: string;
+        selectedBaselayer: IBaseLayerOption;
     }
 
-    export class WodkLegendCtrl {
-        private scope: IWodkLegendScope;
+    export class WodkBaselayersCtrl {
+        private scope: IWodkBaselayersScope;
         private widget: csComp.Services.IWidget;
         private parentWidget: JQuery;
         private mBusHandles: csComp.Services.MessageBusHandle[] = [];
-        private exporterAvailable: boolean;
-        private selectedProp: csComp.Services.IPropertyType;
-        private selectedBins: string;
-        private selectableProps: csComp.Services.IPropertyType[] = [];
-        private layer: csComp.Services.ProjectLayer;
 
         public static $inject = [
             '$scope',
@@ -70,7 +66,7 @@ module wodk {
         ];
 
         constructor(
-            private $scope: IWodkLegendScope,
+            private $scope: IWodkBaselayersScope,
             private $timeout: ng.ITimeoutService,
             private $translate: ng.translate.ITranslateService,
             private $layerService: csComp.Services.LayerService,
@@ -82,11 +78,11 @@ module wodk {
             this.widget = par.widget;
             this.parentWidget = $(`#${this.widget.elementId}-parent`);
 
-            $scope.data = < WodkLegendData > this.widget.data;
+            $scope.data = < WodkBaselayersData > this.widget.data;
             $scope.minimized = false;
 
-            this.mBusHandles.push(this.$messageBus.subscribe('updatelegend', (title: string, data: any) => {
-                this.handleLegendUpdate(title, data);
+            this.mBusHandles.push(this.$messageBus.subscribe('baselayer', (title: string, data: any) => {
+                this.handleBaselayerUpdate(title, data);
             }));
 
             this.init();
@@ -97,19 +93,14 @@ module wodk {
         }
 
         private init() {
-            let dummyProp = {
-                title: '- Geen kleuren -'
-            };
-            this.selectableProps.push(dummyProp);
-            if (this.$scope.data && this.$scope.data.rankingProperties) {
-                _.each(this.$scope.data.rankingProperties, (p) => {
-                    let property = this.$layerService.propertyTypeData[p];
-                    if (property) {
-                        this.selectableProps.push(property);
-                    }
-                });
-            }
-            this.$scope.activeStyleProperty = null;
+            this.$scope.selectedBaselayer = _.findWhere(this.$scope.data.baselayers, {
+                'layerWithoutLabels': this.$mapService.activeBaseLayerId
+            });
+            if (this.$scope.selectedBaselayer) return;
+            this.$scope.selectedBaselayer = _.findWhere(this.$scope.data.baselayers, {
+                'layerWithLabels': this.$mapService.activeBaseLayerId
+            });
+            this.$scope.data.showLabels = true;
         }
 
         private minimize() {
@@ -155,25 +146,43 @@ module wodk {
             }
         }
 
-        private selectProp() {
-            let l = this.$scope.activeStyleGroup.layers[0] || new csComp.Services.ProjectLayer();
-            this.$layerService.setStyleForProperty(l, this.$scope.activeStyleProperty);
+        private selectBaselayer(bl ? : IBaseLayerOption) {
+            if (bl) this.$scope.selectedBaselayer = bl;
+            bl = this.$scope.selectedBaselayer;
+            if (!bl) return;
+            if (this.$scope.data.showLabels && bl.layerWithLabels) {
+                this.updateBaselayer(bl.layerWithLabels);
+            } else if (this.$scope.data.showLabels && !bl.layerWithLabels) {
+                this.$messageBus.notifyWithTranslation('BASELAYER_NOT_AVAILABLE', 'BASELAYER_NOT_AVAILABLE_WITH_LABELS');
+                this.$scope.data.showLabels = false;
+                this.updateBaselayer(bl.layerWithoutLabels);
+            } else if (!this.$scope.data.showLabels && !bl.layerWithoutLabels) {
+                this.$messageBus.notifyWithTranslation('BASELAYER_NOT_AVAILABLE', 'BASELAYER_NOT_AVAILABLE_WITHOUT_LABELS');
+                this.$scope.data.showLabels = true;
+                this.updateBaselayer(bl.layerWithLabels);
+            } else {
+                this.updateBaselayer(bl.layerWithoutLabels);
+            }
         }
 
-        private handleLegendUpdate(title: string, data ? : any) {
+        private toggleLabels() {
+            this.$scope.data.showLabels = !this.$scope.data.showLabels;
+            this.selectBaselayer();
+        }
+
+        private updateBaselayer(layerTitle: string) {
+            let layerObject = this.$mapService.getBaselayer(layerTitle);
+            if (layerObject) {
+                this.$layerService.activeMapRenderer.changeBaseLayer(layerObject);
+                this.$mapService.changeBaseLayer(layerTitle);
+            }
+        }
+
+        private handleBaselayerUpdate(title: string, data ? : any) {
             switch (title) {
                 case 'removelegend':
                     break;
-                case 'hidelegend':
-                    this.hide();
-                    break;
                 default:
-                    this.show();
-                    if (data && data.activeLegend) {
-                        this.$scope.activeLegend = data.activeLegend;
-                        this.$scope.activeStyleGroup = data.group;
-                        this.$scope.activeStyleProperty = data.property;
-                    }
                     if (this.$scope.$root.$$phase !== '$apply' && this.$scope.$root.$$phase !== '$digest') {
                         this.$scope.$apply();
                     }

@@ -23,7 +23,14 @@ module Translations {
             AANPASBAARHEID_WONINGEN: 'Aanpasbaarheid woningen',
             TERUG_NAAR_ZODK: 'Terug naar Zorg op de kaart website',
             WAT_TONEN: 'Wat wil je op de kaart zien?',
-            COMPARE_ITEMS: 'Vergelijk'
+            COMPARE_ITEMS: 'Of wil je ze vergelijken?',
+            NO_LEGEND_AVAILABLE: 'Er is geen legenda beschikbaar voor de huidige kaart.',
+            SHOW_LABELS: 'Toon plaatsnamen',
+            CHOOSE_BASELAYER: 'Kies een kaartweergave',
+            BASELAYER_NOT_AVAILABLE: 'Kaartweergave niet beschikbaar',
+            BASELAYER_NOT_AVAILABLE_WITH_LABELS: 'Deze kaartweergave is niet beschikbaar met plaatsnamen',
+            BASELAYER_NOT_AVAILABLE_WITHOUT_LABELS: 'Deze kaartweergave is niet beschikbaar zonder plaatsnamen',
+            TOON_INFO: 'Toon info'
         };
     }
 }

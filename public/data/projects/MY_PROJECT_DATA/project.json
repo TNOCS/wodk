@@ -89,13 +89,13 @@
                 }
             },
             "refreshBBOX": false,
-            "opacity": 100,
+            "opacity": 90,
             "defaultFeatureType": "buurt",
             "defaultLegendProperty": "data/resourceTypes/Buurt.json#p_apb_w",
             "typeUrl": "data/resourceTypes/Buurt.json",
             "type": "database",
             "enabled": false,
-            "url": "bagbuurten",
+            "url": "http://zorgopdekaart.nl/bagwoningen/public/bagbuurten",
             "renderType": "geojson",
             "dataSourceParameters": {
                 "minZoom": 12,
@@ -128,7 +128,7 @@
             "typeUrl": "data/resourceTypes/BagPanden.json",
             "type": "database",
             "enabled": false,
-            "url": "bagcontours",
+            "url": "http://zorgopdekaart.nl/bagwoningen/public/bagcontours",
             "renderType": "geojson",
             "dataSourceParameters": {
                 "minZoom": 16,
@@ -165,45 +165,6 @@
                 "title": "",
                 "url": "data/projects/MY_PROJECT_DATA/disclaimer.txt",
                 "canMinimize": false
-            }
-        }, {
-            "id": "23bcc93c-6956-4acb-10c0-139f1e89d4bd",
-            "directive": "buttonwidget",
-            "enabled": true,
-            "style": "transparent",
-            "left": "25px",
-            "bottom": "10px",
-            "height": "72px",
-            "width": "75px",
-            "data": {
-                "minimalLayout": true,
-                "toggleMode": true,
-                "hideTooltip": true,
-                "extStyle": {
-                    "border-radius": "30px 0 0 30px"
-                },
-                "buttons": [{
-                    "title": "Toggle achtergrondkaart: toon foto's",
-                    "action": "activate baselayer",
-                    "layer": "World Imagery",
-                    "image": "http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/15/10817/16779.png",
-                    "defaultEnabled": false,
-                    "showLegend": false
-                }, {
-                    "title": "Toggle achtergrondkaart: toon zo leeg mogelijk",
-                    "action": "activate baselayer",
-                    "layer": "Positronlabels",
-                    "image": "http://a.basemaps.cartocdn.com/light_all/15/16779/10817.png",
-                    "defaultEnabled": false,
-                    "showLegend": false
-                }, {
-                    "title": "Toggle achtergrondkaart: toon namen",
-                    "action": "activate baselayer",
-                    "layer": "OpenStreetMap",
-                    "image": "http://c.tile.openstreetmap.fr/hot/15/16776/10811.png",
-                    "defaultEnabled": false,
-                    "showLegend": false
-                }]
             }
         }, {
             "id": "12181ccc-21a4-47c0-de1d-8093ae45e305",
@@ -281,7 +242,8 @@
             "style": "vws2",
             "width": "300px",
             "bottom": "50px",
-            "left": "0px",
+            "left": "500px",
+            "position": "custom",
             "data": {
                 "layerId": "bagbuurten",
                 "rankingProperties": [
@@ -291,6 +253,29 @@
                     "p_apb_onb",
                     "ster_gem"
                 ]
+            }
+        }, {
+            "id": "wodkbaselayers",
+            "directive": "wodkbaselayers",
+            "elementId": "widget-wodkbaselayers",
+            "enabled": true,
+            "style": "vws2",
+            "width": "300px",
+            "bottom": "50px",
+            "left": "500px",
+            "position": "custom",
+            "data": {
+                "showLabels": true,
+                "baselayers": [{
+                    "title": "Kaart",
+                    "layerWithoutLabels": "Positron",
+                    "layerWithLabels": "Positron with labels",
+                    "image": "http://a.basemaps.cartocdn.com/light_all/15/16779/10817.png"
+                }, {
+                    "title": "Satelliet",
+                    "layerWithoutLabels": "World Imagery",
+                    "image": "http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/15/10817/16779.png"
+                }]
             }
         }],
         "mobile": true

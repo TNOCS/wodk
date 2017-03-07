@@ -78,7 +78,7 @@ module WodkRightPanel {
                 this.featureMessageReceived(title, f);
             }));
 
-            this.propertyTable = new PropertyTable(this.layerService, this.$timeout, this.$http);
+            this.propertyTable = new PropertyTable(this.wodkWidgetSvc, this.layerService, this.$timeout, this.$http);
 
             this.init();
         }
@@ -112,8 +112,8 @@ module WodkRightPanel {
                 console.log(e.message);
             });
 
-            this.selectedItems = this.wodkWidgetSvc.getSelectionHistoryOfLastSelectedType();
-            this.selectFeature(this.layerService.lastSelectedFeature);
+            // this.selectedItems = this.wodkWidgetSvc.getSelectionHistoryOfLastSelectedType();
+            // this.selectFeature((this.selectedItems.length > 0) ? this.selectedItems : [this.layerService.lastSelectedFeature]);
         }
 
         private selectLocation(loc: wodk.IPlacesResult, dataset: string) {
@@ -131,9 +131,9 @@ module WodkRightPanel {
             this.placesAutocomplete.close();
         }
 
-        private selectFeature(f: IFeature) {
-            if (!f || _.isEmpty(f)) return;
-            this.propertyTable.displayFeature(f);
+        private selectFeature(fts: IFeature[]) {
+            if (!fts || !_.isArray(fts)) return;
+            this.propertyTable.displayFeature(fts);
             this.updateSearchInput();
         }
 
@@ -151,14 +151,14 @@ module WodkRightPanel {
                 case 'onFeatureDeselect':
                     break;
                 case 'onFeatureSelect':
-                    this.selectFeature(f);
-                    this.selectedItems = this.wodkWidgetSvc.getSelectionHistoryOfLastSelectedType();
+                    if (f && f.fType && f.fType.name === 'BagPanden') {
+                        this.selectFeature([f]);
+                    } else {
+                        this.selectedItems = this.wodkWidgetSvc.getSelectionHistoryOfLastSelectedType();
+                        this.selectFeature(this.selectedItems);
+                    }
                     break;
             };
-        }
-
-        private selectItem(item: IFeature) {
-            this.propertyTable.displayFeature(item);
         }
 
         private removeItem(item: IFeature) {
@@ -177,7 +177,7 @@ module WodkRightPanel {
                 }
             });
 
-            modalInstance.result.then(() => { }, () => {
+            modalInstance.result.then(() => {}, () => {
                 console.log('Modal dismissed at: ' + new Date());
             });
         }

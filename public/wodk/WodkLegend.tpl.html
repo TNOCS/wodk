@@ -1,4 +1,7 @@
 <div>
+    <div class="row" style="width: 100%" data-ng-show="!activeLegend">
+        <div class="col-xs-12 legend-description-label">{{'NO_LEGEND_AVAILABLE' | translate}}</div>
+    </div>
     <div class="row" style="width: 100%">
         <div class="row" data-ng-show="activeStyleGroup">
             <div class="col-xs-12 legend-description-title bold">{{activeStyleGroup.styles[0].title}}</div>
@@ -20,10 +23,10 @@
     </div>-->
     <div class="row" data-ng-show="activeStyleProperty && activeLegend.description">
         <div class="col-xs-12 legend-padding">
-            <a class="legend-description-link">Wat wil je op de kaart zien?<span class="small-padding-lr"><i class="fa fa-arrow-r"></i></span></a>
+            <a class="wodk-link">{{'WAT_TONEN' | translate}}<span class="small-padding-lr"><img src="images/arrow-right.svg" class="arrow-right-link"></img></span></a>
         </div>
     </div>
-    <div class="row" data-ng-show="activeStyleProperty && activeLegend.description" style="padding-top: 8px";>
+    <div class="row" data-ng-show="activeStyleProperty && activeLegend.description" style="padding-top: 8px" ;>
         <div class="col-xs-12 legend-description-label">{{activeLegend.description}}</div>
     </div>
     <div class="legend-entry-list-table" data-ng-if="activeStyleProperty && activeLegend.legendKind === 'discrete'">

@@ -167,8 +167,8 @@ module App {
             $messageBusService.subscribe('feature', this.featureMessageReceived);
             $messageBusService.subscribe('layer', this.layerMessageReceived);
 
-            var rpt = csComp.Helpers.createRightPanelTab('featureprops', 'featureprops', null, 'Selected feature', '{{\'FEATURE_INFO\' | translate}}', 'info');
-            this.$messageBusService.publish('rightpanel', 'activate', rpt);
+            // var rpt = csComp.Helpers.createRightPanelTab('featureprops', 'featureprops', null, 'Selected feature', '{{\'FEATURE_INFO\' | translate}}', 'info');
+            // this.$messageBusService.publish('rightpanel', 'activate', rpt);
             this.$layerService.visual.rightPanelVisible = false; // otherwise, the rightpanel briefly flashes open before closing.
 
             this.$layerService.openSolution('data/projects/projects.json', $location.$$search.layers);
@@ -289,6 +289,18 @@ module App {
          */
         publish(msg: string) {
             this.$messageBusService.publish('wodk', msg);
+        }
+
+        featureHistoryEmpty(): boolean {
+            return this.wodkWidgetSvc.getSelectionHistory.length <= 0;
+        }
+
+        openRightPanel() {
+            this.$layerService.visual.rightPanelVisible = true;
+        }
+
+        closeRightPanel() {
+            this.$layerService.visual.rightPanelVisible = false;
         }
 
         toggleShowAttribution() {

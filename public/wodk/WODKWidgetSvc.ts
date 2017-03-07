@@ -88,9 +88,11 @@ module wodk {
             'enabled': true,
             'style': 'vws-white',
             'position': 'rightpanel',
+            'replace': false,
             'icon': 'home',
             'data': {}
         };
+        private rightPanelTab;
 
         constructor(
             private $rootScope: ng.IRootScopeService,
@@ -169,6 +171,12 @@ module wodk {
                     //$rootScope.$apply();
                 }
             });
+
+            if (!this.rightPanelTab) {
+                let w = this.rightPanel;
+                this.rightPanelTab = csComp.Helpers.createRightPanelTab(w.id, w.directive, w.data, w.title, '{{"FEATURE_INFO" | translate}}', w.icon, w.replace, false);
+                this.$messageBusService.publish('rightpanel', 'activate', this.rightPanelTab);
+            }
         }
 
         public getGemeenteSelectionHistory() {
@@ -465,11 +473,9 @@ module wodk {
         }
 
         private openRightPanel() {
-            let w = this.rightPanel;
-            let rpt = csComp.Helpers.createRightPanelTab(w.id, w.directive, w.data, w.title, '{{"FEATURE_INFO" | translate}}', w.icon, true, false);
-            rpt.open = true;
+            this.rightPanelTab.open = true;
+            this.$layerService.visual.rightPanelVisible = true;
             this.$messageBusService.publish('wodk', 'closenavbar');
-            this.$messageBusService.publish('rightpanel', 'activate', rpt);
         }
 
         private findGemeente(data: {
@@ -800,6 +806,17 @@ module wodk {
                 default:
                     break;
             }
+        }
+
+        public getLZWSets(query, cb: Function) {
+            this.$http.get(`http://www.zorgopdekaart.nl/bagwoningen/public/findlzwset/${query}`)
+                .then((res) => {
+                    cb(res.data);
+                })
+                .catch(() => {
+                    console.log('Find lzw set');
+                    cb();
+                });
         }
     }
 

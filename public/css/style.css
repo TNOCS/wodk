@@ -55,7 +55,8 @@ body {
   color: #fff; }
 
 .wodk-navbar-title-only {
-  font-size: 26px;
+  font-size: 38px;
+  font-weight: normal;
   background-color: transparent;
   float: left;
   margin: 64px 2px 2px 20px;
@@ -127,7 +128,8 @@ body {
   top: 0;
   bottom: 0;
   right: 0;
-  position: absolute; }
+  position: absolute;
+  z-index: 81; }
 
 @media screen and (min-width: 600px) {
   .rightpanel-container {
@@ -201,6 +203,39 @@ body {
 .navbar-brand,
 .navbar-nav > li > a {
   text-shadow: none; }
+
+.wodk-info-tab {
+  background: #42145f;
+  width: 35px;
+  height: 44px;
+  position: absolute;
+  right: 400px;
+  top: 160px;
+  color: white;
+  font-size: 14px;
+  align-items: center;
+  display: flex;
+  cursor: pointer; }
+
+.wodk-info-tab-inner {
+  margin: auto;
+  text-align: center; }
+
+.wodk-info-tab-inner i {
+  font-size: 22px; }
+
+.wodk-info-tab-inner div {
+  line-height: 22px;
+  vertical-align: top;
+  display: inline-block;
+  font-style: italic; }
+
+.wodk-info-tab-collapsed {
+  right: 0px;
+  z-index: 80; }
+
+.wodk-info-tab-collapsed-wide {
+  width: 100px; }
 
 #rightpanelTabPanes {
   box-shadow: none;
@@ -413,9 +448,6 @@ body {
   min-width: 150px;
   margin-right: 10px; }
 
-.navbar-nav > li:hover > .dropdown-menu {
-  display: block; }
-
 .scrollable-menu {
   height: auto;
   max-height: 500px;
@@ -441,8 +473,11 @@ body {
 .popover {
   color: #222; }
 
-#selected-items-rp .btn-group {
+.selected-items-rp .btn-group {
   padding: 2px 1px; }
+
+.selected-items-rp {
+  margin: 4px 0px 16px 0px; }
 
 .legend-entry-color-square {
   height: 18px;
@@ -470,13 +505,17 @@ body {
 .legend-padding {
   padding: 0px 20px; }
 
-.legend-description-link {
+.wodk-link {
   font-style: italic;
   border-bottom: 1px solid #ccc;
   width: 100%;
   display: inline-block;
   padding-bottom: 8px;
   font-size: 16px; }
+
+.wodk-link-rapport {
+  border-bottom: none;
+  width: auto; }
 
 .legend-description-title {
   color: #000;
@@ -599,11 +638,25 @@ a {
 .wodk-btn-green {
   background-color: #275937; }
 
+.wodk-btn-purple:hover,
+.wodk-btn-purple:focus,
+.wodk-btn-purple:active,
+.wodk-btn-purple:active:focus,
+.wodk-btn-purple:active:hover {
+  background-color: black; }
+
+.wodk-btn-purple {
+  background-color: #42145f;
+  min-width: 80px; }
+
 .wodk-navbar-logo {
   height: 128px; }
 
 .wodk-navbar-closing-area {
   height: 240px; }
+
+.wodk-form-group-search {
+  max-width: 500px; }
 
 .wodk-form-group {
   width: 100%;
@@ -611,8 +664,8 @@ a {
 
 .wodk-form-group button {
   float: right;
-  line-height: 30px;
-  margin-left: 12px; }
+  line-height: 31px;
+  margin-top: 1px; }
 
 .wodk-form-group span {
   display: block;
@@ -621,11 +674,23 @@ a {
 .wodk-form-group input {
   border-radius: 0px;
   line-height: 30px;
-  font-size: 22px;
+  font-size: 18px;
   height: auto;
   display: inline-block;
   width: 100%;
   margin-top: 1px; }
+
+.rapport-link {
+  padding: 16px 0px 0px; }
+
+.rapport-link a {
+  padding: 0px 6px;
+  line-height: 20px;
+  vertical-align: top; }
+
+.rapport-link i {
+  font-size: 20px;
+  line-height: 20px; }
 
 .streetview-img {
   padding: 8px;
@@ -648,12 +713,13 @@ a {
   margin-bottom: 16px; }
 
 .wodk-form-group input.small {
-  line-height: 24px;
-  font-size: 16px; }
+  line-height: 35px;
+  font-size: 14px; }
 
 .wodk-form-group button.small {
-  line-height: 29px;
-  margin-left: 4px; }
+  line-height: 38px;
+  margin: 1px 0px 0px 0px;
+  min-width: 64px; }
 
 .ap-dropdown-menu {
   margin-bottom: 6px;
@@ -729,15 +795,18 @@ a {
   border-radius: 0px;
   box-shadow: none; }
 
+.scrolling {
+  overflow-y: auto; }
+
 .table-section-title {
   font-weight: bold;
-  font-size: 125%;
   margin-top: 12px;
-  color: #01689b;
   cursor: pointer; }
 
+.table-section-title > span {
+  padding: 4px; }
+
 .table-row-title {
-  font-weight: bold;
   padding-left: 0px; }
 
 .table-row-value {
@@ -747,7 +816,7 @@ a {
   padding: 6px 0px; }
 
 .table-section {
-  margin: 8px 12px; }
+  margin: 12px 0px 0px; }
 
 .table-section-title {
   padding-left: 0px; }
@@ -768,37 +837,42 @@ a {
   background-size: 16px 1px;
   background-repeat: repeat-x; }
 
-.propertyTable .collapsed .fa-caret-up {
+.property-table .collapsed .fa-caret-up {
   display: none; }
 
-.propertyTable .collapsed .fa-caret-down {
+.property-table .collapsed .fa-caret-down {
   display: inline; }
 
-.propertyTable .fa-caret-down {
+.property-table .fa-caret-down {
   display: none; }
 
-.propertyTable {
+.property-table-header {
+  border-top: solid 1px #ccc;
+  background: #eeeeee; }
+
+.property-table {
   font-size: 14px; }
 
 .border-dashed-lr .active-button:first-child {
   border-left: none; }
 
 .border-dashed-lr .active-button {
-  border-left: dashed 2px black; }
+  border-left: solid 1px #ccc; }
 
 .btn-label {
   border-radius: 0px;
-  background-color: #eeeeee; }
+  background-color: #e3dce7;
+  text-transform: uppercase;
+  padding: 3px 6px; }
 
 .btn-label-close {
-  background-color: #bebebe; }
+  background-color: #c6b8cf; }
 
 .rp-header {
   background: #eeeeee;
   font-size: 18px;
   font-weight: bold;
-  padding-top: 8px;
-  padding-bottom: 8px; }
+  padding: 0px 12px 4px; }
 
 .navbar-fixed-bottom {
   background: #f2eeee;
@@ -821,71 +895,6 @@ a {
   background-size: 16px 1px;
   background-repeat: repeat-y; }
 
-.featureTooltip tr td {
-  background: white;
-  background-color: white;
-  text-align: left;
-  font-family: "RO Sans";
-  font-style: normal;
-  font-weight: bold;
-  font-size: 18px; }
-
-.featureTooltip tr:first-child td {
-  background: white;
-  background-color: white;
-  text-align: left;
-  font-family: "RO Sans";
-  font-style: normal;
-  font-size: 16px;
-  font-weight: normal; }
-
-.wodk-tooltip {
-  background: white;
-  background-color: white;
-  text-align: left;
-  font-family: "RO Sans";
-  font-style: normal;
-  font-weight: bold;
-  font-size: 18px; }
-
-.wodk-tooltip-label {
-  background: white;
-  background-color: white;
-  text-align: left;
-  font-family: "RO Sans";
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  padding: 8px 8px 0px 14px;
-  line-height: 1em; }
-
-.wodk-tooltip-value {
-  background: white;
-  background-color: white;
-  text-align: left;
-  font-family: "RO Sans";
-  font-style: normal;
-  font-weight: bold;
-  font-size: 18px;
-  padding: 4px 8px 8px 14px;
-  line-height: 1em; }
-
-.wodk-tooltip-label-entry {
-  background: white;
-  background-color: white;
-  text-align: left;
-  font-family: "RO Sans";
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  padding: 8px 8px 0px 14px;
-  line-height: 1em;
-  border-top: solid 1px #ccc; }
-
-.wodk-tooltip-padding {
-  padding: 8px;
-  background: white; }
-
 .navbar {
   border: none; }
 
@@ -896,16 +905,71 @@ a {
   background-image: none;
   box-shadow: none; }
 
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:focus,
+.navbar-inverse .navbar-nav > .open > a:hover,
 .navbar-inverse .navbar-nav > .active > a,
 .navbar-inverse .navbar-nav > .active > a:focus,
 .navbar-inverse .navbar-nav > .active > a:hover {
   color: #333;
   background: white; }
 
-.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav > li > a {
+.navbar-inverse .navbar-brand,
+.navbar-inverse .navbar-nav > li > a {
   text-shadow: none;
   padding: 9px 0px; }
 
 .navbar-inverse .navbar-nav li > a > div {
   border-right: 1px solid #ccc;
   padding: 6px 12px; }
+
+.navbar-fixed-bottom .navbar-nav > li > .dropdown-menu {
+  margin-bottom: -1px;
+  border: none;
+  box-shadow: none;
+  -webkit-box-shadow: none; }
+
+.arrow-right-link {
+  height: 14px; }
+
+.wodk-baselayers-padding {
+  padding: 0px 20px; }
+
+.wodk-baselayers-title {
+  font-size: 16px;
+  line-height: 32px;
+  font-weight: bold;
+  border-bottom: 1px solid #ccc; }
+
+.wodk-baselayers-img-title {
+  line-height: 32px;
+  padding: 0;
+  color: #01689b; }
+
+.wodk-baselayers-img {
+  padding-left: 20px; }
+
+.wodk-baselayers-img img {
+  height: 32px;
+  width: 32px; }
+
+.wodk-baselayers-entries {
+  padding: 16px 0px 0px; }
+
+.wodk-baselayers-showlabels {
+  padding: 16px 20px; }
+
+.no-padding {
+  padding: 0; }
+
+.wodk-rightpanel {
+  font-size: 14px;
+  width: 100%;
+  height: 100%;
+  padding: 10px 16px 50px; }
+
+.wodk-rightpanel .active-button {
+  padding: 0px 8px; }
+
+.wodk-rightpanel .active-button img {
+  width: 24px; }

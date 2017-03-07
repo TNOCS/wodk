@@ -26,8 +26,8 @@
                 <br>
                 <div class="text-grey">{{'SEARCH_HINT' | translate}}</div>
                 <form class="" role="search">
-                    <div class="form-group wodk-form-group">
-                        <button ng-click="vm.selectFirstResult()" class="btn btn-success wodk-btn wodk-btn-green">Zoeken</button>
+                    <div class="form-group wodk-form-group wodk-form-group-search">
+                        <button ng-click="vm.selectFirstResult()" class="btn btn-success wodk-btn wodk-btn-purple">Zoek</button>
                         <!--<span><input id="search-address" type="text" class="form-control" ng-model="vm.addressQuery" ng-change="vm.filterAddress()" ng-keyup="$event.keyCode == 13 && vm.selectFirstAddress()"
                         placeholder="" autocomplete="off" autofocus>
                     </span>-->
@@ -54,10 +54,10 @@
     </div>
     <div class="container-fluid wodk-navbar-backdrop animate-backdrop" ng-click="vm.toggle()" ng-show="isOpen">
     </div>
-    <div class="container-fluid animate-navbar-btn all-mouse-events" ng-show="!isOpen" style="position:absolute;top:0">
+    <div class="container-fluid animate-navbar-btn" ng-show="!isOpen" style="position:absolute;top:0">
         <div class="row" style="background: transparent">
             <div class="col-sm-12 col-md-6 col-md-offset-3 text-center">
-                <a class="btn btn-primary wodk-btn wodk-btn-blue open-navbar-btn" ng-click="vm.toggle()">
+                <a class="btn btn-primary wodk-btn wodk-btn-blue open-navbar-btn all-mouse-events" ng-click="vm.toggle()">
                     <div>
                         <div style="font-size: 22px" class="fa fa-caret-down"></div>
                     </div>

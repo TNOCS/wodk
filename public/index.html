@@ -67,6 +67,7 @@
     <script src="wodk/WodkRightPanel.js"></script>
     <script src="wodk/WodkPropertyView.js"></script>
     <script src="wodk/WodkModalCtrl.js"></script>
+    <script src="wodk/WodkBaselayers.js"></script>
     <script src="app/app.js"></script>
     <script src="bower_components/csweb/dist-bower/csTemplates.js"></script>
     <!--<script src="bower_components/promise-polyfill/promise.js"></script>-->
@@ -92,7 +93,7 @@
         </div>-->
         <div class="container-fluid">
             <div class="row">
-                <div class="hidden-xs col-sm-5 col-md-4 col-lg-3" style="z-index:10">
+                <div class="hidden-xs col-sm-6 col-md-5 col-lg-4" style="z-index:10">
                     <h2 class="wodk-navbar-title-only">
                         {{'SITE_TITLE' | translate}}
                     </h2>
@@ -254,7 +255,7 @@
                 <div id="rightpanelTabContainer" class="rightpanel-tabs-container">
                     <!-- Nav tabs -->
                     <ul ng-hide="true" id="rightpanelTabs" class="nav nav-tabs" ng-class="{'rightpanelTabs-collapsed' : !vm.$layerService.visual.rightPanelVisible}">
-                        <li style="margin-top:5px" ng-style="!vm.$layerService.visual.rightPanelVisible && {'opacity':0}" ng-click="vm.$layerService.visual.rightPanelVisible = false"
+                        <li style="margin-top:5px" ng-style="!vm.$layerService.visual.rightPanelVisible && {'opacity':0}" ng-click="vm.closeRightPanel()"
                             uib-popover="{{'HIDE_PANEL' | translate}}" popover-placement="left" popover-trigger="'mouseenter'"
                             popover-append-to-body="true">
                             <a class="rightpanel-hidetab">
@@ -262,9 +263,19 @@
                             </a>
                         </li>
                     </ul>
+                    <div id="wodk-info-tab" class="wodk-info-tab" ng-click="vm.closeRightPanel()">
+                        <div class="wodk-info-tab-inner"><i class="fa fa-caret-right"></i>
+                        </div>
+                    </div>
                     <div id="rightpanelTabPanes" class="tab-content">
                     </div>
                 </div>
+            </div>
+        </div>
+        <!-- Rightpanel tab when rightpanel closed -->
+        <div id="wodk-info-tab-collapsed" class="wodk-info-tab wodk-info-tab-collapsed" ng-click="vm.openRightPanel();firstTime=false;" ng-class="{'wodk-info-tab-collapsed-wide': firstTime}" ng-init="firstTime=true" ng-show="vm.wodkWidgetSvc.selectionHistory.length>0">
+            <div class="wodk-info-tab-inner" ng-show="!vm.$layerService.visual.rightPanelVisible">
+                <div ng-show="firstTime">{{'TOON_INFO' | translate}}</div><i class="fa fa-caret-left small-padding-lr"></i>
             </div>
         </div>
 
@@ -333,15 +344,19 @@
         <nav class="navbar navbar-inverse navbar-fixed-bottom">
             <div class="container-fluid">
                 <ul class="nav navbar-nav">
-                    <li class="active" ng-click="">
-                        <a>
+                    <li class="dropdown">
+                        <a data-toggle="dropdown">
                             <div><span class="small-padding-lr"><i class="fa fa-list-ul"></i></span>Legenda</div>
                         </a>
+                        <div id="widget-wodklegend-parent" class="dropdown-menu" style="width: 300px">
+                        </div>
                     </li>
-                    <li ng-click="vm.toggleBaselayer()">
-                        <a>
+                    <li class="dropdown">
+                        <a data-toggle="dropdown">
                             <div><span class="small-padding-lr"><i class="fa fa-globe"></i></span>Weergave</div>
                         </a>
+                        <div id="widget-wodkbaselayers-parent" class="dropdown-menu" style="width: 300px">
+                        </div>
                     </li>
                     <li ng-click="vm.zoomIn()">
                         <a>

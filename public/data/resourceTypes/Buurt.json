@@ -10,7 +10,7 @@
 				"strokeWidth" : 0.5,
 			 	"selectedStrokeWidth": 2,
 				"cornerRadius": 50,
-				"opacity": 1.0,
+				"opacity": 0.8,
 				"iconWidth" : 24,
 				"iconHeight" : 24,
 				"iconUri" : "images/i.png",
@@ -366,7 +366,7 @@
                 "legendEntries": [
                     {
 						"sortKey": "a",
-                        "label": "    <20% aanpasbare woningen",
+                        "label": "  0-20% aanpasbare woningen",
                         "interval": {
                             "min": 0,
                             "max": 20
@@ -375,7 +375,7 @@
                     },
                     {
 						"sortKey": "b",
-                        "label": "<>20-40% aanpasbare woningen",
+                        "label": " 20-40% aanpasbare woningen",
                         "interval": {
                             "min": 20,
                             "max": 40
@@ -384,7 +384,7 @@
                     },
 					{
 						"sortKey": "c",
-                        "label": "<>40-80% aanpasbare woningen",
+                        "label": " 40-80% aanpasbare woningen",
                         "interval": {
                             "min": 40,
                             "max": 80
@@ -393,7 +393,7 @@
                     },
 					{
 						"sortKey": "d",
-                        "label": "    >80% aanpasbare woningen",
+                        "label": "80-100% aanpasbare woningen",
                         "interval": {
                             "min": 80,
                             "max": 100
