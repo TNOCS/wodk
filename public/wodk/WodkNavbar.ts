@@ -137,7 +137,7 @@ module WodkNavbar {
             this.$timeout(() => {
                 if (this.$scope.isOpen) {
                     document.getElementById('search-address').focus();
-                    this.messageBusService.publish('rightpanel', 'deactiveContainer', 'wodkright');
+                    this.layerService.visual.rightPanelVisible = false;
                 }
             }, 100);
         }

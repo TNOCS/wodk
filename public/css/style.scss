@@ -14,6 +14,109 @@
     font-weight: bold;
     src: url('fonts/ROsanswebtextbold.woff') format('woff');
 }
+@font-face {
+  font-family: 'wodk-icons';
+  src:  url('fonts/wodk-icons.eot?yt5xhw');
+  src:  url('fonts/wodk-icons.eot?yt5xhw#iefix') format('embedded-opentype'),
+    url('fonts/wodk-icons.ttf?yt5xhw') format('truetype'),
+    url('fonts/wodk-icons.woff?yt5xhw') format('woff'),
+    url('fonts/wodk-icons.svg?yt5xhw#wodk-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="wodk-ico-"], [class*=" wodk-ico-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'wodk-icons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  font-size: 24px;
+  padding: 0px 8px;
+  vertical-align: middle;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.wodk-ico-donut:before {
+  content: "\e900";
+}
+.wodk-ico-donut_2:before {
+  content: "\e901";
+}
+.wodk-ico-download-csv:before {
+  content: "\e902";
+}
+.wodk-ico-downloaden:before {
+  content: "\e903";
+}
+.wodk-ico-download-geojson:before {
+  content: "\e904";
+}
+.wodk-ico-downloadpdf:before {
+  content: "\e905";
+}
+.wodk-ico-globe:before {
+  content: "\e906";
+}
+.wodk-ico-hulp:before {
+  content: "\e907";
+}
+.wodk-ico-info:before {
+  content: "\e908";
+}
+.wodk-ico-kaart:before {
+  content: "\e909";
+}
+.wodk-ico-kruis:before {
+  content: "\e90a";
+}
+.wodk-ico-legenda:before {
+  content: "\e90b";
+}
+.wodk-ico-link_pijl:before {
+  content: "\e90c";
+}
+.wodk-ico-marker .path1:before {
+  content: "\e90d";
+  color: rgb(0, 0, 0);
+}
+.wodk-ico-marker .path2:before {
+  content: "\e90e";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.wodk-ico-pdf:before {
+  content: "\e90f";
+}
+.wodk-ico-pijl_nav_links:before {
+  content: "\e910";
+}
+.wodk-ico-pijl_nav_rechts:before {
+  content: "\e911";
+}
+.wodk-ico-printer:before {
+  content: "\e912";
+}
+.wodk-ico-refresh:before {
+  content: "\e913";
+}
+.wodk-ico-ster:before {
+  content: "\e914";
+}
+.wodk-ico-ster-vol:before {
+  content: "\e915";
+}
+.wodk-ico-woning:before {
+  content: "\e916";
+}
+.wodk-ico-zoom_in:before {
+  content: "\e917";
+}
 
 $header-grijs: rgba(238,
 238,
@@ -60,6 +163,14 @@ body {
 .nav>li.dropdown>a,
 .navbar-default .navbar-nav>li>a {
     color: #eee;
+}
+
+.bottom-navbar-content.collapse,
+.bottom-navbar-content.collapsing  {
+    position: absolute;
+    z-index: 400;
+    bottom: 50px;
+    background: white;
 }
 
 .leaflet-control-attribution {
@@ -179,7 +290,7 @@ body {
     bottom: 0;
     right: 0;
     position: absolute;
-    z-index: 81;
+    z-index: 1031;
 }
 
 @media screen and (min-width: 600px) {
@@ -474,6 +585,11 @@ body {
     cursor: pointer;
 }
 
+.active-button > i {
+    color: #333;
+    font-size: 22px;
+}
+
 .active-button-toelichting {
     color: #eee;
     margin: 0;
@@ -485,6 +601,10 @@ body {
     color: black;
     margin-top: 4px;
     font-weight: 500;
+}
+
+.wodk-rightpanel .active-button {
+    padding: 0px 6px;
 }
 
 .inactive-button-toelichting {
@@ -666,6 +786,7 @@ body {
 .wodk-link-rapport {
     border-bottom: none;
     width: auto;
+    font-style: normal;
 }
 
 .legend-description-title {
@@ -875,12 +996,11 @@ a {
 .rapport-link a {
     padding: 0px 6px;
     line-height: 20px;
-    vertical-align: top;
+    vertical-align: middle;
 }
 
-.rapport-link i {
-    font-size: 20px;
-    line-height: 20px;
+.rapport-link img {
+    height: 24px;
 }
 
 .streetview-img {
@@ -890,6 +1010,10 @@ a {
 
 .text-grey {
     color: dimgrey;
+}
+
+.search-hint{
+    font-style: italic;
 }
 
 .small-padding-lr {
@@ -1023,12 +1147,12 @@ a {
 
 .table-section-title {
     font-weight: bold;
-    margin-top: 12px;
+    margin-top: 8px;
     cursor: pointer;
 }
 
 .table-section-title>span {
-    padding: 4px;
+    padding: 4px 8px;
 }
 
 .table-row-title {
@@ -1114,7 +1238,7 @@ a {
     background: $header-grijs;
     font-size: 18px;
     font-weight: bold;
-    padding: 0px 12px 4px;
+    padding: 4px 12px 6px;
 }
 
 .navbar-fixed-bottom {
@@ -1147,22 +1271,20 @@ a {
     border: none;
 }
 
-.navbar-inverse .navbar-nav>.active>a,
-.navbar-inverse .navbar-nav>.open>a {
-    background: white;
-    color: #333;
-    background-image: none;
-    box-shadow: none;
-}
-
 .navbar-inverse .navbar-nav>.open>a,
 .navbar-inverse .navbar-nav>.open>a:focus,
 .navbar-inverse .navbar-nav>.open>a:hover,
-.navbar-inverse .navbar-nav>.active>a,
-.navbar-inverse .navbar-nav>.active>a:focus,
-.navbar-inverse .navbar-nav>.active>a:hover {
+.navbar-inverse .navbar-nav>.collapse,
+.navbar-inverse .navbar-nav>.collapse>a:focus,
+.navbar-inverse .navbar-nav>.collapse>a:hover,
+.navbar-inverse .navbar-nav>li>a:focus,
+.navbar-inverse .navbar-nav>li>a:hover {
     color: #333;
     background: white;
+}
+
+.navbar-inverse .navbar-nav>.collapse.collapsed {
+    background: #eee;
 }
 
 .navbar-inverse .navbar-brand,
@@ -1174,6 +1296,11 @@ a {
 .navbar-inverse .navbar-nav li>a>div {
     border-right: 1px solid #ccc;
     padding: 6px 12px;
+}
+
+.navbar-inverse .navbar-nav li>a>div>div {
+    vertical-align: middle;
+    display: inline-block;
 }
 
 .navbar-fixed-bottom .navbar-nav>li>.dropdown-menu {
@@ -1231,14 +1358,6 @@ $wodk-baselayers-img-height: 32px;
     width: 100%;
     height: 100%;
     padding: 10px 16px 50px;
-}
-
-.wodk-rightpanel .active-button {
-    padding: 0px 8px;
-}
-
-.wodk-rightpanel .active-button img {
-    width: 24px;
 }
 
 $rightpanel-width: 400px;

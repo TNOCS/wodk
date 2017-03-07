@@ -152,6 +152,7 @@ module WodkRightPanel {
                     break;
                 case 'onFeatureSelect':
                     if (f && f.fType && f.fType.name === 'BagPanden') {
+                        this.selectedItems.length = 0;
                         this.selectFeature([f]);
                     } else {
                         this.selectedItems = this.wodkWidgetSvc.getSelectionHistoryOfLastSelectedType();
@@ -184,6 +185,10 @@ module WodkRightPanel {
 
         public publish(msg: string, data ? : any) {
             this.messageBusService.publish('wodk', msg, data);
+        }
+
+        public bookmark() {
+            this.messageBusService.notifyWithTranslation('BOOKMARK', 'BOOKMARK_MSG');
         }
 
         public close() {

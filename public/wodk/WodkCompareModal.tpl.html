@@ -3,23 +3,21 @@
         <span><i class="fa fa-times" ng-click="vm.cancel()"></i></span>
     </h4>
 </div>
-<div class="modal-body">
-    <div style="height: 100%;padding-right:48px;overflow:auto" resize resize-y="100">
-        <table id="compare-widget-table" class="table table-bordered table-hover" style="margin-right:24px;font-size: 12px;">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th ng-repeat="title in featureTitles track by $index">{{title}}</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="entry in tableEntries track by $index">
-                    <th scope="row">{{propertyTitles[$index]}}</th>
-                    <td ng-repeat="col in entry track by $index">{{col}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+<div class="modal-body" style="height: 100%;padding-right:48px;overflow:auto" resize resize-y="250">
+    <table id="compare-widget-table" class="table table-bordered table-hover" style="margin-right:24px;font-size: 12px;">
+        <thead>
+            <tr>
+                <th></th>
+                <th ng-repeat="title in featureTitles track by $index">{{title}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="entry in tableEntries track by $index">
+                <th scope="row">{{propertyTitles[$index]}}</th>
+                <td ng-repeat="col in entry track by $index">{{col}}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-default" ng-click="vm.cancel()">{{'CLOSE' | translate}}</button>

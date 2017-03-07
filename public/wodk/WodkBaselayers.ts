@@ -131,16 +131,16 @@ module wodk {
         }
 
         private hide() {
-            if (this.parentWidget.hasClass('dropdown-menu')) {
-                this.parentWidget.parent().removeClass('open');
+            if (this.parentWidget.hasClass('collapse')) {
+                this.parentWidget.parent().collapse('hide');
             } else {
                 this.parentWidget.hide();
             }
         }
 
         private show() {
-            if (this.parentWidget.hasClass('dropdown-menu')) {
-                this.parentWidget.parent().addClass('open');
+            if (this.parentWidget.hasClass('collapse')) {
+                this.parentWidget.parent().collapse('show');
             } else {
                 this.parentWidget.show();
             }

@@ -183,17 +183,26 @@ module WodkRightPanel {
         }
 
         private getRapportLink(f: IFeature) {
+            let prop;
             if (f.properties.hasOwnProperty('bu_code')) {
-                this.wodkSvc.getLZWSets(f.properties['bu_code'], (set) => {
-                    ( < HTMLLinkElement > document.querySelector('#rapport-link')).href = `http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set ${set.s}.pdf#page=${set.p}`;
-                });
+                prop = f.properties['bu_code'];
             } else if (f.properties.hasOwnProperty('GM_CODE')) {
-                this.wodkSvc.getLZWSets(f.properties['GM_CODE'], (set) => {
-                    ( < HTMLLinkElement > document.querySelector('#rapport-link')).href = `http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set ${set.s}.pdf#page=${set.p}`;
-                });
+                prop = f.properties['GM_CODE'];
             } else {
-                ( < HTMLLinkElement > document.querySelector('#rapport-link')).href = null;
+                this.resetRapportLink();
+                return;
             }
+            this.getLZWSet(prop);
+        }
+
+        private getLZWSet(prop: string) {
+            this.wodkSvc.getLZWSets(prop, (set) => {
+                if (!set || !set.s) {
+                    this.resetRapportLink();
+                    return;
+                }
+                ( < HTMLLinkElement > document.querySelector('#rapport-link')).href = `http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set ${set.s}.pdf#page=${set.p}`;
+            });
         }
 
         private resetRapportLink() {

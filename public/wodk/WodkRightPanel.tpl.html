@@ -10,13 +10,26 @@
         </div>
     </div>-->
     <div class="row border-dashed-lr">
-        <div class="active-button pull-left" uib-tooltip="{{'BEGIN_OPNIEUW' | translate}}" tooltip-placement="bottom-left"><a data-ng-click="vm.publish('refresh')"><img src="images/refresh.svg"></img></a></div>
-        <div class="active-button pull-left" uib-popover="{{'STAP_TERUG' | translate}}" tooltip-placement="bottom-left"><a data-ng-click="vm.publish('back')"><img src="images/nav_pijl_links.svg"></img></a></div>
-        <div class="active-button pull-left" uib-popover="{{'STAP_VOORUIT' | translate}}" tooltip-placement="bottom-left">
-            <a data-ng-click="vm.publish('forward')" ng-class="vm.wodkWidgetSvc.hasForwardHistory() ? '' : 'inactive-button'"><img src="images/nav_pijl_rechts.svg"></img></a>
+        <div class="active-button pull-left" uib-tooltip="{{'BEGIN_OPNIEUW' | translate}}" tooltip-placement="bottom">
+            <i data-ng-click="vm.publish('refresh')" class="wodk-ico-refresh"></i>
+            </div>
+        <div class="active-button pull-left" uib-tooltip="{{'STAP_TERUG' | translate}}" tooltip-placement="bottom">
+            <i data-ng-click="vm.publish('back')" class="wodk-ico-pijl_nav_links"></i>
+            </div>
+        <div class="active-button pull-left" uib-tooltip="{{'STAP_VOORUIT' | translate}}" tooltip-placement="bottom">
+            <i data-ng-click="vm.publish('forward')" ng-class="vm.wodkWidgetSvc.hasForwardHistory() ? '' : 'inactive-button'" class="wodk-ico-pijl_nav_rechts"></i>
         </div>
-        <div class="active-button pull-right" uib-popover="{{'CLOSE' | translate}}" tooltip-placement="bottom-left">
-            <a data-ng-click="vm.close()"><span class="fa fa-times"></span></a>
+        <div class="active-button pull-left">
+            <i style="opacity: 0">.</i>
+        </div>
+        <div class="active-button pull-right" uib-tooltip="{{'CLOSE' | translate}}" tooltip-placement="bottom">
+            <i data-ng-click="vm.close()" class="wodk-ico-kruis"></i>
+        </div>
+        <div class="active-button pull-right" uib-tooltip="{{'BOOKMARK' | translate}}" tooltip-placement="bottom">
+            <i data-ng-click="vm.bookmark()" class="wodk-ico-ster"></i>
+        </div>
+        <div class="active-button pull-right" uib-tooltip="{{'PRINT' | translate}}" tooltip-placement="bottom">
+            <i data-ng-click="vm.bookmark()" class="wodk-ico-printer"></i>
         </div>
     </div>
     <div class="row small-margin-top">
@@ -62,12 +75,13 @@
         <div class="row property-table-content">
             <div class="row">
                 <div class="col-xs-12 rapport-link">
-                    <i class="fa fa-file-pdf-o"></i>
+                    <i class="wodk-ico-downloadpdf"></i>
+                    <!--<img src="images/icons/pdf.svg"></i>-->
                     <a id="rapport-link" class="wodk-link wodk-link-rapport" target="_blank">Rekenmodel - Langer zelfstandig wonen</a>
                 </div>
             </div>
             <div class="row table-section" ng-repeat="section in vm.propertyTable.sections track by $index">
-                <div class="row table-dash" data-toggle="collapse" data-target="#collapse-{{$index}}">
+                <div class="row" data-toggle="collapse" data-target="#collapse-{{$index}}">
                     <div class="col-xs-12 table-section-title">{{section.title}}<span class="fa fa-caret-up"></span><span class="fa fa-caret-down"></span></div>
                 </div>
                 <div ng-show="section.type==='table'" class="row collapse in" id="collapse-{{$index}}">

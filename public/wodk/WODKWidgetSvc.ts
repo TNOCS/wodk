@@ -74,7 +74,7 @@ module wodk {
         public zoomNextFeatureFlag: boolean = false;
         public lastLoadedAddress: IAddressResult;
         protected lastSelectedName: string;
-        protected lastSelectedType: 'provincie' | 'gemeente' | 'buurt';
+        protected lastSelectedType: 'provincie' | 'gemeente' | 'buurt' | 'pand';
         protected gemeenteSelectie: IFeature[];
         protected buurtSelectie: IFeature[];
         protected selectionHistory: IFeature[];

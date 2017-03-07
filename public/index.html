@@ -273,7 +273,8 @@
             </div>
         </div>
         <!-- Rightpanel tab when rightpanel closed -->
-        <div id="wodk-info-tab-collapsed" class="wodk-info-tab wodk-info-tab-collapsed" ng-click="vm.openRightPanel();firstTime=false;" ng-class="{'wodk-info-tab-collapsed-wide': firstTime}" ng-init="firstTime=true" ng-show="vm.wodkWidgetSvc.selectionHistory.length>0">
+        <div id="wodk-info-tab-collapsed" class="wodk-info-tab wodk-info-tab-collapsed" ng-click="vm.openRightPanel();firstTime=false;"
+            ng-class="{'wodk-info-tab-collapsed-wide': firstTime}" ng-init="firstTime=true" ng-show="vm.wodkWidgetSvc.selectionHistory.length>0">
             <div class="wodk-info-tab-inner" ng-show="!vm.$layerService.visual.rightPanelVisible">
                 <div ng-show="firstTime">{{'TOON_INFO' | translate}}</div><i class="fa fa-caret-left small-padding-lr"></i>
             </div>
@@ -344,23 +345,27 @@
         <nav class="navbar navbar-inverse navbar-fixed-bottom">
             <div class="container-fluid">
                 <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a data-toggle="dropdown">
-                            <div><span class="small-padding-lr"><i class="fa fa-list-ul"></i></span>Legenda</div>
-                        </a>
-                        <div id="widget-wodklegend-parent" class="dropdown-menu" style="width: 300px">
+                    <li class="collapse collapsed" data-toggle="collapse" data-target="#widget-wodklegend-parent">
+                        <div id="widget-wodklegend-parent" class="bottom-navbar-content collapse" style="width: 300px">
                         </div>
+                        <a>
+                            <div><i class="wodk-ico-legenda"></i>
+                                <div>Legenda</div>
+                            </div>
+                        </a>
                     </li>
-                    <li class="dropdown">
-                        <a data-toggle="dropdown">
-                            <div><span class="small-padding-lr"><i class="fa fa-globe"></i></span>Weergave</div>
-                        </a>
-                        <div id="widget-wodkbaselayers-parent" class="dropdown-menu" style="width: 300px">
+                    <li class="collapse collapsed" data-toggle="collapse" data-target="#widget-wodkbaselayers-parent">
+                        <div id="widget-wodkbaselayers-parent" class="bottom-navbar-content collapse" style="width: 300px">
                         </div>
+                        <a>
+                            <div><i class="wodk-ico-globe"></i>
+                                <div>Weergave</div>
+                            </div>
+                        </a>
                     </li>
                     <li ng-click="vm.zoomIn()">
                         <a>
-                            <div><i class="fa fa-search-plus"></i></div>
+                            <div><i class="wodk-ico-zoom_in"></i></div>
                         </a>
                     </li>
                     <li ng-click="vm.zoomOut()">
