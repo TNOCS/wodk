@@ -20,7 +20,7 @@
                 "select provincie"
             ],
             "contourProperty": "contour",
-            "propertyTypeKeys": "provincienaam;provinciecode;aant_inw;ster_totaal;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;a_huko_onb;a_koopwon;a_huurwon;p_huko_onb;p_koopwon;p_huurwon;a_1gezw;a_mgezw;a_aangep_w;a_apb_w;a_napb_w;p_aangep_w;p_apb_w;p_napb_w;p_apb_onb;p_apb_in_ond;p_1gezw;p_mgezw;"
+            "propertyTypeKeys": "provincienaam;provinciecode;aant_inw;ster_totaal;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;a_huko_onb;a_koopwon;a_huurwon;p_huko_onb;p_koopwon;p_huurwon;a_1gezw;a_mgezw;a_aangep_w;a_apb_w;a_napb_w;a_apb_onb;p_aangep_w;p_apb_w;p_napb_w;p_apb_onb;p_apb_in_ond;p_1gezw;p_mgezw;"
         },
         "gemeente": {
             "name": "gemeente",
@@ -43,7 +43,7 @@
                 "load buurten"
             ],
             "contourProperty": "_contour",
-            "propertyTypeKeys": "aant_inw;ster_totaal;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;a_huko_onb;a_koopwon;a_huurwon;p_huko_onb;p_koopwon;p_huurwon;a_1gezw;a_mgezw;gemeentecode;GM_CODE;gemeentenaam;a_aangep_w;a_apb_w;a_napb_w;a_apb_in_ond;p_aangep_w;p_apb_w;p_napb_w;p_apb_onb;p_apb_in_ond;p_1gezw;p_mgezw;",
+            "propertyTypeKeys": "aant_inw;ster_totaal;a_aangep_w;a_apb_w;a_napb_w;a_apb_in_ond;a_apb_onb;a_huko_onb;a_koopwon;a_huurwon;p_huko_onb;p_koopwon;p_huurwon;a_1gezw;a_mgezw;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;gemeentecode;GM_CODE;gemeentenaam;p_aangep_w;p_apb_w;p_napb_w;p_apb_onb;p_apb_in_ond;p_1gezw;p_mgezw;",
             "legendExpr": [
                 {
                     "title": "#Inwoners",
@@ -679,7 +679,7 @@
             "label": "ster_0",
             "title": "Ster 0",
             "type": "number",
-            "section": "Indicatie aanpasbaarheid",
+            "section": "Sterren aantallen",
             "stringFormat": "{0:#,#}",
             "visibleInCallOut": true,
             "canEdit": true
@@ -688,7 +688,7 @@
             "label": "ster_1",
             "title": "Ster 1",
             "type": "number",
-            "section": "Indicatie aanpasbaarheid",
+            "section": "Sterren aantallen",
             "stringFormat": "{0:#,#}",
             "visibleInCallOut": true,
             "canEdit": true
@@ -697,7 +697,7 @@
             "label": "ster_2",
             "title": "Ster 2",
             "type": "number",
-            "section": "Indicatie aanpasbaarheid",
+            "section": "Sterren aantallen",
             "stringFormat": "{0:#,#}",
             "visibleInCallOut": true,
             "canEdit": true
@@ -706,7 +706,7 @@
             "label": "ster_3",
             "title": "Ster 3",
             "type": "number",
-            "section": "Indicatie aanpasbaarheid",
+            "section": "Sterren aantallen",
             "stringFormat": "{0:#,#}",
             "visibleInCallOut": true,
             "canEdit": true
@@ -715,7 +715,7 @@
             "label": "ster_4",
             "title": "Ster 4",
             "type": "number",
-            "section": "Indicatie aanpasbaarheid",
+            "section": "Sterren aantallen",
             "stringFormat": "{0:#,#}",
             "visibleInCallOut": true,
             "canEdit": true
@@ -724,7 +724,7 @@
             "label": "ster_5",
             "title": "Ster 5",
             "type": "number",
-            "section": "Indicatie aanpasbaarheid",
+            "section": "Sterren aantallen",
             "stringFormat": "{0:#,#}",
             "visibleInCallOut": true,
             "canEdit": true
@@ -733,7 +733,7 @@
             "label": "ster_onb",
             "title": "Ster onbekend",
             "type": "number",
-            "section": "Indicatie aanpasbaarheid",
+            "section": "Sterren aantallen",
             "stringFormat": "{0:#,#}",
             "visibleInCallOut": true,
             "canEdit": true
@@ -748,6 +748,7 @@
             "canEdit": true
         },
         "a_huko_onb": {
+            "linkedFeature": "p_huko_onb",
             "label": "a_huko_onb",
             "title": "Aant. eigendom onbekend",
             "section": "Eigendom",
@@ -757,6 +758,7 @@
             "canEdit": true
         },
         "a_koopwon": {
+            "linkedFeature": "p_koopwon",
             "label": "a_koopwon",
             "title": "Aant. koopwoningen",
             "type": "number",
@@ -766,6 +768,7 @@
             "canEdit": true
         },
         "a_huurwon": {
+            "linkedFeature": "p_huurwon",
             "label": "a_huurwon",
             "title": "Aant. huurwoningen",
             "type": "number",
@@ -775,6 +778,7 @@
             "canEdit": true
         },
         "a_1gezw": {
+            "linkedFeature": "p_1gezw",
             "label": "a_1gezw",
             "title": "Aant. eengezinswoningen",
             "type": "number",
@@ -784,6 +788,7 @@
             "canEdit": true
         },
         "a_mgezw": {
+            "linkedFeature": "p_mgezw",
             "label": "a_mgezw",
             "title": "Aant. meergezinswoningen",
             "type": "number",
@@ -825,6 +830,7 @@
             "canEdit": true
         },
         "a_apb_onb": {
+            "linkedFeature": "p_apb_onb",
             "label": "a_apb_onb",
             "type": "number",
             "title": "Aant. aanpasbaarheid onbekend",
@@ -836,6 +842,7 @@
             "isSearchable": false
         },
         "a_apb_in_ond" : {
+            "linkedFeature": "p_apb_in_ond",
 			"label" : "a_apb_in_ond",
 			"type" : "number",
 			"title" : "Aant. in onderzoek",
@@ -847,6 +854,7 @@
 			"isSearchable" : false
 		},
         "a_apb_w": {
+            "linkedFeature": "p_apb_w",
             "label": "a_apb_w",
             "type": "number",
             "title": "Aant. aanpasbare woningen",
@@ -858,6 +866,7 @@
             "isSearchable": false
         },
         "a_napb_w": {
+            "linkedFeature": "p_napb_w",
             "label": "a_napb_w",
             "type": "number",
             "title": "Aant. niet-aanpasbare woningen",
@@ -869,6 +878,7 @@
             "isSearchable": false
         },
         "a_aangep_w": {
+            "linkedFeature": "p_aangep_w",
             "label": "a_aangep_w",
             "type": "number",
             "title": "Aant. aangepaste woningen",

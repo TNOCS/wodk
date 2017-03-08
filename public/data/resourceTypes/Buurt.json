@@ -15,8 +15,7 @@
 				"iconHeight" : 24,
 				"iconUri" : "images/i.png",
                 "nameLabel" : "bu_naam",
-				"maxTitleResolution" : -1,
-				"tooltipStringFormat" : "Buurt: {0}"
+				"maxTitleResolution" : -1
 			},
 			"contourProperty": "_contour",
 			"selectActions": ["load woningen"],

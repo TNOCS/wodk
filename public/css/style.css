@@ -914,7 +914,6 @@ a {
 
 .table-section-title {
   font-weight: bold;
-  margin-top: 8px;
   padding-left: 0px;
   cursor: pointer; }
 
@@ -934,7 +933,7 @@ a {
   padding: 6px 0px; }
 
 .table-section {
-  margin: 16px 0px 0px; }
+  margin: 22px 0px 0px; }
 
 .table-section-headers {
   font-style: italic;
@@ -1094,4 +1093,5 @@ a {
   padding-right: 16px; }
 
 .wodk-rightpanel-scrolling-content {
-  padding-right: 16px; }
+  padding-right: 16px;
+  padding-bottom: 30px; }
