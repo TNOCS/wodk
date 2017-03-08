@@ -131,7 +131,7 @@ module WodkRightPanel {
             this.placesAutocomplete.close();
         }
 
-        private selectFeature(fts: IFeature[]) {
+        public selectFeature(fts: IFeature[]) {
             if (!fts || !_.isArray(fts)) return;
             this.propertyTable.displayFeature(fts);
             this.updateSearchInput();

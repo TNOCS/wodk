@@ -20,23 +20,26 @@
 			},
 			"contourProperty": "_contour",
 			"selectActions": ["load woningen"],
-			"propertyTypeKeys":"bu_naam;bu_code;gm_naam;gm_code;gm_code_2015;aant_inw;ster_totaal;a_apb_w;a_napb_w;a_apb_in_ond;a_apb_onb;a_aangep_w;p_apb_w;p_napb_w;p_apb_in_ond;p_apb_onb;p_aangep_w;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;woningen;p_1gezw;p_mgezw;p_koopwon,p_huurwon;p_huko_onb;a_1gezw;a_mgezw;a_koopwon;a_huurwon;a_huko_onb;woz;p_apb_w_copy;"
+			"propertyTypeKeys":"aant_inw;ster_totaal;a_aangep_w;a_apb_w;a_napb_w;a_apb_in_ond;a_apb_onb;a_1gezw;a_mgezw;a_koopwon;a_huurwon;a_huko_onb;p_1gezw;p_mgezw;p_koopwon,p_huurwon;p_huko_onb;p_apb_w;p_napb_w;p_apb_in_ond;p_apb_onb;p_aangep_w;bu_naam;bu_code;gm_naam;gm_code;gm_code_2015;woz;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;woningen;"
 		}
 	},
 	"propertyTypeData" : {
         "bu_naam": {
+			"section" : "Algemene informatie",
         	"label": "bu_naam",
         	"title": "Buurtnaam",
         	"type": "text",
         	"visibleInCallOut" : true
        	},
         "bu_code": {
+			"section" : "Algemene informatie",
         	"label": "bu_code",
         	"title": "Buurtcode",
         	"type": "text",
         	"visibleInCallOut" : true
 		},
 		"gm_naam" : {
+			"section" : "Algemene informatie",
 			"label" : "gm_naam",
 			"type" : "text",
 			"title" : "Gemeentenaam",
@@ -44,12 +47,14 @@
 			"isSearchable" : false
 		},
 		"gm_code": {
+			"section" : "Algemene informatie",
         	"label": "gm_code",
         	"title": "Gemeentecode",
         	"type": "text",
         	"visibleInCallOut" : false
 		},
         "gm_code_2015": {
+			"section" : "Algemene informatie",
         	"label": "gm_code_2015",
         	"title": "Gemeentecode",
         	"type": "text",
@@ -58,20 +63,24 @@
         "aant_inw" : {
 			"label" : "aant_inw",
 			"type" : "number",
+			"section" : "Totalen",
 			"title" : "Aantal inwoners",
             "stringFormat" : "{0:#,#}",
 			"visibleInCallOut" : true,
 			"isSearchable" : false
 		},
 		"ster_totaal" : {
+			"section" : "Sterren aantal",
 			"label" : "ster_totaal",
 			"type" : "number",
+			"section" : "Totalen",
 			"title" : "Aantal woningen",
             "stringFormat" : "{0:#,#}",
 			"visibleInCallOut" : true,
 			"isSearchable" : false
 		},
         "ster_0" : {
+			"section" : "Sterren aantal",
 			"label" : "ster_0",
 			"type" : "number",
 			"title" : "Aantal woningen ster 0",
@@ -80,6 +89,7 @@
 			"isSearchable" : false
 		}, 
         "ster_1" : {
+			"section" : "Sterren aantal",
 			"label" : "ster_1",
 			"type" : "number",
 			"title" : "Aantal woningen ster 1",
@@ -88,6 +98,7 @@
 			"isSearchable" : false
 		}, 
         "ster_2" : {
+			"section" : "Sterren aantal",
 			"label" : "ster_2",
 			"type" : "number",
 			"title" : "Aantal woningen ster 2",
@@ -96,6 +107,7 @@
 			"isSearchable" : false
 		}, 
         "ster_3" : {
+			"section" : "Sterren aantal",
 			"label" : "ster_3",
 			"type" : "number",
 			"title" : "Aantal woningen ster 3",
@@ -104,6 +116,7 @@
 			"isSearchable" : false
 		}, 
         "ster_4" : {
+			"section" : "Sterren aantal",
 			"label" : "ster_4",
 			"type" : "number",
 			"title" : "Aantal woningen ster 4",
@@ -112,6 +125,7 @@
 			"isSearchable" : false
 		}, 
         "ster_5" : {
+			"section" : "Sterren aantal",
 			"label" : "ster_5",
 			"type" : "number",
 			"title" : "Aantal woningen ster 5",
@@ -120,6 +134,7 @@
 			"isSearchable" : false
 		}, 
         "ster_onb" : {
+			"section" : "Sterren aantal",
 			"label" : "ster_onb",
 			"type" : "number",
 			"title" : "Aant. woningen ster onbekend",
@@ -136,6 +151,7 @@
 			"isSearchable" : false
 		},        
 		"p_1gezw" : {
+			"section" : "Woningtypes",
 			"label" : "p_1gezw",
 			"type" : "number",
 			"title" : "Perc. eengezinswoningen",
@@ -147,6 +163,7 @@
 			"isSearchable" : false
 		},        
 		"p_mgezw" : {
+			"section" : "Woningtypes",
 			"label" : "p_mgezw",
 			"type" : "number",
 			"title" : "Perc. meergezinswoningen",
@@ -158,6 +175,7 @@
 			"isSearchable" : false
 		},
         "p_koopwon" : {
+			"section" : "Eigendom woningen",
 			"label" : "p_koopwon",
 			"type" : "number",
 			"title" : "Perc. koopwoningen",
@@ -169,6 +187,7 @@
 			"isSearchable" : false
 		},
         "p_huurwon" : {
+			"section" : "Eigendom woningen",
 			"label" : "p_huurwon",
 			"type" : "number",
 			"title" : "Perc. huurwoningen",
@@ -180,6 +199,7 @@
 			"isSearchable" : false
 		},
         "p_huko_onb" : {
+			"section" : "Eigendom woningen",
 			"label" : "p_huko_onb",
 			"type" : "number",
 			"title" : "Perc. eigendom onbekend",
@@ -191,6 +211,8 @@
 			"isSearchable" : false
 		},
         "a_1gezw" : {
+			"section" : "Woningtypes",
+            "linkedFeature": "p_1gezw",
 			"label" : "a_1gezw",
 			"type" : "number",
 			"title" : "Aant. eengezinswoningen",
@@ -201,6 +223,8 @@
 			"isSearchable" : false
 		},        
 		"a_mgezw" : {
+			"section" : "Woningtypes",
+            "linkedFeature": "p_mgezw",
 			"label" : "a_mgezw",
 			"type" : "number",
 			"title" : "Aant. meergezinswoningen",
@@ -211,6 +235,8 @@
 			"isSearchable" : false
 		},
         "a_koopwon" : {
+			"section" : "Eigendom woningen",
+            "linkedFeature": "p_koopwon",
 			"label" : "a_koopwon",
 			"type" : "number",
 			"title" : "Aant. koopwoningen",
@@ -221,6 +247,8 @@
 			"isSearchable" : false
 		},
         "a_huurwon" : {
+			"section" : "Eigendom woningen",
+            "linkedFeature": "p_huurwon",
 			"label" : "a_huurwon",
 			"type" : "number",
 			"title" : "Aant. huurwoningen",
@@ -231,6 +259,8 @@
 			"isSearchable" : false
 		},
         "a_huko_onb" : {
+			"section" : "Eigendom woningen",
+            "linkedFeature": "p_huko_onb",
 			"label" : "a_huko_onb",
 			"type" : "number",
 			"title" : "Aant. eigendom onbekend",
@@ -241,6 +271,8 @@
 			"isSearchable" : false
 		},
 		"a_apb_in_ond" : {
+			"section" : "Indicatie aanpasbaarheid",
+            "linkedFeature": "p_apb_in_ond",
 			"label" : "a_apb_in_ond",
 			"type" : "number",
 			"title" : "Aant. in onderzoek",
@@ -251,6 +283,8 @@
 			"isSearchable" : false
 		},
 		"a_apb_onb" : {
+			"section" : "Indicatie aanpasbaarheid",
+            "linkedFeature": "p_apb_onb",
 			"label" : "a_apb_onb",
 			"type" : "number",
 			"title" : "Aant. aanpasbaarheid onbekend",
@@ -261,6 +295,8 @@
 			"isSearchable" : false
 		},
         "a_apb_w" : {
+			"section" : "Indicatie aanpasbaarheid",
+            "linkedFeature": "p_apb_w",
 			"label" : "a_apb_w",
 			"type" : "number",
 			"title" : "Aant. aanpasbare woningen",
@@ -271,6 +307,8 @@
 			"isSearchable" : false
 		},
         "a_napb_w" : {
+			"section" : "Indicatie aanpasbaarheid",
+            "linkedFeature": "p_napb_w",
 			"label" : "a_napb_w",
 			"type" : "number",
 			"title" : "Aant. niet-aanpasbare woningen",
@@ -281,6 +319,8 @@
 			"isSearchable" : false
 		},
         "a_aangep_w" : {
+			"section" : "Indicatie aanpasbaarheid",
+            "linkedFeature": "p_aangep_w",
 			"label" : "a_aangep_w",
 			"type" : "number",
 			"title" : "Aant. aangepaste woningen",
@@ -290,64 +330,8 @@
 			"visibleInCallOut" : true,
 			"isSearchable" : false
 		},
-        "p_apb_w_copy" : {
-			"label" : "p_apb_w_copy",
-			"type" : "number",
-			"title" : "Percentage aanpasbare woningen",
-            "expression" : "properties.a_apb_w / properties.ster_totaal * 100",
-            "description" : "Percentage aanpasbare woningen",
-            "stringFormat" : "{0:#,#}%",
-			"min": 0,
-			"max": 100,
-			"visibleInCallOut" : true,
-			"isSearchable" : false,
-			"legend": {
-                "id": "p_apb_w_copy",
-                "visualAspect": "fillColor",
-                "description": "Percentage aanpasbare woningen",
-                "defaultLabel": "Onbekend",
-                "legendKind": "discrete",
-                "legendEntries": [
-                    {
-                        "label": "0-20%",
-                        "interval": {
-                            "min": 0,
-                            "max": 20
-                        },
-                        "color": "#d1d3aa"
-                    },
-                    {
-                        "label": "20-40%",
-                        "interval": {
-                            "min": 20,
-                            "max": 40
-                        },
-                        "color": "#a4a755"
-                    },
-					{
-                        "label": "40-80%",
-                        "interval": {
-                            "min": 40,
-                            "max": 80
-                        },
-                        "color": "#777c00"
-                    },
-					{
-                        "label": "80-100%",
-                        "interval": {
-                            "min": 80,
-                            "max": 100
-                        },
-                        "color": "#4f5200"
-                    },
-					{
-                        "label": "Onbekend",
-                        "color": "#444444"
-                    }
-                ]
-            }
-		},
         "p_apb_w" : {
+			"section" : "Indicatie aanpasbaarheid",
 			"label" : "p_apb_w",
 			"type" : "number",
 			"title" : "Indicatie aanpasbare woningen",
@@ -413,6 +397,7 @@
             }
 		},
         "p_napb_w" : {
+			"section" : "Indicatie aanpasbaarheid",
 			"label" : "p_napb_w",
 			"type" : "number",
 			"title" : "Niet-aanpasbare woningen",
@@ -465,6 +450,7 @@
             }
 		},
 		"p_apb_onb" : {
+			"section" : "Indicatie aanpasbaarheid",
 			"label" : "p_apb_onb",
 			"type" : "number",
 			"title" : "Perc. aanpasbaarheid onbekend",
@@ -517,6 +503,7 @@
             }
 		},
 		"p_apb_in_ond" : {
+			"section" : "Indicatie aanpasbaarheid",
 			"label" : "p_apb_in_ond",
 			"type" : "number",
 			"title" : "Perc. aanpasbaarheid in onderzoek",
@@ -569,6 +556,7 @@
             }
 		},
 		"p_aangep_w" : {
+			"section" : "Indicatie aanpasbaarheid",
 			"label" : "p_aangep_w",
 			"type" : "number",
 			"title" : "Perc. aangepaste woningen",
@@ -621,6 +609,7 @@
             }
 		},
         "woz" : {
+			"section" : "Algemene informatie",
 			"label" : "woz",
 			"type" : "number",
 			"title" : "Gem. WOZ-waarde",

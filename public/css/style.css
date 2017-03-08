@@ -800,8 +800,8 @@ a {
   line-height: 20px;
   vertical-align: middle; }
 
-.rapport-link img {
-  height: 24px; }
+.rapport-link i {
+  padding-left: 0px; }
 
 .streetview-img {
   padding: 8px;
@@ -915,6 +915,7 @@ a {
 .table-section-title {
   font-weight: bold;
   margin-top: 8px;
+  padding-left: 0px;
   cursor: pointer; }
 
 .table-section-title > span {
@@ -926,14 +927,19 @@ a {
 .table-row-value {
   padding: 0px; }
 
+.table-row-value-small {
+  font-size: 90%; }
+
 .table-row {
   padding: 6px 0px; }
 
 .table-section {
-  margin: 12px 0px 0px; }
+  margin: 16px 0px 0px; }
 
-.table-section-title {
-  padding-left: 0px; }
+.table-section-headers {
+  font-style: italic;
+  padding-right: 0px;
+  text-align: right; }
 
 .table-entry-header {
   font-weight: bold;
@@ -1082,4 +1088,10 @@ a {
   font-size: 14px;
   width: 100%;
   height: 100%;
-  padding: 10px 16px 50px; }
+  padding: 10px 0px 50px 16px; }
+
+.wodk-rightpanel-fixed-top {
+  padding-right: 16px; }
+
+.wodk-rightpanel-scrolling-content {
+  padding-right: 16px; }

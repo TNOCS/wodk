@@ -777,8 +777,12 @@ module wodk {
                 });
                 lastSelectedItem.isSelected = true;
                 this.$messageBusService.publish('feature', 'onUpdateWidgets', lastSelectedItem);
+                // update rightpanel 
+                if (this.rightPanelTab) this.rightPanelTab.selectFeature(this.getSelectionHistoryOfLastSelectedType());
             } else {
                 this.$messageBusService.publish('updatelegend', 'hidelegend');
+                if (this.rightPanelTab) this.rightPanelTab.clearTable();
+                this.$layerService.visual.rightPanelVisible = false;
             }
 
             if (this.$rootScope.$$phase !== '$apply' && this.$rootScope.$$phase !== '$digest') {

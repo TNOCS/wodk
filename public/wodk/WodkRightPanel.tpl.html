@@ -1,5 +1,6 @@
-<div class="wodk-rightpanel scrolling">
-    <!--<div class="row border-dashed-lr">
+<div class="wodk-rightpanel">
+    <div class="wodk-rightpanel-fixed-top">
+        <!--<div class="row border-dashed-lr">
         <div class="col-xs-3 active-button text-center" uib-tooltip="{{'BEGIN_OPNIEUW' | translate}}" tooltip-placement="bottom-left"><a data-ng-click="vm.publish('refresh')"><span class="fa fa-repeat"></span></a></div>
         <div class="col-xs-3 active-button text-center" uib-popover="{{'STAP_TERUG' | translate}}" tooltip-placement="bottom-left"><a data-ng-click="vm.publish('back')"><span class="fa fa-arrow-left"></span></a></div>
         <div class="col-xs-3 active-button text-center" uib-popover="{{'STAP_VOORUIT' | translate}}" tooltip-placement="bottom-left">
@@ -9,71 +10,74 @@
             <a data-ng-click="vm.close()"><span class="fa fa-times"></span></a>
         </div>
     </div>-->
-    <div class="row border-dashed-lr">
-        <div class="active-button pull-left" uib-tooltip="{{'BEGIN_OPNIEUW' | translate}}" tooltip-placement="bottom">
-            <i data-ng-click="vm.publish('refresh')" class="wodk-ico-refresh"></i>
+        <div class="row border-dashed-lr">
+            <div class="active-button pull-left" uib-tooltip="{{'BEGIN_OPNIEUW' | translate}}" tooltip-placement="bottom">
+                <i data-ng-click="vm.publish('refresh')" class="wodk-ico-refresh"></i>
             </div>
-        <div class="active-button pull-left" uib-tooltip="{{'STAP_TERUG' | translate}}" tooltip-placement="bottom">
-            <i data-ng-click="vm.publish('back')" class="wodk-ico-pijl_nav_links"></i>
+            <div class="active-button pull-left" uib-tooltip="{{'STAP_TERUG' | translate}}" tooltip-placement="bottom">
+                <i data-ng-click="vm.publish('back')" class="wodk-ico-pijl_nav_links"></i>
             </div>
-        <div class="active-button pull-left" uib-tooltip="{{'STAP_VOORUIT' | translate}}" tooltip-placement="bottom">
-            <i data-ng-click="vm.publish('forward')" ng-class="vm.wodkWidgetSvc.hasForwardHistory() ? '' : 'inactive-button'" class="wodk-ico-pijl_nav_rechts"></i>
+            <div class="active-button pull-left" uib-tooltip="{{'STAP_VOORUIT' | translate}}" tooltip-placement="bottom">
+                <i data-ng-click="vm.publish('forward')" ng-class="vm.wodkWidgetSvc.hasForwardHistory() ? '' : 'inactive-button'" class="wodk-ico-pijl_nav_rechts"></i>
+            </div>
+            <div class="active-button pull-left">
+                <i style="opacity: 0">.</i>
+            </div>
+            <div class="active-button pull-right" uib-tooltip="{{'CLOSE' | translate}}" tooltip-placement="bottom">
+                <i data-ng-click="vm.close()" class="wodk-ico-kruis"></i>
+            </div>
+            <div class="active-button pull-right" uib-tooltip="{{'BOOKMARK' | translate}}" tooltip-placement="bottom">
+                <i data-ng-click="vm.bookmark()" class="wodk-ico-ster"></i>
+            </div>
+            <div class="active-button pull-right" uib-tooltip="{{'PRINT' | translate}}" tooltip-placement="bottom">
+                <i data-ng-click="vm.bookmark()" class="wodk-ico-printer"></i>
+            </div>
         </div>
-        <div class="active-button pull-left">
-            <i style="opacity: 0">.</i>
-        </div>
-        <div class="active-button pull-right" uib-tooltip="{{'CLOSE' | translate}}" tooltip-placement="bottom">
-            <i data-ng-click="vm.close()" class="wodk-ico-kruis"></i>
-        </div>
-        <div class="active-button pull-right" uib-tooltip="{{'BOOKMARK' | translate}}" tooltip-placement="bottom">
-            <i data-ng-click="vm.bookmark()" class="wodk-ico-ster"></i>
-        </div>
-        <div class="active-button pull-right" uib-tooltip="{{'PRINT' | translate}}" tooltip-placement="bottom">
-            <i data-ng-click="vm.bookmark()" class="wodk-ico-printer"></i>
-        </div>
-    </div>
-    <div class="row small-margin-top">
-        <div class="text-grey">{{'SEARCH_HINT' | translate}}</div>
-        <form class="" role="search">
-            <div class="form-group wodk-form-group">
-                <button ng-click="vm.selectFirstAddress()" class="btn btn-success wodk-btn wodk-btn-purple small small-padding-lr">{{'SEARCH' | translate}}</button>
-                <span><input id="search-address-rp" class="small" type="text" class="form-control"
+        <div class="row small-margin-top">
+            <div class="text-grey">{{'SEARCH_HINT' | translate}}</div>
+            <form class="" role="search">
+                <div class="form-group wodk-form-group">
+                    <button ng-click="vm.selectFirstAddress()" class="btn btn-success wodk-btn wodk-btn-purple small small-padding-lr">{{'SEARCH' | translate}}</button>
+                    <span><input id="search-address-rp" class="small" type="text" class="form-control"
                         placeholder="" autofocus>
                     </span>
-            </div>
-        </form>
-    </div>
-    <div class="row">
-        <div id="search-suggestions-rp" class="col-xs-12">
+                </div>
+            </form>
         </div>
-    </div>
-    <div class="row">
-        <div id="selected-items-rp" class="col-xs-12 selected-items-rp no-padding">
-            <div ng-show="vm.selectedItems.length>0">
-                <div ng-repeat="item in vm.selectedItems" style="display: inline">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-label" ng-click="vm.selectFeature(item)">{{item.properties.Name}}</button>
-                        <button type="button" class="btn btn-sm btn-label btn-label-close" ng-click="vm.removeItem(item)"><i class="fa fa-times"></i></button>
+        <div class="row">
+            <div id="search-suggestions-rp" class="col-xs-12">
+            </div>
+        </div>
+        <div class="row">
+            <div id="selected-items-rp" class="col-xs-12 selected-items-rp no-padding">
+                <div ng-show="vm.selectedItems.length>0">
+                    <div ng-repeat="item in vm.selectedItems" style="display: inline">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-label" ng-click="vm.selectFeature(item)">{{item.properties.Name}}</button>
+                            <button type="button" class="btn btn-sm btn-label btn-label-close" ng-click="vm.removeItem(item)"><i class="fa fa-times"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="row property-table">
+            <div class="row property-table-header">
+                <div id="last-selected-item-rp" class="rp-header col-xs-12">
+                    {{vm.propertyTable.title}}
+                </div>
+                <a class="rp-compare wodk-link col-xs-12" ng-show="vm.selectedItems.length>1" ng-click="vm.compareItems()" style="border: none">{{'COMPARE_ITEMS' | translate}}<span class="small-padding-lr"><img src="images/arrow-right.svg" class="arrow-right-link"></img></span>
+                </a>
+            </div>
+        </div>
     </div>
-    <div class="row property-table">
-        <div class="row property-table-header">
-            <div id="last-selected-item-rp" class="rp-header col-xs-12">
-                {{vm.propertyTable.title}}
+    <div class="wodk-rightpanel-scrolling-content scrolling" resize resize-y="200">
+        <div class="row property-table property-table-content">
+            <div class="row" ng-show="vm.propertyTable.streetview">
+                <div class="col-xs-12 streetview-img">
+                    <a id="streetview-link" target="_blank"><img id="streetview-img" /></a>
+                </div>
             </div>
-            <a class="rp-compare wodk-link col-xs-12" ng-show="vm.selectedItems.length>1" ng-click="vm.compareItems()" style="border: none">{{'COMPARE_ITEMS' | translate}}<span class="small-padding-lr"><img src="images/arrow-right.svg" class="arrow-right-link"></img></span>
-            </a>
-        </div>
-        <div class="row" ng-show="vm.propertyTable.streetview">
-            <div class="col-xs-12 streetview-img">
-                <a id="streetview-link" target="_blank"><img id="streetview-img" /></a>
-            </div>
-        </div>
-        <div class="row property-table-content">
-            <div class="row">
+            <div class="row" ng-show="vm.propertyTable.showRapportLink">
                 <div class="col-xs-12 rapport-link">
                     <i class="wodk-ico-downloadpdf"></i>
                     <!--<img src="images/icons/pdf.svg"></i>-->
@@ -82,29 +86,20 @@
             </div>
             <div class="row table-section" ng-repeat="section in vm.propertyTable.sections track by $index">
                 <div class="row" data-toggle="collapse" data-target="#collapse-{{$index}}">
-                    <div class="col-xs-12 table-section-title">{{section.title}}<span class="fa fa-caret-up"></span><span class="fa fa-caret-down"></span></div>
+                    <div class="col-xs-8 table-section-title">{{section.title}}<span class="fa fa-caret-up"></span><span class="fa fa-caret-down"></span></div>
+                    <div class="col-xs-2 table-section-headers" ng-repeat="header in section.headers">{{header}}</div>
                 </div>
                 <div ng-show="section.type==='table'" class="row collapse in" id="collapse-{{$index}}">
                     <div class="row table-row table-dash" ng-repeat="row in section.rows">
                         <div ng-show="row.type !== 'textarea'">
                             <div class="col-xs-8 table-row-title">{{row.title}}</div>
-                            <div class="col-xs-4 text-right table-row-value">
-                                <div class="row">
-                                    <div ng-repeat="val in row.values">
-                                        <div class="table-row-value" data-ng-bind-html="val | trusted"></div>
-                                    </div>
-                                </div>
-                            </div>
+                            <div ng-show="row.values.length===1" class="col-xs-4 text-right table-row-value" data-ng-bind-html="row.values[0] | trusted"></div>
+                            <div ng-show="row.values.length===2" class="col-xs-2 text-right table-row-value" data-ng-bind-html="row.values[0] | trusted"></div>
+                            <div ng-show="row.values.length===2" class="col-xs-2 text-right table-row-value" data-ng-bind-html="row.values[1] | trusted"></div>
                         </div>
                         <div ng-show="row.type === 'textarea'">
                             <div class="col-xs-12 table-row-title">{{row.title}}</div>
-                            <div class="col-xs-offset-1 col-xs-11 table-row-value">
-                                <div class="row">
-                                    <div ng-repeat="val in row.values">
-                                        <div class="table-row-value" data-ng-bind-html="val | trusted"></div>
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="col-xs-12 table-row-value table-row-value-small" ng-repeat="val in row.values track by $index" data-ng-bind-html="val | trusted"></div>
                         </div>
                     </div>
                 </div>
@@ -120,7 +115,5 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <row-visualizer ng-if="filter && filter.filterType=='row'"></row-visualizer>
-    </div>
+</div>
 </div>

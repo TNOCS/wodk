@@ -27,13 +27,14 @@ module WodkRightPanel {
         public title: string;
         public sections: IPropertyTableSection[] = [];
         public streetview: string;
+        public showRapportLink: boolean;
         public fullRows: string[] = [];
 
         constructor(private wodkSvc: wodk.WODKWidgetSvc, private layerService: csComp.Services.LayerService, private timeoutService: ng.ITimeoutService, private http: ng.IHttpService) {
             this.clearTable();
         }
 
-        private clearTable() {
+        public clearTable() {
             this.title = '';
             this.sections.length = 0;
             this.createSection(DEFAULT_SECTION_TITLE, DEFAULT_SECTION_TYPE, DEFAULT_SECTION_ID);
@@ -63,9 +64,11 @@ module WodkRightPanel {
 
         private removeDuplicateAndEmptyRows() {
             this.sections.forEach((section, index) => {
-                section.rows = _.uniq(section.rows, false, (row) => {
+                section.rows = _.chain(section.rows).uniq(false, (row) => {
                     return row.label;
-                });
+                }).filter((row) => {
+                    return row.values.length > 0;
+                }).value();
             });
             this.sections = this.sections.filter((section) => {
                 return section.rows.length > 0;
@@ -76,7 +79,6 @@ module WodkRightPanel {
 
         private displayFeatureDebounced(fts: IFeature[]) {
             if (!fts || !_.isArray(fts)) return;
-            console.log(`Display # features: ${fts.length}`);
             this.timeoutService(() => {
                 this.clearTable();
                 (fts.length === 1 ? this.getStreetViewImage(fts[0]) : this.resetStreetviewImage());
@@ -86,14 +88,16 @@ module WodkRightPanel {
                 this.title = this.getDisplayTitle(fts);
                 this.fillPropertyTable(fts, pTypes);
                 this.removeDuplicateAndEmptyRows();
-                console.log(`Display ${this.sections} sections`);
+                console.log(`Display ${fts.length} features in ${this.sections.length} sections`);
             }, 0);
         }
 
         private fillPropertyTable(fts: IFeature[], pTypes: IPropertyType[]) {
             let virtualFeature = this.joinFeatures(fts, pTypes);
+            let pTypesDict = _.object(_.pluck(pTypes, 'label'), pTypes);
+            let linkedFeatures = [];
             pTypes.forEach((pt: IPropertyType) => {
-                if (pt.visibleInCallOut && virtualFeature.properties.hasOwnProperty(pt.label)) {
+                if (pt.visibleInCallOut && virtualFeature.properties.hasOwnProperty(pt.label) && !(linkedFeatures.indexOf(pt.label) >= 0)) {
                     let sectionId = pt.section || DEFAULT_SECTION_ID;
                     let section = this.findOrCreateSection(sectionId);
                     let value;
@@ -113,8 +117,17 @@ module WodkRightPanel {
                         title: pt.title,
                         label: pt.label,
                         type: pt.type,
-                        values: [value]
+                        values: (value != null ? [value] : [])
                     });
+                    // Add linkedFeature if present (e.g. percentage icw amount)
+                    if (pt['linkedFeature'] && virtualFeature.properties.hasOwnProperty(pt['linkedFeature'])) {
+                        _.last(section.rows).values.push(csComp.Helpers.convertPropertyInfo(pTypesDict[pt['linkedFeature']], virtualFeature.properties[pt['linkedFeature']]));
+                        linkedFeatures.push(pt['linkedFeature']);
+                        if (section.headers.length === 0) {
+                            section.headers.push('Aantal');
+                            section.headers.push('Perc.');
+                        }
+                    }
                 }
             });
         }
@@ -164,6 +177,18 @@ module WodkRightPanel {
             if (this.streetview === address) return; // Already loaded image
             let imgUrl = STREETVIEW_IMG_URL.concat(address);
             let linkUrl = STREETVIEW_LINK_URL.concat(address);
+            this.streetview = address;
+            ( < HTMLImageElement > document.querySelector('#streetview-img')).src = imgUrl;
+            ( < HTMLLinkElement > document.querySelector('#streetview-link')).href = linkUrl;
+            this.resetRapportLink(); // Rapport and streetview image are never shown simulaneously
+        }
+
+        private getStreetViewImageOld(f: IFeature) {
+            if (!f.properties || !f.properties['Adres']) return;
+            let address = f.properties['Adres'].replace('\n', ', ');
+            if (this.streetview === address) return; // Already loaded image
+            let imgUrl = STREETVIEW_IMG_URL.concat(address);
+            let linkUrl = STREETVIEW_LINK_URL.concat(address);
             this.http.get(imgUrl, {
                     responseType: 'arraybuffer'
                 })
@@ -202,11 +227,14 @@ module WodkRightPanel {
                     return;
                 }
                 ( < HTMLLinkElement > document.querySelector('#rapport-link')).href = `http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set ${set.s}.pdf#page=${set.p}`;
+                this.showRapportLink = true;
+                this.resetStreetviewImage(); // Rapport and streetview image are never shown simulaneously
             });
         }
 
         private resetRapportLink() {
             document.querySelector('#rapport-link').removeAttribute('href');
+            this.showRapportLink = false;
         }
 
         private resetStreetviewImage() {
