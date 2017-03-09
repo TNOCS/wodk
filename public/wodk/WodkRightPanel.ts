@@ -78,7 +78,11 @@ module WodkRightPanel {
                 this.featureMessageReceived(title, f);
             }));
 
-            this.propertyTable = new PropertyTable(this.wodkWidgetSvc, this.layerService, this.$timeout, this.$http);
+            this.mBusHandles.push(this.messageBusService.subscribe('wodk', (title, f) => {
+                this.wodkMessageReceived(title);
+            }));
+
+            this.propertyTable = new PropertyTable(this.wodkWidgetSvc, this.layerService, this.$timeout);
 
             this.init();
         }
@@ -131,7 +135,7 @@ module WodkRightPanel {
             this.placesAutocomplete.close();
         }
 
-        public selectFeature(fts: IFeature[]) {
+        private selectFeature(fts: IFeature[]) {
             if (!fts || !_.isArray(fts)) return;
             this.propertyTable.displayFeature(fts);
             this.updateSearchInput();
@@ -149,7 +153,9 @@ module WodkRightPanel {
         private featureMessageReceived(title: string, f: IFeature): void {
             switch (title) {
                 case 'onFeatureDeselect':
+                    this.propertyTable.clearTable();
                     break;
+                case 'onUpdateWidgets':
                 case 'onFeatureSelect':
                     if (f && f.fType && f.fType.name === 'BagPanden') {
                         this.selectedItems.length = 0;
@@ -158,6 +164,14 @@ module WodkRightPanel {
                         this.selectedItems = this.wodkWidgetSvc.getSelectionHistoryOfLastSelectedType();
                         this.selectFeature(this.selectedItems);
                     }
+                    break;
+            };
+        }
+
+         private wodkMessageReceived(title: string): void {
+            switch (title) {
+                case 'clear-rightpanel':
+                    this.propertyTable.clearTable();
                     break;
             };
         }
@@ -173,6 +187,7 @@ module WodkRightPanel {
                 templateUrl: 'wodk/WodkCompareModal.tpl.html',
                 size: 'lg',
                 controller: 'CompareModalCtrl',
+                windowClass: 'modal-slide',
                 resolve: {
                     features: () => this.selectedItems
                 }
@@ -180,6 +195,7 @@ module WodkRightPanel {
 
             modalInstance.result.then(() => {}, () => {
                 console.log('Modal dismissed at: ' + new Date());
+                this.layerService.visual.rightPanelVisible = true;
             });
         }
 
@@ -189,6 +205,10 @@ module WodkRightPanel {
 
         public bookmark() {
             this.messageBusService.notifyWithTranslation('BOOKMARK', 'BOOKMARK_MSG');
+        }
+
+        public exportToImage() {
+            this.wodkWidgetSvc.exportToImage('wodk-rightpanel');
         }
 
         public close() {

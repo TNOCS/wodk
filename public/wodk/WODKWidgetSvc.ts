@@ -777,11 +777,9 @@ module wodk {
                 });
                 lastSelectedItem.isSelected = true;
                 this.$messageBusService.publish('feature', 'onUpdateWidgets', lastSelectedItem);
-                // update rightpanel 
-                if (this.rightPanelTab) this.rightPanelTab.selectFeature(this.getSelectionHistoryOfLastSelectedType());
             } else {
                 this.$messageBusService.publish('updatelegend', 'hidelegend');
-                if (this.rightPanelTab) this.rightPanelTab.clearTable();
+                this.$messageBusService.publish('wodk', 'clear-rightpanel');
                 this.$layerService.visual.rightPanelVisible = false;
             }
 
@@ -821,6 +819,51 @@ module wodk {
                     console.log('Find lzw set');
                     cb();
                 });
+        }
+
+        private getHTML(id: string) {
+            var content = `<html><head>`;
+            $.each(document.getElementsByTagName('link'), (ind: number, val: HTMLLinkElement) => {
+                content += val.outerHTML;
+            });
+            $.each(document.getElementsByTagName('script'), (ind: number, val: HTMLLinkElement) => {
+                content += val.outerHTML;
+            });
+            content += `</head><body>`;
+            content += $(id).prop('outerHTML');
+            content += `</body></html>`;
+            return content;
+        }
+
+        private getDimensions(id: string) {
+            let dom = $(id)[0];
+            let w = dom.scrollWidth;
+            let h = dom.scrollHeight;
+            return {
+                width: w,
+                height: h
+            };
+        }
+
+        public exportToImage(id: string) {
+            let dim = this.getDimensions('#' + id);
+            this.$http({
+                method: 'POST',
+                url: 'screenshot',
+                data: {
+                    html: this.getHTML('#' + id),
+                    width: dim.width,
+                    height: dim.height,
+                    topOffset: 0,
+                    fullScreen: false
+                },
+            }).then((response) => {
+                csComp.Helpers.saveImage(response.data.toString(), 'Langer_Thuis', 'png', true);
+            }, (error) => {
+                console.log(error);
+            });
+            console.log('Screenshot command sent');
+            this.$messageBusService.notifyWithTranslation('IMAGE_REQUESTED', 'IMAGE_WILL_APPEAR');
         }
     }
 

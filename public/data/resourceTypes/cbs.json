@@ -43,21 +43,7 @@
                 "load buurten"
             ],
             "contourProperty": "_contour",
-            "propertyTypeKeys": "aant_inw;ster_totaal;a_aangep_w;a_apb_w;a_napb_w;a_apb_in_ond;a_apb_onb;a_huko_onb;a_koopwon;a_huurwon;p_huko_onb;p_koopwon;p_huurwon;a_1gezw;a_mgezw;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;gemeentecode;GM_CODE;gemeentenaam;p_aangep_w;p_apb_w;p_napb_w;p_apb_onb;p_apb_in_ond;p_1gezw;p_mgezw;",
-            "legendExpr": [
-                {
-                    "title": "#Inwoners",
-                    "type": "number",
-                    "stringFormat": "{0:#,#}",
-                    "expression": "sum(features, 'AANT_INW')"
-                },
-                {
-                    "title": "#Ouderen >64",
-                    "type": "number",
-                    "stringFormat": "{0:#,#}",
-                    "expression": "sum(features, 'nr_kids')"
-                }
-            ]
+            "propertyTypeKeys": "aant_inw;ster_totaal;a_aangep_w;a_apb_w;a_napb_w;a_apb_in_ond;a_apb_onb;a_huko_onb;a_koopwon;a_huurwon;a_1gezw;a_mgezw;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;gemeentecode;GM_CODE;gemeentenaam;p_huko_onb;p_koopwon;p_huurwon;p_aangep_w;p_apb_w;p_napb_w;p_apb_onb;p_apb_in_ond;p_1gezw;p_mgezw;"
         },
         "wijk": {
             "name": "wijk",

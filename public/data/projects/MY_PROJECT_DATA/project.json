@@ -146,95 +146,6 @@
         "showRightmenu": false,
         "showBackgroundImage": false,
         "widgets": [{
-            "id": "5e75a888-21a4-47c0-de1d-8093ae45e305",
-            "directive": "markdownwidget",
-            "elementId": "widget-5e75a888-21a4-47c0-de1d-8093ae45e305",
-            "enabled": false,
-            "style": "vws",
-            "left": "8px",
-            "right": "640px",
-            "top": "100px",
-            "bottom": "16px",
-            "width": "",
-            "height": "",
-            "data": {
-                "featureTypeName": "Dummy",
-                "dynamicProperties": [
-                    "DummyProp"
-                ],
-                "title": "",
-                "url": "data/projects/MY_PROJECT_DATA/disclaimer.txt",
-                "canMinimize": false
-            }
-        }, {
-            "id": "12181ccc-21a4-47c0-de1d-8093ae45e305",
-            "directive": "wodkwidget",
-            "title": "Woninginformatie",
-            "elementId": "widget-12181ccc-21a4-47c0-de1d-8093ae45e305",
-            "enabled": false,
-            "style": "vws",
-            "left": "",
-            "right": "-9000px",
-            "top": "-1100px",
-            "bottom": "",
-            "width": "",
-            "height": "",
-            "data": {
-                "canClose": true,
-                "canMinimize": false,
-                "featureTypeName": "data/resourceTypes/Buurt.json#buurt",
-                "dynamicProperties": [
-                    "bu_naam",
-                    "ster_totaal",
-                    "a_apb_w",
-                    "a_napb_w",
-                    "a_aangep_w",
-                    "a_apb_onb",
-                    "p_apb_w",
-                    "p_napb_w",
-                    "p_aangep_w",
-                    "p_apb_onb",
-                    "a_koopwon",
-                    "a_huurwon",
-                    "a_huko_onb",
-                    "a_1gezw",
-                    "a_mgezw",
-                    "woz",
-                    "p_koopwon",
-                    "p_huurwon",
-                    "p_huko_onb",
-                    "p_1gezw",
-                    "p_mgezw",
-                    "gm_naam",
-                    "aant_inw",
-                    "a_apb_in_ond",
-                    "p_apb_in_ond"
-                ],
-                "url": "data/projects/MY_PROJECT_DATA/buurttabel.txt"
-            }
-        }, {
-            "id": "rankingwidg",
-            "directive": "rankingwidget",
-            "elementId": "widget-rankingwidg",
-            "enabled": true,
-            "style": "vws",
-            "width": "300px",
-            "top": "-6000px",
-            "left": "-2000px",
-            "data": {
-                "layerId": "gemeente",
-                "rankingProperties": {
-                    "geen": "- Geen -",
-                    "aant_inw": "Inwoners per gemeente",
-                    "p_65p": "Aandeel 65+'ers van de inwoners",
-                    "ster3_inw": "Aandeel van ster 3 woningen in de woningvoorraad",
-                    "instroom": "Procentuele instroom mobiliteitsbeperkten per jaar",
-                    "wmo-budg": "Wmo integratiebudget per inwoner",
-                    "aanp_kost_wmo": "Aandeel van de aanpassingskosten in het Wmo integratie-budget"
-                },
-                "bins": 5
-            }
-        }, {
             "id": "wodklegend",
             "directive": "wodklegend",
             "elementId": "widget-wodklegend",
@@ -282,7 +193,7 @@
     }, {
         "id": "datatable",
         "name": "Tabel export",
-        "showMap": false,
+        "showMap": true,
         "showTimeline": false,
         "showLeftmenu": false,
         "showLegend": false,
@@ -294,7 +205,8 @@
             "elementId": "widget-datatable_id",
             "enabled": true,
             "width": "100%",
-            "height": "100%"
+            "height": "100%",
+            "zIndex": 1050
         }],
         "mobile": true
     }],

@@ -103,7 +103,10 @@ module WodkNavbar {
                 loc.type = 'buurt';
                 loc.name = loc.bu_naam;
                 loc.administrative = loc.gm_naam;
-                loc.latlng = {lng: 0, lat: 0};
+                loc.latlng = {
+                    lng: 0,
+                    lat: 0
+                };
             }
             this.lastResult = loc;
             this.messageBusService.publish('wodk', 'address', this.lastResult);
@@ -112,7 +115,7 @@ module WodkNavbar {
             this.toggle();
         }
 
-        private handleMessage(message: string, data?: any) {
+        private handleMessage(message: string, data ? : any) {
             switch (message) {
                 case 'closenavbar':
                     this.toggle(true);
@@ -120,6 +123,12 @@ module WodkNavbar {
                 default:
                     break;
             }
+        }
+
+        private openTable() {
+            this.toggle(true);
+            var db = this.layerService.findDashboardById('datatable');
+            this.messageBusService.publish('dashboard-main', 'activated', db);
         }
 
         private publish(message: string) {
@@ -130,7 +139,7 @@ module WodkNavbar {
             this.selectLocation(this.lastSuggestion, this.lastSuggestionDataset);
         }
 
-        public toggle(forceClose?: boolean) {
+        public toggle(forceClose ? : boolean) {
             this.$timeout(() => {
                 this.$scope.isOpen = (forceClose ? false : !this.$scope.isOpen);
             }, 0);

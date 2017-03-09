@@ -30,7 +30,7 @@ module WodkRightPanel {
         public showRapportLink: boolean;
         public fullRows: string[] = [];
 
-        constructor(private wodkSvc: wodk.WODKWidgetSvc, private layerService: csComp.Services.LayerService, private timeoutService: ng.ITimeoutService, private http: ng.IHttpService) {
+        constructor(private wodkSvc: wodk.WODKWidgetSvc, private layerService: csComp.Services.LayerService, private timeoutService: ng.ITimeoutService) {
             this.clearTable();
         }
 
@@ -84,7 +84,7 @@ module WodkRightPanel {
                 (fts.length === 1 ? this.getStreetViewImage(fts[0]) : this.resetStreetviewImage());
                 (fts.length === 1 ? this.getRapportLink(fts[0]) : this.resetRapportLink());
                 let fType = this.layerService.getFeatureType(fts[0]);
-                let pTypes = csComp.Helpers.getPropertyTypes(fType, null);
+                let pTypes = _.uniq(csComp.Helpers.getPropertyTypes(fType, null));
                 this.title = this.getDisplayTitle(fts);
                 this.fillPropertyTable(fts, pTypes);
                 this.removeDuplicateAndEmptyRows();
@@ -141,9 +141,15 @@ module WodkRightPanel {
                     fts.forEach((f: IFeature) => {
                         if (f.properties.hasOwnProperty(pt.label)) {
                             if (!virtualFeature.properties.hasOwnProperty(pt.label)) {
-                                virtualFeature.properties[pt.label] = f.properties[pt.label];
+                                if (typeof f.properties[pt.label] === 'string') {
+                                    virtualFeature.properties[pt.label] = ' - ';
+                                } else {
+                                    virtualFeature.properties[pt.label] = f.properties[pt.label];
+                                }
                             } else {
-                                virtualFeature.properties[pt.label] += f.properties[pt.label];
+                                if (typeof f.properties[pt.label] !== 'string') {
+                                    virtualFeature.properties[pt.label] += f.properties[pt.label];
+                                }
                             }
                         }
                     });
@@ -181,30 +187,6 @@ module WodkRightPanel {
             ( < HTMLImageElement > document.querySelector('#streetview-img')).src = imgUrl;
             ( < HTMLLinkElement > document.querySelector('#streetview-link')).href = linkUrl;
             this.resetRapportLink(); // Rapport and streetview image are never shown simulaneously
-        }
-
-        private getStreetViewImageOld(f: IFeature) {
-            if (!f.properties || !f.properties['Adres']) return;
-            let address = f.properties['Adres'].replace('\n', ', ');
-            if (this.streetview === address) return; // Already loaded image
-            let imgUrl = STREETVIEW_IMG_URL.concat(address);
-            let linkUrl = STREETVIEW_LINK_URL.concat(address);
-            this.http.get(imgUrl, {
-                    responseType: 'arraybuffer'
-                })
-                .then((res: any) => {
-                    let blob = new Blob([res.data], {
-                        type: 'image/jpeg'
-                    });
-                    this.streetview = address;
-                    let urlCreator = window.URL || ( < any > window).webkitURL;
-                    let imageUrl = urlCreator.createObjectURL(blob);
-                    ( < HTMLImageElement > document.querySelector('#streetview-img')).src = imageUrl;
-                    ( < HTMLLinkElement > document.querySelector('#streetview-link')).href = linkUrl;
-                }).catch((err) => {
-                    console.warn(`Could not get streetview image: ${err}`);
-                    this.streetview = null;
-                });
         }
 
         private getRapportLink(f: IFeature) {

@@ -367,48 +367,8 @@ module wodk {
             }
         }
 
-        private getHTML(id: string) {
-            var content = `<html><head>`;
-            $.each(document.getElementsByTagName('link'), (ind: number, val: HTMLLinkElement) => {
-                content += val.outerHTML;
-            });
-            $.each(document.getElementsByTagName('script'), (ind: number, val: HTMLLinkElement) => {
-                content += val.outerHTML;
-            });
-            content += `</head><body>`;
-            content += $(id).parent().parent().prop('outerHTML');
-            content += `</body></html>`;
-            return content;
-        }
-
-        private getDimensions(id: string) {
-            let dom = $(id).parent().parent();
-            let w = dom.outerWidth(true);
-            let h = dom.outerHeight(true);
-            return {
-                width: w,
-                height: h
-            };
-        }
-
         public exportToImage(id: string) {
-            let dim = this.getDimensions('#' + id);
-            this.$http({
-                method: 'POST',
-                url: "screenshot",
-                data: {
-                    html: this.getHTML('#' + id),
-                    width: dim.width,
-                    height: dim.height,
-                    topOffset: 100
-                },
-            }).then((response) => {
-                csComp.Helpers.saveImage(response.data.toString(), 'Woningaanpassingen screenshot', 'png', true);
-            }, (error) => {
-                console.log(error);
-            });
-            console.log('Screenshot command sent');
-            this.$messageBus.notifyWithTranslation('IMAGE_REQUESTED', 'IMAGE_WILL_APPEAR');
+            this.wodkWidgetSvc.exportToImage(id);
         }
 
         private getSets(query, cb: Function) {

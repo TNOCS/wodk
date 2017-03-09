@@ -1,10 +1,45 @@
 <div class="modal-header">
     <h4 class="modal-title"><i class="fa fa-list-alt rightpanel-header-icon" />{{'COMPARE_TAB' | translate}} {{featureTypeTitle}}
-        <span><i class="fa fa-times" ng-click="vm.cancel()"></i></span>
+        <span><i class="wodk-ico-kruis" ng-click="vm.cancel()" style="float: right"></i></span>
+        <span><i class="wodk-ico-printer" ng-click="vm.exportImage()" style="float: right"></i></span>
     </h4>
 </div>
-<div class="modal-body" style="height: 100%;padding-right:48px;overflow:auto" resize resize-y="250">
-    <table id="compare-widget-table" class="table table-bordered table-hover" style="margin-right:24px;font-size: 12px;">
+<div class="modal-body" style="height: 100%;padding-right:48px;overflow:auto" resize resize-y="210">
+    <div id="wodk-compare-modal" class="wodk-rightpanel-scrolling-content" style="white-space: nowrap">
+        <div class="property-table property-table-compare property-table-content" ng-repeat="propertyTable in vm.propertyTables">
+            <div class="row table-title" uib-tooltip="{{propertyTable.title}}">{{propertyTable.title | limitTo:38}}{{propertyTable.title.length > 38 ? '...' : ''}}</div>
+            <div class="row table-section" ng-repeat="section in propertyTable.sections track by $index">
+                <div class="row" data-toggle="collapse" data-target="#collapse-{{$index}}">
+                    <div class="col-xs-8 table-section-title">{{section.title}}<span class="fa fa-caret-up"></span><span class="fa fa-caret-down"></span></div>
+                    <div class="col-xs-2 table-section-headers" ng-repeat="header in section.headers">{{header}}</div>
+                </div>
+                <div ng-show="section.type==='table'" class="row collapse in" id="collapse-{{$index}}">
+                    <div class="row table-row table-dash" ng-repeat="row in section.rows">
+                        <div ng-show="row.type !== 'textarea'">
+                            <div class="col-xs-8 table-row-title">{{row.title}}</div>
+                            <div ng-show="row.values.length===1" class="col-xs-4 text-right table-row-value" data-ng-bind-html="row.values[0] | trusted"></div>
+                            <div ng-show="row.values.length===2" class="col-xs-2 text-right table-row-value" data-ng-bind-html="row.values[0] | trusted"></div>
+                            <div ng-show="row.values.length===2" class="col-xs-2 text-right table-row-value" data-ng-bind-html="row.values[1] | trusted"></div>
+                        </div>
+                        <div ng-show="row.type === 'textarea'">
+                            <div class="col-xs-12 table-row-title">{{row.title}}</div>
+                            <div class="col-xs-12 table-row-value table-row-value-small" ng-repeat="val in row.values track by $index" data-ng-bind-html="val | trusted"></div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-show="section.type==='full-row'">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div ng-repeat="val in row.values">
+                                <div class="table-row-value" data-ng-bind-html="val | trusted"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<table id="compare-widget-table" class="table table-bordered table-hover" style="margin-right:24px;font-size: 12px;">
         <thead>
             <tr>
                 <th></th>
@@ -17,7 +52,7 @@
                 <td ng-repeat="col in entry track by $index">{{col}}</td>
             </tr>
         </tbody>
-    </table>
+    </table>-->
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-default" ng-click="vm.cancel()">{{'CLOSE' | translate}}</button>

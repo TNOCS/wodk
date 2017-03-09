@@ -255,18 +255,19 @@ body {
   padding-bottom: 50px; }
 
 .modal-header {
-  height: 10%; }
+  height: 60px; }
 
 .modal-body-scrollable {
-  height: 80%;
   width: 100%;
   overflow: auto; }
 
 .modal-content {
-  height: 100%; }
+  height: 100%;
+  border-radius: 0;
+  border: none; }
 
 .modal-footer {
-  height: 10%; }
+  height: 50px; }
 
 .spinner > div {
   background-color: black;
@@ -629,6 +630,11 @@ body {
   width: auto;
   font-style: normal; }
 
+.inline-link {
+  text-decoration: underline;
+  color: #01689b;
+  cursor: pointer; }
+
 .legend-description-title {
   color: #000;
   font-size: 18px;
@@ -972,6 +978,43 @@ a {
 .property-table {
   font-size: 14px; }
 
+.property-table-compare {
+  display: inline-block;
+  max-width: 400px;
+  padding: 0 16px;
+  margin: 0 16px;
+  background: #eee;
+  vertical-align: top; }
+
+.table-title {
+  font-size: 18px;
+  font-weight: bold;
+  padding-top: 10px; }
+
+.modal-slide {
+  opacity: 1;
+  transform: rotateY(-90deg);
+  transform-origin: right;
+  -o-transition: all 0.7s ease-in;
+  -webkit-transition: all 0.7s ease-in;
+  transition: all 0.7s ease-in; }
+
+.modal-slide.in {
+  opacity: 1;
+  transform: rotateY(0); }
+
+.modal-backdrop.fade {
+  -webkit-transition: opacity .7s linear;
+  -o-transition: opacity .7s linear;
+  transition: opacity .7s linear; }
+
+.modal-lg {
+  width: 90%; }
+
+.modal-title {
+  font-size: 24px;
+  font-weight: normal; }
+
 .border-dashed-lr .active-button:first-child {
   border-left: none; }
 
@@ -1087,11 +1130,56 @@ a {
   font-size: 14px;
   width: 100%;
   height: 100%;
-  padding: 10px 0px 50px 16px; }
+  padding: 10px 0px 10px 16px;
+  display: flex;
+  display: -ms-flex;
+  flex-direction: column;
+  -ms-flex-direction: column; }
 
 .wodk-rightpanel-fixed-top {
   padding-right: 16px; }
 
 .wodk-rightpanel-scrolling-content {
   padding-right: 16px;
-  padding-bottom: 30px; }
+  padding-top: 10px; }
+
+.wodk-checkbox input[type="checkbox"] {
+  visibility: none; }
+
+.wodk-checkbox {
+  width: 16px;
+  margin: 2px;
+  position: relative; }
+
+.wodk-checkbox label {
+  cursor: pointer;
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 1px;
+  left: 0;
+  background: #eee;
+  border: 1px solid #333; }
+
+.wodk-checkbox label:after {
+  opacity: 0.2;
+  content: '';
+  position: absolute;
+  width: 9px;
+  height: 5px;
+  background: transparent;
+  top: 3px;
+  left: 3px;
+  border: 3px solid #333;
+  border-top: none;
+  border-right: none;
+  transform: rotate(-45deg); }
+
+.wodk-checkbox label:hover::after {
+  opacity: 0.5; }
+
+.wodk-checkbox input[type=checkbox]:checked + label:after {
+  opacity: 1; }
+
+.data-table {
+  font-size: 14px; }

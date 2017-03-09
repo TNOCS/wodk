@@ -30,7 +30,7 @@
                 <i data-ng-click="vm.bookmark()" class="wodk-ico-ster"></i>
             </div>
             <div class="active-button pull-right" uib-tooltip="{{'PRINT' | translate}}" tooltip-placement="bottom">
-                <i data-ng-click="vm.bookmark()" class="wodk-ico-printer"></i>
+                <i data-ng-click="vm.exportToImage()" class="wodk-ico-printer"></i>
             </div>
         </div>
         <div class="row small-margin-top">
@@ -70,8 +70,9 @@
             </div>
         </div>
     </div>
-    <div class="wodk-rightpanel-scrolling-content scrolling" resize resize-y="200">
-        <div class="row property-table property-table-content">
+     <!--scrolling" resize resize-y="220-->
+    <div class="wodk-rightpanel-scrolling-content scrolling" style="flex: 1">
+        <div class="row property-table property-table-content" id="wodk-rightpanel">
             <div class="row" ng-show="vm.propertyTable.streetview">
                 <div class="col-xs-12 streetview-img">
                     <a id="streetview-link" target="_blank"><img id="streetview-img" /></a>
@@ -115,5 +116,4 @@
             </div>
         </div>
     </div>
-</div>
 </div>

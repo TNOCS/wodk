@@ -3,8 +3,6 @@ module WodkModalCtrl {
         vm: CompareModalCtrl;
         featureTypeTitle: string;
         featureTitles: string[];
-        propertyTitles: string[];
-        tableEntries: Dictionary < string[] > ;
         data: any;
     }
 
@@ -12,19 +10,25 @@ module WodkModalCtrl {
         public static $inject = [
             '$scope',
             '$uibModalInstance',
+            '$timeout',
             'layerService',
+            'wodkWidgetSvc',
             'features'
         ];
+
+        private propertyTables: WodkRightPanel.PropertyTable[];
 
         constructor(
             private $scope: ICompareModalScope,
             private $uibModalInstance: any,
+            private $timeout: ng.ITimeoutService,
             private $layerService: csComp.Services.LayerService,
+            private $wodkSvc: wodk.WODKWidgetSvc,
             private features: IFeature[]) {
 
             $scope.vm = this;
-            $scope.tableEntries = this.getAllTableEntries(features);
             $scope.featureTitles = this.getAllFeatureTitles(features);
+            this.propertyTables = this.getAllFeatureBlocks(features);
         }
 
         private getAllFeatureTitles(fts: IFeature[]): string[] {
@@ -36,44 +40,23 @@ module WodkModalCtrl {
             return titles;
         }
 
-        private getAllTableEntries(fts: IFeature[]): {
-            [key: string]: string[]
-        } {
-            if (!fts || fts.length < 1) return;
-            var entries: {
-                [key: string]: string[]
-            } = {};
-            var keys = [];
+        private createTable(fts: IFeature[]) {
+            let table = new WodkRightPanel.PropertyTable(this.$wodkSvc, this.$layerService, this.$timeout);
+            table.displayFeature(fts);
+            return table;
+        }
+
+        private getAllFeatureBlocks(fts: IFeature[]) {
+            let tables = [];
+            tables.push(this.createTable(fts));
             fts.forEach((f) => {
-                keys = keys.concat(_.keys(f.properties));
+                tables.push(this.createTable([f]));
             });
-            keys = _.uniq(keys);
-            var fType: csComp.Services.IFeatureType = JSON.parse(JSON.stringify(this.$layerService.getFeatureType(fts[0])));
-            this.$scope.featureTypeTitle = fType.name.toLowerCase();
-            fType.propertyTypeKeys = keys.join(';');
-            var propTypes = csComp.Helpers.getPropertyTypes(fType, this.$layerService.propertyTypeData);
-            if (this.$scope.data.numbersOnly) {
-                propTypes = _.pick(propTypes, (prop: IPropertyType, key) => {
-                    return prop.type === 'number';
-                });
-            }
-            keys = keys.filter((key) => {
-                return (_.some(propTypes, (prop, propKey) => {
-                    return prop.label === key;
-                }));
-            });
-            entries = < any > _.object(keys, keys);
-            entries = _.each(entries, (val, key, arr) => {
-                arr[key] = [];
-            });
-            this.$scope.propertyTitles = _.pluck(propTypes, 'title');
-            var propTypesDict = _.indexBy(propTypes, 'label');
-            fts.forEach((f, fIndex) => {
-                keys.forEach((key) => {
-                    entries[key].push((f.properties[key]) ? csComp.Helpers.convertPropertyInfo(propTypesDict[key], f.properties[key]) : null);
-                });
-            });
-            return entries;
+            return tables;
+        }
+
+        public exportImage() {
+            this.$wodkSvc.exportToImage('wodk-compare-modal');
         }
 
         public ok() {
