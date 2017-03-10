@@ -15,10 +15,10 @@
                 <i data-ng-click="vm.publish('refresh')" class="wodk-ico-refresh"></i>
             </div>
             <div class="active-button pull-left" uib-tooltip="{{'STAP_TERUG' | translate}}" tooltip-placement="bottom">
-                <i data-ng-click="vm.publish('back')" class="wodk-ico-pijl_nav_links"></i>
+                <i data-ng-click="vm.publish('back')" class="wodk-ico-pijl_nav_links" style="font-size: 20px;line-height:24px;" ></i>
             </div>
             <div class="active-button pull-left" uib-tooltip="{{'STAP_VOORUIT' | translate}}" tooltip-placement="bottom">
-                <i data-ng-click="vm.publish('forward')" ng-class="vm.wodkWidgetSvc.hasForwardHistory() ? '' : 'inactive-button'" class="wodk-ico-pijl_nav_rechts"></i>
+                <i data-ng-click="vm.publish('forward')" ng-class="vm.wodkWidgetSvc.hasForwardHistory() ? '' : 'inactive-button'" class="wodk-ico-pijl_nav_rechts" style="font-size: 20px;line-height:24px;" ></i>
             </div>
             <div class="active-button pull-left">
                 <i style="opacity: 0">.</i>
@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class="row small-margin-top">
-            <div class="text-grey">{{'SEARCH_HINT' | translate}}</div>
+            <div class="search-hint-text text-grey search-hint">{{'SEARCH_HINT' | translate}}</div>
             <form class="" role="search">
                 <div class="form-group wodk-form-group">
                     <button ng-click="vm.selectFirstAddress()" class="btn btn-success wodk-btn wodk-btn-purple small small-padding-lr">{{'SEARCH' | translate}}</button>

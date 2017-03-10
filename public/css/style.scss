@@ -16,11 +16,11 @@
 }
 @font-face {
   font-family: 'wodk-icons';
-  src:  url('fonts/wodk-icons.eot?yt5xhw');
-  src:  url('fonts/wodk-icons.eot?yt5xhw#iefix') format('embedded-opentype'),
-    url('fonts/wodk-icons.ttf?yt5xhw') format('truetype'),
-    url('fonts/wodk-icons.woff?yt5xhw') format('woff'),
-    url('fonts/wodk-icons.svg?yt5xhw#wodk-icons') format('svg');
+  src:  url('fonts/wodk-icons.eot?jyz61e');
+  src:  url('fonts/wodk-icons.eot?jyz61e#iefix') format('embedded-opentype'),
+    url('fonts/wodk-icons.ttf?jyz61e') format('truetype'),
+    url('fonts/wodk-icons.woff?jyz61e') format('woff'),
+    url('fonts/wodk-icons.svg?jyz61e#wodk-icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -33,7 +33,7 @@
   font-weight: normal;
   font-variant: normal;
   text-transform: none;
-  font-size: 24px;
+  font-size: 26px;
   padding: 0px 8px;
   vertical-align: middle;
 
@@ -42,6 +42,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.wodk-ico-zoom_out:before {
+  content: "\e918";
+}
 .wodk-ico-donut:before {
   content: "\e900";
 }
@@ -588,7 +591,8 @@ body {
 
 .active-button > i {
     color: #333;
-    font-size: 22px;
+    font-size: 26px;
+    line-height: 26px
 }
 
 .active-button-toelichting {
@@ -1041,12 +1045,12 @@ a {
 }
 
 .wodk-form-group input.small {
-    line-height: 35px;
-    font-size: 14px;
+    line-height: 45px;
+    font-size: 16px;
 }
 
 .wodk-form-group button.small {
-    line-height: 38px;
+    line-height: 49px;
     margin: 1px 0px 0px 0px;
     min-width: 64px;
 }
@@ -1225,7 +1229,8 @@ a {
 }
 
 .property-table {
-    font-size: 14px;
+    font-size: 16px;
+    line-height: 28px;
 }
 
 .property-table-compare {
@@ -1274,28 +1279,40 @@ a {
 
 .border-dashed-lr .active-button:first-child {
     border-left: none;
+    margin-left: -10px;
 }
 
 .border-dashed-lr .active-button {
     border-left: solid 1px #ccc;
 }
 
+.search-hint-text {
+    margin: 12px 0px 8px;
+}
+
+.row.border-dashed-lr {
+    margin: 6px 0px;
+}
+
 .btn-label {
     border-radius: 0px;
     background-color: $vws-donkerpaars-3;
     text-transform: uppercase;
-    padding: 3px 6px;
+    padding: 1px 6px;
+    font-size: 14px;
+    line-height: 2;
 }
 
 .btn-label-close {
     background-color: $vws-donkerpaars-2;
+    min-width: 36px;
 }
 
 .rp-header {
     background: $header-grijs;
     font-size: 18px;
     font-weight: bold;
-    padding: 4px 12px 6px;
+    padding: 10px 12px 12px;
 }
 
 .navbar-fixed-bottom {
@@ -1304,17 +1321,22 @@ a {
     border-color: transparent;
 }
 
-.navbar-nav>li>a {
+.navbar-nav>li>a,
+.navbar-header a {
     color: black;
 }
 
-.navbar-inverse .navbar-nav>li>a {
+.navbar-inverse .navbar-nav>li>a,
+.navbar-inverse .navbar-header>a {
     color: black;
 }
 
+.navbar-inverse .navbar-header a:focus,
+.navbar-inverse .navbar-header a:hover,
 .navbar-inverse .navbar-nav>li>a:focus,
 .navbar-inverse .navbar-nav>li>a:hover {
     color: #555;
+    text-decoration: none;
 }
 
 .navbar-dash-grey {
@@ -1326,6 +1348,20 @@ a {
 
 .navbar {
     border: none;
+}
+
+.navbar .navbar-brand {
+    color: black;
+}
+
+.navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand:hover {
+    color: black;
+    background-color: inherit;
+}
+
+.navbar-header>div {
+    color: black;
+    display: inline-block;
 }
 
 .navbar-inverse .navbar-nav>.open>a,
@@ -1344,10 +1380,14 @@ a {
     background: #eee;
 }
 
-.navbar-inverse .navbar-brand,
+.navbar-inverse .navbar-header a,
 .navbar-inverse .navbar-nav>li>a {
     text-shadow: none;
     padding: 9px 0px;
+}
+
+.navbar-inverse .navbar-header a>div {
+    padding: 12px 16px;
 }
 
 .navbar-inverse .navbar-nav li>a>div {
@@ -1355,6 +1395,17 @@ a {
     padding: 6px 12px;
 }
 
+.navbar-mobile-toggle {
+
+}
+
+@media screen and (min-width: 768px) {
+    .navbar-header {
+        display: none;
+    }
+}
+
+.navbar-inverse .navbar-header a>div>div,
 .navbar-inverse .navbar-nav li>a>div>div {
     vertical-align: middle;
     display: inline-block;
@@ -1465,6 +1516,10 @@ $wodk-baselayers-img-height: 32px;
 	border-right: none;
 
 	transform: rotate(-45deg);
+}
+
+li.wodk-checkbox {
+    padding-top: 1px;
 }
 
 .wodk-checkbox label:hover::after {

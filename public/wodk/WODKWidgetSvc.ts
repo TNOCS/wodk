@@ -850,6 +850,7 @@ module wodk {
             this.$http({
                 method: 'POST',
                 url: 'screenshot',
+                timeout: 10000,
                 data: {
                     html: this.getHTML('#' + id),
                     width: dim.width,
