@@ -76,6 +76,7 @@ module wodk {
             $scope.vm = this;
             var par = < any > $scope.$parent;
             this.widget = par.widget;
+            if (!this.widget) return;
             this.parentWidget = $(`#${this.widget.elementId}-parent`);
 
             $scope.data = < WodkBaselayersData > this.widget.data;

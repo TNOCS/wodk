@@ -125,6 +125,10 @@ module WodkNavbar {
             }
         }
 
+        private openPdfs() {
+            $('.infopanel-container').css('display', 'block');
+        }
+
         private openTable() {
             this.toggle(true);
             var db = this.layerService.findDashboardById('datatable');

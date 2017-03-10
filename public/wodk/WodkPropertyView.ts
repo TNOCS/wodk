@@ -125,7 +125,7 @@ module WodkRightPanel {
                         linkedFeatures.push(pt['linkedFeature']);
                         if (section.headers.length === 0) {
                             section.headers.push('Aantal');
-                            section.headers.push('Perc.');
+                            section.headers.push('%');
                         }
                     }
                 }
