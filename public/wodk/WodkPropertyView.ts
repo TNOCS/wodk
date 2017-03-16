@@ -102,6 +102,10 @@ module WodkRightPanel {
                     let section = this.findOrCreateSection(sectionId);
                     let value;
                     switch (pt.type) {
+                        case 'stars':
+                            value = this.getStarsDiv(virtualFeature.properties[pt.label], pTypesDict['ster_gem'].legend);
+                            section.type = 'full-row';
+                            break;
                         case 'image':
                             value = `<img src='${virtualFeature.properties[pt.label]}' style='max-height:100%;max-width:100%;'></img>`;
                             break;
@@ -223,6 +227,93 @@ module WodkRightPanel {
             document.querySelector('#streetview-img').removeAttribute('src');
             document.querySelector('#streetview-link').removeAttribute('href');
             this.streetview = null;
+        }
+
+        private getStarsDiv(prop: any, legend: csComp.Services.Legend) {
+            prop = +prop;
+            let legendEntry;
+            if (prop === 11) {
+                legendEntry = _.find(legend.legendEntries, (le) => {
+                    return le.interval.max === -3;
+                });
+            } else if (prop === 10) {
+                legendEntry = _.find(legend.legendEntries, (le) => {
+                    return le.interval.max === -2;
+                });
+            } else if (prop > 10) {
+                legendEntry = _.find(legend.legendEntries, (le) => {
+                    return le.interval.max === -1;
+                });
+            } else {
+                legendEntry = _.find(legend.legendEntries, (le) => {
+                    return le.interval.max === prop;
+                });
+            }
+            if (!legendEntry) return;
+            let div = `<div style="background-color:${legendEntry.color.substr(0, 7)};text-align:left;">`;
+            let stars;
+            switch (prop) {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                    div += `<img src='images/bag_${prop}.svg' style="height: 32px;margin: 4px 8px;"></img>`;
+                    stars = prop;
+                    break;
+                case 10:
+                case 11:
+                    div += `<img src='images/bag_${prop}.svg' style="height: 32px;margin: 4px 8px;"></img>`;
+                    break;
+                case 12:
+                    div += this.getCombiStarsDiv(1, 1);
+                    break;
+                case 13:
+                    div += this.getCombiStarsDiv(2, 1);
+                    break;
+                case 14:
+                    div += this.getCombiStarsDiv(2, 2);
+                    break;
+                case 15:
+                    div += this.getCombiStarsDiv(3, 2);
+                    break;
+                case 16:
+                    div += this.getCombiStarsDiv(4, 2);
+                    break;
+                case 17:
+                    div += this.getCombiStarsDiv(5, 2);
+                    break;
+                case 18:
+                    div += this.getCombiStarsDiv(6, 2);
+                    break;
+                case 19:
+                    div += this.getCombiStarsDiv(7, 2);
+                    break;
+            }
+            for (let i = 0; i < stars; i++) {
+                div += `<img src='images/icons/ster-vol.svg' style="height: 30px"></img>`;
+            }
+            if (prop === 0) {
+                div += `<span style="color:white">Niet aanpasbaar</span>`;
+            } else if (prop === 10) {
+                div += `<span style="color:white">In onderzoek</span>`;
+            } else if (prop === 11) {
+                div += `<span>Onbekend</span>`;
+            }
+            div += '</div>';
+            return div;
+        }
+
+        private getCombiStarsDiv(ster0: number, ster3: number): string {
+            let div = '<div>';
+            div += `<div><span class="star-label">${ster0}</span><img src='images/bag_0_red.svg' style="height: 32px;margin: 8px;"></img></div>`;
+            div += `<div><span class="star-label">${(ster3 <= 6 ? ster3 : '+')}</span><img src='images/bag_3.svg' style="height: 32px;margin: 4px 8px;"></img>`;
+            for (let i = 0; i < 3; i++) {
+                div += `<img src='images/icons/ster-vol.svg' style="height: 30px"></img>`;
+            }
+            div += '</div></div>';
+            return div;
         }
     }
 }

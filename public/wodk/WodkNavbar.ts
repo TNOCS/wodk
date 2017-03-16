@@ -117,16 +117,20 @@ module WodkNavbar {
 
         private handleMessage(message: string, data ? : any) {
             switch (message) {
-                case 'closenavbar':
+                case 'openrightpanel':
+                case 'opencompare':
                     this.toggle(true);
                     break;
+                case 'opentoelichting':
+                this.openPdfs();
                 default:
                     break;
             }
         }
 
         private openPdfs() {
-            $('.infopanel-container').css('display', 'block');
+            this.toggle(true);
+            $('.infopanel-container').css('width', '1000px');
         }
 
         private openTable() {

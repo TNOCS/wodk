@@ -1,0 +1,81 @@
+<div>
+    <div class="infopanel-fixed-top">
+        <div class="row border-dashed-lr">
+            <div class="active-button pull-right" uib-tooltip="{{'CLOSE' | translate}}" tooltip-placement="bottom">
+                <i data-ng-click="vm.close()" class="wodk-ico-kruis"></i>
+            </div>
+            <!--<div class="active-button pull-right" uib-tooltip="{{'BOOKMARK' | translate}}" tooltip-placement="bottom">
+                <i data-ng-click="vm.bookmark()" class="wodk-ico-ster"></i>
+            </div>-->
+        </div>
+    </div>
+    <div class="infopanel-content scrolling" resize resize-y="55">
+        <h2 class="infopanel-title" style="margin-top: 0px">Toelichting</h2>
+        <ul class="fa-ul wodk-pdf-list">
+            <li>
+                <a href="http://www.zorgopdekaart.nl/files/2016-11/toelichting-woningvoorraad-woningaanpassingen-en-langer-zelfstandig-thuis-11.pdf"
+                    target="_blank">
+                    <span style="white-space: normal;">Toelichting bij de website 'Woningvoorraad, woningaanpassingen `Langer zelfstandig wonen`</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.zorgopdekaart.nl/files/2016-09/toelichting-bij-de-rekenmodellen.pdf" target="_blank">
+                    <span>Toelichting bij de rekenmodellen</span>
+                </a>
+            </li>
+        </ul>
+        <h2 class="infopanel-title">Rekenmodellen</h2>
+        <ul class="fa-ul wodk-pdf-list">
+            <li class="inactive-button-toelichting" inactive>
+                <a>
+                    <span>Rekenmodellen overzichten</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 42 Nederland en alle gemeenten 120m.pdf" target="_blank">
+                    <span>Nederland en alle gemeenten</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 43 400 buurten met hoogste kosten 120m.pdf" target="_blank">
+                    <span>400 buurten met hoogste kosten</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 46 400 buurten met grootste vraag 120m.pdf" target="_blank">
+                    <span>400 buurten met grootste vraag</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 47 400 wijken met grootste vraag 120m.pdf" target="_blank">
+                    <span>400 wijken met grootste vraag</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 48 400 buurten met het hoogste wmo 120m.pdf" target="_blank">
+                    <span>400 buurten met het hoogste % wmo</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set 49 400 wijken met het hoogste Wmo 120m.pdf" target="_blank">
+                    <span>400 wijken met het hoogste % Wmo</span>
+                </a>
+            </li>
+            <li class="divider" </li>
+                <li class="inactive-button-toelichting">
+                    <a>
+                        <span>Rekenmodellen met de buurten van:</span><br>
+                        <span>(volgorde: regeringszetel, dan op inwoners van gemeente, dan op buurten in alfabetische volgorde)</span>
+                    </a>
+                </li>
+                <li class="no-content">
+                    <label>Zoek gemeente: <input ng-model="searchDummy"></label>
+                </li>
+                <li ng-repeat="entry in vm.pdfLinks | filter:searchDummy">
+                    <a href="{{entry.url}}" target="_blank">
+                        <span>{{entry.name | limitTo: 80}}{{entry.name.length > 80 ? '&hellip;' : ''}}</span></a>
+                </li>
+            </li>
+        </ul>
+    </div>
+</div>

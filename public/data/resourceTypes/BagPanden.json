@@ -408,12 +408,22 @@
             "visibleInCallOut": true,
             "isSearchable": false
         },
-        "aanpasbaarheid": {
-            "label": "aanpasbaarheid",
+        "aanpasbaarheid1": {
+            "label": "aanpasbaarheid1",
             "type": "image",
             "title": "Indicatie aanpasbaarheid",
             "inlineImage": true,
             "expression": "'images/combi_' + (properties.icon) + '.png'",
+            "visibleInCallOut": true,
+            "hideInDataTable": true,
+            "isSearchable": false
+        },
+        "aanpasbaarheid": {
+            "label": "aanpasbaarheid",
+            "type": "stars",
+            "section": "Indicatie aanpasbaarheid",
+            "title": " ",
+            "expression": "properties.icon",
             "visibleInCallOut": true,
             "hideInDataTable": true,
             "isSearchable": false

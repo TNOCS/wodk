@@ -181,6 +181,10 @@ module App {
             this.$mapService.getMap().zoomOut();
         }
 
+        openToelichting() {
+            this.$messageBusService.publish('wodk', 'opentoelichting');
+        }
+
         /**
          * Simple filter that returns a list of cities that match the criteria.
          *

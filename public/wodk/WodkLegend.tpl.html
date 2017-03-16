@@ -23,13 +23,13 @@
     </div>-->
     <div class="row" data-ng-show="activeStyleProperty && activeLegend.description">
         <div class="col-xs-12 legend-padding">
-            <a class="wodk-link">{{'WAT_TONEN' | translate}}<span class="small-padding-lr"><img src="images/arrow-right.svg" class="arrow-right-link"></img></span></a>
+            <a class="wodk-link wodk-border-bottom">{{'WAT_TONEN' | translate}}<span class="small-padding-lr"><img src="images/arrow-right.svg" class="arrow-right-link"></img></span></a>
         </div>
     </div>
     <div class="row" data-ng-show="activeStyleProperty && activeLegend.description" style="padding-top: 8px" ;>
         <div class="col-xs-12 legend-description-label">{{activeLegend.description}}</div>
     </div>
-    <div class="legend-entry-list-table" data-ng-if="activeStyleProperty && activeLegend.legendKind === 'discrete'">
+    <div class="legend-entry-list-table wodk-border-bottom" data-ng-if="activeStyleProperty && activeLegend.legendKind === 'discrete'">
         <div class="row" data-ng-repeat="le in activeLegend.legendEntries" ng-class="{'pointer-cursor': $parent.$parent.activeStyleProperty}"
             ng-click="$parent.$parent.vm.toggleFilter(activeLegend, le)" uib-popover="{{'UTILS.FILTER' | translate}}" popover-trigger="mouseenter"
             popover-append-to-body="true" popover-placement="right" popover-enable="{{$parent.$parent.activeStyleProperty}}">
@@ -39,7 +39,22 @@
             </ul>
         </div>
     </div>
-    <div>
-        <input type="range" name="points" min="0" max="500" step="50">
+    <div class="row legend-description-label legend-padding" data-ng-show="activeLegend">
+        <div class="col-xs-12 italic bold no-padding" style="margin-bottom: 4px">
+            Filter buurten
+        </div>
+        <div class="col-xs-12 no-padding">
+            <div>
+                 met minder dan <span><input type="number" class="filter-input" min="0" max="500" ng-model="vm.filterValue" ng-change="vm.selectFilter()"></span> woningen. <span style="float:right" ng-click="vm.filterValue=0;vm.selectFilter()" uib-tooltip="Reset filter"><i class="fa fa-trash-o"></i></span>
+            </div>
+        </div>
+        <div class="col-xs-12 filter-slider-row no-padding">
+            <div>
+                <input type="range" name="points" min="0" max="500" step="50" ng-model="vm.filterValue" ng-change="vm.selectFilter()">
+            </div>
+        </div>
+    </div>
+    <div ng-hide="true">
+        <row-filter ng-if="filter && filter.filterType=='row'" style="margin-left:-12px"></row-filter>
     </div>
 </div>

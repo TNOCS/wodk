@@ -182,7 +182,7 @@ module WodkRightPanel {
 
         private compareItems() {
             this.close();
-            this.messageBusService.publish('wodk', 'closenavbar');
+            this.messageBusService.publish('wodk', 'opencompare');
             var modalInstance = this.$uibModal.open({
                 templateUrl: 'wodk/WodkCompareModal.tpl.html',
                 size: 'lg',

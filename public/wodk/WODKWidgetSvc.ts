@@ -79,7 +79,7 @@ module wodk {
         protected buurtSelectie: IFeature[];
         protected selectionHistory: IFeature[];
         protected forwardHistory: IFeature[];
-        private htmlStyle = '<div style="display:inline-block;vertical-align:middle;text-align:center;background:{{bgColor}};width:28px;height:28px;border-radius:50% 0 0 50%;border-style:solid;border-color:rgba(0,0,150,1);border-width:2px;opacity:1;box-shadow:2px 3px 6px 0px rgba(0,0,0,0.75);"><img src="images/i.png" style="width:24px;height:24px;display:block;"></div>';
+        private htmlStyle = '<div style="display:inline-block;vertical-align:middle;text-align:center;background:transparent;border:none;opacity:1;"><i class="wodk-ico-donut" style="font-size:36px;margin:-12px;padding:0;display:block;color:{{color}}"></div>';
         private htmlStyleInvisible = '<div style="display:inline-block;width:2px;height:2px;"></div>';
         private rightPanel = {
             'id': 'wodkright',
@@ -475,7 +475,7 @@ module wodk {
         private openRightPanel() {
             this.rightPanelTab.open = true;
             this.$layerService.visual.rightPanelVisible = true;
-            this.$messageBusService.publish('wodk', 'closenavbar');
+            this.$messageBusService.publish('wodk', 'openrightpanel');
         }
 
         private findGemeente(data: {
@@ -799,12 +799,12 @@ module wodk {
         private replaceIconColor(f: IFeature) {
             switch (f.fType.name) {
                 case 'Buurt':
-                    f.htmlStyle = f.htmlStyle.replace('{{bgColor}}', 'rgba(20,150,255,1)');
+                    f.htmlStyle = f.htmlStyle.replace('{{color}}', '#3377ff');
                     break;
                 case 'gemeente':
-                    f.htmlStyle = f.htmlStyle.replace('{{bgColor}}', 'rgba(0,0,255,1)');
+                    f.htmlStyle = f.htmlStyle.replace('{{color}}', '#0000ff');
                 case 'provincie':
-                    f.htmlStyle = f.htmlStyle.replace('{{bgColor}}', 'rgba(0,0,175,1)')
+                    f.htmlStyle = f.htmlStyle.replace('{{color}}', '#0000cc');
                 default:
                     break;
             }

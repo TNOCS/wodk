@@ -1,33 +1,36 @@
 <div class="wodk-navbar" ng-class="{'no-mouse-events': !isOpen}">
     <div class="container-fluid animate-navbar" ng-show="isOpen">
-        <div class="row" ng-class="{collapsed: !isOpen, opened: isOpen}">
+        <div class="row wodk-navbar-logo-row" ng-class="{collapsed: !isOpen, opened: isOpen}">
             <div class="col-sm-12 col-md-6 col-md-offset-3 text-center">
-                <img class="wodk-navbar-logo" src="images/RO-logo.png" />
+                <img class="wodk-navbar-logo" src="images/RO-logo-vws.svg" />
             </div>
         </div>
         <div class="row" ng-class="{collapsed: !isOpen, opened: isOpen}">
             <div class="col-sm-12 col-md-6 col-md-offset-3" style="margin-top: 16px;">
-                <a data-ng-click="vm.publish('home')" class="text-grey">
-                    <i class="fa fa-long-arrow-left"></i>
+                <a data-ng-click="vm.publish('home')" class="text-grey no-underline">
+                    <i class="wodk-ico-pijl_nav_links" style="font-size: 20px;"></i>
                     <span>{{'TERUG_NAAR_ZODK' | translate}}</span>
                 </a>
             </div>
         </div>
         <div class="row" ng-class="{collapsed: !isOpen, opened: isOpen}">
             <div class="col-sm-12 col-md-6 col-md-offset-3">
-                <h2>{{'AANPASBAARHEID_WONINGEN' | translate}}</h2>
+                <h2 class="wodk-navbar-title">{{'AANPASBAARHEID_WONINGEN' | translate}}</h2>
                 <div>
                     Visualisatie van de huidige situatie van de aanpasbaarheid van woningen zodat gesprekken over de toekomstige infrastructuur gemakkelijker tot stand komen.
                 </div>
-                <div style="padding-top: 8px;">
+            </div>
+        </div>
+        <div class="row" ng-class="{collapsed: !isOpen, opened: isOpen}">
+            <div class="col-sm-12 col-md-6 col-md-offset-3">
+                <div style="padding-top:12px;">
                     Tip: gebruik de <span class="inline-link" ng-click="vm.openTable()">data export</span> of de <span class="inline-link" ng-click="vm.openPdfs()">rekenmodellen</span> voor meer inzichten.
                 </div>
             </div>
         </div>
         <div class="row" ng-class="{collapsed: !isOpen, opened: isOpen}">
             <div class="col-sm-12 col-md-6 col-md-offset-3">
-                <br>
-                <div class="text-grey search-hint">{{'SEARCH_HINT' | translate}}</div>
+                <div class="search-hint">{{'SEARCH_HINT' | translate}}</div>
                 <form class="" role="search">
                     <div class="form-group wodk-form-group wodk-form-group-search">
                         <button ng-click="vm.selectFirstResult()" class="btn btn-success wodk-btn wodk-btn-purple">Zoek</button>
@@ -45,8 +48,8 @@
             <div id="search-suggestions" class="col-sm-12 col-md-6 col-md-offset-3">
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-12 col-md-6 col-md-offset-3 text-center">
+        <div class="row wodk-navbar-last-row">
+            <div class="col-sm-12 col-md-6 col-md-offset-3 text-center" style="margin-top: 50px">
                 <a ng-click="vm.toggle()" class="btn btn-primary wodk-btn wodk-btn-blue">
                     <div>
                         <div style="font-size: 22px" class="fa fa-caret-up"></div>

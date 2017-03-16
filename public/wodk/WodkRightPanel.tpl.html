@@ -38,7 +38,7 @@
             <div class="search-hint-text text-grey search-hint">{{'SEARCH_HINT' | translate}}</div>
             <form class="" role="search">
                 <div class="form-group wodk-form-group">
-                    <button ng-click="vm.selectFirstAddress()" class="btn btn-success wodk-btn wodk-btn-purple small small-padding-lr">{{'SEARCH' | translate}}</button>
+                    <button ng-click="vm.selectFirstAddress()" class="btn btn-success wodk-btn wodk-btn-purple small small-padding-lr">Zoek</button>
                     <span><input id="search-address-rp" class="small" type="text" class="form-control"
                         placeholder="" autofocus>
                     </span>
@@ -109,13 +109,18 @@
                     </div>
                 </div>
                 <div ng-show="section.type==='full-row'">
-                    <div class="row">
+                    <div class="row table-row table-dash" ng-repeat="row in section.rows">
+                        <div>
+                            <div class="col-xs-12 text-right table-row-value" data-ng-bind-html="row.values[0] | trusted"></div>
+                        </div>
+                    </div>
+                    <!--<div class="row">
                         <div class="col-xs-12">
                             <div ng-repeat="val in row.values">
                                 <div class="table-row-value" data-ng-bind-html="val | trusted"></div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
