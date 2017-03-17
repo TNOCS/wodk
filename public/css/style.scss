@@ -354,17 +354,20 @@ ul.wodk-pdf-list li.no-content a{
     padding: 6px 12px;
 }
 
-.infopanel-title {
+.infopanel-title,
+.stylepanel-title {
     font-size: 28px;
 }
 
-.infopanel-content {
+.infopanel-content,
+.stylepanel-content {
     font-size: 16px;
 }
 
-.infopanel-container {
-    max-width: 0%;
-    width: 0px;
+.infopanel-container,
+.stylepanel-container {
+    max-width: 100%;
+    width: 100%;
     padding: 0;
     top: 0;
     bottom: 0;
@@ -375,8 +378,35 @@ ul.wodk-pdf-list li.no-content a{
     display: block;
 }
 
+.stylepanel-card-title {
+    color: $vws-donkerblauw-logo;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.stylepanel-card-description {
+    color: black;
+    font-size: 18px;
+    padding-bottom: 16px;
+}
+
+.stylepanel-card-image {
+    padding: 16px 0px;
+    width: 100%;
+}
+
+.row-equal {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.full-height {
+    height: 100%;
+}
+
 @media screen and (min-width: 768px) {
-    .infopanel-container {
+    .infopanel-container,
+    .stylepanel-container {
         max-width: 50%;
     }
 }
@@ -1397,13 +1427,25 @@ select.form-control:focus {
     padding-top: 10px;
 }
 
+.animate-sidepanel {
+    transform: rotateY(-90deg);
+    transform-origin: right;
+    -o-transition: all 0.6s ease-in;
+    -webkit-transition: all 0.6s ease-in;
+    transition: all 0.6s ease-in;
+}
+
+.animate-sidepanel.show {
+    transform: rotateY(0);
+}
+
 .modal-slide {
     opacity: 1;
     transform: rotateY(-90deg);
     transform-origin: right;
-    -o-transition: all 1s ease-in;
-    -webkit-transition: all 1s ease-in;
-    transition: all 1s ease-in;
+    -o-transition: all 0.8s ease-in;
+    -webkit-transition: all 0.8s ease-in;
+    transition: all 0.8s ease-in;
 }
 
 .modal-slide.in {

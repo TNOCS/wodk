@@ -69,6 +69,7 @@
     <script src="wodk/WodkModalCtrl.js"></script>
     <script src="wodk/WodkBaselayers.js"></script>
     <script src="wodk/InfoPanel.js"></script>
+    <script src="wodk/StylePanel.js"></script>
     <script src="app/app.js"></script>
     <script src="bower_components/csweb/dist-bower/csTemplates.js"></script>
     <!--<script src="bower_components/promise-polyfill/promise.js"></script>-->
@@ -280,9 +281,17 @@
             </div>
         </div>
 
-        <div class="infopanel-container animate-rightpanel rightpanel-shadow" style="width: 0px">
+        <!-- infopanel -->
+        <div class="infopanel-container animate-sidepanel rightpanel-shadow">
             <div id="infopanel" class="infopanel-main">
                 <infopanel></infopanel>
+            </div>
+        </div>
+
+        <!-- stylepanel -->
+        <div class="stylepanel-container animate-sidepanel rightpanel-shadow">
+            <div id="stylepanel" class="stylepanel-main">
+                <stylepanel></stylepanel>
             </div>
         </div>
 

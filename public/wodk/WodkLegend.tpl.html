@@ -23,7 +23,7 @@
     </div>-->
     <div class="row" data-ng-show="activeStyleProperty && activeLegend.description">
         <div class="col-xs-12 legend-padding">
-            <a class="wodk-link wodk-border-bottom">{{'WAT_TONEN' | translate}}<span class="small-padding-lr"><img src="images/arrow-right.svg" class="arrow-right-link"></img></span></a>
+            <a class="wodk-link wodk-border-bottom" ng-click="vm.openStylePanel()">{{'WAT_TONEN' | translate}}<span class="small-padding-lr"><img src="images/arrow-right.svg" class="arrow-right-link"></img></span></a>
         </div>
     </div>
     <div class="row" data-ng-show="activeStyleProperty && activeLegend.description" style="padding-top: 8px" ;>

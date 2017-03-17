@@ -118,11 +118,11 @@ module WodkNavbar {
         private handleMessage(message: string, data ? : any) {
             switch (message) {
                 case 'openrightpanel':
+                case 'openstylepanel':
                 case 'opencompare':
+                case 'opentoelichting':
                     this.toggle(true);
                     break;
-                case 'opentoelichting':
-                this.openPdfs();
                 default:
                     break;
             }
@@ -130,13 +130,17 @@ module WodkNavbar {
 
         private openPdfs() {
             this.toggle(true);
-            $('.infopanel-container').css('width', '1000px');
+            this.$timeout(() => {
+                this.messageBusService.publish('wodk', 'opentoelichting');
+            }, 200);
         }
 
         private openTable() {
             this.toggle(true);
-            var db = this.layerService.findDashboardById('datatable');
-            this.messageBusService.publish('dashboard-main', 'activated', db);
+            this.$timeout(() => {
+                var db = this.layerService.findDashboardById('datatable');
+                this.messageBusService.publish('dashboard-main', 'activated', db);
+            }, 200);
         }
 
         private publish(message: string) {
@@ -155,6 +159,7 @@ module WodkNavbar {
                 if (this.$scope.isOpen) {
                     document.getElementById('search-address').focus();
                     this.layerService.visual.rightPanelVisible = false;
+                    this.messageBusService.publish('wodk', 'opennavbar');
                 }
             }, 100);
         }

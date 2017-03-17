@@ -69,19 +69,22 @@ module wodk {
         }
 
         private open() {
-            $('.infopanel-container').css('width', '50%');
+            $('.infopanel-container').addClass('show');
         }
 
         private close() {
-            $('.infopanel-container').css('width', '0px');
+            $('.infopanel-container').removeClass('show');
         }
 
         private handleMessage(message: string, data ? : any) {
             switch (message) {
+                case 'opennavbar':
+                case 'opencompare':
                 case 'openrightpanel':
+                case 'openstylepanel':
                     this.close();
                     break;
-                case 'opencompare':
+                case 'opentoelichting':
                     this.open();
                     break;
                 default:

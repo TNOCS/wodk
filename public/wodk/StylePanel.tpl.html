@@ -1,0 +1,23 @@
+<div>
+    <div class="stylepanel-fixed-top">
+        <div class="row border-dashed-lr">
+            <div class="active-button pull-right" uib-tooltip="{{'CLOSE' | translate}}" tooltip-placement="bottom">
+                <i data-ng-click="vm.close()" class="wodk-ico-kruis"></i>
+            </div>
+        </div>
+        <h2 class="stylepanel-title">{{'WAT_TONEN' | translate}}</h2>
+    </div>
+    <div class="stylepanel-content scrolling" resize resize-y="100">
+        <div class="row row-equal">
+            <div class="col-xs-12 col-sm-6" ng-repeat="card in vm.cards">
+                <div class="table-dash-grey pointer full-height" ng-click="vm.select(card)">
+                    <div>
+                        <img class="stylepanel-card-image" ng-src="{{card.image}}"></img>
+                    </div>
+                    <div class="stylepanel-card-title"> {{card.title}} </div>
+                    <div class="stylepanel-card-description"> {{card.description}} </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

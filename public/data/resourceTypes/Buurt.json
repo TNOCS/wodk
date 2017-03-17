@@ -177,13 +177,66 @@
 			"section" : "Eigendom woningen",
 			"label" : "p_koopwon",
 			"type" : "number",
-			"title" : "Perc. koopwoningen",
-            "description" : "Percentage koopwoningen",
+			"title" : "Percentage koopwoningen",
+            "description" : "Geeft het aandeel koopwoningen ten opzichte van de totale woningvoorraad weer per buurt.",
             "stringFormat" : "{0:#,#}%",
 			"min": 0,
 			"max": 100,
 			"visibleInCallOut" : true,
-			"isSearchable" : false
+			"isSearchable" : false,
+			"legend": {
+                "id": "p_koopwon",
+                "visualAspect": "fillColor",
+                "description": "Geeft het aandeel koopwoningen ten opzichte van de totale woningvoorraad weer per buurt.",
+                "legendKind": "discrete",
+                "legendEntries": [
+                    {
+						"sortKey": "a",
+                        "label": "  0-20% koopwoningen",
+                        "interval": {
+                            "min": 0,
+                            "max": 20
+                        },
+                        "color": "#86003e"
+                    },
+                    {
+						"sortKey": "b",
+                        "label": " 20-40% koopwoningen",
+                        "interval": {
+                            "min": 20,
+                            "max": 40
+                        },
+                        "color": "#ca005d"
+                    },
+					{
+						"sortKey": "c",
+                        "label": " 40-80% koopwoningen",
+                        "interval": {
+                            "min": 40,
+                            "max": 80
+                        },
+                        "color": "#db5593"
+                    },
+					{
+						"sortKey": "d",
+                        "label": "80-100% koopwoningen",
+                        "interval": {
+                            "min": 80,
+                            "max": 100
+                        },
+                        "color": "#edaac9"
+                    },
+					{
+						"sortKey": "e",
+                        "label": "Onbekend",
+						"interval": {
+                            "min": 99999,
+                            "max": 99998
+                        },
+                        "color": "#444444"
+                    }
+                ]
+            }
 		},
         "p_huurwon" : {
 			"section" : "Eigendom woningen",
@@ -335,7 +388,7 @@
 			"type" : "number",
 			"title" : "Indicatie aanpasbare woningen",
             "expression" : "properties.a_apb_w / properties.ster_totaal * 100",
-            "description" : "Percentage aanpasbare woningen",
+            "description" : "Het percentage geeft weer hoeveel woningen worden aangemerkt als aanpasbaar in een bepaalde buurt.",
             "stringFormat" : "{0:#,#}%",
 			"min": 0,
 			"max": 100,

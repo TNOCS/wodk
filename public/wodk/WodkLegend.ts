@@ -161,6 +161,10 @@ module wodk {
             }
         }
 
+        private openStylePanel() {
+            this.$messageBus.publish('wodk', 'openstylepanel', this.$scope.activeStyleGroup.layers[0] || new csComp.Services.ProjectLayer());
+        }
+
         private selectFilter = _.debounce(this.selectFilterDebounced, 750);
 
         private selectFilterDebounced() {
@@ -246,7 +250,7 @@ module wodk {
             }
             group.filterResult = this.filterDim.top(Infinity);
             this.$timeout(() => {
-            //     this.updateRowVisualizerScope(this.$scope.filter);
+                //     this.updateRowVisualizerScope(this.$scope.filter);
                 this.updateRowFilterScope(this.$scope.filter);
             });
             // this.$messageBus.publish('filters', 'updateGroup', group.id);
@@ -273,6 +277,36 @@ module wodk {
             }
         }
 
+        public toggleFilter(legend: csComp.Services.Legend, le: csComp.Services.LegendEntry) {
+            if (!legend || !le) return;
+            var projGroup = this.$scope.activeStyleGroup;
+            var property = this.$layerService.propertyTypeData[this.$scope.activeStyleProperty];
+            if (!projGroup || !property) return;
+            //Check if filter already exists. If so, remove it.
+            var exists: boolean = projGroup.filters.some((f: csComp.Services.GroupFilter) => {
+                if (f.property === property.label) {
+                    this.$layerService.removeFilter(f);
+                    return true;
+                }
+            });
+            if (!exists) {
+                var gf = new csComp.Services.GroupFilter();
+                gf.property = property.label; //prop.split('#').pop();
+                gf.id = 'buttonwidget_filter';
+                gf.group = projGroup;
+                gf.filterType = 'row';
+                gf.title = property.title;
+                gf.rangex = [le.interval.min, le.interval.max];
+                gf.filterLabel = le.label;
+                console.log('Setting filter');
+                this.$layerService.rebuildFilters(projGroup);
+                projGroup.filters = projGroup.filters.filter((f) => {
+                    return f.id !== gf.id;
+                });
+                this.$layerService.setFilter(gf, projGroup);
+            }
+        }
+
         private handleLegendUpdate(title: string, data ? : any) {
             switch (title) {
                 case 'removelegend':
@@ -283,9 +317,11 @@ module wodk {
                 default:
                     this.show();
                     if (data && data.activeLegend) {
-                        this.$scope.activeLegend = data.activeLegend;
-                        this.$scope.activeStyleGroup = data.group;
-                        this.$scope.activeStyleProperty = data.property;
+                        this.$timeout(() => {
+                            this.$scope.activeLegend = data.activeLegend;
+                            this.$scope.activeStyleGroup = data.group;
+                            this.$scope.activeStyleProperty = data.property;
+                        }, 0);
                     }
                     if (data && !(data.activeLegend && data.activeLegend.id.indexOf('_rank') === 0)) {
                         delete this.$scope.filter;
