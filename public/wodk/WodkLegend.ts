@@ -115,7 +115,25 @@ module wodk {
                     }
                 });
             }
+            this.getActiveStyle();
             this.$scope.activeStyleProperty = null;
+        }
+
+        private getActiveStyle() {
+            let p = this.$layerService.project;
+            var gs: csComp.Services.GroupStyle;
+            if (!p || !p.groups) return;
+            p.groups.forEach((group) => {
+                if (_.isArray(group.styles) && group.styles.length > 0) {
+                    gs = group.styles[0];
+                }
+            });
+            if (!gs) return;
+            this.$timeout(() => {
+                this.$scope.activeLegend = gs.activeLegend;
+                this.$scope.activeStyleGroup = gs.group;
+                this.$scope.activeStyleProperty = gs.property;
+            }, 0);
         }
 
         private minimize() {

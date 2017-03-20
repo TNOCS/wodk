@@ -4,7 +4,7 @@
             <div class="wodk-baselayers-title">{{'CHOOSE_BASELAYER' | translate}}</div>
         </div>
     </div>
-    <div class="row wodk-baselayers-entries" data-ng-repeat="bl in data.baselayers" ng-click="vm.selectBaselayer(bl)">
+    <div class="row wodk-baselayers-entries pointer" data-ng-repeat="bl in data.baselayers" ng-click="vm.selectBaselayer(bl)">
         <div class="col-xs-3 wodk-baselayers-img">
             <img ng-src="{{bl.image}}"></img>
         </div>
@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="row wodk-baselayers-showlabels">
-        <div class="col-xs-12 no-padding" ng-click="vm.toggleLabels();">
+        <div class="col-xs-12 no-padding pointer" ng-click="vm.toggleLabels();">
             <input type="checkbox" ng-model="data.showLabels" ng-change="vm.selectBaselayer()">{{'SHOW_LABELS' | translate}}</input>
         </div>
     </div>
