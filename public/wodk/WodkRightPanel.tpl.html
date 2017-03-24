@@ -38,7 +38,7 @@
             <div class="search-hint-text text-grey search-hint">{{'SEARCH_HINT' | translate}}</div>
             <form class="" role="search">
                 <div class="form-group wodk-form-group">
-                    <button ng-click="vm.selectFirstAddress()" class="btn btn-success wodk-btn wodk-btn-purple small small-padding-lr">Zoek</button>
+                    <button ng-click="vm.selectFirstAddress()" class="btn btn-success wodk-btn wodk-btn-purple small small-padding-lr wodk-search-rightpanel">Zoek</button>
                     <span><input id="search-address-rp" class="small" type="text" class="form-control"
                         placeholder="" autofocus>
                     </span>
@@ -55,7 +55,7 @@
                     <div ng-repeat="item in vm.selectedItems" style="display: inline">
                         <div class="btn-group">
                             <button type="button" class="btn btn-sm btn-label" ng-click="vm.selectFeature(item)">{{item.properties.Name}}</button>
-                            <button type="button" class="btn btn-sm btn-label btn-label-close" ng-click="vm.removeItem(item)"><i class="fa fa-times"></i></button>
+                            <button ng-show="false" type="button" class="btn btn-sm btn-label btn-label-close" ng-click="vm.removeItem(item)"><i class="fa fa-times"></i></button>
                         </div>
                     </div>
                 </div>

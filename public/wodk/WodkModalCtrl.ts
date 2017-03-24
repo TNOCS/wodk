@@ -17,6 +17,7 @@ module WodkModalCtrl {
         ];
 
         private propertyTables: WodkRightPanel.PropertyTable[];
+        private slider: any;
 
         constructor(
             private $scope: ICompareModalScope,
@@ -40,10 +41,45 @@ module WodkModalCtrl {
             return titles;
         }
 
+        private previousItem() {
+            if (!this.slider) return;
+            this.slider.goToPrevSlide();
+        }
+
+        private nextItem() {
+            if (!this.slider) return;
+            this.slider.goToNextSlide();
+        }
+
         private createTable(fts: IFeature[]) {
             let table = new WodkRightPanel.PropertyTable(this.$wodkSvc, this.$layerService, this.$timeout);
             table.displayFeature(fts);
             return table;
+        }
+
+        private initSlider() {
+            this.slider = $('#lightSlider').lightSlider({
+                controls: false,
+                pager: false,
+                item: 3,
+                slideMove: 1,
+                slideMargin: 0,
+                responsive: [{
+                        breakpoint: 1280,
+                        settings: {
+                            item: 2,
+                            slideMove: 1
+                        }
+                    },
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            item: 1,
+                            slideMove: 1
+                        }
+                    }
+                ]
+            });
         }
 
         private getAllFeatureBlocks(fts: IFeature[]) {
@@ -60,10 +96,12 @@ module WodkModalCtrl {
         }
 
         public ok() {
+            this.slider.destroy();
             this.$uibModalInstance.close();
         }
 
         public cancel() {
+            this.slider.destroy();
             this.$uibModalInstance.dismiss('cancel');
         }
     }

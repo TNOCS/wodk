@@ -440,6 +440,7 @@
                 "visualAspect": "fillColor",
                 "description": "Indicatie aanpasbaarheidsster",
                 "legendKind": "discrete",
+                "showLabelInTooltip": true,
                 "legendEntries": [
                     {
                         "sortKey": "a",

@@ -211,6 +211,7 @@
             "width": "100%",
             "height": "100%",
             "zIndex": 1050,
+            "style": "vws",
             "_interaction": false
         }],
         "mobile": true

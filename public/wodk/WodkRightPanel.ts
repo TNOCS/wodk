@@ -160,6 +160,12 @@ module WodkRightPanel {
                     if (f && f.fType && f.fType.name === 'BagPanden') {
                         this.selectedItems.length = 0;
                         this.selectFeature([f]);
+                    } else if (f && f.fType && f.fType.name === 'Buurt') {
+                        this.selectedItems = this.wodkWidgetSvc.getBuurtSelectionHistory();
+                        this.selectFeature(this.selectedItems);
+                    } else if (f && f.fType && f.fType.name === 'gemeente') {
+                        this.selectedItems = this.wodkWidgetSvc.getGemeenteSelectionHistory();
+                        this.selectFeature(this.selectedItems);
                     } else {
                         this.selectedItems = this.wodkWidgetSvc.getSelectionHistoryOfLastSelectedType();
                         this.selectFeature(this.selectedItems);
@@ -168,7 +174,7 @@ module WodkRightPanel {
             };
         }
 
-         private wodkMessageReceived(title: string): void {
+        private wodkMessageReceived(title: string): void {
             switch (title) {
                 case 'clear-rightpanel':
                     this.propertyTable.clearTable();

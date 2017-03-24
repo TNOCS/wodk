@@ -33,24 +33,24 @@
         <div class="row" data-ng-repeat="le in activeLegend.legendEntries" ng-class="{'pointer-cursor': $parent.$parent.activeStyleProperty}"
             ng-click="$parent.$parent.vm.toggleFilter(activeLegend, le)" uib-popover="{{'UTILS.FILTER' | translate}}" popover-trigger="mouseenter"
             popover-append-to-body="true" popover-placement="right" popover-enable="{{$parent.$parent.activeStyleProperty}}">
-            <div class="col-xs-2 legend-entry-color-square" ng-style="{'background': le.color}"></div>
+            <div class="col-xs-2 legend-entry-color-square" ng-style="{'background': vm.getColor(le.color), 'opacity': vm.getOpacity(le.color)}"></div>
             <div class="col-xs-10 legend-entry-label">{{le.label}}</div>
             </li>
             </ul>
         </div>
     </div>
     <div class="row legend-description-label legend-padding" data-ng-show="activeLegend">
-        <div class="col-xs-12 italic bold no-padding" style="margin-bottom: 4px">
+        <div class="col-xs-12 italic no-padding" style="margin-bottom: 4px">
             Filter buurten
         </div>
         <div class="col-xs-12 no-padding">
             <div>
-                 met minder dan <span><input type="number" class="filter-input" min="0" max="500" ng-model="vm.filterValue" ng-change="vm.selectFilter()"></span> woningen. <span style="float:right" ng-click="vm.filterValue=0;vm.selectFilter()" uib-tooltip="Reset filter"><i class="fa fa-trash-o"></i></span>
+                 met minder dan <span><input class="filter-input" min="0" max="500" ng-model="vm.filterValue" ng-change="vm.selectFilter()"></span> woningen. <span ng-show="false" style="float:right" ng-click="vm.filterValue=0;vm.selectFilter()" uib-tooltip="Reset filter"><i class="fa fa-trash-o"></i></span>
             </div>
         </div>
         <div class="col-xs-12 filter-slider-row no-padding">
             <div>
-                <input type="range" name="points" min="0" max="500" step="50" ng-model="vm.filterValue" ng-change="vm.selectFilter()">
+                <input type="range" name="points" min="0" max="500" step="5" ng-model="vm.filterValue" ng-change="vm.selectFilter()">
             </div>
         </div>
     </div>

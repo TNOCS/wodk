@@ -18,11 +18,11 @@
             "background": "white"
         },
         "vws": {
-            "borderWidth": 1,
-            "borderColor": "#604A7B",
-            "background": "#e3dce7",
+            "borderWidth": 0,
+            "borderColor": "#ffffff",
+            "background": "#ffffff",
             "opacity": 0.999,
-            "borderRadius": "4px"
+            "borderRadius": "0px"
         },
         "vws2": {
             "borderWidth": 0,
@@ -108,6 +108,17 @@
         "url": "http://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/{z}/{y}/{x}",
         "attribution": "Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC",
         "preview": "http://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/11/673/1051.png"
+    },
+    {
+        "title": "World Terrain Labels",
+        "subtitle": "from ESRI",
+        "minZoom": 0,
+        "maxZoom": 18,
+        "cesium_url": "http://server.arcgisonline.com/ArcGIS/rest/services/References/World_Boundaries_and_Places/MapServer",
+        "cesium_maptype": "arcgis",
+        "url": "http://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
+        "attribution": "Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC",
+        "preview": "http://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/11/673/1051.png"
     }, {
         "title": "National Geographic",
         "subtitle": "from ESRI",
@@ -143,6 +154,21 @@
         "cesium_url": "http://d.basemaps.cartocdn.com/light_all/",
         "attribution": "Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community",
         "preview": "http://a.basemaps.cartocdn.com/light_all/11/673/1051.png"
+    },
+    {
+        "title": "PDOK",
+        "id": "PDOK",
+        "subtitle": "From PDOK",
+        "minZoom": 0,
+        "maxZoom": 20,
+        "isDefault": false,
+        "wms": true,
+        "cesium_maptype": "openstreetmap",
+        "layers": ["luchtfoto_jpeg"],
+        "url": "https://geodata1.nationaalgeoregister.nl/luchtfoto/wms?",
+        "cesium_url": "http://d.basemaps.cartocdn.com/light_all/",
+        "attribution": "PDOK",
+        "preview": "http://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/11/673/1051.png"
     }],
     "projects": [{
         "title": "MY_TITLE",

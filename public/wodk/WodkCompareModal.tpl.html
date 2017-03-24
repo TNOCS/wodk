@@ -1,11 +1,99 @@
 <div class="modal-header">
-    <h4 class="modal-title">{{'COMPARE_TAB' | translate}} {{featureTypeTitle}}
-        <span><i class="wodk-ico-kruis" ng-click="vm.cancel()" style="float: right"></i></span>
-        <span><i class="wodk-ico-printer" ng-click="vm.exportImage()" style="float: right"></i></span>
-    </h4>
+    <div>
+        <span><i class="wodk-ico-kruis pointer" ng-click="vm.cancel()" style="float: right"></i></span>
+        <span><i class="wodk-ico-printer pointer" ng-click="vm.exportImage()" style="float: right"></i></span>
+    </div>
 </div>
-<div class="modal-body" style="height: 100%;padding-right:48px;overflow:auto" resize resize-y="210">
-    <div id="wodk-compare-modal" class="wodk-rightpanel-scrolling-content" style="white-space: nowrap">
+<div class="modal-body" id="wodk-compare-modal" style="height: 100%;padding-right:48px;overflow:auto" resize resize-y="100">
+    <!-- Top row -->
+    <div class="row">
+        <div class="col-xs-6 col-sm-5 col-md-4 col-lg-3 compare-top-row-height title">
+            Vergelijking
+        </div>
+        <!-- left-right-navigation -->
+        <div class="col-xs-6 col-sm-7 col-md-8 col-lg-9 compare-top-row-height">
+            <div class="row">
+                <div class="col-xs-6 no-padding pointer compare-navigation" ng-click="vm.previousItem()">
+                    <i class="wodk-ico-pijl_nav_links compare-navigation-arrow"></i><span>vorige gemeente</span>
+                </div>
+                <div class="col-xs-6 no-padding text-right pointer compare-navigation" ng-click="vm.nextItem()">
+                    <span>volgende gemeente</span><i class="wodk-ico-pijl_nav_rechts compare-navigation-arrow"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Content row -->
+    <div class="row">
+        <div class="col-xs-6 col-sm-5 col-md-4 col-lg-3">
+            <div class="row">
+                <div class="col-xs-12 compare-title-row-height italic">
+                    Uw selectie
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 no-padding">
+                    <div class="property-table property-table-compare property-table-content" ng-init="propertyTable=vm.propertyTables[0]">
+                        <div class="row table-section" ng-repeat="section in propertyTable.sections track by $index">
+                            <div class="row" data-toggle="collapse" data-target=".wodk-collapse-{{$index}}">
+                                <div class="col-xs-12 table-section-title">{{section.title}}<span class="fa fa-caret-up"></span><span class="fa fa-caret-down"></span></div>
+                            </div>
+                            <div ng-show="section.type==='table'" class="row collapse in wodk-collapse-{{$index}}">
+                                <div class="row table-row table-dash" ng-repeat="row in section.rows">
+                                    <div class="col-xs-12 table-row-title">{{row.title}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-show="section.type==='full-row'">
+                            <div class="row">
+                                <div class="col-xs-12"> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Right side of the compare view -->
+        <div class="col-xs-6 col-sm-7 col-md-8 col-lg-9 datatable-top-row-height">
+            <ul id="lightSlider">
+                <li class="property-table" ng-repeat="propertyTable in vm.propertyTables" init-slider>
+                    <div class="row table-title compare" uib-tooltip="{{propertyTable.title}}">{{propertyTable.title | limitTo:36}}{{propertyTable.title.length > 36 ? '...' : ''}}</div>
+                    <div class="row table-section" ng-repeat="section in propertyTable.sections track by $index">
+                        <div class="row wodk-collapse-margin">
+                            <div class="col-xs-6 table-section-headers compare" ng-repeat="header in section.headers">{{header}}</div>
+                            <div class="col-xs-12 table-section-headers" ng-show="!section.headers || section.headers.length==0">&nbsp;</div>
+                        </div>
+                        <div ng-show="section.type==='table'" class="row collapse in wodk-collapse-{{$index}}">
+                            <div class="row table-row table-dash" ng-repeat="row in section.rows">
+                                <div ng-show="row.type !== 'textarea'">
+                                    <div ng-show="row.values.length===1" class="col-xs-12 text-right table-row-value" data-ng-bind-html="row.values[0] | trusted"></div>
+                                    <div ng-show="row.values.length===2" class="col-xs-6 text-right table-row-value" data-ng-bind-html="row.values[0] | trusted"></div>
+                                    <div ng-show="row.values.length===2" class="col-xs-6 text-right table-row-value" data-ng-bind-html="row.values[1] | trusted"></div>
+                                </div>
+                                <div ng-show="row.type === 'textarea'">
+                                    <div class="col-xs-12 table-row-value table-row-value-small" ng-repeat="val in row.values track by $index" data-ng-bind-html="val | trusted"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-show="section.type==='full-row'">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div ng-repeat="val in row.values">
+                                        <div class="table-row-value" data-ng-bind-html="val | trusted"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div ng-show="false" class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="vm.cancel()">{{'CLOSE' | translate}}</button>
+</div>
+
+<!--<div id="wodk-compare-modal" class="wodk-rightpanel-scrolling-content" style="white-space: nowrap">
         <div class="property-table property-table-compare property-table-content" ng-repeat="propertyTable in vm.propertyTables">
             <div class="row table-title" uib-tooltip="{{propertyTable.title}}">{{propertyTable.title | limitTo:38}}{{propertyTable.title.length > 38 ? '...' : ''}}</div>
             <div class="row table-section" ng-repeat="section in propertyTable.sections track by $index">
@@ -37,23 +125,4 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <!--<table id="compare-widget-table" class="table table-bordered table-hover" style="margin-right:24px;font-size: 12px;">
-        <thead>
-            <tr>
-                <th></th>
-                <th ng-repeat="title in featureTitles track by $index">{{title}}</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="entry in tableEntries track by $index">
-                <th scope="row">{{propertyTitles[$index]}}</th>
-                <td ng-repeat="col in entry track by $index">{{col}}</td>
-            </tr>
-        </tbody>
-    </table>-->
-</div>
-<div ng-show="false" class="modal-footer">
-    <button type="button" class="btn btn-default" ng-click="vm.cancel()">{{'CLOSE' | translate}}</button>
-</div>
+        </div>-->

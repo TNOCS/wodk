@@ -14,8 +14,8 @@
 
 @font-face {
   font-family: 'wodk-icons';
-  src: url("fonts/wodk-icons.eot?jyz61e");
-  src: url("fonts/wodk-icons.eot?jyz61e#iefix") format("embedded-opentype"), url("fonts/wodk-icons.ttf?jyz61e") format("truetype"), url("fonts/wodk-icons.woff?jyz61e") format("woff"), url("fonts/wodk-icons.svg?jyz61e#wodk-icons") format("svg");
+  src: url("fonts/wodk-icons.eot?ci4j8i");
+  src: url("fonts/wodk-icons.eot?ci4j8i#iefix") format("embedded-opentype"), url("fonts/wodk-icons.ttf?ci4j8i") format("truetype"), url("fonts/wodk-icons.woff?ci4j8i") format("woff"), url("fonts/wodk-icons.svg?ci4j8i#wodk-icons") format("svg");
   font-weight: normal;
   font-style: normal; }
 
@@ -38,6 +38,9 @@
 [class^="wodk-ico-"]:active, [class*=" wodk-ico-"]:active,
 [class^="wodk-ico-"]:focus, [class*=" wodk-ico-"]:focus {
   text-decoration: none; }
+
+.wodk-ico-hulp_vraag:before {
+  content: "\e919"; }
 
 .wodk-ico-zoom_out:before {
   content: "\e918"; }
@@ -258,7 +261,7 @@ h2 {
   margin-left: 20px; }
 
 ul.wodk-pdf-list {
-  margin-right: 2.14em; }
+  margin: 0px 20px; }
 
 ul.wodk-pdf-list li:before {
   font-family: 'wodk-icons' !important;
@@ -273,7 +276,8 @@ ul.wodk-pdf-list li.divider:before {
   content: none; }
 
 ul.wodk-pdf-list li {
-  margin: 6px 0px; }
+  margin: 6px 0px;
+  padding-left: 0px; }
 
 ul.wodk-pdf-list li.inactive-button-toelichting a,
 ul.wodk-pdf-list li.no-content a {
@@ -463,6 +467,9 @@ ul.wodk-pdf-list li.no-content a {
   height: 75%;
   top: 0px; }
 
+.wodk-search-rightpanel {
+  font-size: 18px !important; }
+
 .marker-cluster-small {
   background-color: rgba(15, 225, 255, 0.6); }
 
@@ -583,10 +590,11 @@ ul.wodk-pdf-list li.no-content a {
   padding: 0px 6px; }
 
 .inactive-button-toelichting {
-  background: #ccc;
+  background: white;
   color: #eeeeee;
   margin: 0;
-  font-size: 1.0em;
+  font-size: 20px;
+  font-weight: bold;
   pointer-events: none;
   padding: 8px; }
 
@@ -697,8 +705,8 @@ ul.wodk-pdf-list li.no-content a {
   padding: 7px; }
 
 .legend-entry-label {
-  height: 32px;
-  line-height: 32px;
+  height: 36px;
+  line-height: 36px;
   color: #000;
   font-size: 14px;
   padding-left: 0px; }
@@ -776,7 +784,7 @@ ul.wodk-pdf-list li.no-content a {
   z-index: 0; }
 
 .animate-backdrop {
-  z-index: 1109; }
+  z-index: 99; }
 
 .animate-backdrop.ng-hide-add {
   background-color: rgba(0, 0, 0, 0.5);
@@ -793,7 +801,7 @@ ul.wodk-pdf-list li.no-content a {
   background-color: rgba(0, 0, 0, 0.5); }
 
 .wodk-navbar {
-  z-index: 1111;
+  z-index: 101;
   position: relative;
   top: 0px;
   bottom: 0px;
@@ -807,12 +815,19 @@ ul.wodk-pdf-list li.no-content a {
 .wodk-navbar-title {
   font-size: 38px;
   font-weight: normal;
-  margin-bottom: 18px; }
+  margin-bottom: 18px;
+  margin-left: 0px; }
+
+a.black .fa-sort {
+  color: #999; }
 
 .datatable-download {
   background: #e3dce7;
   float: right;
   text-align: right; }
+
+.datatable-download-text {
+  font-size: 18px; }
 
 .datatable-grey {
   background: #eeeeee; }
@@ -935,8 +950,8 @@ a {
 
 .search-hint {
   font-style: italic;
-  margin-top: 16px;
-  margin-bottom: 6px; }
+  margin-top: 24px;
+  margin-bottom: 18px; }
 
 .small-padding-lr {
   padding: 0 6px 0 6px; }
@@ -1019,7 +1034,7 @@ select.form-control:focus {
   transform: rotateY(0); }
 
 .animate-navbar {
-  z-index: 1111;
+  z-index: 101;
   position: relative; }
 
 .animate-navbar.ng-hide-add {
@@ -1039,7 +1054,7 @@ select.form-control:focus {
   transform: rotateX(0); }
 
 .animate-navbar-btn {
-  z-index: 1110; }
+  z-index: 100; }
 
 .animate-navbar-btn.ng-hide-add {
   transform: rotateX(0);
@@ -1093,6 +1108,10 @@ select.form-control:focus {
 .table-section {
   margin: 22px 0px 0px; }
 
+.table-section-headers.compare {
+  font-style: normal;
+  font-weight: bold; }
+
 .table-section-headers {
   font-style: italic;
   padding-right: 0px;
@@ -1132,12 +1151,24 @@ select.form-control:focus {
   line-height: 28px; }
 
 .property-table-compare {
-  display: inline-block;
-  max-width: 400px;
-  padding: 0 16px;
-  margin: 0 16px;
-  background: #eeeeee;
+  display: block;
+  margin: 0px;
+  background: white;
   vertical-align: top; }
+
+.table-title.compare {
+  height: 50px;
+  line-height: 50px;
+  background: #c6b8cf;
+  padding: 0px 36px 0px 0px;
+  text-align: right;
+  vertical-align: middle; }
+
+.wodk-collapse-margin {
+  margin-right: 36px; }
+
+[class^="wodk-collapse-"], [class*=" wodk-collapse-"] {
+  margin-right: 36px; }
 
 .table-title {
   font-size: 18px;
@@ -1217,7 +1248,7 @@ select.form-control:focus {
   line-height: 22px;
   font-size: 18px;
   font-weight: bold;
-  padding: 10px 12px 4px; }
+  padding: 10px 12px 10px; }
 
 .navbar-fixed-bottom {
   background: #f2eeee;
@@ -1301,10 +1332,37 @@ select.form-control:focus {
   -webkit-box-shadow: none; }
 
 .arrow-right-link {
-  height: 14px; }
+  height: 12px; }
+
+.compare-navigation {
+  font-size: 16px; }
+
+.compare-navigation-arrow {
+  font-size: 18px; }
+
+.compare-top-row-height {
+  height: 50px;
+  vertical-align: bottom;
+  line-height: 50px; }
+
+.compare-top-row-height.title {
+  font-size: 28px;
+  vertical-align: top; }
+
+.compare-title-row-height {
+  height: 50px;
+  line-height: 50px;
+  vertical-align: middle;
+  background: #e3dce7; }
+
+.compare-item-title {
+  background: #c6b8cf; }
 
 .wodk-baselayers-padding {
   padding: 0px 20px; }
+
+.wodk-baselayers-label {
+  padding: 24px 0px; }
 
 .wodk-baselayers-title {
   font-size: 16px;
@@ -1365,13 +1423,13 @@ select.form-control:focus {
   height: 16px;
   margin-top: 2px;
   margin-bottom: 0px;
-  top: 1px;
+  top: 2px;
   left: 0;
-  background: #eeeeee;
+  background: white;
   border: 1px solid #333; }
 
 .wodk-checkbox label:after {
-  opacity: 0.2;
+  opacity: 0.01;
   content: '';
   position: absolute;
   width: 16px;
@@ -1424,7 +1482,14 @@ li.wodk-checkbox {
   vertical-align: middle; }
 
 .data-table {
-  font-size: 14px; }
+  font-size: 18px; }
+
+ul.datatable-padding-left {
+  font-size: 16px; }
+
+.filter-input {
+  max-width: 48px;
+  margin: 0px 4px; }
 
 .filter-input:focus {
   outline: none; }

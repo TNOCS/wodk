@@ -141,13 +141,13 @@ module wodk {
             if (!l || !this.selectedProp) return;
             if (this.selectedProp === 'geen') {
                 var oldStyles = l.group.styles.filter((s: csComp.Services.GroupStyle) => {
-                    return s.property.startsWith('_rank');
+                    return s.property.indexOf('_rank') === 0;
                 });
                 oldStyles.forEach((s) => {
                     this.$layerService.removeStyle(s);
                 });
                 var oldFilters = l.group.filters.filter((f: csComp.Services.GroupFilter) => {
-                    return f.property.startsWith('_rank');
+                    return f.property.indexOf('_rank') === 0;
                 });
                 oldFilters.forEach((f) => {
                     this.$layerService.removeFilter(f);

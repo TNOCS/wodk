@@ -78,7 +78,7 @@ module WodkRightPanel {
         public displayFeature = _.throttle(this.displayFeatureDebounced, 500);
 
         private displayFeatureDebounced(fts: IFeature[]) {
-            if (!fts || !_.isArray(fts)) return;
+            if (!fts || !_.isArray(fts) || fts.length < 1) return;
             this.timeoutService(() => {
                 this.clearTable();
                 (fts.length === 1 ? this.getStreetViewImage(fts[0]) : this.resetStreetviewImage());
@@ -139,26 +139,27 @@ module WodkRightPanel {
         private joinFeatures(fts: IFeature[], pTypes: IPropertyType[]): IFeature {
             if (fts.length === 1) return fts[0];
             let virtualFeature = < IFeature > {};
+            virtualFeature.layer = < csComp.Services.ProjectLayer > {};
+            virtualFeature.layer.typeUrl = fts[0].fType.id.split('#').shift();
             virtualFeature.properties = {};
             pTypes.forEach((pt: IPropertyType) => {
-                if (pt.visibleInCallOut) {
-                    fts.forEach((f: IFeature) => {
-                        if (f.properties.hasOwnProperty(pt.label)) {
-                            if (!virtualFeature.properties.hasOwnProperty(pt.label)) {
-                                if (typeof f.properties[pt.label] === 'string') {
-                                    virtualFeature.properties[pt.label] = ' - ';
-                                } else {
-                                    virtualFeature.properties[pt.label] = f.properties[pt.label];
-                                }
+                fts.forEach((f: IFeature) => {
+                    if (f.properties.hasOwnProperty(pt.label)) {
+                        if (!virtualFeature.properties.hasOwnProperty(pt.label)) {
+                            if (typeof f.properties[pt.label] === 'string') {
+                                virtualFeature.properties[pt.label] = ' - ';
                             } else {
-                                if (typeof f.properties[pt.label] !== 'string') {
-                                    virtualFeature.properties[pt.label] += f.properties[pt.label];
-                                }
+                                virtualFeature.properties[pt.label] = f.properties[pt.label];
+                            }
+                        } else {
+                            if (typeof f.properties[pt.label] !== 'string') {
+                                virtualFeature.properties[pt.label] += f.properties[pt.label];
                             }
                         }
-                    });
-                }
+                    }
+                });
             });
+            this.layerService.evaluateFeatureExpressions( < csComp.Services.Feature > virtualFeature);
             return virtualFeature;
         }
 

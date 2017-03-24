@@ -565,5 +565,14 @@ module App {
             };
         })
         .controller('CompareModalCtrl', WodkModalCtrl.CompareModalCtrl)
-        .controller('appCtrl', AppCtrl);
+        .controller('appCtrl', AppCtrl)
+        .directive('initSlider', () => {
+            return (scope, element, attrs) => {
+                if (scope.$last) {
+                    // iteration is complete, do whatever post-processing
+                    // is necessary
+                    scope.vm.initSlider();
+                }
+            };
+        });
 }

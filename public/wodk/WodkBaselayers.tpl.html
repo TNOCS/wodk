@@ -12,9 +12,22 @@
             {{bl.title}}
         </div>
     </div>
-    <div class="row wodk-baselayers-showlabels">
-        <div class="col-xs-12 no-padding pointer" ng-click="vm.toggleLabels();">
-            <input type="checkbox" ng-model="data.showLabels" ng-change="vm.selectBaselayer()">{{'SHOW_LABELS' | translate}}</input>
+    <!--<div class="row wodk-baselayers-showlabels">
+        <div class="col-xs-12 no-padding pointer wodk-checkbox" ng-click="vm.toggleLabels();">
+            <input type="checkbox" ng-model="data.showLabels" ng-change="vm.selectBaselayer()" id="showlabels"></input>
+            <label for="showlabels"></label>
+            <div style="display: inline;padding: 0px 10px;">{{'SHOW_LABELS' | translate}}</div>
+        </div>
+    </div>-->
+    <div class="row wodk-baselayers-label pointer">
+        <div class="col-xs-3 wodk-baselayers-img">
+            <div class="wodk-checkbox">
+                <input type="checkbox" ng-model="data.showLabels" ng-change="vm.selectBaselayer()" id="showlabels"></input>
+                <label for="showlabels"></label>
+            </div>
+        </div>
+        <div class="col-xs-9 no-padding">
+            <div>{{'SHOW_LABELS' | translate}}</div>
         </div>
     </div>
 </div>

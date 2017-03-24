@@ -195,6 +195,9 @@ module wodk {
         }
 
         private createChart() {
+            var layer = this.$layerService.findLoadedLayer('bagbuurten');
+            if (!layer) return;
+            this.$scope.style = layer.group.styles[0];
             console.log(`Create chart ${this.widget.id}`);
             var gf = new csComp.Services.GroupFilter();
             gf.property = this.$scope.style.property;
@@ -333,18 +336,18 @@ module wodk {
                     this.hide();
                     break;
                 default:
-                    this.show();
                     if (data && data.activeLegend) {
                         this.$timeout(() => {
                             this.$scope.activeLegend = data.activeLegend;
                             this.$scope.activeStyleGroup = data.group;
                             this.$scope.activeStyleProperty = data.property;
+                            this.show();
                         }, 0);
                     }
-                    if (data && !(data.activeLegend && data.activeLegend.id.indexOf('_rank') === 0)) {
-                        delete this.$scope.filter;
-                        this.$scope.style = data;
-                    }
+                    // if (data && !(data.activeLegend && data.activeLegend.id.indexOf('_rank') === 0)) {
+                    //     delete this.$scope.filter;
+                    //     this.$scope.style = data;
+                    // }
                     if (this.$scope.$root.$$phase !== '$apply' && this.$scope.$root.$$phase !== '$digest') {
                         this.$scope.$apply();
                     }
@@ -366,6 +369,18 @@ module wodk {
                 default:
                     break;
             }
+        }
+
+        private getColor(v: string) {
+            let result = csComp.Helpers.getColorAndOpacityFromRgbaString(v);
+            if (!result) return v;
+            return result.color;
+        }
+
+        private getOpacity(v: string) {
+            let result = csComp.Helpers.getColorAndOpacityFromRgbaString(v);
+            if (!result) return 1;
+            return result.opacity;
         }
     }
 }
