@@ -100,13 +100,23 @@ module WodkNavbar {
         private selectLocation(loc: wodk.IPlacesResult, dataset: string) {
             if (!loc || _.isEmpty(loc)) return;
             if (dataset && dataset === 'buurten') {
-                loc.type = 'buurt';
-                loc.name = loc.bu_naam;
-                loc.administrative = loc.gm_naam;
-                loc.latlng = {
-                    lng: 0,
-                    lat: 0
-                };
+                if (loc.gm_naam === 'provincie') {
+                    let provLayer = this.layerService.findLoadedLayer('provincie');
+                    if (!provLayer) return;
+                    let f = _.find(provLayer.data.features, (f: IFeature) => {
+                        return f.properties['Name'] === loc.bu_naam;
+                    });
+                    if (f) this.layerService.selectFeature(f);
+                    return;
+                } else {
+                    loc.type = 'buurt';
+                    loc.name = loc.bu_naam;
+                    loc.administrative = loc.gm_naam;
+                    loc.latlng = {
+                        lng: 0,
+                        lat: 0
+                    };
+                }
             }
             this.lastResult = loc;
             this.messageBusService.publish('wodk', 'address', this.lastResult);

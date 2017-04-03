@@ -62,7 +62,8 @@ module wodk {
             'messageBusService',
             'mapService',
             'dashboardService',
-            '$http'
+            '$http',
+            '$timeout'
         ];
 
         /**
@@ -101,7 +102,8 @@ module wodk {
             private $messageBusService: csComp.Services.MessageBusService,
             private $mapService: csComp.Services.MapService,
             private dashboardService: csComp.Services.DashboardService,
-            private $http: ng.IHttpService) {
+            private $http: ng.IHttpService,
+            private $timeout: ng.ITimeoutService) {
 
             this.dashboardService.widgetTypes['wodkwidget'] = < csComp.Services.IWidget > {
                 id: 'wodkwidget',
@@ -776,6 +778,7 @@ module wodk {
                     return lastSelectedItem.id === f.id;
                 });
                 lastSelectedItem.isSelected = true;
+                this.lastSelectedName = lastSelectedItem.properties['Name'] || 'onbekend';
                 this.$messageBusService.publish('feature', 'onUpdateWidgets', lastSelectedItem);
             } else {
                 this.$messageBusService.publish('updatelegend', 'hidelegend');
@@ -789,7 +792,8 @@ module wodk {
         };
 
         public removeItem(item: IFeature) {
-
+            //TODO: remove any item, instead of only the latest
+            this.stepBack();
         }
 
         public setLastSelectedName(name: string) {

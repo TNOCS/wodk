@@ -15,3 +15,4 @@ dist/
 offline_search_result.json
 public/temp/bower_components/
 typings/
+public/tmp-*.html

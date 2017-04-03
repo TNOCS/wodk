@@ -39,6 +39,7 @@ module WodkRightPanel {
         private propertyTable: PropertyTable;
         private selectedItems: IFeature[];
         private mBusHandles: csComp.Services.MessageBusHandle[] = [];
+        private lastSelectedName: string;
 
         public static $inject = [
             '$scope',
@@ -101,6 +102,7 @@ module WodkRightPanel {
             this.placesAutocomplete.on('change', (e) => {
                 console.log(e.dataset, e.suggestion);
                 this.selectLocation(e.suggestion, e.dataset);
+                this.placesAutocomplete.close();
             });
 
             this.placesAutocomplete.on('suggestions', (e) => {
@@ -116,6 +118,10 @@ module WodkRightPanel {
                 console.log(e.message);
             });
 
+            $('#search-address-rp').on('blur', () => {
+                this.placesAutocomplete.close();
+            });
+
             // this.selectedItems = this.wodkWidgetSvc.getSelectionHistoryOfLastSelectedType();
             // this.selectFeature((this.selectedItems.length > 0) ? this.selectedItems : [this.layerService.lastSelectedFeature]);
         }
@@ -123,19 +129,28 @@ module WodkRightPanel {
         private selectLocation(loc: wodk.IPlacesResult, dataset: string) {
             if (!loc || _.isEmpty(loc)) return;
             if (dataset && dataset === 'buurten') {
-                loc.type = 'buurt';
-                loc.name = loc.bu_naam;
-                loc.administrative = loc.gm_naam;
-                loc.latlng = {
-                    lng: 0,
-                    lat: 0
-                };
+                if (loc.gm_naam === 'provincie') {
+                    let provLayer = this.layerService.findLoadedLayer('provincie');
+                    if (!provLayer) return;
+                    let f = this.layerService.findFeatureByName(loc.bu_naam);
+                    if (f) this.layerService.selectFeature(f);
+                    return;
+                } else {
+                    loc.type = 'buurt';
+                    loc.name = loc.bu_naam;
+                    loc.administrative = loc.gm_naam;
+                    loc.latlng = {
+                        lng: 0,
+                        lat: 0
+                    };
+                }
             }
             this.messageBusService.publish('wodk', 'address', loc);
             this.placesAutocomplete.close();
         }
 
         private selectFeature(fts: IFeature[]) {
+            this.lastSelectedName = this.wodkWidgetSvc.getLastSelectedName();
             if (!fts || !_.isArray(fts)) return;
             this.propertyTable.displayFeature(fts);
             this.updateSearchInput();
@@ -147,6 +162,7 @@ module WodkRightPanel {
                 this.placesAutocomplete.setVal(`${lastPlace.name}, ${lastPlace.administrative}`);
                 this.placesAutocomplete.autocomplete.pin.style.display = 'none';
                 this.placesAutocomplete.autocomplete.clear.style.display = '';
+                this.placesAutocomplete.close();
             }
         }
 
@@ -184,6 +200,7 @@ module WodkRightPanel {
 
         private removeItem(item: IFeature) {
             this.wodkWidgetSvc.removeItem(item);
+            this.lastSelectedName = this.wodkWidgetSvc.getLastSelectedName();
         }
 
         private compareItems() {

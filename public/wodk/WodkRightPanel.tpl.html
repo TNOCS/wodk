@@ -55,7 +55,7 @@
                     <div ng-repeat="item in vm.selectedItems" style="display: inline">
                         <div class="btn-group">
                             <button type="button" class="btn btn-sm btn-label" ng-click="vm.selectFeature(item)">{{item.properties.Name}}</button>
-                            <button ng-show="false" type="button" class="btn btn-sm btn-label btn-label-close" ng-click="vm.removeItem(item)"><i class="fa fa-times"></i></button>
+                            <button ng-show="item.properties.Name === vm.wodkWidgetSvc.lastSelectedName" type="button" class="btn btn-sm btn-label btn-label-close" ng-click="vm.removeItem(item)"><i class="fa fa-times"></i></button>
                         </div>
                     </div>
                 </div>
