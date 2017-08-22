@@ -214,6 +214,7 @@ module WodkRightPanel {
                     return;
                 }
                 ( < HTMLLinkElement > document.querySelector('#rapport-link')).href = `http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set ${set.s}.pdf#page=${set.p}`;
+                ( < HTMLLinkElement > document.querySelector('#rapport-link-descr')).href = `http://www.zorgopdekaart.nl/bagwoningen/pdfs/beschrijving/${prop}.pdf`;
                 this.showRapportLink = true;
                 this.resetStreetviewImage(); // Rapport and streetview image are never shown simulaneously
             });
@@ -221,6 +222,7 @@ module WodkRightPanel {
 
         private resetRapportLink() {
             document.querySelector('#rapport-link').removeAttribute('href');
+            document.querySelector('#rapport-link-descr').removeAttribute('href');
             this.showRapportLink = false;
         }
 
