@@ -4,6 +4,7 @@ import fs = require('fs-extra');
 import path = require('path');
 import webshot = require('webshot');
 import stream = require('stream');
+import https = require('https');
 import * as csweb from "csweb";
 import _ = require("underscore.string");
 
@@ -36,7 +37,7 @@ var tileIndex;
 cs.start(() => {
 
     // Should be set to true for server on zodk
-    const runOnZODKServer = false;
+    const runOnZODKServer = true;
     const zodkServerAddress = 'http://www.zorgopdekaart.nl/bagwoningen';
 
     if (startDatabaseConnection) {
@@ -133,6 +134,23 @@ cs.start(() => {
         cs.server.get(deployPath + (runOnZODKServer ? '/public' : '') + '/exportgemeenten', (req, res) => {
             console.log('/exportgemeenten');
             bagDatabase.exportGemeenten(req, res);
+        });
+
+        cs.server.get(deployPath + (runOnZODKServer ? '/public' : '') + '/getstreetview', (req, res) => {
+            console.log('/getstreetview');
+            
+            let locationParam = req.query.location || '';
+            let url = `https://maps.googleapis.com/maps/api/streetview?size=360x220&key=AIzaSyAswem_dGRsuDky7YfsQB1beZLu5p9DLfY&location=${locationParam}`;
+            https.get(url, (streetviewRes) => {
+                if (streetviewRes && streetviewRes.statusCode === 200) {
+                    console.log('OK');
+                    res.writeHead(200, { "Content-Type": "image/jpeg" });
+                    streetviewRes.pipe(res);
+                } else {
+                    res.writeHead(streetviewRes.statusCode);
+                    res.end();
+                }
+            }).end();
         });
 
         cs.server.post(deployPath + (runOnZODKServer ? '/public' : '') + '/screenshot', (req, res) => {

@@ -15,7 +15,8 @@
                 "cornerRadius": 6,
                 "iconUri": "images/bag_{icon}.png",
                 "maxTitleResolution": -1,
-                "drawingMode": "Point"
+                "drawingMode": "Point",
+                "nameLabel": "Adres"
             },
 			"selectActions": ["select pand"],
             "propertyTypeKeys": "Name;aanpasbaarheid;kostenindicatie;hellingbaan;drempelvrij;traplift;aanname;Adres;streetview;kadaster;pandtype;bouwjaar;lift;pandoppervlakte;gebruiksdoelverblijfsobject;plint;woningen_in_pand;niet_woningen_in_pand;pandhoogte;pandid;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;ster_in_ond;wijknaam;wijkcode;buurtnaam;buurtcode;ster_gem;oppervlakteverblijfsobject;icon;postcode;woonplaatsnaam;leeftijd_bewoner;eigendom;verhuurder;corporatie;gemeentenaam;isonderzocht;plint_oz;lift_oz;"

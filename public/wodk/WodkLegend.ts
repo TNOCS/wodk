@@ -324,7 +324,7 @@ module wodk {
                 projGroup.filters = projGroup.filters.filter((f) => {
                     return f.id !== gf.id;
                 });
-                this.$layerService.setFilter(gf, projGroup);
+                this.$layerService.setFilter(gf, projGroup, false);
             }
         }
 
