@@ -3,7 +3,7 @@ module WodkRightPanel {
     var DEFAULT_SECTION_ID = '__info';
     var DEFAULT_SECTION_TYPE: IPropertyTableSectionType = 'table';
     var DEFAULT_SECTION_TITLE = '';
-    var STREETVIEW_IMG_URL = 'https://maps.googleapis.com/maps/api/streetview?size=360x220&location=';
+    var STREETVIEW_IMG_URL = 'http://www.zorgopdekaart.nl/bagwoningen/public/getstreetview?location=';
     var STREETVIEW_LINK_URL = 'http://maps.google.com/maps?q=';
 
     export interface IPropertyTableSection {

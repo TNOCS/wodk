@@ -95,7 +95,7 @@
             "typeUrl": "data/resourceTypes/Buurt.json",
             "type": "database",
             "enabled": false,
-            "url": "http://zorgopdekaart.nl/bagwoningen/public/bagbuurten",
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/public/bagbuurten",
             "renderType": "geojson",
             "dataSourceParameters": {
                 "minZoom": 12,
@@ -128,7 +128,7 @@
             "typeUrl": "data/resourceTypes/BagPanden.json",
             "type": "database",
             "enabled": false,
-            "url": "http://zorgopdekaart.nl/bagwoningen/public/bagcontours",
+            "url": "http://www.zorgopdekaart.nl/bagwoningen/public/bagcontours",
             "renderType": "geojson",
             "dataSourceParameters": {
                 "minZoom": 16,
@@ -155,7 +155,7 @@
             "style": "vws2",
             "width": "300px",
             "bottom": "50px",
-            "left": "500px",
+            "left": "0px",
             "position": "custom",
             "data": {
                 "layerId": "bagbuurten",
@@ -175,7 +175,7 @@
             "style": "vws2",
             "width": "300px",
             "bottom": "50px",
-            "left": "500px",
+            "left": "50px",
             "position": "custom",
             "data": {
                 "showLabels": true,

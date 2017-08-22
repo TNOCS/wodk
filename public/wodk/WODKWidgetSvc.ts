@@ -50,9 +50,9 @@ module wodk {
     // export var SEARCH_BUURT_URL = 'searchbuurt';
     // export var SEARCH_PAND_URL = 'searchpand';
 
-    export var SEARCH_GEMEENTE_URL = 'http://zorgopdekaart.nl/bagwoningen/public/searchgemeente';
-    export var SEARCH_BUURT_URL = 'http://zorgopdekaart.nl/bagwoningen/public/searchbuurt';
-    export var SEARCH_PAND_URL = 'http://zorgopdekaart.nl/bagwoningen/public/searchpand';
+    export var SEARCH_GEMEENTE_URL = 'http://www.zorgopdekaart.nl/bagwoningen/public/searchgemeente';
+    export var SEARCH_BUURT_URL = 'http://www.zorgopdekaart.nl/bagwoningen/public/searchbuurt';
+    export var SEARCH_PAND_URL = 'http://www.zorgopdekaart.nl/bagwoningen/public/searchpand';
 
     export class WODKWidgetSvc {
         static $inject = [
