@@ -20,13 +20,21 @@ module DownloadAction {
                     title: `Open rekenmodel voor buurt "${feature.properties['Name']}"`
                 };
                 downloadPdfOption.callback = this.downloadPdf;
-                return [downloadPdfOption];
+                var downloadRapportageOption = < IActionOption > {
+                    title: `Open rapportage voor buurt "${feature.properties['Name']}"`
+                };
+                downloadRapportageOption.callback = this.downloadRapportage;
+                return [downloadPdfOption, downloadRapportageOption];
             } else if (feature.properties.hasOwnProperty('Name') && feature.fType && feature.fType.name.toLowerCase() === 'gemeente') {
                 var downloadPdfOption = < IActionOption > {
                     title: `Open rekenmodel voor gemeente "${feature.properties['Name']}"`
                 };
                 downloadPdfOption.callback = this.downloadPdf;
-                return [downloadPdfOption];
+                var downloadRapportageOption = < IActionOption > {
+                    title: `Open rapportage voor gemeente "${feature.properties['Name']}"`
+                };
+                downloadRapportageOption.callback = this.downloadRapportage;
+                return [downloadPdfOption, downloadRapportageOption];
             } else {
                 return [];
             }
@@ -44,38 +52,29 @@ module DownloadAction {
 
         updateFeature(feuture: IFeature) {}
 
+        private downloadRapportage(feature: IFeature, layerService: csComp.Services.LayerService) {
+            if (!feature) return;
+
+            if (feature.properties.hasOwnProperty('bu_code') && feature.fType && feature.fType.name.toLowerCase() === 'buurt') {
+                let prop = feature.properties['bu_code'];
+                window.open(`http://www.zorgopdekaart.nl/bagwoningen/pdfs/ra/RA_${prop}.pdf`, '_blank');
+            }
+            if (feature.properties.hasOwnProperty('GM_CODE') && feature.fType && feature.fType.name.toLowerCase() === 'gemeente') {
+                let prop = feature.properties['GM_CODE'];
+                window.open(`http://www.zorgopdekaart.nl/bagwoningen/pdfs/ra/RA_${prop}.pdf`, '_blank');
+            }
+        }
+
         private downloadPdf(feature: IFeature, layerService: csComp.Services.LayerService) {
             if (!feature) return;
 
-            function findSet(query: string, layerService: csComp.Services.LayerService, cb: Function) {
-                // layerService.$http.get(`http://localhost:3002/findlzwset/${query}`)
-                layerService.$http.get(`http://www.zorgopdekaart.nl/bagwoningen/public/findlzwset/${query}`)
-                    .then((res) => {
-                        cb(res.data);
-                    })
-                    .catch(() => {
-                        console.log('Error finding lzwset');
-                        cb();
-                    });
-            }
-
             if (feature.properties.hasOwnProperty('bu_code') && feature.fType && feature.fType.name.toLowerCase() === 'buurt') {
-                let wdw = window.open('', '_blank');
-                findSet(feature.properties['bu_code'], layerService, (set) => {
-                    if (set) {
-                        let url = `http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set ${set.s}.pdf#page=${set.p}`;
-                        wdw.location.href = url;
-                    }
-                });
+                let prop = feature.properties['bu_code'];
+                window.open(`http://www.zorgopdekaart.nl/bagwoningen/pdfs/rs/RS_${prop}.pdf`, '_blank');
             }
             if (feature.properties.hasOwnProperty('GM_CODE') && feature.fType && feature.fType.name.toLowerCase() === 'gemeente') {
-                let wdw = window.open('', '_blank');
-                findSet(feature.properties['GM_CODE'], layerService, (set) => {
-                    if (set) {
-                        let url = `http://www.zorgopdekaart.nl/bagwoningen/pdfs/lzw/LZW set ${set.s}.pdf#page=${set.p}`;
-                        wdw.location.href = url;
-                    }
-                });
+                let prop = feature.properties['GM_CODE'];
+                window.open(`http://www.zorgopdekaart.nl/bagwoningen/pdfs/rs/RS_${prop}.pdf`, '_blank');
             }
         }
 
