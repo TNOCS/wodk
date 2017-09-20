@@ -271,18 +271,27 @@ ul.wodk-pdf-list li:before {
   vertical-align: middle; }
 
 ul.wodk-pdf-list li.inactive-button-toelichting:before,
+ul.wodk-pdf-list li.inactive-button-toelichting-sub:before,
 ul.wodk-pdf-list li.no-content:before,
 ul.wodk-pdf-list li.divider:before {
   content: none; }
 
 ul.wodk-pdf-list li {
   margin: 6px 0px;
-  padding-left: 0px; }
+  padding-left: 16px; }
 
 ul.wodk-pdf-list li.inactive-button-toelichting a,
 ul.wodk-pdf-list li.no-content a {
   color: black;
   font-size: 120%; }
+
+ul.wodk-pdf-list li.inactive-button-toelichting-sub a {
+  color: black;
+  font-size: 80%; }
+
+ul.wodk-pdf-list li.inactive-button-toelichting,
+ul.wodk-pdf-list li.inactive-button-toelichting-sub {
+  padding-left: 0px; }
 
 .navbar-inverse .navbar-nav.navbar-right li > a > div {
   border-left: 1px solid #ccc;
