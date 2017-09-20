@@ -83,6 +83,8 @@ module wodk {
             this.cards.length = 0;
             this.initCard('images/infographic2.png', 'p_apb_w', 'bagbuurten');
             this.initCard('images/infographic1.png', 'p_koopwon', 'bagbuurten');
+            this.initCard('images/infographic2.png', 'lb_situ', 'bagbuurten');
+            this.initCard('images/infographic1.png', 'afs_adl_int', 'bagbuurten');
         }
 
         private initCard(image: string, prop: string, layerId: string) {

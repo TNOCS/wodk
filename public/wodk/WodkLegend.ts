@@ -315,9 +315,14 @@ module wodk {
                 gf.property = property.label; //prop.split('#').pop();
                 gf.id = 'buttonwidget_filter';
                 gf.group = projGroup;
-                gf.filterType = 'row';
                 gf.title = property.title;
-                gf.rangex = [le.interval.min, le.interval.max];
+                if (le.hasOwnProperty('stringValue')) {
+                    gf.filterType = 'text';
+                    gf.stringValue = le.stringValue;
+                } else {
+                    gf.filterType = 'row';
+                    gf.rangex = [le.interval.min, le.interval.max];
+                }
                 gf.filterLabel = le.label;
                 console.log('Setting filter');
                 this.$layerService.rebuildFilters(projGroup);

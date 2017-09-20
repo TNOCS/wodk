@@ -29,7 +29,8 @@
     <div class="row" data-ng-show="activeStyleProperty && activeLegend.description" style="padding-top: 8px" ;>
         <div class="col-xs-12 legend-description-label">{{activeLegend.description}}</div>
     </div>
-    <div class="legend-entry-list-table wodk-border-bottom" data-ng-if="activeStyleProperty && activeLegend.legendKind === 'discrete'">
+    <!-- intervals  -->
+    <div class="legend-entry-list-table wodk-border-bottom" data-ng-if="activeStyleProperty && (activeLegend.legendKind === 'discrete' || activeLegend.legendKind === 'discretestrings')">
         <div class="row" data-ng-repeat="le in activeLegend.legendEntries" ng-class="{'pointer-cursor': $parent.$parent.activeStyleProperty}"
             ng-click="$parent.$parent.vm.toggleFilter(activeLegend, le)" uib-popover="{{'UTILS.FILTER' | translate}}" popover-trigger="mouseenter"
             popover-append-to-body="true" popover-placement="right" popover-enable="{{$parent.$parent.activeStyleProperty}}">

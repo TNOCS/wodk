@@ -683,7 +683,65 @@
 			"title": "Leefbaarheidssituatie",
 			"type": "text",
 			"visibleInCallOut": true,
-			"section": "Leefbaarometer"
+			"section": "Leefbaarometer",
+			"legend": {
+				"id": "lb_situ",
+				"description": "De leefbaarheidssituatie van de woongebieden is geclassificeerd volgens leefbaarometer.nl (BZK, 2014).",
+				"legendKind": "discretestrings",
+				"visualAspect": "fillColor",
+				"legendEntries": [
+					{
+						"label": "Uitstekend",
+						"stringValue": "9 Uitstekend",
+						"color": "#006d2c"
+					},
+					{
+						"label": "Zeer goed",
+						"stringValue": "8 Zeer goed",
+						"color": "#31a354"
+					},
+					{
+						"label": "Goed",
+						"stringValue": "7 Goed",
+						"color": "#74c476"
+					},
+					{
+						"label": "Ruim voldoende",
+						"stringValue": "6 Ruim voldoende",
+						"color": "#a1d99b"
+					},
+					{
+						"label": "Voldoende",
+						"stringValue": "5 Voldoende",
+						"color": "#c7e9c0"
+					},
+					{
+						"label": "Zwak",
+						"stringValue": "4 Zwak",
+						"color": "#ffc"
+					},
+					{
+						"label": "Onvoldoende",
+						"stringValue": "3 Onvoldoende",
+						"color": "#ed7d31"
+					},
+					{
+						"label": "Ruim onvoldoende",
+						"stringValue": "2 Ruim onvoldoende",
+						"color": "#ef3b2c"
+					},
+					{
+						"label": "Zeer onvoldoende",
+						"stringValue": "1 Zeer onvoldoende",
+						"color": "#99000d"
+					},
+					{
+						"label": "Onbekend",
+						"stringValue": "Onbekend",
+						"color": "#fff"
+					}
+				]
+			}
 		},
 		"lb_score": {
 			"label": "lb_score",
