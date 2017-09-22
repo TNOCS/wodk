@@ -44,6 +44,7 @@ module wodk {
         filter: csComp.Services.GroupFilter;
         minimized: boolean;
         selectedFeature: csComp.Services.IFeature;
+        activeFilter: string;
         activeLegend: csComp.Services.Legend;
         activeStyleGroup: csComp.Services.ProjectGroup;
         activeStyleProperty: string;
@@ -56,8 +57,7 @@ module wodk {
         private mBusHandles: csComp.Services.MessageBusHandle[] = [];
         private exporterAvailable: boolean;
         private selectedProp: csComp.Services.IPropertyType;
-        private selectedBins: string;
-        private selectableProps: csComp.Services.IPropertyType[] = [];
+        private selectedBins: string[] = [];
         private layer: csComp.Services.ProjectLayer;
         private filterValue: number = 0;
         private filterDim: any;
@@ -103,20 +103,9 @@ module wodk {
         }
 
         private init() {
-            let dummyProp = {
-                title: '- Geen kleuren -'
-            };
-            this.selectableProps.push(dummyProp);
-            if (this.$scope.data && this.$scope.data.rankingProperties) {
-                _.each(this.$scope.data.rankingProperties, (p) => {
-                    let property = this.$layerService.propertyTypeData[p];
-                    if (property) {
-                        this.selectableProps.push(property);
-                    }
-                });
-            }
             this.getActiveStyle();
             this.$scope.activeStyleProperty = null;
+            this.selectedBins.length = 0;
         }
 
         private getActiveStyle() {
@@ -186,7 +175,8 @@ module wodk {
         private selectFilter = _.debounce(this.selectFilterDebounced, 750);
 
         private selectFilterDebounced() {
-            this.$messageBus.publish('wodk', 'filter', +this.filterValue);
+            var prop = this.$scope.activeLegend['_filter'];
+            this.$messageBus.publish('wodk', 'filter', {prop: prop, value: +this.filterValue});
         }
 
         private selectProp() {
@@ -226,13 +216,13 @@ module wodk {
             if (gf.group.id === 'buurten') {
                 (this.filterDim ? this.filterDim.dispose() : null);
                 this.filterDim = null;
-                this.addBuurtFilter(this.filterValue);
+                this.addBuurtFilter(this.$scope.activeLegend['_filter'], this.filterValue);
             }
             // var propType = this.$layerService.findPropertyTypeById(this.$scope.layer.typeUrl + '#' + gf.property);
             // this.$layerService.setGroupStyle(this.$scope.style.group, propType);
         }
 
-        private addBuurtFilter(minSize: number) {
+        private addBuurtFilter(prop: string, minSize: number) {
             var layer = this.$layerService.findLoadedLayer('bagbuurten');
             if (!layer) {
                 return;
@@ -246,7 +236,7 @@ module wodk {
             }));
             // dc.filterAll();
             this.filterValue = minSize;
-            var propId = 'data/resourceTypes/Buurt.json#ster_totaal';
+            var propId = `data/resourceTypes/Buurt.json#${prop}`;
             var p = this.$layerService.findPropertyTypeById(propId);
             var propLabel = propId.split('#').pop();
             if (layer.group && layer.group.ndx && !this.filterDim) {
@@ -318,12 +308,16 @@ module wodk {
                 gf.title = property.title;
                 if (le.hasOwnProperty('stringValue')) {
                     gf.filterType = 'text';
-                    gf.stringValue = le.stringValue;
+                    gf.stringValue = '';
+                    legend.legendEntries.some((leLoop) => {
+                        gf.stringValue += `${leLoop.stringValue};`;
+                        return (leLoop.label === le.label ? true : false);
+                    });
                 } else {
                     gf.filterType = 'row';
                     gf.rangex = [le.interval.min, le.interval.max];
+                    gf.filterLabel = le.label;
                 }
-                gf.filterLabel = le.label;
                 console.log('Setting filter');
                 this.$layerService.rebuildFilters(projGroup);
                 projGroup.filters = projGroup.filters.filter((f) => {
@@ -341,7 +335,7 @@ module wodk {
                     this.hide();
                     break;
                 default:
-                    if (data && data.activeLegend) {
+                    if (data && data.activeLegend && data.group) {
                         this.$timeout(() => {
                             this.$scope.activeLegend = data.activeLegend;
                             this.$scope.activeStyleGroup = data.group;
@@ -362,11 +356,11 @@ module wodk {
         private handleWodkUpdate(title: string, data ? : any) {
             switch (title) {
                 case 'filter':
-                    if (!data && data !== 0) return;
+                    if (!data || !data.hasOwnProperty('prop') || !data.hasOwnProperty('value')) return;
                     (this.filterDim ? this.filterDim.dispose() : null);
                     this.filterDim = null;
                     if (this.$scope.filter) {
-                        this.addBuurtFilter(data);
+                        this.addBuurtFilter(data.prop, data.value);
                     } else {
                         this.createChart();
                     }

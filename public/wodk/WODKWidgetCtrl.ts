@@ -110,17 +110,17 @@ module wodk {
                 }
             }));
 
-            this.mBusHandles.push(this.$messageBus.subscribe('wodk', (title, value: any) => {
+            this.mBusHandles.push(this.$messageBus.subscribe('wodk', (title, data: any) => {
                 switch (title) {
                     case 'city':
-                        if (!value) return;
-                        this.selectCity(value);
+                        if (!data) return;
+                        this.selectCity(data);
                         break;
                     case 'filter':
-                        if (!value && value !== 0) return;
+                        if (!data || !data.hasOwnProperty('prop') || !data.hasOwnProperty('value')) return;
                         (this.buurtFilterDim ? this.buurtFilterDim.dispose() : null);
                         this.buurtFilterDim = null;
-                        this.addBuurtFilter(value);
+                        this.addBuurtFilter(data.prop, data.value);
                         break;
                     default:
                         break;
@@ -161,7 +161,7 @@ module wodk {
             }
         }
 
-        private addBuurtFilter(minSize: number) {
+        private addBuurtFilter(prop: string, minSize: number) {
             var layer = this.$layerService.findLoadedLayer('bagbuurten');
             if (!layer) {
                 return;
@@ -175,7 +175,7 @@ module wodk {
             }));
             // dc.filterAll();
             this.buurtFilterVal = minSize;
-            var propId = 'data/resourceTypes/Buurt.json#ster_totaal';
+            var propId = `data/resourceTypes/Buurt.json#${prop}`;
             var p = this.$layerService.findPropertyTypeById(propId);
             var propLabel = propId.split('#').pop();
             if (layer.group && layer.group.ndx && !this.buurtFilterDim) {
@@ -310,7 +310,7 @@ module wodk {
             if (gf.group.id === "buurten") {
                 (this.buurtFilterDim ? this.buurtFilterDim.dispose() : null);
                 this.buurtFilterDim = null;
-                this.addBuurtFilter(this.buurtFilterVal);
+                this.addBuurtFilter('ster_totaal', this.buurtFilterVal);
             }
             // var propType = this.$layerService.findPropertyTypeById(this.$scope.layer.typeUrl + '#' + gf.property);
             // this.$layerService.setGroupStyle(this.$scope.style.group, propType);

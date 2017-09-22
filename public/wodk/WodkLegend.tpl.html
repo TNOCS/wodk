@@ -13,14 +13,6 @@
             <a class="widget-min-max-close" ng-click="vm.exportToImage()"><i class="fa fa-save" uib-tooltip="{{'SAVE_AS_IMAGE' | translate}}" tooltip-trigger="mouseenter" tooltip-append-to-body="true" ng-show="vm.exporterAvailable&&!minimized"></i></a>
         </div>
     </div>
-    <!--<div class="form-group row" ng-hide="minimized">
-        <div class="col-xs-12">
-            <select id="select-prop" class="form-control dropdown-selected table-dash" ng-change="vm.selectProp()" ng-model="activeStyleProperty"
-                style="padding:0px 2px;">
-                <option class="dropdown-item" ng-repeat="prop in vm.selectableProps" value="{{prop.label}}">{{'WAT_TONEN' | translate}}</option>
-            </select>
-        </div>
-    </div>-->
     <div class="row" data-ng-show="activeStyleProperty && activeLegend.description">
         <div class="col-xs-12 legend-padding">
             <a class="wodk-link wodk-border-bottom" ng-click="vm.openStylePanel()">{{'WAT_TONEN' | translate}}<span class="small-padding-lr"><img src="images/arrow-right.svg" class="arrow-right-link"></img></span></a>
@@ -40,18 +32,35 @@
             </ul>
         </div>
     </div>
-    <div class="row legend-description-label legend-padding" data-ng-show="activeLegend">
+    <!--Buurtfilter  -->
+    <div class="row legend-description-label legend-padding" data-ng-if="activeLegend && !(activeLegend._filter === 'afs_adl_int')">
         <div class="col-xs-12 italic no-padding" style="margin-bottom: 4px">
             Filter buurten
         </div>
         <div class="col-xs-12 no-padding">
             <div>
-                 met minder dan <span><input class="filter-input" min="0" max="500" ng-model="vm.filterValue" ng-change="vm.selectFilter()"></span> woningen. <span ng-show="false" style="float:right" ng-click="vm.filterValue=0;vm.selectFilter()" uib-tooltip="Reset filter"><i class="fa fa-trash-o"></i></span>
+                 met minder dan <span><input class="filter-input" ng-model="vm.filterValue" ng-change="vm.selectFilter()"></span> woningen. <span ng-show="false" style="float:right" ng-click="vm.filterValue=0;vm.selectFilter()" uib-tooltip="Reset filter"><i class="fa fa-trash-o"></i></span>
             </div>
         </div>
         <div class="col-xs-12 filter-slider-row no-padding">
             <div>
-                <input type="range" name="points" min="0" max="500" step="5" ng-model="vm.filterValue" ng-change="vm.selectFilter()">
+                <input id="woningen" type="range" name="woningen" min="0" max="500" step="10" ng-model="vm.filterValue" ng-change="vm.selectFilter()">
+            </div>
+        </div>
+    </div>
+    <!--Afstandsfilter  -->
+    <div class="row legend-description-label legend-padding" data-ng-if="activeLegend && activeLegend._filter === 'afs_adl_int'">
+        <div class="col-xs-12 italic no-padding" style="margin-bottom: 4px">
+            Filter buurten met ADL-afstand
+        </div>
+        <div class="col-xs-12 no-padding">
+            <div>
+                 groter dan <span><input class="filter-input" ng-model="vm.filterValue" ng-change="vm.selectFilter()"></span> meter. <span ng-show="false" style="float:right" ng-click="vm.filterValue=0;vm.selectFilter()" uib-tooltip="Reset filter"><i class="fa fa-trash-o"></i></span>
+            </div>
+        </div>
+        <div class="col-xs-12 filter-slider-row no-padding">
+            <div>
+                <input id="afstand" type="range" name="afstand" min="0" max="1200" step="100" ng-model="vm.filterValue" ng-change="vm.selectFilter()">
             </div>
         </div>
     </div>

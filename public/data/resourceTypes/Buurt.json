@@ -187,6 +187,7 @@
 			"visibleInCallOut": true,
 			"isSearchable": false,
 			"legend": {
+				"_filter": "ster_totaal",
 				"id": "p_koopwon",
 				"visualAspect": "fillColor",
 				"description": "Geeft het aandeel koopwoningen ten opzichte van de totale woningvoorraad weer per buurt.",
@@ -397,6 +398,7 @@
 			"visibleInCallOut": false,
 			"isSearchable": false,
 			"legend": {
+				"_filter": "ster_totaal",
 				"id": "p_apb_w",
 				"visualAspect": "fillColor",
 				"description": "Het percentage aanpasbare woningen ten opzichte van alle woningen in het getoonde gebied.",
@@ -463,6 +465,7 @@
 			"visibleInCallOut": true,
 			"isSearchable": false,
 			"legend": {
+				"_filter": "ster_totaal",
 				"id": "p_napb_w",
 				"visualAspect": "fillColor",
 				"description": "Percentage niet-aanpasbare woningen",
@@ -516,6 +519,7 @@
 			"visibleInCallOut": true,
 			"isSearchable": false,
 			"legend": {
+				"_filter": "ster_totaal",
 				"id": "p_apb_onb",
 				"visualAspect": "fillColor",
 				"description": "Percentage aanpasbaarheid onbekend",
@@ -569,6 +573,7 @@
 			"visibleInCallOut": true,
 			"isSearchable": false,
 			"legend": {
+				"_filter": "ster_totaal",
 				"id": "p_apb_in_ond",
 				"visualAspect": "fillColor",
 				"description": "Percentage aanpasbaarheid in onderzoek",
@@ -622,6 +627,7 @@
 			"visibleInCallOut": true,
 			"isSearchable": false,
 			"legend": {
+				"_filter": "ster_totaal",
 				"id": "p_aangep_w",
 				"visualAspect": "fillColor",
 				"description": "Percentage aangepaste woningen",
@@ -685,6 +691,7 @@
 			"visibleInCallOut": true,
 			"section": "Leefbaarometer",
 			"legend": {
+				"_filter": "afs_adl_int",
 				"id": "lb_situ",
 				"description": "De leefbaarheidssituatie van de woongebieden is geclassificeerd volgens leefbaarometer.nl (BZK, 2014).",
 				"legendKind": "discretestrings",
@@ -877,7 +884,105 @@
 			"stringFormat": "{0:#,#.#} km",
 			"type": "number",
 			"visibleInCallOut": false,
-			"section": "Afstand tot voorzieningen"
+			"section": "Afstand tot voorzieningen",
+			"legend": {
+				"_filter": "ster_totaal",
+				"id": "afs_adl_int",
+				"description": "Afstand tot ADL-voorzieningen",
+				"legendKind": "discrete",
+				"visualAspect": "fillColor",
+				"cumulative": true,
+				"legendEntries": [
+					{
+						"label": "Maximaal 200 meter",
+						"interval": {
+							"min": 0,
+							"max": 200
+						},
+						"color": "#006d2c"
+					},
+					{
+						"label": "Maximaal 300 meter",
+						"interval": {
+							"min": 200,
+							"max": 300
+						},
+						"color": "#006d2c"
+					},
+					{
+						"label": "Maximaal 400 meter",
+						"interval": {
+							"min": 300,
+							"max": 400
+						},
+						"color": "#31a354"
+					},
+					{
+						"label": "Maximaal 500 meter",
+						"interval": {
+							"min": 400,
+							"max": 500
+						},
+						"color": "#74c476"
+					},
+					{
+						"label": "Maximaal 600 meter",
+						"interval": {
+							"min": 500,
+							"max": 600
+						},
+						"color": "#a1d99b"
+					},
+					{
+						"label": "Maximaal 700 meter",
+						"interval": {
+							"min": 600,
+							"max": 700
+						},
+						"color": "#c7e9c0"
+					},
+					{
+						"label": "Maximaal 800 meter",
+						"interval": {
+							"min": 700,
+							"max": 800
+						},
+						"color": "#ffc"
+					},
+					{
+						"label": "Maximaal 900 meter",
+						"interval": {
+							"min": 800,
+							"max": 900
+						},
+						"color": "#ffc"
+					},
+					{
+						"label": "Maximaal 1000 meter",
+						"interval": {
+							"min": 900,
+							"max": 1000
+						},
+						"color": "#ffc"
+					},
+					{
+						"label": "Meer dan 1000 meter",
+						"interval": {
+							"min": 1000,
+							"max": 20000
+						},
+						"color": "#fff"
+					},
+					{
+						"label": "Onbekend",
+						"interval": {
+							"min": 99999,
+							"max": 99999
+						},
+						"color": "#fff"
+					}
+				]
+			}
 		}
 	}
 }
