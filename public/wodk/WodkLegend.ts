@@ -176,7 +176,7 @@ module wodk {
 
         private selectFilterDebounced() {
             var prop = this.$scope.activeLegend['_filter'];
-            this.$messageBus.publish('wodk', 'filter', {prop: prop, value: +this.filterValue});
+            this.$messageBus.publish('wodk', 'filter', {prop: prop, value: +this.filterValue, reversed: this.$scope.activeLegend['_reversed']});
         }
 
         private selectProp() {
@@ -216,13 +216,13 @@ module wodk {
             if (gf.group.id === 'buurten') {
                 (this.filterDim ? this.filterDim.dispose() : null);
                 this.filterDim = null;
-                this.addBuurtFilter(this.$scope.activeLegend['_filter'], this.filterValue);
+                this.addBuurtFilter(this.$scope.activeLegend['_filter'], this.filterValue, this.$scope.activeLegend['_reversed']);
             }
             // var propType = this.$layerService.findPropertyTypeById(this.$scope.layer.typeUrl + '#' + gf.property);
             // this.$layerService.setGroupStyle(this.$scope.style.group, propType);
         }
 
-        private addBuurtFilter(prop: string, minSize: number) {
+        private addBuurtFilter(prop: string, minSize: number, reversed: boolean) {
             var layer = this.$layerService.findLoadedLayer('bagbuurten');
             if (!layer) {
                 return;
@@ -247,15 +247,20 @@ module wodk {
                     return prop;
                 });
             }
-            this.applyFilter(this.filterValue, layer.group);
+            this.applyFilter(this.filterValue, layer.group, reversed);
         }
 
-        private applyFilter(filterValue, group) {
+        private applyFilter(filterValue: number, group: csComp.Services.ProjectGroup, reversed: boolean) {
             console.log('Apply buurtfilter');
             if (filterValue === null || filterValue === undefined || isNaN(filterValue)) return;
             if (!this.filterDim) return;
             if (filterValue > 0) {
-                this.filterDim.filter([filterValue, Infinity]);
+                if (!reversed) {
+                    this.filterDim.filter([filterValue, Infinity]);
+                } else {
+                    // https://github.com/crossfilter/crossfilter/wiki/Crossfilter-Gotchas#filterrange-does-not-include-the-top-point
+                    this.filterDim.filter([-Infinity, filterValue*1.001]);
+                }
             } else {
                 this.filterDim.filterAll();
             }
@@ -360,7 +365,7 @@ module wodk {
                     (this.filterDim ? this.filterDim.dispose() : null);
                     this.filterDim = null;
                     if (this.$scope.filter) {
-                        this.addBuurtFilter(data.prop, data.value);
+                        this.addBuurtFilter(data.prop, data.value, data.reversed);
                     } else {
                         this.createChart();
                     }

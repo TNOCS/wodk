@@ -97,25 +97,29 @@ module WodkRightPanel {
             let pTypesDict = _.object(_.pluck(pTypes, 'label'), pTypes);
             let linkedFeatures = [];
             pTypes.forEach((pt: IPropertyType) => {
-                if (pt.visibleInCallOut && virtualFeature.properties.hasOwnProperty(pt.label) && !(linkedFeatures.indexOf(pt.label) >= 0)) {
+                if (pt.visibleInCallOut && (virtualFeature.properties.hasOwnProperty(pt.label) || pt.hasOwnProperty('unknownValue')) && !(linkedFeatures.indexOf(pt.label) >= 0)) {
                     let sectionId = pt.section || DEFAULT_SECTION_ID;
                     let section = this.findOrCreateSection(sectionId);
                     let value;
-                    switch (pt.type) {
-                        case 'stars':
-                            value = this.getStarsDiv(virtualFeature.properties[pt.label], pTypesDict['ster_gem'].legend);
-                            section.type = 'full-row';
-                            break;
-                        case 'image':
-                            value = `<img src='${virtualFeature.properties[pt.label]}' style='max-height:100%;max-width:100%;'></img>`;
-                            break;
-                        case 'url':
-                            section.type = 'full-row';
-                            value = `<a href='${virtualFeature.properties[pt.label]}'</a>`;
-                            break;
-                        default:
-                            value = csComp.Helpers.convertPropertyInfo(pt, virtualFeature.properties[pt.label]);
-                            break;
+                    if (!virtualFeature.properties.hasOwnProperty(pt.label) && pt['unknownValue']) {
+                        value = pt['unknownValue'];
+                    } else {
+                        switch (pt.type) {
+                            case 'stars':
+                                value = this.getStarsDiv(virtualFeature.properties[pt.label], pTypesDict['ster_gem'].legend);
+                                section.type = 'full-row';
+                                break;
+                            case 'image':
+                                value = `<img src='${virtualFeature.properties[pt.label]}' style='max-height:100%;max-width:100%;'></img>`;
+                                break;
+                            case 'url':
+                                section.type = 'full-row';
+                                value = `<a href='${virtualFeature.properties[pt.label]}'</a>`;
+                                break;
+                            default:
+                                value = csComp.Helpers.convertPropertyInfo(pt, virtualFeature.properties[pt.label]);
+                                break;
+                        }
                     }
                     section.rows.push({
                         title: pt.title,
@@ -146,13 +150,13 @@ module WodkRightPanel {
                 fts.forEach((f: IFeature) => {
                     if (f.properties.hasOwnProperty(pt.label)) {
                         if (!virtualFeature.properties.hasOwnProperty(pt.label)) {
-                            if (typeof f.properties[pt.label] === 'string') {
+                            if (typeof f.properties[pt.label] === 'string' || (pt.hasOwnProperty('joinable') && !pt['joinable'])) {
                                 virtualFeature.properties[pt.label] = ' - ';
                             } else {
                                 virtualFeature.properties[pt.label] = f.properties[pt.label];
                             }
                         } else {
-                            if (typeof f.properties[pt.label] !== 'string') {
+                            if (typeof virtualFeature.properties[pt.label] !== 'string') {
                                 virtualFeature.properties[pt.label] += f.properties[pt.label];
                             }
                         }

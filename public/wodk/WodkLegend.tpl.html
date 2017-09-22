@@ -51,11 +51,11 @@
     <!--Afstandsfilter  -->
     <div class="row legend-description-label legend-padding" data-ng-if="activeLegend && activeLegend._filter === 'afs_adl_int'">
         <div class="col-xs-12 italic no-padding" style="margin-bottom: 4px">
-            Filter buurten met ADL-afstand
+            Toon buurten met een ADL-afstand van
         </div>
         <div class="col-xs-12 no-padding">
             <div>
-                 groter dan <span><input class="filter-input" ng-model="vm.filterValue" ng-change="vm.selectFilter()"></span> meter. <span ng-show="false" style="float:right" ng-click="vm.filterValue=0;vm.selectFilter()" uib-tooltip="Reset filter"><i class="fa fa-trash-o"></i></span>
+                 maximaal <span><input class="filter-input" ng-model="vm.filterValue" ng-change="vm.selectFilter()"></span> meter. <span ng-show="true" style="float:right" ng-click="vm.filterValue=0;vm.selectFilter()" uib-tooltip="Toon alles"><i class="fa fa-refresh"></i></span>
             </div>
         </div>
         <div class="col-xs-12 filter-slider-row no-padding">

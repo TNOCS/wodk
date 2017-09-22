@@ -160,6 +160,7 @@
 			"stringFormat": "{0:#,#}%",
 			"min": 0,
 			"max": 100,
+			"unknownValue": "?",
 			"visibleInCallOut": true,
 			"isSearchable": false
 		},
@@ -172,6 +173,7 @@
 			"stringFormat": "{0:#,#}%",
 			"min": 0,
 			"max": 100,
+			"unknownValue": "?",
 			"visibleInCallOut": true,
 			"isSearchable": false
 		},
@@ -184,6 +186,7 @@
 			"stringFormat": "{0:#,#}%",
 			"min": 0,
 			"max": 100,
+			"unknownValue": "?",
 			"visibleInCallOut": true,
 			"isSearchable": false,
 			"legend": {
@@ -250,6 +253,7 @@
 			"stringFormat": "{0:#,#}%",
 			"min": 0,
 			"max": 100,
+			"unknownValue": "?",
 			"visibleInCallOut": true,
 			"isSearchable": false
 		},
@@ -262,6 +266,7 @@
 			"stringFormat": "{0:#,#}%",
 			"min": 0,
 			"max": 100,
+			"unknownValue": "?",
 			"visibleInCallOut": true,
 			"isSearchable": false
 		},
@@ -274,6 +279,7 @@
 			"description": "Aantal eengezinswoningen",
 			"stringFormat": "{0:#,#}",
 			"expression": "properties.ster_totaal * properties.p_1gezw / 100",
+			"unknownValue": "?",
 			"visibleInCallOut": true,
 			"isSearchable": false
 		},
@@ -286,6 +292,7 @@
 			"description": "Aantal meergezinswoningen",
 			"stringFormat": "{0:#,#}",
 			"expression": "properties.ster_totaal * properties.p_mgezw / 100",
+			"unknownValue": "?",
 			"visibleInCallOut": true,
 			"isSearchable": false
 		},
@@ -674,6 +681,7 @@
 			"type": "number",
 			"title": "Gem. WOZ-waarde",
 			"stringFormat": "€ {0:#,#}k",
+			"unknownValue": "€ ?",
 			"visibleInCallOut": true,
 			"isSearchable": false
 		},
@@ -687,10 +695,14 @@
 		"lb_situ": {
 			"label": "lb_situ",
 			"title": "Leefbaarheidssituatie",
+			"description": "De leefbaarheidssituatie wordt weergegeven in 9 klassen, waarvan 5 klassen positief en 3 klassen negatief. Een gemiddeld gebied scoort op de grens tussen 'ruim voldoende' en 'goed'. De middenklasse 'zwak'",
 			"type": "text",
+			"unknownValue": "Onbekend",
+			"joinable": false,
 			"visibleInCallOut": true,
 			"section": "Leefbaarometer",
 			"legend": {
+				"_reversed": true,
 				"_filter": "afs_adl_int",
 				"id": "lb_situ",
 				"description": "De leefbaarheidssituatie van de woongebieden is geclassificeerd volgens leefbaarometer.nl (BZK, 2014).",
@@ -753,58 +765,144 @@
 		"lb_score": {
 			"label": "lb_score",
 			"title": "Leefbaarometerscore",
+			"description": "De totaalscore betreft een 'absolute' score. De waarde is de afwijking t.o.v. het Nederlands gemiddelde, waarbij de schaal van de leefbaarometerscore loopt van -0,93 tot 0,83. Een gemiddeld gebied scoort op de grens tussen 'ruim voldoende' en 'goed'. Door de gekozen schaal hebben gebieden die onder het nationaal gemiddelde liggen een score onder nul. Dit kunnen dus ook gebieden zijn die 'voldoende' scoren. De totaalscore is samengesteld uit 5 onderliggende dimensies: Woningen (18%), Bevolking (15%), Voorzieningen (25%), Veiligheid (24%), Fysieke omgeving (18%). Bron: leefbaarometer.nl, BZK, 2014",
 			"type": "number",
 			"stringFormat": "{0:#,#.##}",
+			"unknownValue": "Onbekend",
+			"joinable": false,
 			"visibleInCallOut": true,
 			"section": "Leefbaarometer"
 		},
 		"dim_won": {
 			"label": "dim_won",
 			"title": "Dimensie Woningen",
+			"description": "De deelscore van Dimensie Woningen geeft aan of een gebied beter of slechter scoort dan het landelijk gemiddelde (0) op dit onderdeel, waarbij de schaal van deze deelscore loopt van -0,65 tot 0,26. Bron: leefbaarometer.nl, BZK, 2014",
 			"stringFormat": "{0:#,#.##}",
 			"type": "number",
+			"unknownValue": "Onbekend",
+			"joinable": false,
 			"visibleInCallOut": true,
 			"section": "Leefbaarometer"
 		},
 		"dim_bev": {
 			"label": "dim_bev",
 			"title": "Dimensie Bevolking",
+			"description": "De deelscore van Dimensie Bevolking geeft aan of een gebied beter of slechter scoort dan het landelijk gemiddelde (0) op dit onderdeel, waarbij de schaal van deze deelscore loopt van -0,46 tot 0,17. Bron: leefbaarometer.nl, BZK, 2014",
 			"stringFormat": "{0:#,#.##}",
 			"type": "number",
+			"unknownValue": "Onbekend",
+			"joinable": false,
 			"visibleInCallOut": true,
 			"section": "Leefbaarometer"
 		},
 		"dim_voorz": {
 			"label": "dim_voorz",
 			"title": "Dimensie Voorzieningen",
+			"description": "De deelscore van Dimensie Voorzieningen geeft aan of een gebied beter of slechter scoort dan het landelijk gemiddelde (0) op dit onderdeel, waarbij de schaal van deze deelscore loopt van -0,78 tot 0,77. Bron: leefbaarometer.nl, BZK, 2014",
 			"stringFormat": "{0:#,#.##}",
 			"type": "number",
+			"unknownValue": "Onbekend",
+			"joinable": false,
 			"visibleInCallOut": true,
 			"section": "Leefbaarometer"
 		},
 		"dim_veil": {
 			"label": "dim_veil",
 			"title": "Dimensie Veiligheid",
+			"description": "De deelscore van Dimensie Veiligheid geeft aan of een gebied beter of slechter scoort dan het landelijk gemiddelde (0) op dit onderdeel, waarbij de schaal van deze deelscore loopt van -0,45 tot 0,25. Bron: leefbaarometer.nl, BZK, 2014",
 			"stringFormat": "{0:#,#.##}",
 			"type": "number",
+			"unknownValue": "Onbekend",
+			"joinable": false,
 			"visibleInCallOut": true,
 			"section": "Leefbaarometer"
 		},
 		"dim_fys": {
 			"label": "dim_fys",
 			"title": "Dimensie Fysiek",
+			"description": "De deelscore van Dimensie Fysieke omgeving geeft aan of een gebied beter of slechter scoort dan het landelijk gemiddelde (0) op dit onderdeel, waarbij de schaal van deze deelscore loopt van -0,43 tot 0,46. Bron: leefbaarometer.nl, BZK, 2014",
 			"stringFormat": "{0:#,#.##}",
 			"type": "number",
+			"unknownValue": "Onbekend",
+			"joinable": false,
 			"visibleInCallOut": true,
 			"section": "Leefbaarometer"
 		},
 		"afs_adl": {
 			"label": "afs_adl",
 			"title": "Afstand tot ADL-voorzieningen",
-			"description": "Gemiddelde afstand tot zowel supermarkt, huisarts als apotheek",
+			"description": "De maximale gemiddelde afstand van alle inwoners in een gebied tot zowel de dichtstbijzijnde supermarkt, huisartsenpraktijk als apotheek, berekend over de weg (uitgedrukt in km). Bron: CBS Nabijheidsstatistiek, 2015/22-02-2017",
 			"type": "text",
+			"unknownValue": "Onbekend",
+			"joinable": false,
 			"visibleInCallOut": true,
-			"section": "Afstand tot voorzieningen"
+			"section": "Afstand tot voorzieningen",
+			"legend": {
+				"_filter": "afs_adl_int",
+				"_reversed": true,
+				"id": "afs_adl_int",
+				"description": "De maximale gemiddelde afstand van alle inwoners in een gebied tot zowel de dichtstbijzijnde supermarkt, huisartsenpraktijk als apotheek, berekend over de weg.",
+				"legendKind": "discrete",
+				"visualAspect": "fillColor",
+				"cumulative": true,
+				"legendEntries": [
+					{
+						"label": "Maximaal 200 meter",
+						"stringValue": "max 200 meter",
+						"color": "#006d2c"
+					},
+					{
+						"label": "Maximaal 300 meter",
+						"stringValue": "max 300 meter",
+						"color": "#006d2c"
+					},
+					{
+						"label": "Maximaal 400 meter",
+						"stringValue": "max 400 meter",
+						"color": "#31a354"
+					},
+					{
+						"label": "Maximaal 500 meter",
+						"stringValue": "max 500 meter",
+						"color": "#74c476"
+					},
+					{
+						"label": "Maximaal 600 meter",
+						"stringValue": "max 600 meter",
+						"color": "#a1d99b"
+					},
+					{
+						"label": "Maximaal 700 meter",
+						"stringValue": "max 700 meter",
+						"color": "#c7e9c0"
+					},
+					{
+						"label": "Maximaal 800 meter",
+						"stringValue": "max 800 meter",
+						"color": "#ffc"
+					},
+					{
+						"label": "Maximaal 900 meter",
+						"stringValue": "max 900 meter",
+						"color": "#ffc"
+					},
+					{
+						"label": "Maximaal 1000 meter",
+						"stringValue": "max 1000 meter",
+						"color": "#ffc"
+					},
+					{
+						"label": "Meer dan 1000 meter",
+						"stringValue": "> 1000 meter",
+						"color": "#fff"
+					},
+					{
+						"label": "Onbekend",
+						"stringValue": "Onbekend",
+						"color": "#fff"
+					}
+				]
+			}
 		},
 		"afs_harts": {
 			"label": "afs_harts",
@@ -812,6 +910,8 @@
 			"stringFormat": "{0:#,#.#} km",
 			"type": "number",
 			"visibleInCallOut": true,
+			"unknownValue": "Onbekend",
+			"joinable": false,
 			"section": "Afstand tot voorzieningen"
 		},
 		"afs_apo": {
@@ -820,6 +920,8 @@
 			"stringFormat": "{0:#,#.#} km",
 			"type": "number",
 			"visibleInCallOut": true,
+			"unknownValue": "Onbekend",
+			"joinable": false,
 			"section": "Afstand tot voorzieningen"
 		},
 		"afs_super": {
@@ -828,6 +930,8 @@
 			"stringFormat": "{0:#,#.#} km",
 			"type": "number",
 			"visibleInCallOut": true,
+			"unknownValue": "Onbekend",
+			"joinable": false,
 			"section": "Afstand tot voorzieningen"
 		},
 		"afs_wnkl": {
@@ -836,6 +940,8 @@
 			"stringFormat": "{0:#,#.#} km",
 			"type": "number",
 			"visibleInCallOut": true,
+			"unknownValue": "Onbekend",
+			"joinable": false,
 			"section": "Afstand tot voorzieningen"
 		},
 		"afs_ziek_in": {
@@ -844,6 +950,8 @@
 			"stringFormat": "{0:#,#.#} km",
 			"type": "number",
 			"visibleInCallOut": true,
+			"unknownValue": "Onbekend",
+			"joinable": false,
 			"section": "Afstand tot voorzieningen"
 		},
 		"afs_ziek_ex": {
@@ -852,6 +960,8 @@
 			"stringFormat": "{0:#,#.#} km",
 			"type": "number",
 			"visibleInCallOut": true,
+			"unknownValue": "Onbekend",
+			"joinable": false,
 			"section": "Afstand tot voorzieningen"
 		},
 		"wdruk_ha": {
@@ -860,6 +970,8 @@
 			"stringFormat": "{0:#,#.##}",
 			"type": "number",
 			"visibleInCallOut": true,
+			"unknownValue": "Onbekend",
+			"joinable": false,
 			"section": "Huisarts en mantelzorg"
 		},
 		"mantelz": {
@@ -868,6 +980,8 @@
 			"stringFormat": "{0:#,#.##}",
 			"type": "number",
 			"visibleInCallOut": true,
+			"unknownValue": "Onbekend",
+			"joinable": false,
 			"section": "Huisarts en mantelzorg"
 		},
 		"afs_trein": {
@@ -876,19 +990,24 @@
 			"stringFormat": "{0:#,#.#} km",
 			"type": "number",
 			"visibleInCallOut": true,
+			"unknownValue": "Onbekend",
+			"joinable": false,
 			"section": "Afstand tot voorzieningen"
 		},
 		"afs_adl_int": {
 			"label": "afs_adl_int",
 			"title": "Afstand tot ADL-voorzieningen (m)",
-			"stringFormat": "{0:#,#.#} km",
+			"description": "De maximale gemiddelde afstand van alle inwoners in een gebied tot zowel de dichtstbijzijnde supermarkt, huisartsenpraktijk als apotheek, berekend over de weg.",
+			"stringFormat": "{0:#,#.#} m",
 			"type": "number",
+			"unknownValue": "Onbekend",
 			"visibleInCallOut": false,
 			"section": "Afstand tot voorzieningen",
 			"legend": {
-				"_filter": "ster_totaal",
+				"_filter": "afs_adl_int",
+				"_reversed": true,
 				"id": "afs_adl_int",
-				"description": "Afstand tot ADL-voorzieningen",
+				"description": "De maximale gemiddelde afstand van alle inwoners in een gebied tot zowel de dichtstbijzijnde supermarkt, huisartsenpraktijk als apotheek, berekend over de weg.",
 				"legendKind": "discrete",
 				"visualAspect": "fillColor",
 				"cumulative": true,
