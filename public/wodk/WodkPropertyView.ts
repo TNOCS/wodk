@@ -16,6 +16,7 @@ module WodkRightPanel {
 
     export interface IPropertyTableRow {
         title: string;
+        description: string;
         label: string;
         type: string;
         values: any[];
@@ -124,6 +125,7 @@ module WodkRightPanel {
                     section.rows.push({
                         title: pt.title,
                         label: pt.label,
+                        description: pt.description || '',
                         type: pt.type,
                         values: (value != null ? [value] : [])
                     });

@@ -84,6 +84,7 @@
 			"section": "Sterren aantal",
 			"label": "ster_0",
 			"type": "number",
+			"unknownValue": "0",
 			"title": "Aantal woningen ster 0",
 			"stringFormat": "{0:#,#}",
 			"visibleInCallOut": true,
@@ -101,6 +102,7 @@
 		"ster_2": {
 			"section": "Sterren aantal",
 			"label": "ster_2",
+			"unknownValue": "0",
 			"type": "number",
 			"title": "Aantal woningen ster 2",
 			"stringFormat": "{0:#,#}",
@@ -110,6 +112,7 @@
 		"ster_3": {
 			"section": "Sterren aantal",
 			"label": "ster_3",
+			"unknownValue": "0",
 			"type": "number",
 			"title": "Aantal woningen ster 3",
 			"stringFormat": "{0:#,#}",
@@ -708,6 +711,7 @@
 				"description": "De leefbaarheidssituatie van de woongebieden is geclassificeerd volgens leefbaarometer.nl (BZK, 2014).",
 				"legendKind": "discretestrings",
 				"visualAspect": "fillColor",
+				"defaultLabel": "Onbekend",
 				"legendEntries": [
 					{
 						"label": "Uitstekend",
@@ -844,6 +848,7 @@
 				"description": "De maximale gemiddelde afstand van alle inwoners in een gebied tot zowel de dichtstbijzijnde supermarkt, huisartsenpraktijk als apotheek, berekend over de weg.",
 				"legendKind": "discrete",
 				"visualAspect": "fillColor",
+				"defaultLabel": "Onbekend",
 				"cumulative": true,
 				"legendEntries": [
 					{
@@ -899,7 +904,7 @@
 					{
 						"label": "Onbekend",
 						"stringValue": "Onbekend",
-						"color": "#fff"
+						"color": "#ddd"
 					}
 				]
 			}
@@ -1098,7 +1103,7 @@
 							"min": 99999,
 							"max": 99999
 						},
-						"color": "#fff"
+						"color": "#ddd"
 					}
 				]
 			}
