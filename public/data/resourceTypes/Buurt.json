@@ -912,6 +912,7 @@
 		"afs_harts": {
 			"label": "afs_harts",
 			"title": "Afstand tot huisarts",
+			"description": "De gemiddelde afstand van alle inwoners in een gebied tot de dichtstbijzijnde huisartsenpraktijk, berekend over de weg (uitgedrukt in km). Bron: CBS Nabijheidsstatistiek, 2015/22-02-2017",
 			"stringFormat": "{0:#,#.#} km",
 			"type": "number",
 			"visibleInCallOut": true,
@@ -922,6 +923,7 @@
 		"afs_apo": {
 			"label": "afs_apo",
 			"title": "Afstand tot apotheek",
+			"description": "De gemiddelde afstand van alle inwoners in een gebied tot de dichtstbijzijnde apotheek, berekend over de weg (uitgedrukt in km). Bron: CBS Nabijheidsstatistiek, 2015/22-02-2017",
 			"stringFormat": "{0:#,#.#} km",
 			"type": "number",
 			"visibleInCallOut": true,
@@ -932,6 +934,7 @@
 		"afs_super": {
 			"label": "afs_super",
 			"title": "Afstand tot supermarkt",
+			"description": "De gemiddelde afstand van alle inwoners in een gebied tot de dichtstbijzijnde supermarkt, berekend over de weg (uitgedrukt in km). Bron: CBS Nabijheidsstatistiek, 2015/22-02-2017",
 			"stringFormat": "{0:#,#.#} km",
 			"type": "number",
 			"visibleInCallOut": true,
@@ -942,6 +945,7 @@
 		"afs_wnkl": {
 			"label": "afs_wnkl",
 			"title": "Afstand tot overige winkel voor dagelijkse levensmiddelen",
+			"description": "De gemiddelde afstand van alle inwoners in een gebied tot de dichtstbijzijnde supermarkt, berekend over de weg (uitgedrukt in km). Bron: CBS Nabijheidsstatistiek, 2015/22-02-2017",
 			"stringFormat": "{0:#,#.#} km",
 			"type": "number",
 			"visibleInCallOut": true,
@@ -952,6 +956,7 @@
 		"afs_ziek_in": {
 			"label": "afs_ziek_in",
 			"title": "Afstand tot ziekenhuis incl. poliklinieken",
+			"description": "De gemiddelde afstand van alle inwoners in een gebied tot de dichtstbijzijnde ziekenhuis incl. poliklinieken, berekend over de weg (uitgedrukt in km). Bron: CBS Nabijheidsstatistiek, 2015/22-02-2017",
 			"stringFormat": "{0:#,#.#} km",
 			"type": "number",
 			"visibleInCallOut": true,
@@ -962,6 +967,7 @@
 		"afs_ziek_ex": {
 			"label": "afs_ziek_ex",
 			"title": "Afstand tot ziekenhuis excl. poliklinieken",
+			"description": "De gemiddelde afstand van alle inwoners in een gebied tot de dichtstbijzijnde ziekenhuis excl. poliklinieken, berekend over de weg (uitgedrukt in km). Bron: CBS Nabijheidsstatistiek, 2015/22-02-2017",
 			"stringFormat": "{0:#,#.#} km",
 			"type": "number",
 			"visibleInCallOut": true,
@@ -972,6 +978,7 @@
 		"wdruk_ha": {
 			"label": "wdruk_ha",
 			"title": "Werkdruk huisartsenzorg",
+			"description": "De procentuele afwijking van de werkdruk (hoger of lager) huisartsenzorg in de gemeente ten opzichte van het landelijk gemiddelde. Een lager percentage (lagere werkdruk) is beter. Bron: VAAM, 2014 ", 
 			"stringFormat": "{0:#,#.##}",
 			"type": "number",
 			"visibleInCallOut": true,
@@ -982,6 +989,7 @@
 		"mantelz": {
 			"label": "mantelz",
 			"title": "Mantelzorg",
+			"description": "De mantelzorg uitgedrukt in uren per week per persoon met 1 of meer langdurige aandoeningen. Bron: CBS Gezondheidsmonitor, 2012",
 			"stringFormat": "{0:#,#.##}",
 			"type": "number",
 			"visibleInCallOut": true,
@@ -992,6 +1000,7 @@
 		"afs_trein": {
 			"label": "afs_trein",
 			"title": "Afstand tot treinstation",
+			"description": "De gemiddelde afstand van alle inwoners in een gebied tot de dichtstbijzijnde treinstation, berekend over de weg (uitgedrukt in km). Bron: CBS Nabijheidsstatistiek, 2015/22-02-2017",
 			"stringFormat": "{0:#,#.#} km",
 			"type": "number",
 			"visibleInCallOut": true,
