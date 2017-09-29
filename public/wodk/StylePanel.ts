@@ -100,8 +100,9 @@ module wodk {
         }
 
         private select(card: IStylePanelCard) {
-            if (this.layer && card.property) {
-                this.$layerService.setStyleForProperty(this.layer, card.property);
+            var l = this.$layerService.findLoadedLayer(card.layerId);
+            if (l && card.property) {
+                this.$layerService.setStyleForProperty(l, card.property);
                 this.close();
             }
         }

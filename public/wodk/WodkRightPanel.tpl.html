@@ -102,13 +102,13 @@
                     </div>
                     <div class="row table-row table-dash" ng-repeat="row in section.rows">
                         <div ng-show="row.type !== 'textarea'">
-                            <div class="col-xs-8 table-row-title" uib-popover="{{row.description}}" popover-placement="left" popover-trigger="'mouseenter'" popover-append-to-body="true">{{row.title}}</div>
+                            <div class="col-xs-8 table-row-title" uib-popover="{{row.description}}" popover-popup-delay="300" popover-placement="left" popover-trigger="'mouseenter'" popover-append-to-body="true">{{row.title}}</div>
                             <div ng-show="row.values.length===1" class="col-xs-4 text-right table-row-value" data-ng-bind-html="row.values[0] | trusted"></div>
                             <div ng-show="row.values.length===2" class="col-xs-2 text-right table-row-value" data-ng-bind-html="row.values[0] | trusted"></div>
                             <div ng-show="row.values.length===2" class="col-xs-2 text-right table-row-value" data-ng-bind-html="row.values[1] | trusted"></div>
                         </div>
                         <div ng-show="row.type === 'textarea'">
-                            <div class="col-xs-12 table-row-title" uib-popover="{{row.description}}" popover-placement="left" popover-trigger="'mouseenter'" popover-append-to-body="true">{{row.title}}</div>
+                            <div class="col-xs-12 table-row-title" uib-popover="{{row.description}}" popover-popup-delay="300" popover-placement="left" popover-trigger="'mouseenter'" popover-append-to-body="true">{{row.title}}</div>
                             <div class="col-xs-12 table-row-value table-row-value-small" ng-repeat="val in row.values track by $index" data-ng-bind-html="val | trusted"></div>
                         </div>
                     </div>

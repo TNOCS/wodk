@@ -698,7 +698,7 @@
 		"lb_situ": {
 			"label": "lb_situ",
 			"title": "Leefbaarheidssituatie",
-			"description": "De leefbaarheidssituatie wordt weergegeven in 9 klassen, waarvan 5 klassen positief en 3 klassen negatief. Een gemiddeld gebied scoort op de grens tussen 'ruim voldoende' en 'goed'. De middenklasse 'zwak'",
+			"description": "De leefbaarheidssituatie wordt weergegeven in 9 klassen, waarvan 5 klassen positief en 3 klassen negatief. Een gemiddeld gebied scoort op de grens tussen “ruim voldoende” en “goed”. De middenklasse 'zwak' scoort niet negatief, tegelijkertijd betekent dit dat er wel iets aan de hand is waardoor er gesproken kan worden over matige leefbaarheid. Bron: leefbaarometer.nl, BZK, 2014",
 			"type": "text",
 			"unknownValue": "Onbekend",
 			"joinable": false,
@@ -945,7 +945,7 @@
 		"afs_wnkl": {
 			"label": "afs_wnkl",
 			"title": "Afstand tot overige winkel voor dagelijkse levensmiddelen",
-			"description": "De gemiddelde afstand van alle inwoners in een gebied tot de dichtstbijzijnde supermarkt, berekend over de weg (uitgedrukt in km). Bron: CBS Nabijheidsstatistiek, 2015/22-02-2017",
+			"description": "De gemiddelde afstand van alle inwoners in een gebied tot de dichtstbijzijnde overige winkel voor dagelijkse levensmiddelen, berekend over de weg (uitgedrukt in km). Bron: CBS Nabijheidsstatistiek, 2015/22-02-2017",
 			"stringFormat": "{0:#,#.#} km",
 			"type": "number",
 			"visibleInCallOut": true,
