@@ -344,7 +344,7 @@
 			"description": "Aantal aanpasbaarheid in onderzoek",
 			"expression": "properties.ster_in_ond || 0",
 			"stringFormat": "{0:#,#}",
-			"visibleInCallOut": true,
+			"visibleInCallOut": false,
 			"isSearchable": false
 		},
 		"a_apb_onb": {
@@ -354,7 +354,7 @@
 			"type": "number",
 			"title": "Aant. aanpasbaarheid onbekend",
 			"description": "Aantal aanpasbaarheid onbekend",
-			"expression": "properties.ster_onb || 0",
+			"expression": "(properties.ster_onb || 0) + (properties.ster_in_ond || 0)",
 			"stringFormat": "{0:#,#}",
 			"visibleInCallOut": true,
 			"isSearchable": false
@@ -522,7 +522,7 @@
 			"type": "number",
 			"title": "Perc. aanpasbaarheid onbekend",
 			"description": "Percentage aanpasbaarheid onbekend",
-			"expression": "properties.a_apb_onb / properties.ster_totaal * 100 || 0",
+			"expression": "(properties.a_apb_onb + properties.a_apb_in_ond) / properties.ster_totaal * 100 || 0",
 			"stringFormat": "{0:#,#}%",
 			"min": 0,
 			"max": 100,
@@ -580,7 +580,7 @@
 			"stringFormat": "{0:#,#}%",
 			"min": 0,
 			"max": 100,
-			"visibleInCallOut": true,
+			"visibleInCallOut": false,
 			"isSearchable": false,
 			"legend": {
 				"_filter": "ster_totaal",

@@ -43,7 +43,7 @@
                 "load buurten"
             ],
             "contourProperty": "_contour",
-            "propertyTypeKeys": "aant_inw;ster_totaal;a_aangep_w;a_apb_w;a_napb_w;a_apb_in_ond;a_apb_onb;a_huko_onb;a_koopwon;a_huurwon;a_1gezw;a_mgezw;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;gemeentecode;GM_CODE;gemeentenaam;p_huko_onb;p_koopwon;p_huurwon;p_aangep_w;p_apb_w;p_napb_w;p_apb_onb;p_apb_in_ond;p_1gezw;p_mgezw;"
+            "propertyTypeKeys": "aant_inw;ster_totaal;a_aangep_w;a_apb_w;a_napb_w;a_apb_in_ond;a_apb_onb;a_huko_onb;a_koopwon;a_huurwon;a_1gezw;a_mgezw;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;ster_onb;ster_in_ond;gemeentecode;GM_CODE;gemeentenaam;p_huko_onb;p_koopwon;p_huurwon;p_aangep_w;p_apb_w;p_napb_w;p_apb_onb;p_apb_in_ond;p_1gezw;p_mgezw;"
         },
         "wijk": {
             "name": "wijk",
@@ -721,7 +721,17 @@
             "type": "number",
             "section": "Sterren aantallen",
             "stringFormat": "{0:#,#}",
+            "expression": "(properties.ster_onb || 0) + (properties.ster_in_ond || 0)",
             "visibleInCallOut": true,
+            "canEdit": true
+        },
+        "ster_in_ond": {
+            "label": "ster_in_ond",
+            "title": "Ster in onderzoek",
+            "type": "number",
+            "section": "Sterren aantallen",
+            "stringFormat": "{0:#,#}",
+            "visibleInCallOut": false,
             "canEdit": true
         },
         "ster_totaal": {
@@ -821,7 +831,7 @@
             "type": "number",
             "title": "Aant. aanpasbaarheid onbekend",
             "description": "Aantal aanpasbaarheid onbekend",
-            "expression": "properties.ster_onb || 0",
+            "expression": "(properties.ster_onb || 0) + (properties.ster_in_ond || 0)",
             "section": "Indicatie aanpasbaarheid",
             "stringFormat": "{0:#,#}",
             "visibleInCallOut": true,
@@ -836,7 +846,7 @@
             "expression" : "properties.ster_in_ond || 0",
             "section": "Indicatie aanpasbaarheid",
             "stringFormat" : "{0:#,#}",
-			"visibleInCallOut" : true,
+			"visibleInCallOut" : false,
 			"isSearchable" : false
 		},
         "a_apb_w": {
@@ -906,7 +916,7 @@
             "type": "number",
             "title": "Perc. aanpasbaarheid onbekend",
             "description": "Percentage aanpasbaarheid onbekend",
-            "expression": "properties.a_apb_onb / properties.ster_totaal * 100 || 0",
+            "expression": "(properties.a_apb_in_ond + properties.a_apb_onb) / properties.ster_totaal * 100 || 0",
             "section": "Indicatie aanpasbaarheid",
             "stringFormat": "{0:#,#}%",
             "min": 0,
@@ -924,7 +934,7 @@
             "stringFormat": "{0:#,#}%",
             "min": 0,
             "max": 100,
-            "visibleInCallOut": true,
+            "visibleInCallOut": false,
             "isSearchable": false
         },
         "p_aangep_w": {
