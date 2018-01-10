@@ -96,7 +96,7 @@
             "section": "Liftonderzoek",
             "type": "options",
             "options": {
-                "-1": "In onderzoek",
+                "-1": "Onbekend",
                 "0": "Aanname geen lift",
                 "1": "Aanname lift",
                 "2": "Aanname geen lift"
@@ -109,7 +109,7 @@
             "section": "Liftonderzoek",
             "type": "options",
             "options": {
-                "-1": "In onderzoek",
+                "-1": "Onbekend",
                 "0": "Aanname geen souterrain of plint",
                 "1": "Aanname souterrain of plint",
                 "2": "Aanname geen souterrain of plint"
@@ -217,7 +217,7 @@
             "section": "Woninggegevens",
             "type": "options",
             "options": {
-                "-1": "In onderzoek",
+                "-1": "Onbekend",
                 "0": "Aanname geen lift",
                 "1": "Aanname lift",
                 "2": "Aanname geen lift"
@@ -231,7 +231,7 @@
             "type": "options",
             "section": "Woninggegevens",
             "options": {
-                "-1": "In onderzoek",
+                "-1": "Onbekend",
                 "0": "Aanname geen souterrain of plint",
                 "1": "Aanname souterrain of plint",
                 "2": "Aanname geen souterrain of plint"
@@ -351,7 +351,7 @@
             "label": "ster_in_ond",
             "type": "number",
             "section": "Overig",
-            "title": "In onderzoek",
+            "title": "Onbekend",
             "visibleInCallOut": true,
             "isSearchable": false
         },
@@ -448,18 +448,9 @@
                         "label": "onbekend",
                         "interval": {
                             "min": -4,
-                            "max": -3
-                        },
-                        "color": "#cccccc33"
-                    },
-                    {
-                        "sortKey": "b",
-                        "label": "in onderzoek",
-                        "interval": {
-                            "min": -3,
                             "max": -2
                         },
-                        "color": "#444444"
+                        "color": "#cccccc33"
                     },
                     {
                         "sortKey": "g",
