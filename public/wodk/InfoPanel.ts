@@ -68,6 +68,10 @@ module wodk {
 
         }
 
+        private isOpen(): boolean {
+            return $('.infopanel-container').hasClass('show');
+        }
+
         private open() {
             $('.infopanel-container').addClass('show');
         }
@@ -82,10 +86,18 @@ module wodk {
                 case 'opencompare':
                 case 'openrightpanel':
                 case 'openstylepanel':
+                case 'closetoelichting':
                     this.close();
                     break;
                 case 'opentoelichting':
                     this.open();
+                    break;
+                case 'toggletoelichting':
+                    if (this.isOpen()) {
+                        this.$messageBus.publish('wodk', 'closetoelichting');
+                    } else {
+                        this.$messageBus.publish('wodk', 'opentoelichting');
+                    }
                     break;
                 default:
                     break;

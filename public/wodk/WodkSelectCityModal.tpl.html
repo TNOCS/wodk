@@ -1,0 +1,19 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{'SELECTEER_GEMEENTE' | translate}}</h4>
+</div>
+<div class="modal-body">
+    <p>{{'SELECTEER_GEMEENTE' | translate}}</p>
+    <input type="text" id="city-text" ng-model="city" ng-keyup="$event.keyCode == 13 && vm.ok()" autofocus>
+    <table id="searchTextResults">
+        <tr>
+            <th>{{'GEMEENTE' | translate}}</th>
+        </tr>
+        <tr ng-repeat="cityName in cityNames | filter:city">
+            <td class="pointer" ng-click="vm.ok(cityName.name)">{{cityName.name}}</td>
+        </tr>
+    </table>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-warning" ng-click="vm.close()">{{'CLOSE' | translate}}</button>
+    <button type="button" class="btn btn-default" ng-click="vm.ok()">{{'OK' | translate}}</button>
+</div>

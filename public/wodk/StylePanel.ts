@@ -50,6 +50,7 @@ module wodk {
         public static $inject = [
             '$scope',
             '$timeout',
+            '$location',
             '$translate',
             'layerService',
             'messageBusService',
@@ -59,6 +60,7 @@ module wodk {
         constructor(
             private $scope: StylePanelCtrlScope,
             private $timeout: ng.ITimeoutService,
+            private $location: ng.ILocationService,
             private $translate: ng.translate.ITranslateService,
             private $layerService: csComp.Services.LayerService,
             private $messageBus: csComp.Services.MessageBusService,
@@ -103,6 +105,7 @@ module wodk {
             var l = this.$layerService.findLoadedLayer(card.layerId);
             if (l && card.property) {
                 this.$layerService.setStyleForProperty(l, card.property);
+                this.$location.search('styleproperty', card.property);
                 this.close();
             }
         }

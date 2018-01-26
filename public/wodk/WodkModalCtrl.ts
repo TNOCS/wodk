@@ -105,4 +105,46 @@ module WodkModalCtrl {
             this.$uibModalInstance.dismiss('cancel');
         }
     }
+
+    export interface ISelectCityModalCtrlScope extends ng.IScope {
+        vm: SelectCityModalCtrl;
+        city: string;
+        cityNames: any[];
+    }
+
+    export class SelectCityModalCtrl {
+        public static $inject = [
+            '$scope',
+            '$uibModalInstance',
+            '$timeout',
+            'layerService',
+            'wodkWidgetSvc',
+            'cityNames'
+        ];
+
+
+        constructor(
+            private $scope: ISelectCityModalCtrlScope,
+            private $uibModalInstance: any,
+            private $timeout: ng.ITimeoutService,
+            private $layerService: csComp.Services.LayerService,
+            private $wodkSvc: wodk.WODKWidgetSvc,
+            private cityNames: string[]) {
+
+            $scope.vm = this;
+            $scope.cityNames = _.map(cityNames, (name) => {return {name: name};});
+        }
+
+        public ok(cityName?: string) {
+            if (cityName) {
+                this.$uibModalInstance.close(cityName);
+            } else {
+                this.$uibModalInstance.close(this.$scope.city);
+            }
+        }
+
+        public cancel() {
+            this.$uibModalInstance.dismiss('cancel');
+        }
+    }
 }

@@ -56,7 +56,8 @@ module wodk {
 
     export class WODKWidgetSvc {
         static $inject = [
-            '$rootScope',
+			'$rootScope',
+			'$location',
             '$translate',
             'layerService',
             'messageBusService',
@@ -96,7 +97,8 @@ module wodk {
         private rightPanelTab;
 
         constructor(
-            private $rootScope: ng.IRootScopeService,
+			private $rootScope: ng.IRootScopeService,
+			private $location: ng.ILocationService,
             private $translate: ng.translate.ITranslateService,
             private $layerService: csComp.Services.LayerService,
             private $messageBusService: csComp.Services.MessageBusService,
@@ -134,6 +136,11 @@ module wodk {
                     case 'address':
                         this.loadAddress(value);
                         break;
+                    case 'city':
+                        if (value && _.isObject(value)) {
+                            this.selectCity(value.city, value.style);
+                        }
+                        break;  
                     default:
                         break;
                 }
@@ -246,6 +253,48 @@ module wodk {
             this.lastSelectedType = 'provincie';
         }
 
+		private selectCity(name: string, styleProp: string, layerId: string = 'bagbuurten') {
+			if (!name) return;
+			var foundFeature: csComp.Services.IFeature = this.findFeatureByBestMatchingPropertyValue('Name', name);
+			if (foundFeature) {
+				if (foundFeature.geometry.type.toLowerCase() !== 'point') {
+					this.zoomNextFeatureFlag = true;
+					let handle = this.$messageBusService.subscribe('layer', (topic, layer) => {
+						if (topic === 'activated' && layer.id === 'bagbuurten' && layer.group) {
+							let l = this.$layerService.findLoadedLayer(layer.id);
+							if (l && styleProp) {
+								this.$layerService.setStyleForProperty(l, styleProp);
+								this.$messageBusService.publish('updatelegend', 'update', _.find(l.group.styles, (s) => {
+									return s.enabled;
+								}));
+							}
+							this.$messageBusService.unsubscribe(handle);
+						}
+					});
+					this.$layerService.selectFeature(foundFeature);
+				} else {
+					// City is already selected, only zoom to it
+					this.$mapService.getMap().flyTo(new L.LatLng(foundFeature.geometry.coordinates[1], foundFeature.geometry.coordinates[0]));
+				}
+			}
+		}
+
+        public findFeatureByBestMatchingPropertyValue(property: string, value: string): IFeature {
+            var fts = this.$layerService.project.features;
+            var maxScore = -1;
+            var bestMatch;
+            fts.forEach((f: IFeature) => {
+                if (f.properties.hasOwnProperty(property) && typeof f.properties[property] === 'string') {
+                    var score = value.score(f.properties[property]);
+                    if (score > maxScore && f.fType.name === 'gemeente') {
+                        maxScore = score;
+                        bestMatch = f;
+                    }
+                }
+            });
+            return bestMatch;
+        }
+
         public laadBuurten(fitMap: boolean = false) {
             // Load buurten by gemeente
             var l = this.$layerService.findLayer('bagbuurten');
@@ -305,10 +354,14 @@ module wodk {
             } else {
                 this.$layerService.addLayer(l, () => {
                     var group = this.$layerService.findGroupById('buurten');
-                    if (typeof group === 'undefined') return;
-                    var propType = this.$layerService.findPropertyTypeById('data/resourceTypes/Buurt.json#p_apb_w');
-                    if (typeof propType === 'undefined') return;
-                    this.$layerService.setGroupStyle(group, propType);
+					if (typeof group === 'undefined') return;
+					var propType = 'p_apb_w';
+					let searchParams = this.$location.search();
+					if (searchParams && searchParams.hasOwnProperty('styleproperty')) {
+						propType = searchParams['styleproperty'];
+					}
+                    if (!propType) return;
+                    this.$layerService.setStyleForProperty(l, propType);
                     // Only fit map for the first gemeente, or when the zoomNextFeatureFlag parameter = true
                     if (this.zoomNextFeatureFlag) {
                         fitMap = true;

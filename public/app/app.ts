@@ -32,6 +32,7 @@ module App {
             '$scope',
             '$location',
             '$http',
+            '$uibModal',
             'mapService',
             'layerService',
             'messageBusService',
@@ -66,6 +67,7 @@ module App {
             private $scope: IAppScope,
             private $location: IAppLocationService,
             private $http: ng.IHttpService,
+            private $uibModal: ng.ui.bootstrap.IModalService,
             private $mapService: csComp.Services.MapService,
             private $layerService: csComp.Services.LayerService,
             private $messageBusService: csComp.Services.MessageBusService,
@@ -153,6 +155,11 @@ module App {
                         this.wodkWidgetSvc.stepBack();
                     });
 
+                    var searchParams = this.$location.search();
+                    if (searchParams && searchParams.hasOwnProperty('selectcity')) {
+                        this.selectCity(searchParams['styleproperty']);
+                    }
+
                     // NOTE EV: You may run into problems here when calling this inside an angular apply cycle.
                     // Alternatively, check for it or use (dependency injected) $timeout.
                     if ($scope.$root.$$phase !== '$apply' && $scope.$root.$$phase !== '$digest') {
@@ -181,8 +188,8 @@ module App {
             this.$mapService.getMap().zoomOut();
         }
 
-        openToelichting() {
-            this.$messageBusService.publish('wodk', 'opentoelichting');
+        toggleToelichting() {
+            this.$messageBusService.publish('wodk', 'toggletoelichting');
         }
 
         /**
@@ -204,23 +211,42 @@ module App {
             this.foundCities = found;
         }
 
-        /**
-         * Select the city and broadcast it.
-         *
-         * @param {string} city
-         */
-        selectCity(city: string) {
-            $('#search-city').val('');
-            this.$messageBusService.publish('wodk', 'city', city);
-        }
+        // /**
+        //  * Select the city and broadcast it.
+        //  *
+        //  * @param {string} city
+        //  */
+        // selectCity(city: string) {
+        //     $('#search-city').val('');
+        //     this.$messageBusService.publish('wodk', 'city', city);
+        // }
 
-        /**
-         * Select the first search result.
-         */
-        selectFirstCity() {
-            if (this.foundCities.length > 0) {
-                this.selectCity(this.foundCities[0]);
-            }
+        // /**
+        //  * Select the first search result.
+        //  */
+        // selectFirstCity() {
+        //     if (this.foundCities.length > 0) {
+        //         this.selectCity(this.foundCities[0]);
+        //     }
+        // }
+
+        selectCity(styleProp: string) {
+            var modalInstance = this.$uibModal.open({
+                templateUrl: 'wodk/WodkSelectCityModal.tpl.html',
+                size: 'md',
+                controller: 'SelectCityModalCtrl',
+                resolve: {
+                    cityNames: () => this.cities
+                }
+            });
+
+            modalInstance.result.then((city: string) => {
+                console.log('Selected city: ' + city);
+                var data = {city: city, style: styleProp};
+                this.$messageBusService.publish('wodk', 'city', data);
+            }, () => {
+                console.log('Modal dismissed at: ' + new Date());
+            });
         }
 
         filterAddress = _.debounce(this.filterAddressDebounced, 750);
@@ -565,6 +591,7 @@ module App {
             };
         })
         .controller('CompareModalCtrl', WodkModalCtrl.CompareModalCtrl)
+        .controller('SelectCityModalCtrl', WodkModalCtrl.SelectCityModalCtrl)
         .controller('appCtrl', AppCtrl)
         .directive('initSlider', () => {
             return (scope, element, attrs) => {
