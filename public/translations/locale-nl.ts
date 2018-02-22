@@ -1,7 +1,7 @@
 module Translations {
     export class DutchAdditional {
         public static locale: ng.translate.ITranslationTable = {
-            SITE_TITLE: 'Aanpasbaarheid Woningen \'Langer zelfstandig wonen\'',
+            SITE_TITLE: 'Aanpasbaarheid woningen\r\n\'Langer thuis\'',
             PROVINCIE: 'Provincie',
             GEMEENTE: 'Gemeente',
             GEMEENTEN_CUMULATIEF: 'Gemeenten cumulatief',
