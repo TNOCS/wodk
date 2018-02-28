@@ -444,7 +444,7 @@
                 "showLabelInTooltip": true,
                 "legendEntries": [
                     {
-                        "sortKey": "a",
+                        "sortKey": "z",
                         "label": "onbekend",
                         "interval": {
                             "min": -4,
@@ -489,7 +489,7 @@
                         "color": "#33cc00"
                     },
                     {
-                        "sortKey": "2",
+                        "sortKey": "e",
                         "label": "3 sterren aanpasbaar",
                         "interval": {
                             "min": 2,

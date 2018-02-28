@@ -119,6 +119,7 @@ module wodk {
             });
             if (!gs) return;
             this.$timeout(() => {
+                this.sortLegend(gs.activeLegend);
                 this.$scope.activeLegend = gs.activeLegend;
                 this.$scope.activeStyleGroup = gs.group;
                 this.$scope.activeStyleProperty = gs.property;
@@ -332,6 +333,15 @@ module wodk {
             }
         }
 
+        private sortLegend(legend: csComp.Services.Legend) {
+            if (!legend.legendEntries) return;
+            legend.legendEntries = legend.legendEntries.sort((a, b) => {
+                let keyA = (a.sortKey ? a.sortKey : a.label);
+                let keyB = (b.sortKey ? b.sortKey : b.label);
+                return keyA.toString().localeCompare(keyB.toString());
+            });
+        }
+
         private handleLegendUpdate(title: string, data ? : any) {
             switch (title) {
                 case 'removelegend':
@@ -342,6 +352,7 @@ module wodk {
                 default:
                     if (data && data.activeLegend && data.group) {
                         this.$timeout(() => {
+                            this.sortLegend(data.activeLegend);
                             this.$scope.activeLegend = data.activeLegend;
                             this.$scope.activeStyleGroup = data.group;
                             this.$scope.activeStyleProperty = data.property;

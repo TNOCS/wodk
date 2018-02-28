@@ -83,10 +83,13 @@ module wodk {
 
         private init() {
             this.cards.length = 0;
-            this.initCard('images/infographic2.png', 'p_apb_w', 'bagbuurten');
-            this.initCard('images/infographic1.png', 'p_koopwon', 'bagbuurten');
-            this.initCard('images/infographic2.png', 'lb_situ', 'bagbuurten');
-            this.initCard('images/infographic1.png', 'afs_adl', 'bagbuurten');
+            this.initCard('images/indicatie_aanpasbaarheid_woningen.svg', 'p_apb_w', 'bagbuurten');
+            this.initCard('images/percentage_koopwoningen.svg', 'p_koopwon', 'bagbuurten');
+            this.initCard('images/leefbaarheidssituatie.svg', 'lb_situ', 'bagbuurten');
+            this.initCard('images/afstand_tot_adl_voorzieningen.svg', 'afs_adl', 'bagbuurten');
+            this.initCard('images/gr_aant_inwoners_per_buurt.svg', 'aant_inw', 'bagbuurten');
+            this.initCard('images/grootste_aanbod_3ster.svg', 'ster_3', 'bagbuurten');
+            this.initCard('images/gr_aandeel_65plus.svg', 'p_65_eo_jr', 'bagbuurten');
         }
 
         private initCard(image: string, prop: string, layerId: string) {

@@ -21,7 +21,7 @@
 			"selectActions": [
 				"load woningen"
 			],
-			"propertyTypeKeys": "aant_inw;ster_totaal;a_aangep_w;a_apb_w;a_napb_w;a_apb_in_ond;a_apb_onb;a_1gezw;a_mgezw;a_koopwon;a_huurwon;a_huko_onb;p_1gezw;p_mgezw;p_koopwon,p_huurwon;p_huko_onb;p_apb_w;p_napb_w;p_apb_in_ond;p_apb_onb;p_aangep_w;bu_naam;bu_code;gm_naam;gm_code;gm_code_2015;woz;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;woningen;lb_situ;lb_score;dim_won;dim_bev;dim_voorz;dim_veil;dim_fys;afs_adl;afs_harts;afs_apo;afs_super;afs_wnkl;afs_ziek_in;afs_ziek_ex;wdruk_ha;mantelz;afs_trein;afs_adl_int"
+			"propertyTypeKeys": "aant_inw;ster_totaal;a_aangep_w;a_apb_w;a_napb_w;a_apb_in_ond;a_apb_onb;a_1gezw;a_mgezw;a_koopwon;a_huurwon;a_huko_onb;p_1gezw;p_mgezw;p_koopwon,p_huurwon;p_huko_onb;p_apb_w;p_napb_w;p_apb_in_ond;p_apb_onb;p_aangep_w;bu_naam;bu_code;gm_naam;gm_code;gm_code_2015;woz;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;woningen;lb_situ;lb_score;dim_won;dim_bev;dim_voorz;dim_veil;dim_fys;afs_adl;afs_harts;afs_apo;afs_super;afs_wnkl;afs_ziek_in;afs_ziek_ex;wdruk_ha;mantelz;afs_trein;afs_adl_int;p_65_eo_jr"
 		}
 	},
 	"propertyTypeData": {
@@ -66,9 +66,64 @@
 			"type": "number",
 			"section": "Totalen",
 			"title": "Aantal inwoners",
+			"description": "Op deze plattegrond van de gekozen gemeente ziet u de buurten met de meeste inwoners. Dit geeft u een indicatie van de behoefte aan aanpasbare woningen en in welke buurten u de grootste impact van een voldoende aanbod aan geschikte woningen kan verwachten.",
 			"stringFormat": "{0:#,#}",
 			"visibleInCallOut": true,
-			"isSearchable": false
+			"isSearchable": false,
+			"legend": {
+				"_filter": "ster_totaal",
+				"id": "aant_inw",
+				"visualAspect": "fillColor",
+				"description": "Aantal inwoners per buurt.",
+				"legendKind": "discrete",
+				"legendEntries": [
+					{
+						"sortKey": "a",
+						"label": ">5000",
+						"interval": {
+							"min": 5000,
+							"max": 9999999
+						},
+						"color": "#86003e"
+					},
+					{
+						"sortKey": "b",
+						"label": "2500-5000",
+						"interval": {
+							"min": 2500,
+							"max": 5000
+						},
+						"color": "#ca005d"
+					},
+					{
+						"sortKey": "c",
+						"label": "1000-2500",
+						"interval": {
+							"min": 1000,
+							"max": 2500
+						},
+						"color": "#db5593"
+					},
+					{
+						"sortKey": "d",
+						"label": "0-1000",
+						"interval": {
+							"min": 0,
+							"max": 1000
+						},
+						"color": "#edaac9"
+					},
+					{
+						"sortKey": "z",
+						"label": "Onbekend",
+						"interval": {
+							"min": -9999999999,
+							"max": -1
+						},
+						"color": "#444444"
+					}
+				]
+			}
 		},
 		"ster_totaal": {
 			"section": "Sterren aantal",
@@ -115,9 +170,64 @@
 			"unknownValue": "0",
 			"type": "number",
 			"title": "Aantal woningen ster 3",
+			"description": "Op deze plattegrond van de gekozen gemeente ziet u de wijken met het grootste aanbod aan ster 3 woningen die in beginsel geschikt zijn voor mensen met mobiliteitsbeperkingen.",
 			"stringFormat": "{0:#,#}",
 			"visibleInCallOut": true,
-			"isSearchable": false
+			"isSearchable": false,
+			"legend": {
+				"_filter": "ster_totaal",
+				"id": "ster_3",
+				"visualAspect": "fillColor",
+				"description": "Aantal ster 3 woningen per buurt.",
+				"legendKind": "discrete",
+				"legendEntries": [
+					{
+						"sortKey": "a",
+						"label": ">1500",
+						"interval": {
+							"min": 1500,
+							"max": 9999999
+						},
+						"color": "#86003e"
+					},
+					{
+						"sortKey": "b",
+						"label": "500-1500",
+						"interval": {
+							"min": 500,
+							"max": 1500
+						},
+						"color": "#ca005d"
+					},
+					{
+						"sortKey": "c",
+						"label": "100-500",
+						"interval": {
+							"min": 100,
+							"max": 500
+						},
+						"color": "#db5593"
+					},
+					{
+						"sortKey": "d",
+						"label": "0-100",
+						"interval": {
+							"min": 0,
+							"max": 100
+						},
+						"color": "#edaac9"
+					},
+					{
+						"sortKey": "z",
+						"label": "Onbekend",
+						"interval": {
+							"min": -9999999999,
+							"max": -1
+						},
+						"color": "#444444"
+					}
+				]
+			}
 		},
 		"ster_4": {
 			"section": "Sterren aantal",
@@ -401,7 +511,7 @@
 			"type": "number",
 			"title": "Indicatie aanpasbare woningen",
 			"expression": "properties.a_apb_w / properties.ster_totaal * 100",
-			"description": "Het percentage geeft weer hoeveel woningen worden aangemerkt als aanpasbaar in een bepaalde buurt.",
+			"description": "Is de woning aanpasbaar en wat kost dat? Buurtrapportages: Hoeveel aanpasbare woningen heeft de buurt en hoeveel zijn huur of koop? Wat kosten de aanpassingen? Hoeveel vraag zal er in de buurt of gemeente zijn door demografische veranderingen?",
 			"stringFormat": "{0:#,#}%",
 			"min": 0,
 			"max": 100,
@@ -698,7 +808,7 @@
 		"lb_situ": {
 			"label": "lb_situ",
 			"title": "Leefbaarheidssituatie",
-			"description": "De leefbaarheidssituatie wordt weergegeven in 9 klassen, waarvan 5 klassen positief en 3 klassen negatief. Een gemiddeld gebied scoort op de grens tussen “ruim voldoende” en “goed”. De middenklasse 'zwak' scoort niet negatief, tegelijkertijd betekent dit dat er wel iets aan de hand is waardoor er gesproken kan worden over matige leefbaarheid. Bron: leefbaarometer.nl, BZK, 2014",
+			"description": "Mensen met mobiliteitsbeperkingen hebben een beperkte actieradius. Wat is de (loop afstand) van hun huis tot voorzieningen? Hoe is de relatie tussen de voorzieningen en de leefbaarheid van de wijk? Bron: leefbaarometer.nl, BZK, 2014",
 			"type": "text",
 			"unknownValue": "Onbekend",
 			"joinable": false,
@@ -1113,6 +1223,69 @@
 							"max": 99999
 						},
 						"color": "#ddd"
+					}
+				]
+			}
+		},
+		"p_65_eo_jr": {
+			"label": "p_65_eo_jr",
+			"type": "number",
+			"title": "Aandeel 65+ ers",
+			"description": "Op deze plattegrond van de gekozen gemeente ziet u de wijken met het grootste aandeel 65+ ers. Dit geeft u een indicatie van de toekomstig behoefte aan aanpasbare woningen en waar u de grootste vraag naar geschikte woningen of woningaanpassingen kunt verwachten.",
+			"stringFormat": "{0:#,#}%",
+			"visibleInCallOut": true,
+			"isSearchable": false,
+			"legend": {
+				"_filter": "ster_totaal",
+				"id": "p_65_eo_jr",
+				"visualAspect": "fillColor",
+				"description": "Het aandeel 65+ ers in de buurt",
+				"legendKind": "discrete",
+				"legendEntries": [
+					{
+						"sortKey": "a",
+						"label": "0-10%",
+						"interval": {
+							"min": 0,
+							"max": 10
+						},
+						"color": "#86003e"
+					},
+					{
+						"sortKey": "b",
+						"label": "10-20%",
+						"interval": {
+							"min": 10,
+							"max": 20
+						},
+						"color": "#ca005d"
+					},
+					{
+						"sortKey": "c",
+						"label": "20-40%",
+						"interval": {
+							"min": 20,
+							"max": 40
+						},
+						"color": "#db5593"
+					},
+					{
+						"sortKey": "d",
+						"label": "40-100%",
+						"interval": {
+							"min": 40,
+							"max": 100
+						},
+						"color": "#edaac9"
+					},
+					{
+						"sortKey": "z",
+						"label": "Onbekend",
+						"interval": {
+							"min": -9999999999,
+							"max": -1
+						},
+						"color": "#444444"
 					}
 				]
 			}
