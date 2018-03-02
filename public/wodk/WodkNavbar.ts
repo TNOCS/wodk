@@ -209,7 +209,6 @@ module WodkNavbar {
                 this.gemeenteOnly = true;
                 if (typeof searchParams['selectcity'] === 'string') {
                     this.selectStyledGemeente(searchParams['selectcity']);
-                    this.$location.search('selectcity', null);
                 }
             }
         }
@@ -217,6 +216,7 @@ module WodkNavbar {
         private selectStyledGemeente(city: string) {
             var searchParams = this.$location.search();
             var styleProp = searchParams['styleproperty'];
+            this.$location.search('selectcity', city);
             if (!styleProp || typeof styleProp !== 'string') styleProp = 'aant_inw';
             var data = {city: city, style: styleProp};
             this.messageBusService.publish('wodk', 'city', data);

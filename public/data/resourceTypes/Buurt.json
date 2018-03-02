@@ -129,7 +129,6 @@
 			"section": "Sterren aantal",
 			"label": "ster_totaal",
 			"type": "number",
-			"section": "Totalen",
 			"title": "Aantal woningen",
 			"stringFormat": "{0:#,#}",
 			"visibleInCallOut": true,
@@ -1230,6 +1229,7 @@
 		"p_65_eo_jr": {
 			"label": "p_65_eo_jr",
 			"type": "number",
+			"section": "Totalen",
 			"title": "Aandeel 65+ ers",
 			"description": "Op deze plattegrond van de gekozen gemeente ziet u de wijken met het grootste aandeel 65+ ers. Dit geeft u een indicatie van de toekomstig behoefte aan aanpasbare woningen en waar u de grootste vraag naar geschikte woningen of woningaanpassingen kunt verwachten.",
 			"stringFormat": "{0:#,#}%",
