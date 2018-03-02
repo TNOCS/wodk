@@ -31,6 +31,7 @@ module WodkNavbar {
     export class WodkNavbarCtrl {
         public static $inject = [
             '$scope',
+            '$location',
             '$http',
             'layerService',
             'messageBusService',
@@ -44,10 +45,14 @@ module WodkNavbar {
         private lastResult: wodk.IPlacesResult;
         private lastSuggestion: wodk.IPlacesResult;
         private lastSuggestionDataset: string;
-        private msgBusHandle: csComp.Services.MessageBusHandle;
+        private msgBusHandles: csComp.Services.MessageBusHandle[] = [];
+        private gemeenteQuery: string;
+        private foundCities: string[] = [];
+        private gemeenteOnly: boolean;
 
         constructor(
             private $scope: IWodkNavbarScope,
+            private $location: ng.ILocationService,
             private $http: ng.IHttpService,
             public layerService: csComp.Services.LayerService,
             private messageBusService: csComp.Services.MessageBusService,
@@ -58,9 +63,15 @@ module WodkNavbar {
             $scope.vm = this;
             $scope.isOpen = true;
 
-            this.msgBusHandle = this.messageBusService.subscribe('wodk', (message, data) => {
+            this.msgBusHandles.push(this.messageBusService.subscribe('wodk', (message, data) => {
                 this.handleMessage(message, data);
-            });
+            }));
+
+            this.msgBusHandles.push(this.messageBusService.subscribe('layer', (topic, layer) => {
+                if (topic === 'activated' && layer.id === 'gemeente') {
+                    this.shouldUseSelectedCity();
+                }
+            }));
 
             this.placesAutocomplete = (( < any > window).places)({
                 container: document.querySelector('#search-address'),
@@ -92,9 +103,7 @@ module WodkNavbar {
                 console.log(e.message);
             });
 
-            setTimeout(() => {
-                // this.test();
-            }, 5000);
+            // this.shouldUseSelectedCity();
         }
 
         private selectLocation(loc: wodk.IPlacesResult, dataset: string) {
@@ -161,6 +170,26 @@ module WodkNavbar {
             this.selectLocation(this.lastSuggestion, this.lastSuggestionDataset);
         }
 
+        private selectFirstGemeente() {
+            if (!this.foundCities || this.foundCities.length === 0) return;
+            this.selectStyledGemeente(this.foundCities[0])
+        }
+
+        private filterGemeente() {
+            let query = this.gemeenteQuery;
+            this.foundCities.length = 0;
+            if (query.length < 2 || typeof query !== 'string') return;
+            query = query.toLowerCase();
+            const maxFound = 15;
+            let found = [];
+            wodk.gemeentes.some(c => {
+                if (c.toLowerCase().indexOf(query) < 0) return false;
+                found.push(c);
+                if (found.length === maxFound) return true;
+            });
+            this.foundCities = found;
+        }
+
         public toggle(forceClose ? : boolean) {
             this.$timeout(() => {
                 this.$scope.isOpen = (forceClose ? false : !this.$scope.isOpen);
@@ -172,6 +201,28 @@ module WodkNavbar {
                     this.messageBusService.publish('wodk', 'opennavbar');
                 }
             }, 100);
+        }
+        
+        private shouldUseSelectedCity() {
+            var searchParams = this.$location.search();
+            if (searchParams && searchParams.hasOwnProperty('selectcity')) {
+                this.gemeenteOnly = true;
+                if (typeof searchParams['selectcity'] === 'string') {
+                    this.selectStyledGemeente(searchParams['selectcity']);
+                    this.$location.search('selectcity', null);
+                }
+            }
+        }
+
+        private selectStyledGemeente(city: string) {
+            var searchParams = this.$location.search();
+            var styleProp = searchParams['styleproperty'];
+            if (!styleProp || typeof styleProp !== 'string') styleProp = 'aant_inw';
+            var data = {city: city, style: styleProp};
+            this.messageBusService.publish('wodk', 'city', data);
+            this.gemeenteOnly = false;
+            this.foundCities.length = 0;
+            this.gemeenteQuery = '';
         }
 
         private test() {

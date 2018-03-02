@@ -444,6 +444,9 @@ ul.wodk-pdf-list li.inactive-button-toelichting-sub {
 .italic {
   font-style: italic; }
 
+.wodk-row-nodisplay {
+  display: none; }
+
 .wodk-info-tab-collapsed {
   right: 0px;
   z-index: 80; }

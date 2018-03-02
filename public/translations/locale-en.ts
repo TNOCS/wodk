@@ -20,6 +20,7 @@ module Translations {
             NR_GROUPS: 'Groepen',
             RANKING: 'Overzichten',
             PROPERTY: 'Eigenschap',
+            SEARCH_HINT_GEMEENTE: 'Selecteer een gemeente om het geselecteerde inzicht te bekijken.',
             SEARCH_HINT: 'Zoek op plaatsnaam, postcode of adres',
             WAT_TONEN: 'Wat wil je op de kaart zien?',
             COMPARE_ITEMS: 'Vergelijk'

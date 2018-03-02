@@ -82,8 +82,8 @@ module WodkRightPanel {
             if (!fts || !_.isArray(fts) || fts.length < 1) return;
             this.timeoutService(() => {
                 this.clearTable();
-                (fts.length === 1 ? this.getStreetViewImage(fts[0]) : this.resetStreetviewImage());
-                (fts.length === 1 ? this.getRapportLink(fts[0]) : this.resetRapportLink());
+                (+fts.length === 1 ? this.getStreetViewImage(fts[0]) : this.resetStreetviewImage());
+                (+fts.length === 1 ? this.getRapportLink(fts[0]) : this.resetRapportLink());
                 let fType = this.layerService.getFeatureType(fts[0]);
                 let pTypes = _.uniq(csComp.Helpers.getPropertyTypes(fType, null));
                 this.title = this.getDisplayTitle(fts);

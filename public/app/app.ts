@@ -57,7 +57,6 @@ module App {
         public addressQuery: string;
         public foundCities: string[] = [];
         public cityQuery: string;
-        public cities: string[] = ['Aa en Hunze', 'Aalburg', 'Aalsmeer', 'Aalten', 'Achtkarspelen', 'Alblasserdam', 'Albrandswaard', 'Alkmaar', 'Almelo', 'Almere', 'Alphen aan den Rijn', 'Alphen-Chaam', 'Ameland', 'Amersfoort', 'Amstelveen', 'Amsterdam', 'Apeldoorn', 'Appingedam', 'Arnhem', 'Assen', 'Asten', 'Baarle-Nassau', 'Baarn', 'Barendrecht', 'Barneveld', 'Bedum', 'Beek', 'Beemster', 'Beesel', 'Bellingwedde', 'Berg en Dal', 'Bergeijk', 'Bergen (Limburg)', 'Bergen (Noord-Holland)', 'Bergen op Zoom', 'Berkelland', 'Bernheze', 'Best', 'Beuningen', 'Beverwijk', 'Binnenmaas', 'Bladel', 'Blaricum', 'Bloemendaal', 'Bodegraven-Reeuwijk', 'Boekel', 'Bonaire', 'Borger-Odoorn', 'Borne', 'Borsele', 'Boxmeer', 'Boxtel', 'Breda', 'Brielle', 'Bronckhorst', 'Brummen', 'Brunssum', 'Bunnik', 'Bunschoten', 'Buren', 'Capelle aan den IJssel', 'Castricum', 'Coevorden', 'Cranendonck', 'Cromstrijen', 'Cuijk', 'Culemborg', 'Dalfsen', 'Dantumadeel', 'De Bilt', 'De Friese Meren', 'De Marne', 'De Ronde Venen', 'De Wolden', 'Delft', 'Delfzijl', 'Den Haag (\'s-Gravenhage)', 'Den Helder', 'Deurne', 'Deventer', 'Diemen', 'Dinkelland', 'Doesburg', 'Doetinchem', 'Dongen', 'Dongeradeel', 'Dordrecht', 'Drechterland', 'Drimmelen', 'Dronten', 'Druten', 'Duiven', 'Echt-Susteren', 'Edam-Volendam', 'Ede', 'Eemnes', 'Eemsmond', 'Eersel', 'Eijsden-Margraten', 'Eindhoven', 'Elburg', 'Emmen', 'Enkhuizen', 'Enschede', 'Epe', 'Ermelo', 'Etten-Leur', 'Ferwerderadeel', 'Franekeradeel', 'Geertruidenberg', 'Geldermalsen', 'Geldrop-Mierlo', 'Gemert-Bakel', 'Gennep', 'Giessenlanden', 'Gilze en Rijen', 'Goeree-Overflakkee', 'Goes', 'Goirle', 'Gooise Meren', 'Gorinchem (Gorcum of Gorkum)', 'Gouda', 'Grave', 'Groningen', 'Grootegast', 'Gulpen-Wittem', 'Haaksbergen', 'Haaren', 'Haarlem', 'Haarlemmerliede en Spaarnwoude', 'Haarlemmermeer', 'Halderberge', 'Hardenberg', 'Harderwijk', 'Hardinxveld-Giessendam', 'Haren', 'Harlingen', 'Hattem', 'Heemskerk', 'Heemstede', 'Heerde', 'Heerenveen', 'Heerhugowaard', 'Heerlen', 'Heeze-Leende', 'Heiloo', 'Hellendoorn/Nijverdal', 'Hellevoetsluis', 'Helmond', 'Hendrik-Ido-Ambacht', 'Hengelo (Overijssel)', '\'s-Hertogenbosch (Den Bosch)', 'Het Bildt', 'Heumen', 'Heusden', 'Hillegom', 'Hilvarenbeek', 'Hilversum', 'Hof van Twente', 'Hollands Kroon', 'Hoogeveen', 'Hoogezand-Sappemeer', 'Hoorn', 'Horst aan de Maas', 'Houten', 'Huizen', 'Hulst', 'IJsselstein', 'Kaag en Braassem', 'Kampen', 'Kapelle', 'Katwijk', 'Kerkrade', 'Koggenland', 'Kollumerland en Nieuwkruisland', 'Korendijk', 'Krimpen aan den IJssel', 'Krimpenerwaard', 'Laarbeek', 'Landerd', 'Landgraaf', 'Landsmeer', 'Langedijk', 'Lansingerland', 'Laren', 'Leek', 'Leerdam', 'Leeuwarden', 'Leeuwarderadeel', 'Leiden', 'Leiderdorp', 'Leidschendam-Voorburg', 'Lelystad', 'Leudal', 'Leusden', 'Lingewaal', 'Lingewaard', 'Lisse', 'Littenseradeel', 'Lochem', 'Loon op Zand', 'Lopik', 'Loppersum', 'Losser', 'Maasdriel', 'Maasgouw', 'Maassluis', 'Maastricht', 'Marum', 'Medemblik', 'Meerssen', 'Menaldumadeel', 'Menterwolde', 'Meppel', 'Middelburg', 'Midden-Delfland', 'Midden-Drenthe', 'Mill en Sint Hubert', 'Moerdijk', 'Molenwaard', 'Montferland', 'Montfoort', 'Mook en Middelaar', 'Neder-Betuwe', 'Nederweert', 'Neerijnen', 'Nieuwegein', 'Nieuwkoop', 'Nijkerk', 'Nijmegen', 'Nissewaard', 'Noord-Beveland', 'Noordenveld', 'Noordoostpolder', 'Noordwijk', 'Noordwijkerhout', 'Nuenen', ' Gerwen en Nederwetten', 'Nunspeet', 'Nuth', 'Oegstgeest', 'Oirschot', 'Oisterwijk', 'Oldambt', 'Oldebroek', 'Oldenzaal', 'Olst-Wijhe', 'Ommen', 'Onderbanken', 'Oost Gelre', 'Oosterhout', 'Ooststellingwerf', 'Oostzaan', 'Opmeer', 'Opsterland', 'Oss', 'Oud-Beijerland', 'Oude IJsselstreek', 'Ouder-Amstel', 'Oudewater', 'Overbetuwe', 'Papendrecht', 'Peel en Maas', 'Pekela', 'Pijnacker-Nootdorp', 'Purmerend', 'Putten', 'Raalte', 'Reimerswaal', 'Renkum', 'Renswoude', 'Reusel-De Mierden', 'Rheden', 'Rhenen', 'Ridderkerk', 'Rijnwaarden', 'Rijssen-Holten', 'Rijswijk', 'Roerdalen', 'Roermond', 'Roosendaal', 'Rotterdam', 'Rozendaal', 'Rucphen', 'Saba', 'Schagen', 'Scherpenzeel', 'Schiedam', 'Schiermonnikoog', 'Schijndel', 'Schinnen', 'Schouwen-Duiveland', 'Simpelveld', 'Sint Anthonis', 'Sint Eustatius', 'Sint-Michielsgestel', 'Sint-Oedenrode', 'Sittard-Geleen', 'Sliedrecht', 'Slochteren', 'Sluis', 'Smallingerland', 'Soest', 'Someren', 'Son en Breugel', 'Stadskanaal', 'Staphorst', 'Stede Broec', 'Steenbergen', 'Steenwijkerland', 'Stein', 'Stichtse Vecht', 'Strijen', 'Súdwest-Fryslân', 'Ten Boer', 'Terneuzen', 'Terschelling', 'Texel', 'Teylingen', 'Tholen', 'Tiel', 'Tietjerksteradeel', 'Tilburg', 'Tubbergen', 'Twenterand', 'Tynaarlo', 'Uden', 'Uitgeest', 'Uithoorn', 'Urk', 'Utrecht', 'Utrechtse Heuvelrug', 'Vaals', 'Valkenburg aan de Geul', 'Valkenswaard', 'Veendam', 'Veenendaal', 'Veere', 'Veghel', 'Veldhoven', 'Velsen', 'Venlo', 'Venray', 'Vianen', 'Vlaardingen', 'Vlagtwedde', 'Vlieland', 'Vlissingen', 'Voerendaal', 'Voorschoten', 'Voorst', 'Vught', 'Waalre', 'Waalwijk', 'Waddinxveen', 'Wageningen', 'Wassenaar', 'Waterland', 'Weert', 'Weesp', 'Werkendam', 'West Maas en Waal', 'Westerveld', 'Westervoort', 'Westland', 'Weststellingwerf', 'Westvoorne', 'Wierden', 'Wijchen', 'Wijdemeren', 'Wijk bij Duurstede', 'Winsum', 'Winterswijk', 'Woensdrecht', 'Woerden', 'Wormerland', 'Woudenberg', 'Woudrichem', 'Zaanstad', 'Zaltbommel', 'Zandvoort', 'Zederik', 'Zeewolde', 'Zeist', 'Zevenaar', 'Zoetermeer', 'Zoeterwoude', 'Zuidhorn', 'Zuidplas', 'Zundert', 'Zutphen', 'Zwartewaterland', 'Zwijndrecht', 'Zwolle'];
 
         activeLayer: csComp.Services.ProjectLayer;
 
@@ -155,10 +154,10 @@ module App {
                         this.wodkWidgetSvc.stepBack();
                     });
 
-                    var searchParams = this.$location.search();
-                    if (searchParams && searchParams.hasOwnProperty('selectcity')) {
-                        this.selectCity(searchParams['styleproperty']);
-                    }
+                    // var searchParams = this.$location.search();
+                    // if (searchParams && searchParams.hasOwnProperty('selectcity')) {
+                    //     this.selectCity(searchParams['styleproperty']);
+                    // }
 
                     // NOTE EV: You may run into problems here when calling this inside an angular apply cycle.
                     // Alternatively, check for it or use (dependency injected) $timeout.
@@ -192,25 +191,6 @@ module App {
             this.$messageBusService.publish('wodk', 'toggletoelichting');
         }
 
-        /**
-         * Simple filter that returns a list of cities that match the criteria.
-         *
-         * @param {string} query
-         */
-        filterCity(query: string) {
-            this.foundCities.length = 0;
-            if (query.length < 2 || typeof query !== 'string') return;
-            query = query.toLowerCase();
-            const maxFound = 15;
-            let found = [];
-            this.cities.some(c => {
-                if (c.toLowerCase().indexOf(query) < 0) return false;
-                found.push(c);
-                if (found.length === maxFound) return true;
-            });
-            this.foundCities = found;
-        }
-
         // /**
         //  * Select the city and broadcast it.
         //  *
@@ -229,25 +209,6 @@ module App {
         //         this.selectCity(this.foundCities[0]);
         //     }
         // }
-
-        selectCity(styleProp: string) {
-            var modalInstance = this.$uibModal.open({
-                templateUrl: 'wodk/WodkSelectCityModal.tpl.html',
-                size: 'md',
-                controller: 'SelectCityModalCtrl',
-                resolve: {
-                    cityNames: () => this.cities
-                }
-            });
-
-            modalInstance.result.then((city: string) => {
-                console.log('Selected city: ' + city);
-                var data = {city: city, style: styleProp};
-                this.$messageBusService.publish('wodk', 'city', data);
-            }, () => {
-                console.log('Modal dismissed at: ' + new Date());
-            });
-        }
 
         filterAddress = _.debounce(this.filterAddressDebounced, 750);
 

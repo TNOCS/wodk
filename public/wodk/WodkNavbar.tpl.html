@@ -28,7 +28,7 @@
                 </div>
             </div>
         </div>
-        <div class="row" ng-class="{collapsed: !isOpen, opened: isOpen}">
+        <div class="row" ng-class="{collapsed: !isOpen, opened: isOpen, 'wodk-row-nodisplay': vm.gemeenteOnly}">
             <div class="col-sm-12 col-md-6 col-md-offset-3">
                 <div class="search-hint">{{'SEARCH_HINT' | translate}}</div>
                 <form class="" role="search">
@@ -44,8 +44,28 @@
                 </form>
             </div>
         </div>
+        <div class="row" ng-class="{collapsed: !isOpen || vm.gemeenteOnly, opened: isOpen && !vm.gemeenteOnly, 'wodk-row-nodisplay': !vm.gemeenteOnly}">
+            <div class="col-sm-12 col-md-6 col-md-offset-3">
+                <div class="search-hint">{{'SEARCH_HINT_GEMEENTE' | translate}}</div>
+                <div class="form-group wodk-form-group wodk-form-group-search">
+                    <button ng-click="vm.selectFirstGemeente()" class="btn btn-success wodk-btn wodk-btn-purple">Zoek</button>
+                    <span>
+                        <input id="search-gemeente" type="text" class="form-control" ng-model="vm.gemeenteQuery" ng-change="vm.filterGemeente()" ng-keyup="$event.keyCode == 13 && vm.selectFirstGemeente()" placeholder="" autocomplete="off" autofocus>
+                    </span>
+                </div>
+            </div>
+        </div>
         <div class="row" ng-class="{collapsed: !isOpen, opened: isOpen}">
-            <div id="search-suggestions" class="col-sm-12 col-md-6 col-md-offset-3">
+            <div id="search-suggestions-gemeente" class="col-sm-12 col-md-6 col-md-offset-3">
+                <span class="ap-dropdown-menu ap-with-buurten ap-with-places" style="position: relative; top: 0px; left: 0px; right: auto; display: block;">
+                    <div class="ap-dataset-places">
+                        <span class="ap-suggestions" style="display: block;">
+                            <div ng-repeat="city in vm.foundCities" class="ap-suggestion" ng-class="{'ap-cursor': hovering}" ng-mouseenter="hovering=true" ng-mouseleave="hovering=false">
+                                <span class="ap-name" style="white-space: normal" ng-click="vm.selectStyledGemeente(city)">{{city}}</span>
+                            </div>
+                        </span>
+                    </div>
+                </span>
             </div>
         </div>
         <div class="row wodk-navbar-last-row">
