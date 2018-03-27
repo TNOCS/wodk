@@ -21,7 +21,7 @@ module Translations {
             RANKING: 'Overzichten',
             PROPERTY: 'Eigenschap',
             SEARCH_HINT: 'Zoek op plaatsnaam, postcode of adres',
-            SEARCH_HINT_GEMEENTE: 'Selecteer een gemeente om het geselecteerde inzicht te bekijken.',
+            SEARCH_HINT_GEMEENTE: 'Selecteer een gemeente om het geselecteerde inzicht, "{{property}}", te bekijken.',
             AANPASBAARHEID_WONINGEN: 'Aanpasbaarheid woningen',
             TERUG_NAAR_ZODK: 'Terug naar Zorg op de kaart website',
             WAT_TONEN: 'Wat wil je op de kaart zien?',

@@ -90,6 +90,9 @@ module wodk {
             this.initCard('images/gr_aant_inwoners_per_buurt.svg', 'aant_inw', 'bagbuurten');
             this.initCard('images/grootste_aanbod_3ster.svg', 'ster_3', 'bagbuurten');
             this.initCard('images/gr_aandeel_65plus.svg', 'p_65_eo_jr', 'bagbuurten');
+            this.initCard('images/gr_aand_instroom_mobiliteitsbeperkten.svg', 'p_jrl_instr_mob_bep_2016', 'bagbuurten');
+            this.initCard('images/grootste_vraag_tov_aanbod_3ster_woningen.svg', 'match_va_ster3_lage_vhm', 'bagbuurten');
+            this.initCard('images/hoogste_aanp_kosten_wmo.svg', 'p_deel_jrl_wmo_ib', 'bagbuurten');
         }
 
         private initCard(image: string, prop: string, layerId: string) {
@@ -113,6 +116,10 @@ module wodk {
             }
         }
 
+        private isOpen(): boolean {
+            return $('.stylepanel-container').hasClass('show');
+        }
+
         private open() {
             $('.stylepanel-container').addClass('show');
         }
@@ -127,12 +134,19 @@ module wodk {
                 case 'opencompare':
                 case 'opentoelichting':
                 case 'openrightpanel':
+                case 'closestylepanel':
                     this.close();
                     break;
                 case 'openstylepanel':
                     this.layer = data;
                     this.open();
                     break;
+                case 'togglestylepanel':
+                    if (this.isOpen()) {
+                        this.$messageBus.publish('wodk', 'closestylepanel');
+                    } else {
+                        this.$messageBus.publish('wodk', 'openstylepanel', data);
+                    }
                 default:
                     break;
             }

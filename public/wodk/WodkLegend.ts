@@ -169,6 +169,10 @@ module wodk {
             }
         }
 
+        private toggleStylePanel() {
+            this.$messageBus.publish('wodk', 'togglestylepanel', this.$scope.activeStyleGroup.layers[0] || new csComp.Services.ProjectLayer());
+        }
+
         private openStylePanel() {
             this.$messageBus.publish('wodk', 'openstylepanel', this.$scope.activeStyleGroup.layers[0] || new csComp.Services.ProjectLayer());
         }

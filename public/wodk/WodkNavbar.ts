@@ -28,6 +28,13 @@ module WodkNavbar {
         isOpen: boolean;
     }
 
+    /** The preselected style should be shown to the user. Therefore, 
+     *  the propType label must be converted to a readable title, 
+     *  which requires the resource type.
+     */
+    const RESOURCE_TYPE_URL: string = '/bagwoningen/public/data/resourceTypes/Buurt.json';
+    // const RESOURCE_TYPE_URL: string = '/data/resourceTypes/Buurt.json';
+    
     export class WodkNavbarCtrl {
         public static $inject = [
             '$scope',
@@ -49,6 +56,8 @@ module WodkNavbar {
         private gemeenteQuery: string;
         private foundCities: string[] = [];
         private gemeenteOnly: boolean;
+        private resourceTypeLoaded: boolean = false;
+        private selectedStyleTitle: string = '1';
 
         constructor(
             private $scope: IWodkNavbarScope,
@@ -72,6 +81,8 @@ module WodkNavbar {
                     this.shouldUseSelectedCity();
                 }
             }));
+
+            this.loadResourceType(RESOURCE_TYPE_URL);
 
             this.placesAutocomplete = (( < any > window).places)({
                 container: document.querySelector('#search-address'),
@@ -104,6 +115,12 @@ module WodkNavbar {
             });
 
             // this.shouldUseSelectedCity();
+        }
+
+        private loadResourceType(url: string) {
+            this.layerService.loadTypeResources(url, false, () => {
+                this.resourceTypeLoaded = true;
+            });
         }
 
         private selectLocation(loc: wodk.IPlacesResult, dataset: string) {
@@ -207,6 +224,16 @@ module WodkNavbar {
             var searchParams = this.$location.search();
             if (searchParams && searchParams.hasOwnProperty('selectcity')) {
                 this.gemeenteOnly = true;
+                if (typeof searchParams['styleproperty'] === 'string' && this.resourceTypeLoaded) {
+                    let propType = this.layerService.findPropertyTypeById(RESOURCE_TYPE_URL.concat('#', searchParams['styleproperty']));
+                    if (propType) {
+                        this.selectedStyleTitle = propType.title;
+                    } else {
+                        this.selectedStyleTitle = '';
+                    }
+                } else {
+                    this.selectedStyleTitle = '';                    
+                }
                 if (typeof searchParams['selectcity'] === 'string') {
                     this.selectStyledGemeente(searchParams['selectcity']);
                 }
