@@ -825,52 +825,62 @@
 					{
 						"label": "Uitstekend",
 						"stringValue": "9 Uitstekend",
-						"color": "#006d2c"
+						"color": "#006d2c",
+						"sortKey": "a"
 					},
 					{
 						"label": "Zeer goed",
 						"stringValue": "8 Zeer goed",
-						"color": "#31a354"
+						"color": "#31a354",
+						"sortKey": "b"
 					},
 					{
 						"label": "Goed",
 						"stringValue": "7 Goed",
-						"color": "#74c476"
+						"color": "#74c476",
+						"sortKey": "c"
 					},
 					{
 						"label": "Ruim voldoende",
 						"stringValue": "6 Ruim voldoende",
-						"color": "#a1d99b"
+						"color": "#a1d99b",
+						"sortKey": "d"
 					},
 					{
 						"label": "Voldoende",
 						"stringValue": "5 Voldoende",
-						"color": "#c7e9c0"
+						"color": "#c7e9c0",
+						"sortKey": "e"
 					},
 					{
 						"label": "Zwak",
 						"stringValue": "4 Zwak",
-						"color": "#ffc"
+						"color": "#ffc",
+						"sortKey": "f"
 					},
 					{
 						"label": "Onvoldoende",
 						"stringValue": "3 Onvoldoende",
-						"color": "#ed7d31"
+						"color": "#ed7d31",
+						"sortKey": "g"
 					},
 					{
 						"label": "Ruim onvoldoende",
 						"stringValue": "2 Ruim onvoldoende",
-						"color": "#ef3b2c"
+						"color": "#ef3b2c",
+						"sortKey": "h"
 					},
 					{
 						"label": "Zeer onvoldoende",
 						"stringValue": "1 Zeer onvoldoende",
-						"color": "#99000d"
+						"color": "#99000d",
+						"sortKey": "i"
 					},
 					{
 						"label": "Onbekend",
 						"stringValue": "Onbekend",
-						"color": "#fff"
+						"color": "#fff",
+						"sortKey": "z"
 					}
 				]
 			}
@@ -963,57 +973,68 @@
 					{
 						"label": "Maximaal 200 meter",
 						"stringValue": "max 200 meter",
-						"color": "#006d2c"
+						"color": "#006d2c",
+						"sortKey": "a"
 					},
 					{
 						"label": "Maximaal 300 meter",
 						"stringValue": "max 300 meter",
-						"color": "#006d2c"
+						"color": "#006d2c",
+						"sortKey": "b"
 					},
 					{
 						"label": "Maximaal 400 meter",
 						"stringValue": "max 400 meter",
-						"color": "#31a354"
+						"color": "#31a354",
+						"sortKey": "c"
 					},
 					{
 						"label": "Maximaal 500 meter",
 						"stringValue": "max 500 meter",
-						"color": "#74c476"
+						"color": "#74c476",
+						"sortKey": "d"
 					},
 					{
 						"label": "Maximaal 600 meter",
 						"stringValue": "max 600 meter",
-						"color": "#a1d99b"
+						"color": "#a1d99b",
+						"sortKey": "e"
 					},
 					{
 						"label": "Maximaal 700 meter",
 						"stringValue": "max 700 meter",
-						"color": "#c7e9c0"
+						"color": "#c7e9c0",
+						"sortKey": "f"
 					},
 					{
 						"label": "Maximaal 800 meter",
 						"stringValue": "max 800 meter",
-						"color": "#ffc"
+						"color": "#ffc",
+						"sortKey": "g"
 					},
 					{
 						"label": "Maximaal 900 meter",
 						"stringValue": "max 900 meter",
-						"color": "#ffc"
+						"color": "#ffc",
+						"sortKey": "h"
 					},
 					{
 						"label": "Maximaal 1000 meter",
 						"stringValue": "max 1000 meter",
-						"color": "#ffc"
+						"color": "#ffc",
+						"sortKey": "i"
 					},
 					{
 						"label": "Meer dan 1000 meter",
 						"stringValue": "> 1000 meter",
-						"color": "#fff"
+						"color": "#fff",
+						"sortKey": "j"
 					},
 					{
 						"label": "Onbekend",
 						"stringValue": "Onbekend",
-						"color": "#ddd"
+						"color": "#ddd",
+						"sortKey": "z"
 					}
 				]
 			}
@@ -1141,7 +1162,8 @@
 							"min": 0,
 							"max": 200
 						},
-						"color": "#006d2c"
+						"color": "#006d2c",
+						"sortKey": "a"
 					},
 					{
 						"label": "Maximaal 300 meter",
@@ -1149,7 +1171,8 @@
 							"min": 200,
 							"max": 300
 						},
-						"color": "#006d2c"
+						"color": "#006d2c",
+						"sortKey": "b"
 					},
 					{
 						"label": "Maximaal 400 meter",
@@ -1157,7 +1180,8 @@
 							"min": 300,
 							"max": 400
 						},
-						"color": "#31a354"
+						"color": "#31a354",
+						"sortKey": "c"
 					},
 					{
 						"label": "Maximaal 500 meter",
@@ -1165,7 +1189,8 @@
 							"min": 400,
 							"max": 500
 						},
-						"color": "#74c476"
+						"color": "#74c476",
+						"sortKey": "d"
 					},
 					{
 						"label": "Maximaal 600 meter",
@@ -1173,7 +1198,8 @@
 							"min": 500,
 							"max": 600
 						},
-						"color": "#a1d99b"
+						"color": "#a1d99b",
+						"sortKey": "e"
 					},
 					{
 						"label": "Maximaal 700 meter",
@@ -1181,7 +1207,8 @@
 							"min": 600,
 							"max": 700
 						},
-						"color": "#c7e9c0"
+						"color": "#c7e9c0",
+						"sortKey": "f"
 					},
 					{
 						"label": "Maximaal 800 meter",
@@ -1189,7 +1216,8 @@
 							"min": 700,
 							"max": 800
 						},
-						"color": "#ffc"
+						"color": "#ffc",
+						"sortKey": "g"
 					},
 					{
 						"label": "Maximaal 900 meter",
@@ -1197,7 +1225,8 @@
 							"min": 800,
 							"max": 900
 						},
-						"color": "#ffc"
+						"color": "#ffc",
+						"sortKey": "h"
 					},
 					{
 						"label": "Maximaal 1000 meter",
@@ -1205,7 +1234,8 @@
 							"min": 900,
 							"max": 1000
 						},
-						"color": "#ffc"
+						"color": "#ffc",
+						"sortKey": "i"
 					},
 					{
 						"label": "Meer dan 1000 meter",
@@ -1213,7 +1243,8 @@
 							"min": 1000,
 							"max": 20000
 						},
-						"color": "#fff"
+						"color": "#fff",
+						"sortKey": "j"
 					},
 					{
 						"label": "Onbekend",
@@ -1221,7 +1252,8 @@
 							"min": 99999,
 							"max": 99999
 						},
-						"color": "#ddd"
+						"color": "#ddd",
+						"sortKey": "z"
 					}
 				]
 			}
@@ -1234,6 +1266,7 @@
 			"description": "Op deze plattegrond van de gekozen gemeente ziet u de wijken met het grootste aandeel 65+ ers. Dit geeft u een indicatie van de toekomstig behoefte aan aanpasbare woningen en waar u de grootste vraag naar geschikte woningen of woningaanpassingen kunt verwachten.",
 			"stringFormat": "{0:#,#}%",
 			"visibleInCallOut": true,
+			"unknownValue": "?",
 			"isSearchable": false,
 			"legend": {
 				"_filter": "ster_totaal",
@@ -1274,6 +1307,71 @@
 						"label": "40-100%",
 						"interval": {
 							"min": 40,
+							"max": 100
+						},
+						"color": "#edaac9"
+					},
+					{
+						"sortKey": "z",
+						"label": "Onbekend",
+						"interval": {
+							"min": -9999999999,
+							"max": -1
+						},
+						"color": "#444444"
+					}
+				]
+			}
+		},
+		"p_jrl_instr_mob_bep_2016": {
+			"label": "p_jrl_instr_mob_bep_2016",
+			"type": "number",
+			"section": "Totalen",
+			"title": "Aandeel instroom mobiliteitsbeperkten",
+			"description": "Op deze plattegrond van de gekozen gemeente ziet u de buurten waar het aandeel van de instroom aan mobiliteitsbeperkten het grootst is, gelet op de demografie. U kunt daarmee inschatten of er behoefte is aan geschikte woningen en/of vraag naar woningaanpassingen. ",
+			"stringFormat": "{0:#,#}%",
+			"visibleInCallOut": true,
+			"unknownValue": "?",
+			"isSearchable": false,
+			"legend": {
+				"_filter": "ster_totaal",
+				"id": "p_jrl_instr_mob_bep_2016",
+				"visualAspect": "fillColor",
+				"description": "Het aandeel van de instroom aan mobiliteitsbeperkten",
+				"legendKind": "discrete",
+				"legendEntries": [
+					{
+						"sortKey": "a",
+						"label": "0-0.1%",
+						"interval": {
+							"min": 0,
+							"max": 0.1
+						},
+						"color": "#86003e"
+					},
+					{
+						"sortKey": "b",
+						"label": "0.1-0.2%",
+						"interval": {
+							"min": 0.1,
+							"max": 0.2
+						},
+						"color": "#ca005d"
+					},
+					{
+						"sortKey": "c",
+						"label": "0.2-0.3%",
+						"interval": {
+							"min": 0.2,
+							"max": 0.3
+						},
+						"color": "#db5593"
+					},
+					{
+						"sortKey": "d",
+						"label": "> 0.3%",
+						"interval": {
+							"min": 0.3,
 							"max": 100
 						},
 						"color": "#edaac9"
