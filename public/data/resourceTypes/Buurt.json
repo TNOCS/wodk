@@ -21,7 +21,7 @@
 			"selectActions": [
 				"load woningen"
 			],
-			"propertyTypeKeys": "aant_inw;ster_totaal;a_aangep_w;a_apb_w;a_napb_w;a_apb_in_ond;a_apb_onb;a_1gezw;a_mgezw;a_koopwon;a_huurwon;a_huko_onb;p_1gezw;p_mgezw;p_koopwon,p_huurwon;p_huko_onb;p_apb_w;p_napb_w;p_apb_in_ond;p_apb_onb;p_aangep_w;bu_naam;bu_code;gm_naam;gm_code;gm_code_2015;woz;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;woningen;lb_situ;lb_score;dim_won;dim_bev;dim_voorz;dim_veil;dim_fys;afs_adl;afs_harts;afs_apo;afs_super;afs_wnkl;afs_ziek_in;afs_ziek_ex;wdruk_ha;mantelz;afs_trein;afs_adl_int;p_65_eo_jr"
+			"propertyTypeKeys": "aant_inw;ster_totaal;a_aangep_w;a_apb_w;a_napb_w;a_apb_in_ond;a_apb_onb;a_1gezw;a_mgezw;a_koopwon;a_huurwon;a_huko_onb;p_1gezw;p_mgezw;p_koopwon,p_huurwon;p_huko_onb;p_apb_w;p_napb_w;p_apb_in_ond;p_apb_onb;p_aangep_w;bu_naam;bu_code;gm_naam;gm_code;gm_code_2015;woz;ster_0;ster_1;ster_2;ster_3;ster_4;ster_5;woningen;lb_situ;lb_score;dim_won;dim_bev;dim_voorz;dim_veil;dim_fys;afs_adl;afs_harts;afs_apo;afs_super;afs_wnkl;afs_ziek_in;afs_ziek_ex;wdruk_ha;mantelz;afs_trein;afs_adl_int;p_65_eo_jr;p_jrl_instr_mob_bep_2016;match_va_ster3_lage_vhm;p_deel_jrl_wmo_ib"
 		}
 	},
 	"propertyTypeData": {
@@ -169,7 +169,7 @@
 			"unknownValue": "0",
 			"type": "number",
 			"title": "Aantal woningen ster 3",
-			"description": "Op deze plattegrond van de gekozen gemeente ziet u de wijken met het grootste aanbod aan ster 3 woningen die in beginsel geschikt zijn voor mensen met mobiliteitsbeperkingen.",
+			"description": "Het aanbod aan ster 3 woningen die in beginsel geschikt zijn voor mensen met mobiliteitsbeperkingen in deze buurt.",
 			"stringFormat": "{0:#,#}",
 			"visibleInCallOut": true,
 			"isSearchable": false,
@@ -177,7 +177,8 @@
 				"_filter": "ster_totaal",
 				"id": "ster_3",
 				"visualAspect": "fillColor",
-				"description": "Aantal ster 3 woningen per buurt.",
+				"title": "Aantal ster 3 woningen per buurt.",
+				"description": "Op deze plattegrond van de gekozen gemeente ziet u de buurten met het grootste aanbod aan ster 3 woningen die in beginsel geschikt zijn voor mensen met mobiliteitsbeperkingen.",
 				"legendKind": "discrete",
 				"legendEntries": [
 					{
@@ -1263,7 +1264,7 @@
 			"type": "number",
 			"section": "Totalen",
 			"title": "Aandeel 65+ ers",
-			"description": "Op deze plattegrond van de gekozen gemeente ziet u de wijken met het grootste aandeel 65+ ers. Dit geeft u een indicatie van de toekomstig behoefte aan aanpasbare woningen en waar u de grootste vraag naar geschikte woningen of woningaanpassingen kunt verwachten.",
+			"description": "Het aandeel 65+ ers in deze buurt. Dit geeft u een indicatie van de toekomstig behoefte aan aanpasbare woningen en waar u de grootste vraag naar geschikte woningen of woningaanpassingen kunt verwachten.",
 			"stringFormat": "{0:#,#}%",
 			"visibleInCallOut": true,
 			"unknownValue": "?",
@@ -1323,13 +1324,238 @@
 				]
 			}
 		},
+		"match_va_ster3_lage_vhm": {
+			"label": "match_va_ster3_lage_vhm",
+			"type": "number",
+			"section": "Totalen",
+			"title": "Vraag t.o.v. ster 3 woningen",
+			"description": "De vraag naar ster 3 woningen die in beginsel geschikt zijn voor mensen met mobiliteitsbeperkingen in deze buurt. Deze vraag wordt verwacht op basis van de demografie.",
+			"stringFormat": "{0:#,#}%",
+			"visibleInCallOut": true,
+			"unknownValue": "?",
+			"isSearchable": false,
+			"legend": {
+				"_filter": "ster_totaal",
+				"_reversed": true,
+				"id": "match_va_ster3_lage_vhm",
+				"title": "Grootste vraag t.o.v. ster 3 woningen",
+				"description": "Grootste vraag t.o.v. ster 3 woningen",
+				"legendKind": "discrete",
+				"visualAspect": "fillColor",
+				"legendEntries": [
+					{
+						"label": ">110%",
+						"interval": {
+							"min": 110.0,
+							"max": 99999
+						},
+						"color": "#86003e",
+						"sortKey": "a"
+					},
+					{
+						"label": "82.5%-110%",
+						"interval": {
+							"min": 82.5,
+							"max": 110.0
+						},
+						"color": "#ca005d",
+						"sortKey": "b"
+					},
+					{
+						"label": "55%-82.5%",
+						"interval": {
+							"min": 55.0,
+							"max": 82.5
+						},
+						"color": "#db5593",
+						"sortKey": "c"
+					},
+					{
+						"label": "27.5%-55%",
+						"interval": {
+							"min": 27.5,
+							"max": 55.0
+						},
+						"color": "#edaac9",
+						"sortKey": "d"
+					},
+					{
+						"label": "0%-27.5%",
+						"interval": {
+							"min": 0,
+							"max": 27.5
+						},
+						"color": "#fff",
+						"sortKey": "e"
+					},
+					{
+						"label": "Onbekend",
+						"interval": {
+							"min": -99999,
+							"max": 0
+						},
+						"color": "#c5c5c5",
+						"sortKey": "f"
+					}
+				]
+			}
+		},
+		"p_deel_jrl_wmo_ib": {
+			"label": "p_deel_jrl_wmo_ib",
+			"type": "number",
+			"section": "Totalen",
+			"title": "Aandeel aanpassingskosten uit wmo-integratiebudget",
+			"description": "Het aandeel aanpassingskosten in deze buurt, als de vraag naar woningaanpassingen wordt gehonoreerd. De kosten volgen uit de typologie van de woningen en de demografie.",
+			"stringFormat": "{0:#,#}%",
+			"visibleInCallOut": true,
+			"unknownValue": "?",
+			"isSearchable": false,
+			"legend": {
+				"id": "p_deel_jrl_wmo_ib",
+				"title": "Aandeel aanpassingskosten uit wmo-integratiebudget",
+				"description": "Op deze plattegrond van de gekozen gemeente ziet u de buurten waarin het aandeel aanpassingskosten het hoogste is, als de vraag naar woningaanpassingen wordt gehonoreerd. De kosten volgen uit de typologie van de woningen en de demografie.",
+				"legendKind": "discrete",
+				"visualAspect": "fillColor",
+				"legendEntries": [
+					{
+						"label": ">46%",
+						"interval": {
+							"min": 46,
+							"max": 9999
+						},
+						"color": "#86003e",
+						"sortKey": "a"
+					},
+					{
+						"label": "36%-46%",
+						"interval": {
+							"min": 36,
+							"max": 46
+						},
+						"color": "#ca005d",
+						"sortKey": "b"
+					},
+					{
+						"label": "25%-36%",
+						"interval": {
+							"min": 25,
+							"max": 36
+						},
+						"color": "#db5593",
+						"sortKey": "c"
+					},
+					{
+						"label": "14%-25%",
+						"interval": {
+							"min": 14,
+							"max": 25
+						},
+						"color": "#edaac9",
+						"sortKey": "d"
+					},
+					{
+						"label": "<14%",
+						"interval": {
+							"min": 0,
+							"max": 14
+						},
+						"color": "#fff",
+						"sortKey": "e"
+					},
+					{
+						"label": "Onbekend",
+						"interval": {
+							"min": -999,
+							"max": 0
+						},
+						"color": "#c5c5c5",
+						"sortKey": "z"
+					}
+				]
+			}
+		},
+		"jrl_aanp_kost_inw": {
+			"label": "jrl_aanp_kost_inw",
+			"type": "number",
+			"section": "Totalen",
+			"title": "Jaarlijkse aanpassingskosten / inwoner",
+			"description": "De jaarlijkse aanpassingskosten per inwoner in deze buurt. Als de vraag naar woningaanpassingen wordt gehonoreerd volgen de kosten uit de typologie van de woningen en de demografie.",
+			"stringFormat": "€{0:#,#}",
+			"visibleInCallOut": true,
+			"unknownValue": "?",
+			"isSearchable": false,
+			"legend": {
+				"_filter": "ster_totaal",
+				"id": "jrl_aanp_kost_inw",
+				"title": "Hoogste jaarlijkse aanpassingskosten per inwoner",
+				"description": "Op deze plattegrond van de gekozen gemeente ziet u de buurten hoogste jaarlijks aanpassingskosten per inwoner. Als de vraag naar woningaanpassingen wordt gehonoreerd volgen de kosten uit de typologie van de woningen en de demografie.",
+				"legendKind": "discrete",
+				"visualAspect": "fillColor",
+				"legendEntries": [
+					{
+						"label": "€21-€27",
+						"interval": {
+							"min": 21,
+							"max": 27
+						},
+						"color": "#86003e",
+						"sortKey": "a"
+					},
+					{
+						"label": "€15-€21",
+						"interval": {
+							"min": 15,
+							"max": 21
+						},
+						"color": "#ca005d",
+						"sortKey": "b"
+					},
+					{
+						"label": "€8-€15",
+						"interval": {
+							"min": 8,
+							"max": 15
+						},
+						"color": "#db5593",
+						"sortKey": "c"
+					},
+					{
+						"label": "€2-€8",
+						"interval": {
+							"min": 2,
+							"max": 8
+						},
+						"color": "#edaac9",
+						"sortKey": "d"
+					},
+					{
+						"label": "<€2",
+						"interval": {
+							"min": 0,
+							"max": 2
+						},
+						"color": "#fff",
+						"sortKey": "e"
+					},
+					{
+						"label": "Onbekend",
+						"interval": {
+							"min": -99999,
+							"max": 0
+						},
+						"color": "#c5c5c5",
+						"sortKey": "z"
+					}
+				]
+			}
+		},
 		"p_jrl_instr_mob_bep_2016": {
 			"label": "p_jrl_instr_mob_bep_2016",
 			"type": "number",
 			"section": "Totalen",
 			"title": "Aandeel instroom mobiliteitsbeperkten",
 			"description": "Op deze plattegrond van de gekozen gemeente ziet u de buurten waar het aandeel van de instroom aan mobiliteitsbeperkten het grootst is, gelet op de demografie. U kunt daarmee inschatten of er behoefte is aan geschikte woningen en/of vraag naar woningaanpassingen. ",
-			"stringFormat": "{0:#,#}%",
+			"stringFormat": "{0:#,#.#}%",
 			"visibleInCallOut": true,
 			"unknownValue": "?",
 			"isSearchable": false,
