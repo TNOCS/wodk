@@ -631,7 +631,7 @@
 			"type": "number",
 			"title": "Perc. aanpasbaarheid onbekend",
 			"description": "Percentage aanpasbaarheid onbekend",
-			"expression": "(properties.a_apb_onb + properties.a_apb_in_ond) / properties.ster_totaal * 100 || 0",
+			"expression": "(properties.a_apb_onb) / properties.ster_totaal * 100 || 0",
 			"stringFormat": "{0:#,#}%",
 			"min": 0,
 			"max": 100,
