@@ -2,12 +2,15 @@
   "version": "2.2.0",
   "compilerOptions": {
     "target": "es5",
+    "lib": ["es5", "es6", "dom"],
     "module": "commonjs",
     "declaration": false,
     "noImplicitAny": false,
     "removeComments": false,
     "noLib": false,
-    "sourceMap": false
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "types": ["node"]
   },
   "files": [
     "./public/bower_components/csweb/dist-bower/csComp.d.ts",

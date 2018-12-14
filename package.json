@@ -11,7 +11,8 @@
   "scripts": {
     "dev": "node ./node_modules/concurrently/src/main.js \"npm run scss\" \"npm run compile-watch\"",
     "scss": "node ./node_modules/node-sass/bin/node-sass ./public/css/style.scss -w -path -o ./public/css",
-    "compile-watch": "tsc -w"
+    "compile-watch": "tsc -w",
+    "tsc": "./node_modules/.bin/tsc"
   },
   "repository": {
     "type": "git",
@@ -19,8 +20,9 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@types/node": "^8.10.38",
     "concurrently": "^3.2.0",
-    "csweb": "^0.3.0",
+    "csweb": "0.3.0-wodk.0",
     "geojson-vt": "^2.1.8",
     "moment": "^2.13.0",
     "pg": "^6.1.2",
@@ -30,6 +32,7 @@
     "winston": "^2.1.0"
   },
   "devDependencies": {
+    "@types/underscore": "^1.8.3",
     "chokidar": "^1.2.0",
     "coveralls": "^2.11.4",
     "csweb-offline-search": "^0.1.0",
@@ -50,12 +53,12 @@
     "gulp-rename": "~1.2.0",
     "gulp-sass": "^3.0.0",
     "gulp-tsconfig-files": "~0.4.0",
-    "gulp-tsd": "0.1.1",
     "gulp-uglify": "^2.0.0",
     "gulp-useref": "^3.1.2",
     "gulp-watch": "^4.2.4",
     "node-sass": "^4.2.0",
-    "run-sequence": "^1.1.4"
+    "run-sequence": "^1.1.4",
+    "typescript": "2.2.2"
   },
   "bugs": {
     "url": "https://github.com/TNOCS/csWeb/issues"

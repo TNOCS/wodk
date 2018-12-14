@@ -32,8 +32,8 @@ module WodkNavbar {
      *  the propType label must be converted to a readable title, 
      *  which requires the resource type.
      */
-    const RESOURCE_TYPE_URL: string = '/bagwoningen/public/data/resourceTypes/Buurt.json';
-    // const RESOURCE_TYPE_URL: string = '/data/resourceTypes/Buurt.json';
+    // const RESOURCE_TYPE_URL: string = '/bagwoningen/public/data/resourceTypes/Buurt.json';
+    const RESOURCE_TYPE_URL: string = '/data/resourceTypes/Buurt.json';
     
     export class WodkNavbarCtrl {
         public static $inject = [
