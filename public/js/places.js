@@ -174,7 +174,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, userAutocompleteOptions);
 	
 // CUSTOM BUURTEN DB
-  var bIndex = client.initIndex('prod_buurten');
+var client = _algoliasearchLite2.default('QM7PRYY79T', 'password');
+var bIndex = client.initIndex('prod_buurten');
 
 	var buurtenDataset = {
 			source: _autocomplete2.default.sources.hits(bIndex, {hitsPerPage: 4}),
